@@ -2,12 +2,22 @@ doctype html
 html
   head
     link(rel="stylesheet",type="text/css",href="index.css")
+    link(rel="Stylesheet",type="text/css",href="lib/ion-rangeslider/2.1.7/css/ion.rangeSlider.css")
+    link(rel="Stylesheet",type="text/css",href="lib/ion-rangeslider/2.1.7/css/ion.rangeSlider.skinFlat.css")
   body
     #root
       .cell: .tomato.css
-      .cell: .tomato.js
-      .cell: .tomato.webgl
+      .cell
+        .ctrl: input.slider
+        .tomato.js
+        .tomato.css.ref
+      .cell
+        .ctrl: input.slider
+        .tomato.webgl
+        .tomato.css.ref
 
+  script(src="lib/jquery.min.js")
+  script(src="lib/ion-rangeslider/2.1.7/js/ion.rangeSlider.min.js")
   script(src="lib/shader.min.js")
-  script(src="anikit.js")
+  script(src="anikit.bundle.js")
   script(src="index.js")

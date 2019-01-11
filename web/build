@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+browserify anikit.js > anikit.bundle.js
