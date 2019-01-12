@@ -30,7 +30,6 @@ suite = do
     config.name = \kit
     /* CSS */
     t1 = Date.now!
-    console.log config.dur
     @style.textContent = """
     #{mod.css config}
     .tomato.css {

@@ -32,7 +32,7 @@ ret = do
       t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 2, p), p) / 2
     else
       t = (anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p), p) / 2) + 0.5
-    t = 1 - 4 * Math.abs(t - 0.5)
+    t = 1 - 4 * Math.abs(t - 0.5) # -1 -> 1 -> -1
     return t
 
   css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt

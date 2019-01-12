@@ -43,7 +43,6 @@ suite = {
     config.name = 'kit';
     /* CSS */
     t1 = Date.now();
-    console.log(config.dur);
     this.style.textContent = "" + mod.css(config) + "\n.tomato.css {\n  animation: kit " + (config.dur || 1) + "s infinite;\n  transform-origin: 50% 50%;\n}";
     console.log(mod.css(config));
     console.log("CSS Generation elapsed: " + (Date.now() - t1) * 0.001);
