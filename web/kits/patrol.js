@@ -3,48 +3,48 @@ var ret;
 ret = {
   name: 'patrol',
   preset: {
-    jingle: {
-      count: 7,
+    breath: {
+      steep: 0.6,
+      offset: 0.06,
+      propFunc: function(f, opt){
+        return {
+          transform: "scale(" + (1 + f.value * opt.offset - 0.03) + ")"
+        };
+      }
+    },
+    dim: {
+      steep: 0.6,
+      offset: 0.5,
+      propFunc: function(f, opt){
+        return {
+          opacity: 0.5 + f.value * opt.offset
+        };
+      }
+    },
+    metronome: {
+      steep: 0.6,
       offset: 10,
-      ratio: 0.6,
-      delay: 0.1,
-      unit: '',
+      rotate: 30,
+      unit: 'px',
       propFunc: function(f, opt){
         return {
-          transform: "rotate(" + f.value * opt.offset + "deg)",
-          "transform-origin": "50% 0%"
+          transform: "translate(" + f.value * opt.offset + opt.unit + ") rotate(" + f.value * opt.rotate + "deg)"
         };
       }
     },
-    "rubber-v": {
-      count: 7,
-      offset: 0.2,
-      ratio: 0.7,
-      delay: 0.3,
+    swing: {
+      steep: 0.6,
+      offset: 30,
       unit: '',
       propFunc: function(f, opt){
         return {
-          transform: "scaleY(" + (1 + f.value * opt.offset) + ")"
+          transform: "rotate(" + f.value * opt.offset + "deg)"
         };
       }
     },
-    rubber: {
-      count: 7,
-      offset: 0.2,
-      ratio: 0.7,
-      delay: 0.3,
-      unit: '',
-      propFunc: function(f, opt){
-        return {
-          transform: "scaleX(" + (1 + f.value * opt.offset) + ")"
-        };
-      }
-    },
-    "shake-v": {
-      count: 5,
+    "wander-v": {
+      steep: 0.6,
       offset: 10,
-      ratio: 0.6,
-      delay: 0.3,
       unit: 'px',
       propFunc: function(f, opt){
         return {
@@ -52,108 +52,30 @@ ret = {
         };
       }
     },
-    shake: {
-      count: 5,
+    wander: {
+      steep: 0.6,
       offset: 10,
-      ratio: 0.7,
-      delay: 0.3,
       unit: 'px',
       propFunc: function(f, opt){
         return {
           transform: "translate(" + f.value * opt.offset + opt.unit + ",0)"
         };
       }
-    },
-    tick: {
-      count: 7,
-      offset: 20,
-      ratio: 0.7,
-      delay: 0.3,
-      unit: "",
-      propFunc: function(f, opt){
-        return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
-        };
-      }
-    },
-    smash: {
-      count: 4,
-      offset: 30,
-      ratio: 0,
-      delay: 0.5,
-      unit: "",
-      sampleCount: 20,
-      errorThreshold: 0.001,
-      propFunc: function(f, opt){
-        return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
-        };
-      }
-    },
-    "jelly-alt": {
-      count: 7,
-      offset: 10,
-      ratio: 0.7,
-      delay: 0.3,
-      unit: "",
-      propFunc: function(f, opt){
-        return {
-          transform: "skewX(" + f.value * opt.offset + "deg)"
-        };
-      }
-    },
-    jelly: {
-      count: 5,
-      offset: 10,
-      ratio: 0.6,
-      delay: 0.3,
-      unit: 'px',
-      propFunc: function(f, opt){
-        return {
-          transform: "translate(" + f.value * -opt.offset + opt.unit + ",0) skewX(" + f.value * opt.offset + "deg)"
-        };
-      }
-    },
-    damage: {
-      count: 10,
-      offset: 1,
-      ratio: 0.8,
-      delay: 0.2,
-      unit: "",
-      propFunc: function(f, opt){
-        return {
-          opacity: 1 - f.value * opt.offset
-        };
-      }
     }
   },
   edit: {
-    count: {
-      'default': 10,
+    steep: {
+      'default': 0.6,
       type: 'number',
       min: 0,
-      max: 50
+      max: 1
     },
     offset: {
-      'default': 1,
+      'default': 10,
       type: 'number',
+      unit: 'px',
       min: 0,
-      max: 1,
-      step: 0.1
-    },
-    ratio: {
-      'default': 0.8,
-      type: 'number',
-      min: 0,
-      max: 1,
-      step: 0.1
-    },
-    delay: {
-      'default': 0.2,
-      type: 'number',
-      min: 0,
-      max: 1,
-      step: 0.01
+      max: 30
     },
     unit: {
       'default': 'px',
@@ -162,17 +84,15 @@ ret = {
     }
   },
   timing: function(t, opt){
-    var len, idx, v1, v2;
-    if (t < opt.delay) {
-      return t / opt.delay;
+    var p;
+    p = [opt.steep, 0, 1 - opt.steep, 1];
+    if (t < 0.5) {
+      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 2, p), p) / 2;
+    } else {
+      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p), p) / 2 + 0.5;
     }
-    len = (1 - opt.delay) / opt.count;
-    idx = Math.floor((t - opt.delay) / len);
-    t = (t - (idx * len + opt.delay)) / len;
-    t = anikit.timing.js.easeOutQuad(t);
-    v1 = Math.pow(opt.ratio, idx) * Math.pow(-1, idx);
-    v2 = Math.pow(opt.ratio, idx + 1) * Math.pow(-1, idx + 1);
-    return (v2 - v1) * t + v1;
+    t = 1 - 4 * Math.abs(t - 0.5);
+    return t;
   },
   css: function(opt){
     var this$ = this;
@@ -185,5 +105,17 @@ ret = {
       value: this.timing(t, opt)
     }, opt);
   }
+  /* equivalent keyframes */
+  /*
+  @keyframes {name}
+    0%,50%,100%
+      timing-step(rate)
+    0%
+      func(-1 * max)
+    50%
+      func(1 * max)
+    100%
+      func(-1 * max)
+  */
 };
 module.exports = ret;

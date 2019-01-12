@@ -22,7 +22,6 @@ suite = do
     @animate.aniid = aniid = Math.random!
     requestAnimationFrame (step = (t) ~> 
       t = t * 0.001
-      t = t - Math.floor(t)
       func t
       if @animate.aniid == aniid => requestAnimationFrame step
     )
@@ -31,11 +30,12 @@ suite = do
     config.name = \kit
     /* CSS */
     t1 = Date.now!
+    console.log config.dur
     @style.textContent = """
     #{mod.css config}
     .tomato.css {
-      animation: kit 1s infinite;
-      transform-origin: 40px 40px;
+      animation: kit #{config.dur or 1}s infinite;
+      transform-origin: 50% 50%;
     }
     """
     console.log mod.css config
@@ -43,7 +43,7 @@ suite = do
 
     /* JS */
     @animate (t) ~>
-      t = t + (@animate.offset or 0)
+      t = (t + (@animate.offset or 0)) / (config.dur or 1)
       tomato-js.style <<< mod.js (t - Math.floor(t)), config
       #mat = kit.js (t - Math.floor(t)), opt
       #tomato-js.style.transform = "matrix(#{mat.join(',')})"

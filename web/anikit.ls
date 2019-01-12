@@ -1,6 +1,7 @@
-require! <[easing-fit ./kits-list ./easing]>
+require! <[easing-fit cubic ./kits-list ./easing]>
 
 anikit = do
+  noise: (t) -> (Math.sin(t * 43758.5453) + 1 ) * 0.5
   step-to-keyframes: (step, opt) ->
     ret = easing-fit.fit step, opt
     propFunc = opt.propFunc or (-> it)
@@ -16,6 +17,7 @@ anikit = do
 
 anikit <<< kits-list
 anikit.timing = easing
+anikit.cubic = cubic
 
 if window? =>
   window.anikit = anikit

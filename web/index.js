@@ -31,7 +31,6 @@ suite = {
     this.animate.aniid = aniid = Math.random();
     return requestAnimationFrame(step = function(t){
       t = t * 0.001;
-      t = t - Math.floor(t);
       func(t);
       if (this$.animate.aniid === aniid) {
         return requestAnimationFrame(step);
@@ -44,12 +43,13 @@ suite = {
     config.name = 'kit';
     /* CSS */
     t1 = Date.now();
-    this.style.textContent = "" + mod.css(config) + "\n.tomato.css {\n  animation: kit 1s infinite;\n  transform-origin: 40px 40px;\n}";
+    console.log(config.dur);
+    this.style.textContent = "" + mod.css(config) + "\n.tomato.css {\n  animation: kit " + (config.dur || 1) + "s infinite;\n  transform-origin: 50% 50%;\n}";
     console.log(mod.css(config));
     console.log("CSS Generation elapsed: " + (Date.now() - t1) * 0.001);
     /* JS */
     this.animate(function(t){
-      t = t + (this$.animate.offset || 0);
+      t = (t + (this$.animate.offset || 0)) / (config.dur || 1);
       return import$(tomatoJs.style, mod.js(t - Math.floor(t), config));
     });
     /* WEBGL */

@@ -1,7 +1,9 @@
 var mods = {
-  "patrol": require("./kits/patrol")
+  "patrol": require("./kits/patrol"),
+  "rubber": require("./kits/rubber"),
+  "tremble": require("./kits/tremble")
 };
 
-var types = {"jingle":"patrol","rubber-v":"patrol","rubber":"patrol","shake-v":"patrol","shake":"patrol","tick":"patrol","smash":"patrol","jelly-alt":"patrol","jelly":"patrol","damage":"patrol"};
+var types = {"breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble"};
 
 module.exports = {mods: mods, types: types};
