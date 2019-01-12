@@ -8,38 +8,49 @@ $( \input.slider )
     min: -0.5, max: 0.5, step: 0.001
     onChange: ->
       suite.animate.offset = it.from
-      suite.shader.uniforms.offset.value = it.from
+      if suite.shader => suite.shader.uniforms.offset.value = it.from
 
 suite = do
   init: ->
     /* CSS */
     @style = document.createElement("style")
     document.head.appendChild @style
-
     @style.setAttribute \type, \text/css
 
   stop: -> @animate.aniid = -1
   animate: (func) ->
     @animate.aniid = aniid = Math.random!
-    requestAnimationFrame (step = (t) ~> func t * 0.001; if @animate.aniid == aniid => requestAnimationFrame step)
+    requestAnimationFrame (step = (t) ~> 
+      t = t * 0.001
+      t = t - Math.floor(t)
+      func t
+      if @animate.aniid == aniid => requestAnimationFrame step
+    )
 
-  use-kit: (name) ->
-    kit = anikit(name)
+  use: ({mod, config}) ->
+    config.name = \kit
     /* CSS */
+    t1 = Date.now!
     @style.textContent = """
-    #{kit.css {name: \kit, height: -20}}
+    #{mod.css config}
     .tomato.css {
-      animation: kit 1s infinite
+      animation: kit 1s infinite;
+      transform-origin: 40px 40px;
     }
     """
+    console.log mod.css config
+    console.log "CSS Generation elapsed: #{(Date.now! - t1) * 0.001}"
 
     /* JS */
     @animate (t) ~>
       t = t + (@animate.offset or 0)
-      mat = kit.js (t - Math.floor(t)), {height: -20}
-      tomato-js.style.transform = "matrix(#{mat.join(',')})"
+      tomato-js.style <<< mod.js (t - Math.floor(t)), config
+      #mat = kit.js (t - Math.floor(t)), opt
+      #tomato-js.style.transform = "matrix(#{mat.join(',')})"
 
     /* WEBGL */
+    return
+    args = new Float32Array([0 til 16].map -> opt.args[it] or 0)
     @shader = shader = do
       render: (renderer, program, t)  ->
         gl = renderer.gl
@@ -48,6 +59,7 @@ suite = do
         gl.drawArrays gl.TRIANGLES, 0, 6
       uniforms:
         offset: type: \1f, value: 0.0
+        args: type: \Matrix4fv, value: args
 
       vertexShader: '''
       precision highp float;
@@ -67,10 +79,11 @@ suite = do
       ''' + kit.glsl(name:\kit) + '''
       uniform float uTime;
       uniform float offset;
+      uniform mat4 args;
       uniform vec2 uResolution;
       void main() {
         float len, alpha, p, t = uTime + offset;
-        mat4 opt = mat4(0);
+        mat4 opt = mat4(args);
         vec3 pos, c1, c2;
         vec2 uv;
         c1 = vec3(.5625, .5625, 1.);
@@ -79,9 +92,11 @@ suite = do
         pos = vec3(uv - vec2(.5, .5), 1.);
 
         /* 0 ~ 1 = 0 ~ 40px */
-        opt[0][0] = -20. / 40.;
+        //opt[0][0] = opt[0][0] / 40.;
+        //opt[0][1] = opt[0][1] / 40.;
 
         pos.xy = (pos.xy * uResolution.xy / 40.0);
+        t = t - floor(t);
         pos = kit(t, 0, opt) * pos;
 
         len = length(pos.xy);
@@ -97,8 +112,19 @@ suite = do
     @renderer = new ShaderRenderer [shader], {root: tomato-webgl}
     @renderer.init!
     @renderer.animate!
-    console.log @renderer.width, @renderer.height
 
 suite.init!
-suite.use-kit \spin
-suite.use-kit \bounce
+
+select = document.querySelector \#select
+select.addEventListener \change, -> 
+  name = @value
+  ret = anikit.use name
+  suite.use ret
+
+
+for k,v of anikit.types =>
+  opt = document.createElement("option")
+  opt.setAttribute \value, k
+  opt.textContent = k
+  select.appendChild opt
+

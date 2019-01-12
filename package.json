@@ -26,9 +26,11 @@
     "pug": "^2.0.3"
   },
   "dependencies": {
+    "bezier-easing": "^2.1.0",
     "easing-fit": "github:loadingio/easing-fit",
     "growl": "=1.10.2",
     "js2glsl": "^0.1.0",
-    "minimatch": "=3.0.2"
+    "minimatch": "=3.0.2",
+    "svg-path-properties": "^0.4.7"
   }
 }

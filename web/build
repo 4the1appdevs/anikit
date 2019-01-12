@@ -1,2 +1,3 @@
 #!/usr/bin/env bash
+lsc kits-bundle
 browserify anikit.js > anikit.bundle.js
