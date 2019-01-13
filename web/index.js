@@ -6,8 +6,8 @@ tomatoWebgl = document.querySelector('.tomato.webgl');
 x$ = $('input.slider');
 x$.val(0);
 x$.ionRangeSlider({
-  min: -0.5,
-  max: 0.5,
+  min: -1.0,
+  max: 1.0,
   step: 0.001,
   onChange: function(it){
     suite.animate.offset = it.from;

@@ -5,7 +5,7 @@ tomato-webgl = document.querySelector \.tomato.webgl
 $( \input.slider )
   ..val 0
   ..ionRangeSlider do
-    min: -0.5, max: 0.5, step: 0.001
+    min: -1.0, max: 1.0, step: 0.001
     onChange: ->
       suite.animate.offset = it.from
       if suite.shader => suite.shader.uniforms.offset.value = it.from
