@@ -3,172 +3,110 @@ var ret;
 ret = {
   name: 'bounce',
   preset: {
-    beat: {
-      steep: 0.4,
-      count: 1,
-      decay: 0.5,
-      power: 1.1,
-      offset: 0.2,
-      unit: '',
-      propFunc: function(f, opt){
-        return {
-          transform: "scale(" + (1 - opt.offset * f.value) + ")"
-        };
-      }
-    },
-    bounceAlt: {
-      steep: 0.5,
-      count: 0,
-      decay: 0.5,
-      power: 0,
-      offset: -14,
-      unit: 'px',
-      propFunc: function(f, opt){
-        return {
-          transform: "translate(0, " + opt.offset * f.value + opt.unit + ")"
-        };
-      }
-    },
-    pulse: {
-      dur: 0.5,
-      steep: 0.6,
-      count: 0,
-      decay: 0.5,
-      power: 1.1,
-      offset: 0.2,
-      unit: '',
-      errorThreshold: 0.001,
-      segSampleCount: 20,
-      sampleCount: 1000,
-      propFunc: function(f, opt){
-        return {
-          transform: "scale(" + (1 - opt.offset * f.value) + ")"
-        };
-      }
-    },
-    "tick-alt": {
-      steep: 0.4,
-      count: 5,
-      decay: 0.6,
-      power: 1.1,
-      offset: -45,
-      unit: '',
-      propFunc: function(f, opt){
-        return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
-        };
-      }
-    },
-    jump: {
-      steep: 0.4,
-      count: 5,
-      decay: 0.6,
-      power: 1.1,
-      offset: -14,
-      unit: 'px',
-      propFunc: function(f, opt){
-        return {
-          transform: "translate(0," + f.value * opt.offset + opt.unit + ")"
-        };
-      }
-    }
+    bounce: {}
   },
   edit: {
-    steep: {
-      'default': 0.4,
-      type: 'number',
-      min: 0.3,
-      max: 1
-    },
-    count: {
-      'default': 5,
-      type: 'number',
-      min: 0,
-      max: 10
-    },
-    decay: {
-      'default': 0.6,
-      type: 'number',
-      min: 0,
-      max: 1,
-      step: 0.1
-    },
-    power: {
-      'default': 1.1,
-      type: 'number',
-      min: 0,
-      max: 10,
-      step: 0.1
-    },
-    offset: {
-      'default': -14,
+    blur: {
+      'default': 10,
       type: 'number',
       unit: 'px',
-      min: -100,
+      min: 0,
       max: 100
     },
     unit: {
       'default': 'px',
       type: 'choice',
       values: ["px", "%", ""]
+    },
+    height: {
+      'default': -40,
+      type: 'number',
+      min: -500,
+      max: 500
+    },
+    offset: {
+      'default': 50,
+      type: 'number',
+      min: -500,
+      max: 500
+    },
+    rate: {
+      'default': 13 / 18,
+      type: 'number',
+      min: 0,
+      max: 1
+    },
+    deflate: {
+      'default': 0.6,
+      type: 'number',
+      min: 0,
+      max: 1
     }
   },
-  timing: function(t, opt){
-    var p1, p2, R, i$, to$, i, pp, pf, ph, d;
-    p1 = [opt.steep, 0, 1, 1 - opt.steep];
-    p2 = [0, opt.steep, 1 - opt.steep, 1];
-    R = (opt.decay - 1) / (Math.pow(opt.decay, opt.count + 1) - 1);
-    for (i$ = 0, to$ = opt.count; i$ <= to$; ++i$) {
-      i = i$;
-      pp = R * (Math.pow(opt.decay, i) - 1) / (opt.decay - 1);
-      pf = R * (Math.pow(opt.decay, i + 1) - 1) / (opt.decay - 1);
-      ph = (pf + pp) * 0.5;
-      d = Math.pow(Math.pow(opt.decay, opt.power), i);
-      if (t < ph) {
-        t = (t - pp) / (ph - pp);
-        t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p2), p2);
-      } else if (t < pf) {
-        t = (t - ph) / (pf - ph);
-        t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p1), p1);
-        t = 1 - t;
-      } else {
-        continue;
-      }
-      return t * d;
+  step: function(t, opt){
+    var args, y, s;
+    opt == null && (opt = {});
+    args = [opt.height, opt.offset, opt.rate, opt.deflate];
+    if (t < args[2]) {
+      t = t / args[2];
+      y = args[0] * (0.25 - Math.pow(t - 0.5, 2)) * 4;
+      s = 1;
+    } else {
+      t = (t - args[2]) / (1 - args[2]);
+      s = args[3] + (1 - args[3]) * Math.pow(t - 0.5, 2) / 0.25;
+      y = args[1] * (1 - s);
     }
-    return 0;
+    return [1, 0, 0, s, 0, y];
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
-      return this$.timing(it, opt);
-    }, opt);
+    var optAlt, ret1, ret2, ret, this$ = this;
+    optAlt = JSON.parse(JSON.stringify(opt));
+    optAlt.height = 1;
+    ret1 = easingFit.fit(function(it){
+      return this$.step(it, optAlt)[5];
+    }, {
+      end: opt.rate
+    });
+    ret2 = easingFit.fit(function(it){
+      return this$.step(it, optAlt)[3];
+    }, {
+      start: opt.rate
+    });
+    ret1.pop();
+    ret = ret1.concat(ret2);
+    ret = easingFit.toKeyframes(ret, {
+      format: 'css',
+      propFunc: function(it, idx){
+        var s, y;
+        if (idx < ret1.length) {
+          return {
+            transform: "translate(0," + it.value * opt.height + "px) scaleY(1)"
+          };
+        } else {
+          s = it.value;
+          y = (opt.offset || 50) * (1 - s);
+          return {
+            transform: "translate(0," + y + "px) scaleY(" + it.value + ")"
+          };
+        }
+      },
+      name: opt.name
+    });
+    return ret;
   },
   js: function(t, opt){
-    return opt.propFunc({
-      value: this.timing(t, opt)
-    }, opt);
+    var mat;
+    opt == null && (opt = {});
+    opt = import$(import$({}, this.opt), opt);
+    mat = this.step(t, opt);
+    return {
+      transform: "matrix(" + mat.join(',') + ")"
+    };
   }
-  /* equivalent keyframes */
-  /*
-  bounce(name, dur, iterations, accelerate, decay, power, offset, func)
-    R = 100 * (decay - 1) / (decay ** (iterations + 1) - 1)
-    .{name}
-      animation: unquote(name) dur linear infinite
-    @keyframes {name}
-      0%
-        func(0,0)
-        timing-speed-down(accelerate)
-      for num in (0..iterations)
-        p = (decay ** ( num + 1 ) - 1) / (decay - 1)
-        p2 = p - (decay ** num) * 0.5
-        d = offset * ((decay ** power) ** num)
-        {R * 1% * p2 }
-          func(d,num * 2 + 1)
-          timing-speed-up(accelerate)
-        {R * 1% * p}
-          func(0,num * 2 + 2)
-          timing-speed-down(accelerate)
-  */
 };
 module.exports = ret;
+function import$(obj, src){
+  var own = {}.hasOwnProperty;
+  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
+  return obj;
+}
