@@ -1,7 +1,6 @@
 ret = do
   name: \rush
   preset:
-
     "rush-btt":
       dur: 2
       steep: 0.4, offset_near: 20, offset_far: 200, direction: -1
