@@ -46,6 +46,7 @@ suite = do
       tomato-js.style <<< mod.js (t - Math.floor(t)), config
       #mat = kit.js (t - Math.floor(t)), opt
       #tomato-js.style.transform = "matrix(#{mat.join(',')})"
+    return
 
     /* WEBGL */
     return

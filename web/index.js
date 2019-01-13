@@ -51,6 +51,7 @@ suite = {
       t = (t + (this$.animate.offset || 0)) / (config.dur || 1);
       return import$(tomatoJs.style, mod.js(t - Math.floor(t), config));
     });
+    return;
     /* WEBGL */
     return;
     args = new Float32Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(function(it){

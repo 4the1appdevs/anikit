@@ -91,12 +91,6 @@ ret = {
       value: this.timing(t, opt)
     }, opt);
   }
-  /*
-  timing-speed-down(rate)
-    animation-timing-function: cubic-bezier(0,rate,1 - rate,1)
-  timing-speed-up(rate)
-    animation-timing-function: cubic-bezier(rate,0,1,1 - rate)
-  */
   /* equivalent keyframes */
   /*
   slide(name, dur, rate, offset, func)
