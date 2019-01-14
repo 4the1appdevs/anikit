@@ -7,11 +7,18 @@ ret = {
       steep: 0.4,
       cycle: 3600,
       dur: 2,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotateY(" + f.value * opt.cycle + "deg)"
+          transform: "rotateY(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.ry(f * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -19,22 +26,36 @@ ret = {
       steep: 0.4,
       cycle: 3600,
       dur: 2,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotateX(" + f.value * opt.cycle + "deg)"
+          transform: "rotateX(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.rx(f * c.cycle * Math.PI / 180)
         };
       }
     },
     "cycle": {
       steep: 0.0,
       cycle: 360,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.rz(f * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -42,11 +63,18 @@ ret = {
       steep: 0.4,
       cycle: 360,
       flip: true,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotateY(" + f.value * opt.cycle + "deg)"
+          transform: "rotateY(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.ry(f * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -54,33 +82,54 @@ ret = {
       steep: 0.4,
       cycle: 360,
       flip: true,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotateX(" + f.value * opt.cycle + "deg)"
+          transform: "rotateX(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.rx(f * c.cycle * Math.PI / 180)
         };
       }
     },
     "spin-fast": {
       steep: 0.4,
       cycle: 1800,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.rz(f * c.cycle * Math.PI / 180)
         };
       }
     },
     spin: {
       steep: 0.4,
       cycle: 360,
-      errorThreshold: 0.001,
-      sampleCount: 20,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20
+      },
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle + "deg)"
+        };
+      },
+      value: function(f, c){
+        return {
+          transform: anikit.util.rz(f * c.cycle * Math.PI / 180)
         };
       }
     }
@@ -121,24 +170,27 @@ ret = {
       return t;
     }
     if (t < 0.5) {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 2, p1), p1);
+      t = cubic.Bezier.y(cubic.Bezier.t(t * 2, p1), p1);
       t = t * 0.5;
     } else {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p2), p2);
+      t = cubic.Bezier.y(cubic.Bezier.t((t - 0.5) * 2, p2), p2);
       t = t * 0.5 + 0.5;
     }
     return t;
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

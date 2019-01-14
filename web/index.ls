@@ -1,6 +1,7 @@
 tomato-js = document.querySelector \.tomato.js
 tomato-css = document.querySelector \.tomato.css
 tomato-webgl = document.querySelector \.tomato.webgl
+tomato-three = document.querySelector \.tomato.three
 
 $( \input.slider )
   ..val 0
@@ -10,12 +11,73 @@ $( \input.slider )
       suite.animate.offset = it.from
       if suite.shader => suite.shader.uniforms.offset.value = it.from
 
+three-init = (root, w = window.innerWidth, h = window.innerHeight) ->
+  box = tomato-three.parentNode.getBoundingClientRect!
+  [w,h] = [box.width, box.height]
+  camera = new THREE.PerspectiveCamera 45, w/h, 1, 10000
+  scene = new THREE.Scene!
+  renderer = new THREE.WebGLRenderer antialias: true, alpha: true
+  renderer.setSize w, h
+  renderer.setClearColor 0x0, 0
+  root.appendChild renderer.domElement
+  #controls = new THREE.OrbitControls camera
+  controls = {}
+  animate = (render-func) ->
+    _animate = (value) ->
+      requestAnimationFrame _animate
+      render-func value
+    _animate!
+  return {camera, scene, renderer, w, h, controls}
+
 suite = do
   init: ->
     /* CSS */
     @style = document.createElement("style")
     document.head.appendChild @style
     @style.setAttribute \type, \text/css
+    @ <<< three-init tomato-three
+    [renderer, scene, camera] = [@renderer, @scene, @camera]
+    geom = new THREE.SphereGeometry 1, 20, 20
+    shape = new THREE.Shape!
+    d = 1.1
+    shape.moveTo d, 0
+    shape.bezierCurveTo d, 1.3 * d, -d, 1.3 * d, -d, 0
+    shape.bezierCurveTo -d, -1.3 * d, d, -1.3 * d, d, 0
+
+    geom = new THREE.ShapeGeometry shape
+    @mat = mat = new THREE.MeshStandardMaterial color: 0xffffff, metalness: 0, roughness: 0.5
+    @mat = mat = new THREE.ShaderMaterial do
+      side: THREE.DoubleSide
+      vertexShader: '''
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.);
+      }
+      '''
+      fragmentShader: '''
+      varying vec2 vUv;
+      void main() {
+        vec3 c1 = vec3(1., 1., 0.5);
+        vec3 c2 = vec3(0., 0., 1.);
+        vec2 v = vUv;
+        float len = 0.;
+        len = length(v - 0.);
+        len = smoothstep(0.88,0.89,len);
+        if(v.y + v.x < 0.0 || v.y - v.x < 0.0 ) { len = 0.; }
+
+        gl_FragColor = vec4(mix(c1, c2, len), 1.);
+      }
+      '''
+    @mesh = mesh = new THREE.Mesh geom, mat
+    @light = light = new THREE.HemisphereLight 0x0099ff, 0xff9900, 0.9
+    scene.add light
+
+    mesh.matrixAutoUpdate = false
+    scene.add mesh
+    camera.position.set 0, 0, 10
+    camera.lookAt 0, 0, 0
+    renderer.render scene, camera
 
   stop: -> @animate.aniid = -1
   animate: (func) ->
@@ -23,30 +85,37 @@ suite = do
     requestAnimationFrame (step = (t) ~> 
       t = t * 0.001
       func t
+
+      t = t + (@animate.offset or 0)
+      @mesh.matrix.set.apply(
+        @mesh.matrix,
+        (@kit.affine(t - Math.floor(t)).transform or [1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1])
+      )
+
+      @renderer.render @scene, @camera
       if @animate.aniid == aniid => requestAnimationFrame step
     )
 
-  use: ({mod, config}) ->
-    config.name = \kit
+  use: (name) ->
+
+    @kit = kit = new anikit name, {name: \kit}
+
     /* CSS */
     t1 = Date.now!
-    @style.textContent = """
-    #{mod.css config}
-    .tomato.css {
-      animation: kit #{config.dur or 1}s infinite;
-      transform-origin: 50% 50%;
-    }
-    """
-    console.log mod.css config
+    @style.textContent = kit.css name: \kit
+    kit.animate(tomato-css)
     console.log "CSS Generation elapsed: #{(Date.now! - t1) * 0.001}"
+
+    console.log kit.affine 0
 
     /* JS */
     @animate (t) ~>
-      t = (t + (@animate.offset or 0)) / (config.dur or 1)
-      tomato-js.style <<< mod.js (t - Math.floor(t)), config
+      t = (t + (@animate.offset or 0)) / (kit.config.dur or 1)
+      tomato-js.style <<< kit.js (t - Math.floor(t))
+      #cfg = kit.affine(t - Math.floor(t))
+      #tomato-js.style.transform = "matrix3d(#{(cfg.transform or []).join(',')})"
       #mat = kit.js (t - Math.floor(t)), opt
       #tomato-js.style.transform = "matrix(#{mat.join(',')})"
-    return
 
     /* WEBGL */
     return
@@ -116,11 +185,7 @@ suite = do
 suite.init!
 
 select = document.querySelector \#select
-select.addEventListener \change, -> 
-  name = @value
-  ret = anikit.use name
-  suite.use ret
-
+select.addEventListener \change, -> suite.use @value
 
 for k,v of anikit.types =>
   opt = document.createElement("option")

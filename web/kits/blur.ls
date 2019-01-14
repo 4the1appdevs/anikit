@@ -3,7 +3,7 @@ ret = do
   preset:
     blur: {}
   edit: 
-    blur: default: 10, type: \number, unit: \px, min: 0, max: 100
+    blur: default: 10, type: \number, unit: \px, units: <[px %]>, min: 0, max: 100
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   css: (opt) ->
@@ -15,7 +15,8 @@ ret = do
     }
     """
 
-  js: (t, opt) ->
+  js: (t, opt) -> return { filter: "blur(#{opt.blur * (1 - Math.abs(t - 0.5) * 2)}#{opt.unit})" }
+
 
 
 module.exports = ret
