@@ -4,46 +4,78 @@ ret = {
   name: 'slide',
   preset: {
     "slide-ltr": {
-      errorThreshold: 0.0001,
-      sampleCount: 20,
+      local: {
+        errorThreshold: 0.0001,
+        sampleCount: 20
+      },
       offset: 200,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset + opt.unit + ",0)",
+          transform: "translate(" + f.value * c.offset + c.unit + ",0)",
           opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.tx(t * c.offset),
+          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
         };
       }
     },
     "slide-rtl": {
-      errorThreshold: 0.0001,
-      sampleCount: 20,
+      local: {
+        errorThreshold: 0.0001,
+        sampleCount: 20
+      },
       offset: -200,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset + opt.unit + ",0)",
+          transform: "translate(" + f.value * c.offset + c.unit + ",0)",
           opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.tx(t * c.offset),
+          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
         };
       }
     },
     "slide-btt": {
-      errorThreshold: 0.0001,
-      sampleCount: 20,
+      local: {
+        errorThreshold: 0.0001,
+        sampleCount: 20
+      },
       offset: -200,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset + opt.unit + ")",
+          transform: "translate(0," + f.value * c.offset + c.unit + ")",
           opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.ty(t * c.offset),
+          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
         };
       }
     },
     "slide-ttb": {
-      errorThreshold: 0.0001,
-      sampleCount: 20,
+      local: {
+        errorThreshold: 0.0001,
+        sampleCount: 20
+      },
       offset: 200,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset + opt.unit + ")",
+          transform: "translate(0," + f.value * c.offset + c.unit + ")",
           opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.ty(t * c.offset),
+          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
         };
       }
     }
@@ -73,23 +105,30 @@ ret = {
     p1 = [opt.steep, 0, 1, 1 - opt.steep];
     p2 = [0, opt.steep, 1 - opt.steep, 1];
     if (t < 0.5) {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 2, p1), p1);
+      t = cubic.Bezier.y(cubic.Bezier.t(t * 2, p1), p1);
     } else {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p2), p2) / 2;
+      t = cubic.Bezier.y(cubic.Bezier.t((t - 0.5) * 2, p2), p2) / 2;
       t = t * 2 - 1;
     }
     return t;
-  },
+  }
+  /*
+  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  */,
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

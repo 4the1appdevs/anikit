@@ -67,7 +67,7 @@ ret = {
       values: ["px", "%", ""]
     }
   },
-  propFunc: function(f, opt){
+  prop: function(f, opt){
     var ref$, x, y, r, s;
     ref$ = this.calc(f.value, opt), x = ref$[0], y = ref$[1], r = ref$[2], s = ref$[3];
     return {
@@ -77,14 +77,14 @@ ret = {
   css: function(opt){
     var ret, i$, to$, i, p;
     ret = [
-      "@keyframes " + opt.name + " {", "  0% { transform: " + this.propFunc({
+      "@keyframes " + opt.name + " {", "  0% { transform: " + this.prop({
         value: 0
       }, opt).transform + " }"
     ];
     for (i$ = 1, to$ = opt.count; i$ < to$; ++i$) {
       i = i$;
       p = easingFit.round(100 * i / opt.count);
-      ret.push("  " + p + "% { transform: " + this.propFunc({
+      ret.push("  " + p + "% { transform: " + this.prop({
         value: p / 100
       }, opt).transform + "; animation-timing-function: linear }");
     }
@@ -98,13 +98,21 @@ ret = {
     if (t === 0 || t === 1) {
       return [0, 0, 0, 1];
     }
-    x = anikit.noise(t * 78779) * offset - offset * 0.5;
-    y = anikit.noise(t * 57793) * offset - offset * 0.5;
-    r = anikit.noise(t * 19901) * degree - degree * 0.5;
-    s = 1 + anikit.noise(t + 31393) * zoom - zoom * 0.5;
+    x = anikit.util.noise(t * 78779) * offset - offset * 0.5;
+    y = anikit.util.noise(t * 57793) * offset - offset * 0.5;
+    r = anikit.util.noise(t * 19901) * degree - degree * 0.5;
+    s = 1 + anikit.util.noise(t + 31393) * zoom - zoom * 0.5;
     return [x, y, r, s];
   },
   js: function(t, opt){
+    var values, mat;
+    values = this.affine(t, opt);
+    mat = values.transform;
+    return {
+      transform: "matrix(" + [mat[0], mat[1], mat[4], mat[5], mat[3], mat[7]].join(',') + ")"
+    };
+  },
+  affine: function(t, opt){
     var t1, t2, ref$, x1, y1, r1, s1, x2, y2, r2, s2, x, y, r, s;
     t1 = Math.floor(t * opt.count) / opt.count;
     t2 = Math.ceil(t * opt.count) / opt.count;
@@ -113,10 +121,10 @@ ret = {
     t = (t - t1) / (t2 - t1);
     x = (x2 - x1) * t + x1;
     y = (y2 - y1) * t + y1;
-    r = (r2 - r1) * t + r1;
+    r = ((r2 - r1) * t + r1) * Math.PI / 180;
     s = (s2 - s1) * t + s1;
     return {
-      transform: "translate(" + x + opt.unit + "," + y + opt.unit + ") rotate(" + r + "deg) scale(" + s + ")"
+      transform: [s * Math.cos(r), Math.sin(r), 0, x, -Math.sin(r), s * Math.cos(r), 0, y, 0, 0, s, 0, 0, 0, 0, 1]
     };
   }
   /* equivalent keyframes */

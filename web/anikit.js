@@ -76,13 +76,14 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
     node.matrixAutoUpdate = false;
     mat = values.transform || [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+    [3, 7, 11].map(function(it){
+      return mat[it] = mat[it] / 40;
+    });
     gmat = new THREE.Matrix4().makeTranslation(wx, wy, wz);
     node.matrix.set.apply(node.matrix, mat);
     node.matrix.multiply(gmat);
     node.matrix.premultiply(gmat.getInverse(gmat));
-    if (values.opacity) {
-      return node.material.uniforms.alpha.value = values.opacity;
-    }
+    return node.material.uniforms.alpha.value = values.opacity != null ? values.opacity : 1;
   },
   animate: function(node, opt){
     opt == null && (opt = {});
@@ -119,7 +120,7 @@ import$(anikit, {
       return [1, 0, 0, t, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
     },
     ty: function(t){
-      return [1, 0, 0, 0, 0, 1, 0, t, 0, 0, 1, 0, 0, 0, 0, 1];
+      return [1, 0, 0, 0, 0, 1, 0, -t, 0, 0, 1, 0, 0, 0, 0, 1];
     },
     tz: function(t){
       return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, t, 0, 0, 0, 1];
@@ -132,6 +133,9 @@ import$(anikit, {
     },
     sz: function(t){
       return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, t, 0, 0, 0, 0, 1];
+    },
+    s: function(t){
+      return [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1];
     },
     kx: function(t){
       return [1, -tan(t), 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];

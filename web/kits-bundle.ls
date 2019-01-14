@@ -6,7 +6,7 @@ mods = fs.readdir-sync \kits
   .map -> [it.replace(/\.ls$/, ''), require("./kits/#it")]
 
 # refactoring: test from blur
-mods = mods.filter -> ~(<[blur spin rubber]>.indexOf(it.0))
+mods = mods.filter -> ~(<[blur spin rubber tremble patrol slide]>.indexOf(it.0))
 
 for [name,mod] in mods =>
   if mod.preset => for k,v of (mod.preset or {}) => types[k] = name

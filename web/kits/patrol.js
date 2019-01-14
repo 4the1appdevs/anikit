@@ -6,18 +6,28 @@ ret = {
     breath: {
       steep: 0.6,
       offset: 0.06,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "scale(" + (1 + f.value * opt.offset - 0.03) + ")"
+          transform: "scale(" + (1 + f.value * c.offset - 0.03) + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.s(1 + t * c.offset - 0.03)
         };
       }
     },
     dim: {
       steep: 0.6,
       offset: 0.5,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          opacity: 0.5 + f.value * opt.offset
+          opacity: 0.5 + f.value * c.offset
+        };
+      },
+      value: function(t, c){
+        return {
+          opacity: 0.5 + t * c.offset
         };
       }
     },
@@ -26,9 +36,16 @@ ret = {
       offset: 10,
       rotate: 30,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset + opt.unit + ") rotate(" + f.value * opt.rotate + "deg)"
+          transform: "translate(" + f.value * c.offset + c.unit + ") rotate(" + f.value * c.rotate + "deg)"
+        };
+      },
+      value: function(t, c){
+        var a;
+        a = t * c.rotate * Math.PI / 180;
+        return {
+          transform: [Math.cos(a), Math.sin(a), 0, t * c.offset, -Math.sin(a), Math.cos(a), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
       }
     },
@@ -36,9 +53,14 @@ ret = {
       steep: 0.6,
       offset: 30,
       unit: '',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
+          transform: "rotate(" + f.value * c.offset + "deg)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180)
         };
       }
     },
@@ -46,9 +68,14 @@ ret = {
       steep: 0.6,
       offset: 10,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset + opt.unit + ")"
+          transform: "translate(0," + f.value * c.offset + c.unit + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.ty(t * c.offset)
         };
       }
     },
@@ -56,9 +83,14 @@ ret = {
       steep: 0.6,
       offset: 10,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset + opt.unit + ",0)"
+          transform: "translate(" + f.value * c.offset + c.unit + ",0)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.tx(t * c.offset)
         };
       }
     }
@@ -87,23 +119,26 @@ ret = {
     var p;
     p = [opt.steep, 0, 1 - opt.steep, 1];
     if (t < 0.5) {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 2, p), p) / 2;
+      t = cubic.Bezier.y(cubic.Bezier.t(t * 2, p), p) / 2;
     } else {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p), p) / 2 + 0.5;
+      t = cubic.Bezier.y(cubic.Bezier.t((t - 0.5) * 2, p), p) / 2 + 0.5;
     }
     t = 1 - 4 * Math.abs(t - 0.5);
     return t;
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

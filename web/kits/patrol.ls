@@ -3,24 +3,36 @@ ret = do
   preset: 
     breath:
       steep: 0.6, offset: 0.06
-      propFunc: (f, opt) -> {transform: "scale(#{1 + f.value * opt.offset - 0.03})"}
+      prop: (f, c) -> {transform: "scale(#{1 + f.value * c.offset - 0.03})"}
+      value: (t, c) -> transform: anikit.util.s(1 + t * c.offset - 0.03)
     dim:
       steep: 0.6, offset: 0.5
-      propFunc: (f, opt) -> {opacity: 0.5 + f.value * opt.offset}
+      prop: (f, c) -> {opacity: 0.5 + f.value * c.offset}
+      value: (t, c) -> opacity: 0.5 + t * c.offset
     metronome:
       steep: 0.6, offset: 10, rotate: 30, unit: \px
-      propFunc: (f, opt) -> {
-        transform: "translate(#{f.value * opt.offset}#{opt.unit}) rotate(#{f.value * opt.rotate}deg)"
+      prop: (f, c) -> {
+        transform: "translate(#{f.value * c.offset}#{c.unit}) rotate(#{f.value * c.rotate}deg)"
       }
+      value: (t, c) -> 
+        a = t * c.rotate * Math.PI / 180
+        transform: [
+          Math.cos(a), Math.sin(a), 0, t * c.offset,
+          -Math.sin(a), Math.cos(a), 0, 0,
+          0, 0, 1, 0, 0, 0, 0, 1
+        ]
     swing:
       steep: 0.6, offset: 30, unit: ''
-      propFunc: (f, opt) -> {transform: "rotate(#{f.value * opt.offset}deg)"}
+      prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
+      value: (t, c) -> transform: anikit.util.rz t * c.offset * Math.PI / 180
     "wander-v": 
       steep: 0.6, offset: 10, unit: \px
-      propFunc: (f, opt) -> {transform: "translate(0,#{f.value * opt.offset}#{opt.unit})"}
+      prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
+      value: (t, c) -> transform: anikit.util.ty t * c.offset
     wander:
       steep: 0.6, offset: 10, unit: \px
-      propFunc: (f, opt) -> {transform: "translate(#{f.value * opt.offset}#{opt.unit},0)"}
+      prop: (f, c) -> {transform: "translate(#{f.value * c.offset}#{c.unit},0)"}
+      value: (t, c) -> transform: anikit.util.tx t * c.offset
 
   edit: 
     steep: default: 0.6, type: \number, min: 0, max: 1
@@ -29,14 +41,16 @@ ret = do
   timing: (t, opt) ->
     p = [opt.steep,0,1 - opt.steep,1]
     if t < 0.5 =>
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 2, p), p) / 2
+      t = cubic.Bezier.y(cubic.Bezier.t(t * 2, p), p) / 2
     else
-      t = (anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p), p) / 2) + 0.5
+      t = (cubic.Bezier.y(cubic.Bezier.t((t - 0.5) * 2, p), p) / 2) + 0.5
     t = 1 - 4 * Math.abs(t - 0.5) # -1 -> 1 -> -1
     return t
 
-  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-  js: (t, opt) -> opt.propFunc {value: @timing t, opt}, opt
+  css: (opt) -> 
+    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  affine: (t, opt) -> opt.value @timing(t, opt), opt
 
   /* equivalent keyframes */
   /*

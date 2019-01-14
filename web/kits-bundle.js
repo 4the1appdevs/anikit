@@ -8,7 +8,7 @@ mods = fs.readdirSync('kits').filter(function(it){
   return [it.replace(/\.ls$/, ''), require("./kits/" + it)];
 });
 mods = mods.filter(function(it){
-  return ~['blur', 'spin', 'rubber'].indexOf(it[0]);
+  return ~['blur', 'spin', 'rubber', 'tremble', 'patrol', 'slide'].indexOf(it[0]);
 });
 for (i$ = 0, len$ = mods.length; i$ < len$; ++i$) {
   ref$ = mods[i$], name = ref$[0], mod = ref$[1];
