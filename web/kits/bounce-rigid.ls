@@ -4,22 +4,30 @@ ret = do
   preset:
     beat:
       steep: 0.4, count: 1, decay: 0.5, power: 1.1, offset: 0.2, unit: ''
-      propFunc: (f, opt) -> {transform: "scale(#{1 - opt.offset * f.value})"}
+      prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
+      value: (t, c) -> transform: anikit.util.s 1 - t * c.offset
 
     bounce-alt:
       steep: 0.5, count: 0, decay: 0.5, power: 0, offset: -14, unit: 'px'
-      propFunc: (f, opt) -> {transform: "translate(0, #{opt.offset * f.value}#{opt.unit})"}
+      prop: (f, c) -> {transform: "translate(0, #{c.offset * f.value}#{c.unit})"}
+      value: (t, c) -> transform: anikit.util.ty c.offset * t
+
     pulse:
       dur: 0.5
       steep: 0.6, count: 0, decay: 0.5, power: 1.1, offset: 0.2, unit: ''
-      error-threshold: 0.001, seg-sample-count: 20, sample-count: 1000
-      propFunc: (f, opt) -> {transform: "scale(#{1 - opt.offset * f.value})"}
+      local: error-threshold: 0.001, seg-sample-count: 20, sample-count: 1000
+      prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
+      value: (t, c) -> transform: anikit.util.s 1 - c.offset * t
+
     "tick-alt":
       steep: 0.4, count: 5, decay: 0.6, power: 1.1, offset: -45, unit: ''
-      propFunc: (f, opt) -> {transform: "rotate(#{f.value * opt.offset}deg)"}
+      prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
+      value: (t, c) -> transform: anikit.util.rz t * c.offset * Math.PI / 180
+
     jump:
       steep: 0.4, count: 5, decay: 0.6, power: 1.1, offset: -14, unit: \px
-      propFunc: (f, opt) -> {transform: "translate(0,#{f.value * opt.offset}#{opt.unit})"}
+      prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
+      value: (t, c) -> transform: anikit.util.ty t * c.offset
 
   edit: 
     steep: default: 0.4, type: \number, min: 0.3, max: 1
@@ -41,17 +49,24 @@ ret = do
       d = ((opt.decay ** opt.power) ** i)
       if t < ph =>
         t = (t - pp) / (ph - pp)
-        t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p2), p2)
+        t = cubic.Bezier.y(cubic.Bezier.t(t, p2), p2)
       else if t < pf =>
         t = (t - ph) / (pf - ph)
-        t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p1), p1)
+        t = cubic.Bezier.y(cubic.Bezier.t(t, p1), p1)
         t = 1 - t
       else continue
       return t * d
     return 0
 
+  /*
   css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-  js: (t, opt) -> opt.propFunc {value: @timing t, opt}, opt
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  */
+
+  css: (opt) -> 
+    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  affine: (t, opt) -> opt.value @timing(t, opt), opt
 
   /* equivalent keyframes */
   /*

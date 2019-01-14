@@ -53,6 +53,9 @@ ret = {
     return {
       opacity: t
     };
+  },
+  affine: function(t, opt){
+    return this.js(t, opt);
   }
   /* equivalent keyframes */
   /*

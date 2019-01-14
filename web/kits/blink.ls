@@ -27,6 +27,7 @@ ret = do
     else if t > 1 - 2 * delta => t = (t - (1 - 2 * delta)) / (2 * delta)
     else t = 0
     return { opacity: t }
+  affine: (t, opt) -> @js t, opt
 
   /* equivalent keyframes */
   /*

@@ -10,9 +10,14 @@ ret = {
       power: 1.1,
       offset: 0.2,
       unit: '',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "scale(" + (1 - opt.offset * f.value) + ")"
+          transform: "scale(" + (1 - c.offset * f.value) + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.s(1 - t * c.offset)
         };
       }
     },
@@ -23,9 +28,14 @@ ret = {
       power: 0,
       offset: -14,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0, " + opt.offset * f.value + opt.unit + ")"
+          transform: "translate(0, " + c.offset * f.value + c.unit + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.ty(c.offset * t)
         };
       }
     },
@@ -37,12 +47,19 @@ ret = {
       power: 1.1,
       offset: 0.2,
       unit: '',
-      errorThreshold: 0.001,
-      segSampleCount: 20,
-      sampleCount: 1000,
-      propFunc: function(f, opt){
+      local: {
+        errorThreshold: 0.001,
+        segSampleCount: 20,
+        sampleCount: 1000
+      },
+      prop: function(f, c){
         return {
-          transform: "scale(" + (1 - opt.offset * f.value) + ")"
+          transform: "scale(" + (1 - c.offset * f.value) + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.s(1 - c.offset * t)
         };
       }
     },
@@ -53,9 +70,14 @@ ret = {
       power: 1.1,
       offset: -45,
       unit: '',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
+          transform: "rotate(" + f.value * c.offset + "deg)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180)
         };
       }
     },
@@ -66,9 +88,14 @@ ret = {
       power: 1.1,
       offset: -14,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset + opt.unit + ")"
+          transform: "translate(0," + f.value * c.offset + c.unit + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.ty(t * c.offset)
         };
       }
     }
@@ -126,10 +153,10 @@ ret = {
       d = Math.pow(Math.pow(opt.decay, opt.power), i);
       if (t < ph) {
         t = (t - pp) / (ph - pp);
-        t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p2), p2);
+        t = cubic.Bezier.y(cubic.Bezier.t(t, p2), p2);
       } else if (t < pf) {
         t = (t - ph) / (pf - ph);
-        t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p1), p1);
+        t = cubic.Bezier.y(cubic.Bezier.t(t, p1), p1);
         t = 1 - t;
       } else {
         continue;
@@ -137,17 +164,24 @@ ret = {
       return t * d;
     }
     return 0;
-  },
+  }
+  /*
+  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  */,
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*
