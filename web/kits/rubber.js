@@ -9,10 +9,16 @@ ret = {
       ratio: 0.6,
       delay: 0.1,
       unit: '',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.offset + "deg)",
+          transform: "rotate(" + f.value * c.offset + "deg)",
           "transform-origin": "50% 0%"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180),
+          transformOrigin: [0.5, 0.0, 0.5]
         };
       }
     },
@@ -22,9 +28,14 @@ ret = {
       ratio: 0.7,
       delay: 0.3,
       unit: '',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "scaleY(" + (1 + f.value * opt.offset) + ")"
+          transform: "scaleY(" + (1 + f.value * c.offset) + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.sy(1 + t * c.offset)
         };
       }
     },
@@ -34,9 +45,14 @@ ret = {
       ratio: 0.7,
       delay: 0.3,
       unit: '',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "scaleX(" + (1 + f.value * opt.offset) + ")"
+          transform: "scaleX(" + (1 + f.value * c.offset) + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.sx(1 + t * c.offset)
         };
       }
     },
@@ -46,9 +62,14 @@ ret = {
       ratio: 0.6,
       delay: 0.3,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset + opt.unit + ")"
+          transform: "translate(0," + f.value * c.offset + c.unit + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.ty(t * c.offset)
         };
       }
     },
@@ -58,9 +79,14 @@ ret = {
       ratio: 0.7,
       delay: 0.3,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset + opt.unit + ",0)"
+          transform: "translate(" + f.value * c.offset + c.unit + ",0)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.tx(t * c.offset)
         };
       }
     },
@@ -70,9 +96,14 @@ ret = {
       ratio: 0.7,
       delay: 0.3,
       unit: "",
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
+          transform: "rotate(" + f.value * c.offset + "deg)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180)
         };
       }
     },
@@ -84,9 +115,14 @@ ret = {
       unit: "",
       sampleCount: 20,
       errorThreshold: 0.001,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * opt.offset + "deg)"
+          transform: "rotate(" + f.value * c.offset + "deg)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180)
         };
       }
     },
@@ -96,9 +132,14 @@ ret = {
       ratio: 0.7,
       delay: 0.3,
       unit: "",
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "skewX(" + f.value * opt.offset + "deg)"
+          transform: "skewX(" + f.value * c.offset + "deg)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.kx(t * c.offset * Math.PI / 180)
         };
       }
     },
@@ -108,9 +149,14 @@ ret = {
       ratio: 0.6,
       delay: 0.3,
       unit: 'px',
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * -opt.offset + opt.unit + ",0) skewX(" + f.value * opt.offset + "deg)"
+          transform: "translate(" + f.value * -c.offset + c.unit + ",0) skewX(" + f.value * c.offset + "deg)"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: [1, -Math.tan(t * c.offset * Math.PI / 180), 0, t * -c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
       }
     },
@@ -120,9 +166,14 @@ ret = {
       ratio: 0.8,
       delay: 0.2,
       unit: "",
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          opacity: 1 - f.value * opt.offset
+          opacity: 1 - f.value * c.offset
+        };
+      },
+      value: function(t, c){
+        return {
+          opacity: 1 - t * c.offset
         };
       }
     }
@@ -139,7 +190,8 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.1,
+      unit: 'px'
     },
     ratio: {
       'default': 0.8,
@@ -169,21 +221,24 @@ ret = {
     len = (1 - opt.delay) / opt.count;
     idx = Math.floor((t - opt.delay) / len);
     t = (t - (idx * len + opt.delay)) / len;
-    t = anikit.timing.js.easeOutQuad(t);
+    t = easing.js.easeOutQuad(t);
     v1 = Math.pow(opt.ratio, idx) * Math.pow(-1, idx);
     v2 = Math.pow(opt.ratio, idx + 1) * Math.pow(-1, idx + 1);
     return (v2 - v1) * t + v1;
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

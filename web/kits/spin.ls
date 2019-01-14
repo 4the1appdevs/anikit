@@ -5,37 +5,37 @@ ret = do
       steep: 0.4, cycle: 3600, dur: 2
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.ry(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI / 180)}
     "coin-v":
       steep: 0.4, cycle: 3600, dur: 2
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.rx(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI / 180)}
     "cycle":
       steep: 0.0, cycle: 360
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.rz(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
     "flip-h":
       steep: 0.4, cycle: 360, flip: true
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.ry(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI / 180)}
     "flip-v":
       steep: 0.4, cycle: 360, flip: true
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.rx(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI / 180)}
     "spin-fast":
       steep: 0.4, cycle: 1800
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.rz(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
     spin:
       steep: 0.4, cycle: 360
       local: error-threshold: 0.001, sample-count: 20
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
-      value: (f, c) -> {transform: anikit.util.rz(f * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
   edit: 
     steep: default: 0.4, type: \number, min: 0, max: 1
     cycle: default: 360, type: \number, unit: \deg, min: 0, max: 3600, step: 360

@@ -1,7 +1,7 @@
 require! <[easing-fit cubic ./kits-list ./easing]>
 uuid = require 'uuid/v4'
 
-{cos,sin} = Math{cos,sin}
+{cos,sin,tan} = Math{cos,sin,tan}
 
 anikit = (name, opt={}) ->
   @{mod, config} = anikit.get(name, opt)
@@ -17,6 +17,26 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   css: (opt={}) -> if @mod.css => @mod.css {} <<< @config <<< opt else {}
   js: (t, opt=@config) -> if @mod.js => @mod.js t, opt else {}
   affine: (t, opt=@config) -> if @mod.affine => @mod.affine t, opt else {}
+
+  animate-js: (node, t, opt) ->
+    if node.ld-style => for k,v of that => node.style[k] = ""
+    node.ld-style = @js (t - Math.floor(t))
+    node.style <<< @js (t - Math.floor(t))
+
+  animate-three: (node, t, opt) ->
+    values = @affine t, (if opt => {} <<< @config <<< opt else @config)
+    box = new THREE.Box3!setFromObject node
+    [wx,wy,wz] = <[x y z]>
+      .map -> box.max[it] - box.min[it]
+      .map (d,i) -> ((values.transform-origin or [0.5,0.5,0.5])[i] - 0.5) * d
+    node.matrixAutoUpdate = false
+    mat = values.transform or [1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1]
+    gmat = new THREE.Matrix4!makeTranslation wx, wy, wz
+    node.matrix.set.apply( node.matrix, mat)
+    node.matrix.multiply gmat
+    node.matrix.premultiply gmat.getInverse gmat
+    if values.opacity => node.material.uniforms.alpha.value = values.opacity
+
   animate: (node, opt={}) ->
     opt = {} <<< @config <<< opt
     if !@dom =>
@@ -39,6 +59,8 @@ anikit <<< do
     sx: (t) -> [t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     sy: (t) -> [1, 0, 0, 0, 0, t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     sz: (t) -> [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, t, 0, 0, 0, 0, 1]
+    kx: (t) -> [1, -tan(t), 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+    ky: (t) -> [1, 0, 0, 0, tan(t), 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   get: (name, opt={}) ->
     mod = if @types[name] => @mods[@types[name]] else @mods[name]
     config = {name: name, dur: 1}

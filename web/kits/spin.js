@@ -16,9 +16,9 @@ ret = {
           transform: "rotateY(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.ry(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.ry(t * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -35,9 +35,9 @@ ret = {
           transform: "rotateX(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.rx(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.rx(t * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -53,9 +53,9 @@ ret = {
           transform: "rotate(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.rz(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.rz(t * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -72,9 +72,9 @@ ret = {
           transform: "rotateY(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.ry(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.ry(t * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -91,9 +91,9 @@ ret = {
           transform: "rotateX(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.rx(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.rx(t * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -109,9 +109,9 @@ ret = {
           transform: "rotate(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.rz(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.rz(t * c.cycle * Math.PI / 180)
         };
       }
     },
@@ -127,9 +127,9 @@ ret = {
           transform: "rotate(" + f.value * c.cycle + "deg)"
         };
       },
-      value: function(f, c){
+      value: function(t, c){
         return {
-          transform: anikit.util.rz(f * c.cycle * Math.PI / 180)
+          transform: anikit.util.rz(t * c.cycle * Math.PI / 180)
         };
       }
     }

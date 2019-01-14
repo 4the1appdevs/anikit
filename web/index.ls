@@ -20,7 +20,6 @@ three-init = (root, w = window.innerWidth, h = window.innerHeight) ->
   renderer.setSize w, h
   renderer.setClearColor 0x0, 0
   root.appendChild renderer.domElement
-  #controls = new THREE.OrbitControls camera
   controls = {}
   animate = (render-func) ->
     _animate = (value) ->
@@ -37,44 +36,49 @@ suite = do
     @style.setAttribute \type, \text/css
     @ <<< three-init tomato-three
     [renderer, scene, camera] = [@renderer, @scene, @camera]
-    geom = new THREE.SphereGeometry 1, 20, 20
     shape = new THREE.Shape!
     d = 1.1
     shape.moveTo d, 0
     shape.bezierCurveTo d, 1.3 * d, -d, 1.3 * d, -d, 0
     shape.bezierCurveTo -d, -1.3 * d, d, -1.3 * d, d, 0
 
-    geom = new THREE.ShapeGeometry shape
+    @geom = geom = new THREE.ShapeGeometry shape
     @mat = mat = new THREE.MeshStandardMaterial color: 0xffffff, metalness: 0, roughness: 0.5
     @mat = mat = new THREE.ShaderMaterial do
       side: THREE.DoubleSide
+      transparent: true
+      uniforms: alpha: type: \f, value: 1
       vertexShader: '''
       varying vec2 vUv;
+      varying float vA;
+      uniform float alpha;
       void main() {
         vUv = uv;
+        vA = alpha;
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.);
       }
       '''
       fragmentShader: '''
       varying vec2 vUv;
+      varying float vA;
       void main() {
-        vec3 c1 = vec3(1., 1., 0.5);
-        vec3 c2 = vec3(0., 0., 1.);
+        vec3 c1 = vec3(.3, .5, 0.9);
+        vec3 c2 = vec3(.6, .8, 1.);
         vec2 v = vUv;
         float len = 0.;
         len = length(v - 0.);
         len = smoothstep(0.88,0.89,len);
         if(v.y + v.x < 0.0 || v.y - v.x < 0.0 ) { len = 0.; }
 
-        gl_FragColor = vec4(mix(c1, c2, len), 1.);
+        gl_FragColor = vec4(mix(c1, c2, len), vA);
       }
       '''
     @mesh = mesh = new THREE.Mesh geom, mat
     @light = light = new THREE.HemisphereLight 0x0099ff, 0xff9900, 0.9
     scene.add light
-
     mesh.matrixAutoUpdate = false
     scene.add mesh
+
     camera.position.set 0, 0, 10
     camera.lookAt 0, 0, 0
     renderer.render scene, camera
@@ -83,16 +87,7 @@ suite = do
   animate: (func) ->
     @animate.aniid = aniid = Math.random!
     requestAnimationFrame (step = (t) ~> 
-      t = t * 0.001
-      func t
-
-      t = t + (@animate.offset or 0)
-      @mesh.matrix.set.apply(
-        @mesh.matrix,
-        (@kit.affine(t - Math.floor(t)).transform or [1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1])
-      )
-
-      @renderer.render @scene, @camera
+      func t * 0.001
       if @animate.aniid == aniid => requestAnimationFrame step
     )
 
@@ -106,16 +101,17 @@ suite = do
     kit.animate(tomato-css)
     console.log "CSS Generation elapsed: #{(Date.now! - t1) * 0.001}"
 
-    console.log kit.affine 0
 
-    /* JS */
     @animate (t) ~>
       t = (t + (@animate.offset or 0)) / (kit.config.dur or 1)
-      tomato-js.style <<< kit.js (t - Math.floor(t))
-      #cfg = kit.affine(t - Math.floor(t))
-      #tomato-js.style.transform = "matrix3d(#{(cfg.transform or []).join(',')})"
-      #mat = kit.js (t - Math.floor(t)), opt
-      #tomato-js.style.transform = "matrix(#{mat.join(',')})"
+      t = t - Math.floor(t)
+
+      /* JS */
+      kit.animate-js tomato-js, t
+
+      /* THREEJS */
+      kit.animate-three @mesh, t - Math.floor(t)
+      @renderer.render @scene, @camera
 
     /* WEBGL */
     return

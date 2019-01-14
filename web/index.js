@@ -53,19 +53,18 @@ threeInit = function(root, w, h){
 suite = {
   init: function(){
     /* CSS */
-    var ref$, renderer, scene, camera, geom, shape, d, mat, mesh, light;
+    var ref$, renderer, scene, camera, shape, d, geom, mat, mesh, light;
     this.style = document.createElement("style");
     document.head.appendChild(this.style);
     this.style.setAttribute('type', 'text/css');
     import$(this, threeInit(tomatoThree));
     ref$ = [this.renderer, this.scene, this.camera], renderer = ref$[0], scene = ref$[1], camera = ref$[2];
-    geom = new THREE.SphereGeometry(1, 20, 20);
     shape = new THREE.Shape();
     d = 1.1;
     shape.moveTo(d, 0);
     shape.bezierCurveTo(d, 1.3 * d, -d, 1.3 * d, -d, 0);
     shape.bezierCurveTo(-d, -1.3 * d, d, -1.3 * d, d, 0);
-    geom = new THREE.ShapeGeometry(shape);
+    this.geom = geom = new THREE.ShapeGeometry(shape);
     this.mat = mat = new THREE.MeshStandardMaterial({
       color: 0xffffff,
       metalness: 0,
@@ -73,8 +72,15 @@ suite = {
     });
     this.mat = mat = new THREE.ShaderMaterial({
       side: THREE.DoubleSide,
-      vertexShader: 'varying vec2 vUv;\nvoid main() {\n  vUv = uv;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.);\n}',
-      fragmentShader: 'varying vec2 vUv;\nvoid main() {\n  vec3 c1 = vec3(1., 1., 0.5);\n  vec3 c2 = vec3(0., 0., 1.);\n  vec2 v = vUv;\n  float len = 0.;\n  len = length(v - 0.);\n  len = smoothstep(0.88,0.89,len);\n  if(v.y + v.x < 0.0 || v.y - v.x < 0.0 ) { len = 0.; }\n\n  gl_FragColor = vec4(mix(c1, c2, len), 1.);\n}'
+      transparent: true,
+      uniforms: {
+        alpha: {
+          type: 'f',
+          value: 1
+        }
+      },
+      vertexShader: 'varying vec2 vUv;\nvarying float vA;\nuniform float alpha;\nvoid main() {\n  vUv = uv;\n  vA = alpha;\n  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.);\n}',
+      fragmentShader: 'varying vec2 vUv;\nvarying float vA;\nvoid main() {\n  vec3 c1 = vec3(.3, .5, 0.9);\n  vec3 c2 = vec3(.6, .8, 1.);\n  vec2 v = vUv;\n  float len = 0.;\n  len = length(v - 0.);\n  len = smoothstep(0.88,0.89,len);\n  if(v.y + v.x < 0.0 || v.y - v.x < 0.0 ) { len = 0.; }\n\n  gl_FragColor = vec4(mix(c1, c2, len), vA);\n}'
     });
     this.mesh = mesh = new THREE.Mesh(geom, mat);
     this.light = light = new THREE.HemisphereLight(0x0099ff, 0xff9900, 0.9);
@@ -92,11 +98,7 @@ suite = {
     var aniid, step, this$ = this;
     this.animate.aniid = aniid = Math.random();
     return requestAnimationFrame(step = function(t){
-      t = t * 0.001;
-      func(t);
-      t = t + (this$.animate.offset || 0);
-      this$.mesh.matrix.set.apply(this$.mesh.matrix, this$.kit.affine(t - Math.floor(t)).transform || [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
-      this$.renderer.render(this$.scene, this$.camera);
+      func(t * 0.001);
       if (this$.animate.aniid === aniid) {
         return requestAnimationFrame(step);
       }
@@ -114,11 +116,14 @@ suite = {
     });
     kit.animate(tomatoCss);
     console.log("CSS Generation elapsed: " + (Date.now() - t1) * 0.001);
-    console.log(kit.affine(0));
-    /* JS */
     this.animate(function(t){
       t = (t + (this$.animate.offset || 0)) / (kit.config.dur || 1);
-      return import$(tomatoJs.style, kit.js(t - Math.floor(t)));
+      t = t - Math.floor(t);
+      /* JS */
+      kit.animateJs(tomatoJs, t);
+      /* THREEJS */
+      kit.animateThree(this$.mesh, t - Math.floor(t));
+      return this$.renderer.render(this$.scene, this$.camera);
     });
     /* WEBGL */
     return;
