@@ -31,20 +31,25 @@ ret = do
     ret = ret1 ++ ret2
     ret = easing-fit.to-keyframes ret, do
       format: \css
-      propFunc: (it, idx) -> 
+      prop: (f, c, idx) -> 
+        console.log f, c
         if idx < ret1.length =>
-          {transform: "translate(0,#{it.value * opt.height}px) scaleY(1)"}
+          {transform: "translate(0,#{f.value * c.height}px) scaleY(1)"}
         else
-          s = it.value
-          y = (opt.offset or 50) * (1 - s)
-          {transform: "translate(0,#{y}px) scaleY(#{it.value})"}
+          s = f.value
+          y = (c.offset or 50) * (1 - s)
+          {transform: "translate(0,#{y}px) scaleY(#{f.value})"}
       name: opt.name
+      config: opt
     return ret
 
-  js: (t, opt={}) ->
-    opt = {} <<< @opt <<< opt
+  js: (t, opt) ->
     mat = @step t, opt
     return {transform: "matrix(#{mat.join(',')})"}
+  
+  affine: (t, opt) ->
+    mat = @step t, opt
+    return {transform: [mat.0, mat.1, 0, mat.4, mat.2, mat.3, 0, -mat.5, 0, 0, 1, 0, 0, 0, 0, 1]}
 
 
 module.exports = ret

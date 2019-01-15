@@ -76,37 +76,39 @@ ret = {
     ret = ret1.concat(ret2);
     ret = easingFit.toKeyframes(ret, {
       format: 'css',
-      propFunc: function(it, idx){
+      prop: function(f, c, idx){
         var s, y;
+        console.log(f, c);
         if (idx < ret1.length) {
           return {
-            transform: "translate(0," + it.value * opt.height + "px) scaleY(1)"
+            transform: "translate(0," + f.value * c.height + "px) scaleY(1)"
           };
         } else {
-          s = it.value;
-          y = (opt.offset || 50) * (1 - s);
+          s = f.value;
+          y = (c.offset || 50) * (1 - s);
           return {
-            transform: "translate(0," + y + "px) scaleY(" + it.value + ")"
+            transform: "translate(0," + y + "px) scaleY(" + f.value + ")"
           };
         }
       },
-      name: opt.name
+      name: opt.name,
+      config: opt
     });
     return ret;
   },
   js: function(t, opt){
     var mat;
-    opt == null && (opt = {});
-    opt = import$(import$({}, this.opt), opt);
     mat = this.step(t, opt);
     return {
       transform: "matrix(" + mat.join(',') + ")"
     };
+  },
+  affine: function(t, opt){
+    var mat;
+    mat = this.step(t, opt);
+    return {
+      transform: [mat[0], mat[1], 0, mat[4], mat[2], mat[3], 0, -mat[5], 0, 0, 1, 0, 0, 0, 0, 1]
+    };
   }
 };
 module.exports = ret;
-function import$(obj, src){
-  var own = {}.hasOwnProperty;
-  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
-  return obj;
-}
