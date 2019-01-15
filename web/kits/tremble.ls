@@ -1,5 +1,6 @@
 ret = do
   name: \tremble
+  type: \animation
   preset: 
     measure: dur: 5, count: 30, offset: 0, degree: 30, zoom: 0
     shiver: dur: 0.5, count: 30, offset: 0, degree: 0, zoom: 0.1

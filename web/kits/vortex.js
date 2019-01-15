@@ -17,6 +17,7 @@ value = function(t, c){
 };
 ret = {
   name: 'vortex',
+  type: 'animation',
   preset: {
     "vortex-out": {
       steep: 0.3,

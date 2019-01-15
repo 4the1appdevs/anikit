@@ -1,5 +1,6 @@
 ret = do
   name: \squeeze
+  type: \animation
   preset:
     squeeze:
       local: sample-count: 20, error-threshold: 0.001

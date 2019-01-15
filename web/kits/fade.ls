@@ -1,5 +1,6 @@
 ret = do
   name: \fade
+  type: \animation
   preset:
     fade: 
       prop: (f, c) -> { opacity: 1 - f.value }

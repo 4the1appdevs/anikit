@@ -1,5 +1,6 @@
 ret = do
   name: \clock
+  type: \animation
   preset:
     clock: {}
   edit: 

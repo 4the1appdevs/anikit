@@ -1,5 +1,6 @@
 ret = do
   name: \heartbeat
+  type: \animation
   preset:
     heartbeat: 
       prop: (f, c) -> {transform: "scale(#{1 + f.value * c.scale})"}

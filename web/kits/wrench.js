@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'wrench',
+  type: 'animation',
   preset: {
     wrench: {}
   },

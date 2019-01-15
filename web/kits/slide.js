@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'slide',
+  type: 'animation',
   preset: {
     "slide-ltr": {
       local: {

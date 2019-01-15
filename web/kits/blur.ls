@@ -1,5 +1,6 @@
 ret = do
   name: \blur
+  type: \animation
   preset:
     blur: {}
   edit: 

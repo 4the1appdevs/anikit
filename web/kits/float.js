@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'float',
+  type: 'animation',
   preset: {
     float: {}
   },

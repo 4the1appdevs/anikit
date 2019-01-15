@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'bounce-rigid',
+  type: 'animation',
   preset: {
     beat: {
       steep: 0.4,

@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'clock',
+  type: 'animation',
   preset: {
     clock: {}
   },

@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'tremble',
+  type: 'animation',
   preset: {
     measure: {
       dur: 5,

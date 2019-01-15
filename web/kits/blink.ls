@@ -1,5 +1,6 @@
 ret = do
   name: \blink
+  type: \animation
   preset:
     blink: 
       showtime: 0.5, transtime: 0.01

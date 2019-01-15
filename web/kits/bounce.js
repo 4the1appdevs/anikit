@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'bounce',
+  type: 'animation',
   preset: {
     bounce: {}
   },

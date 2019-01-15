@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'orbit',
+  type: 'animation',
   preset: {
     orbit: {
       count: 12,

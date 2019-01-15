@@ -2166,6 +2166,7 @@ module.exports = {mods: mods, types: types};
 var ret;
 ret = {
   name: 'blink',
+  type: 'animation',
   preset: {
     blink: {
       showtime: 0.5,
@@ -2245,6 +2246,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'blur',
+  type: 'animation',
   preset: {
     blur: {}
   },
@@ -2279,6 +2281,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'bounce-rigid',
+  type: 'animation',
   preset: {
     beat: {
       steep: 0.4,
@@ -2489,6 +2492,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'bounce',
+  type: 'animation',
   preset: {
     bounce: {}
   },
@@ -2598,6 +2602,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'clock',
+  type: 'animation',
   preset: {
     clock: {}
   },
@@ -2679,6 +2684,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'fade',
+  type: 'animation',
   preset: {
     fade: {
       prop: function(f, c){
@@ -2741,6 +2747,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'float',
+  type: 'animation',
   preset: {
     float: {}
   },
@@ -2803,6 +2810,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'heartbeat',
+  type: 'animation',
   preset: {
     heartbeat: {
       prop: function(f, c){
@@ -2904,6 +2912,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'hit',
+  type: 'animation',
   preset: {
     hit: {}
   },
@@ -3011,6 +3020,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'orbit',
+  type: 'animation',
   preset: {
     orbit: {
       count: 12,
@@ -3076,6 +3086,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'patrol',
+  type: 'animation',
   preset: {
     breath: {
       steep: 0.6,
@@ -3169,30 +3180,28 @@ ret = {
       }
     }
   },
-  edit: [
-    {
-      steep: {
-        'default': 0.6,
-        type: 'number',
-        min: 0,
-        max: 1,
-        step: 0.01
-      },
-      offset: {
-        'default': 10,
-        type: 'number',
-        unit: 'px',
-        min: 0,
-        max: 100
-      }
-    }, 0.01, {
-      unit: {
-        'default': 'px',
-        type: 'choice',
-        values: ["px", "%", ""]
-      }
+  edit: {
+    steep: {
+      'default': 0.6,
+      type: 'number',
+      min: 0,
+      max: 1,
+      step: 0.01
+    },
+    offset: {
+      'default': 10,
+      type: 'number',
+      unit: 'px',
+      min: 0,
+      max: 100,
+      step: 0.01
+    },
+    unit: {
+      'default': 'px',
+      type: 'choice',
+      values: ["px", "%", ""]
     }
-  ],
+  },
   timing: function(t, opt){
     var p;
     p = [opt.steep, 0, 1 - opt.steep, 1];
@@ -3237,6 +3246,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'rubber',
+  type: 'animation',
   preset: {
     jingle: {
       count: 7,
@@ -3496,6 +3506,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'rush',
+  type: 'animation',
   preset: {
     "rush-btt": {
       dur: 2,
@@ -3721,6 +3732,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'slide',
+  type: 'animation',
   preset: {
     "slide-ltr": {
       local: {
@@ -3876,6 +3888,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'spin',
+  type: 'animation',
   preset: {
     "coin-h": {
       steep: 0.4,
@@ -4089,6 +4102,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'squeeze',
+  type: 'animation',
   preset: {
     squeeze: {
       local: {
@@ -4178,6 +4192,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'surprise',
+  type: 'animation',
   preset: {
     surprise: {}
   },
@@ -4250,6 +4265,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'tremble',
+  type: 'animation',
   preset: {
     measure: {
       dur: 5,
@@ -4418,6 +4434,7 @@ value = function(t, c){
 };
 ret = {
   name: 'vortex',
+  type: 'animation',
   preset: {
     "vortex-out": {
       steep: 0.3,
@@ -4533,6 +4550,7 @@ module.exports = ret;
 var ret;
 ret = {
   name: 'wrench',
+  type: 'animation',
   preset: {
     wrench: {}
   },

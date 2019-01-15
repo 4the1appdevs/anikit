@@ -1,5 +1,6 @@
 ret = do
   name: \rubber
+  type: \animation
   preset: 
     jingle:
       count: 7, offset: 10, ratio: 0.6, delay: 0.1, unit: ''

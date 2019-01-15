@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'heartbeat',
+  type: 'animation',
   preset: {
     heartbeat: {
       prop: function(f, c){

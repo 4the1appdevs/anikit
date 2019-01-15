@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'hit',
+  type: 'animation',
   preset: {
     hit: {}
   },

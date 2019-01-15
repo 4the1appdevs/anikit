@@ -1,5 +1,6 @@
 ret = do
   name: \slide
+  type: \animation
   preset:
     "slide-ltr": 
       local: error-threshold: 0.0001, sample-count: 20

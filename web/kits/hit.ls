@@ -1,5 +1,6 @@
 ret = do
   name: \hit
+  type: \animation
   preset:
     hit: {}
   edit: 

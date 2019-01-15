@@ -1,5 +1,6 @@
 ret = do
   name: \spin
+  type: \animation
   preset:
     "coin-h":
       steep: 0.4, cycle: 3600, dur: 2

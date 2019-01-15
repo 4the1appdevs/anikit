@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'rubber',
+  type: 'animation',
   preset: {
     jingle: {
       count: 7,

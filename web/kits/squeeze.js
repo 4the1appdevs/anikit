@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'squeeze',
+  type: 'animation',
   preset: {
     squeeze: {
       local: {

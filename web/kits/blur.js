@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'blur',
+  type: 'animation',
   preset: {
     blur: {}
   },

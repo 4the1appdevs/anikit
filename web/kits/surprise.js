@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'surprise',
+  type: 'animation',
   preset: {
     surprise: {}
   },

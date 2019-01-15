@@ -1,5 +1,6 @@
 ret = do
   name: \rush
+  type: \animation
   preset:
     "rush-btt":
       dur: 2

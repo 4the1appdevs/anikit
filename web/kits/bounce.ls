@@ -1,5 +1,6 @@
 ret = do
   name: \bounce
+  type: \animation
   preset:
     bounce: {}
   edit: 

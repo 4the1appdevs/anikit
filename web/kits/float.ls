@@ -1,5 +1,6 @@
 ret = do
   name: \float
+  type: \animation
   preset:
     float: {}
   edit: 

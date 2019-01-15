@@ -1,5 +1,6 @@
 ret = do
   name: \orbit
+  type: \animation
   preset:
     orbit:
       count: 12, radius: 60, unit: \px

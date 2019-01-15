@@ -1,5 +1,6 @@
 ret = do
   name: \patrol
+  type: \animation
   preset: 
     breath:
       steep: 0.6, offset: 0.06
@@ -34,9 +35,9 @@ ret = do
       prop: (f, c) -> {transform: "translate(#{f.value * c.offset}#{c.unit},0)"}
       value: (t, c) -> transform: anikit.util.tx t * c.offset
 
-  edit: 
+  edit: do
     steep: default: 0.6, type: \number, min: 0, max: 1, step: 0.01
-    offset: default: 10, type: \number, unit: \px, min: 0, max: 100, 0.01
+    offset: default: 10, type: \number, unit: \px, min: 0, max: 100, step: 0.01
     unit: default: \px, type: \choice, values: ["px", "%", ""]
   timing: (t, opt) ->
     p = [opt.steep,0,1 - opt.steep,1]

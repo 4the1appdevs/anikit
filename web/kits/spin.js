@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'spin',
+  type: 'animation',
   preset: {
     "coin-h": {
       steep: 0.4,

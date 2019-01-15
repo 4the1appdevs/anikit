@@ -15,6 +15,7 @@ value = (t, c) ->
 
 ret = do
   name: \vortex
+  type: \animation
   preset:
 
     "vortex-out":

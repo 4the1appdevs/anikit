@@ -1,6 +1,7 @@
 
 ret = do
   name: \bounce-rigid
+  type: \animation
   preset:
     beat:
       steep: 0.4, count: 1, decay: 0.5, power: 1.1, offset: 0.2, unit: ''

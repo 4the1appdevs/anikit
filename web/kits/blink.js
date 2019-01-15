@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'blink',
+  type: 'animation',
   preset: {
     blink: {
       showtime: 0.5,

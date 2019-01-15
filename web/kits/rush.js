@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'rush',
+  type: 'animation',
   preset: {
     "rush-btt": {
       dur: 2,

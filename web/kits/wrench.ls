@@ -1,5 +1,6 @@
 ret = do
   name: \wrench
+  type: \animation
   preset:
     wrench: {}
   edit: 

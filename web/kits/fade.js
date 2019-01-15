@@ -2,6 +2,7 @@
 var ret;
 ret = {
   name: 'fade',
+  type: 'animation',
   preset: {
     fade: {
       prop: function(f, c){

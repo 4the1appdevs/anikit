@@ -1,5 +1,6 @@
 ret = do
   name: \surprise
+  type: \animation
   preset:
     surprise: {}
   edit: 
