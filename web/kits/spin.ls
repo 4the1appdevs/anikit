@@ -37,7 +37,7 @@ ret = do
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
       value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
   edit: 
-    steep: default: 0.4, type: \number, min: 0, max: 1
+    steep: default: 0.4, type: \number, min: 0, max: 1, step: 0.01
     cycle: default: 360, type: \number, unit: \deg, min: 0, max: 3600, step: 360
     flip: default: false, type: \boolean
     unit: default: \px, type: \choice, values: ["px", "%", ""]

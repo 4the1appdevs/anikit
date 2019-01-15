@@ -12,7 +12,8 @@ ret = {
       unit: 'px',
       units: ['px', '%'],
       min: 0,
-      max: 100
+      max: 100,
+      step: 1
     },
     unit: {
       'default': 'px',

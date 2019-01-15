@@ -6,13 +6,6 @@ ret = {
     bounce: {}
   },
   edit: {
-    blur: {
-      'default': 10,
-      type: 'number',
-      unit: 'px',
-      min: 0,
-      max: 100
-    },
     unit: {
       'default': 'px',
       type: 'choice',
@@ -34,13 +27,15 @@ ret = {
       'default': 13 / 18,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     deflate: {
       'default': 0.6,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     }
   },
   step: function(t, opt){
@@ -78,7 +73,6 @@ ret = {
       format: 'css',
       prop: function(f, c, idx){
         var s, y;
-        console.log(f, c);
         if (idx < ret1.length) {
           return {
             transform: "translate(0," + f.value * c.height + "px) scaleY(1)"

@@ -3,12 +3,11 @@ ret = do
   preset:
     bounce: {}
   edit: 
-    blur: default: 10, type: \number, unit: \px, min: 0, max: 100
     unit: default: \px, type: \choice, values: ["px", "%", ""]
     height: default: -40, type: \number, min: -500, max: 500
     offset: default: 50, type: \number, min: -500, max: 500
-    rate: default: 13/18, type: \number, min: 0, max: 1
-    deflate: default: 0.6, type: \number, min: 0, max: 1
+    rate: default: 13/18, type: \number, min: 0, max: 1, step: 0.01
+    deflate: default: 0.6, type: \number, min: 0, max: 1, step: 0.01
 
   step: (t, opt = {}) ->
     args = [opt.height, opt.offset, opt.rate, opt.deflate]
@@ -32,7 +31,6 @@ ret = do
     ret = easing-fit.to-keyframes ret, do
       format: \css
       prop: (f, c, idx) -> 
-        console.log f, c
         if idx < ret1.length =>
           {transform: "translate(0,#{f.value * c.height}px) scaleY(1)"}
         else

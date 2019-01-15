@@ -64,16 +64,27 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return import$(node.style, this.js(t - Math.floor(t)));
   },
   animateThree: function(node, t, opt){
-    var values, box, ref$, wx, wy, wz, mat, gmat;
+    var values, box, bbox, ref$, wx, wy, wz, nx, ny, nz, m, mat, gmat, opacity;
     values = this.affine(t, opt
       ? import$(import$({}, this.config), opt)
       : this.config);
     box = new THREE.Box3().setFromObject(node);
+    node.geometry.computeBoundingBox();
+    bbox = node.geometry.boundingBox;
     ref$ = ['x', 'y', 'z'].map(function(it){
-      return box.max[it] - box.min[it];
+      return bbox.max[it] - bbox.min[it];
     }).map(function(d, i){
       return ((values.transformOrigin || [0.5, 0.5, 0.5])[i] - 0.5) * d;
     }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
+    ref$ = ['x', 'y', 'z'].map(function(it){
+      return (bbox.max[it] + bbox.min[it]) * 0.5;
+    }), nx = ref$[0], ny = ref$[1], nz = ref$[2];
+    if (nx || ny || nz) {
+      m = new THREE.Matrix4();
+      m.set(1, 0, 0, -nx, 0, 1, 0, -ny, 0, 0, 1, -nz, 0, 0, 0, 1);
+      node.geometry.applyMatrix(m);
+      node.repos = m.getInverse(m);
+    }
     node.matrixAutoUpdate = false;
     mat = values.transform || [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
     [3, 7, 11].map(function(it){
@@ -83,7 +94,16 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     node.matrix.set.apply(node.matrix, mat);
     node.matrix.multiply(gmat);
     node.matrix.premultiply(gmat.getInverse(gmat));
-    return node.material.uniforms.alpha.value = values.opacity != null ? values.opacity : 1;
+    if (node.repos) {
+      node.matrix.premultiply(node.repos);
+    }
+    opacity = values.opacity != null ? values.opacity : 1;
+    if (node.material.uniforms && node.material.uniforms.alpha) {
+      return node.material.uniforms.alpha.value = opacity;
+    } else {
+      node.material.transparent = true;
+      return node.material.opacity = opacity;
+    }
   },
   animate: function(node, opt){
     opt == null && (opt = {});

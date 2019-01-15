@@ -6,7 +6,7 @@ ret = do
       value: (t, c) -> { opacity: 1 - t }
   edit: 
     dur: default: 1
-    steep: default: 0, type: \number, min: 0, max: 0.5
+    steep: default: 0, type: \number, min: 0, max: 0.5, step: 0.01
 
   timing: (t, opt) ->
     p1 = [opt.steep, 0.5 - opt.steep, 0.5 + opt.steep, 1.0 - opt.steep]

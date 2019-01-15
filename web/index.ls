@@ -74,10 +74,11 @@ suite = do
       }
       '''
     @mesh = mesh = new THREE.Mesh geom, mat
+    @group = group = new THREE.Group!
+    group.add mesh
+    scene.add group
     @light = light = new THREE.HemisphereLight 0x0099ff, 0xff9900, 0.9
     scene.add light
-    mesh.matrixAutoUpdate = false
-    scene.add mesh
 
     camera.position.set 0, 0, 10
     camera.lookAt 0, 0, 0

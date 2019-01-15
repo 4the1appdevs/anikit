@@ -190,7 +190,7 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1,
+      step: 0.01,
       unit: 'px'
     },
     ratio: {
@@ -198,7 +198,7 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.01
     },
     delay: {
       'default': 0.2,

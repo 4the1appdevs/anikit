@@ -24,7 +24,8 @@ ret = {
       'default': 0,
       type: 'number',
       min: 0,
-      max: 0.5
+      max: 0.5,
+      step: 0.01
     }
   },
   timing: function(t, opt){

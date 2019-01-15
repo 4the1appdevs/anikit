@@ -26,9 +26,18 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   animate-three: (node, t, opt) ->
     values = @affine t, (if opt => {} <<< @config <<< opt else @config)
     box = new THREE.Box3!setFromObject node
+    node.geometry.computeBoundingBox!
+    bbox = node.geometry.boundingBox
     [wx,wy,wz] = <[x y z]>
-      .map -> box.max[it] - box.min[it]
+      .map -> bbox.max[it] - bbox.min[it]
       .map (d,i) -> ((values.transform-origin or [0.5,0.5,0.5])[i] - 0.5) * d
+    [nx,ny,nz] = <[x y z]>
+      .map -> (bbox.max[it] + bbox.min[it]) * 0.5
+    if nx or ny or nz =>
+      m = new THREE.Matrix4!
+      m.set 1,0,0,-nx,0,1,0,-ny,0,0,1,-nz,0,0,0,1
+      node.geometry.applyMatrix m
+      node.repos = m.getInverse m
     node.matrixAutoUpdate = false
     mat = values.transform or [1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1]
     [3,7,11].map -> mat[it] = mat[it] / 40 #TODO make to real ratio
@@ -37,7 +46,15 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     node.matrix.set.apply( node.matrix, mat)
     node.matrix.multiply gmat
     node.matrix.premultiply gmat.getInverse gmat
-    node.material.uniforms.alpha.value = if values.opacity? => values.opacity else 1
+    if node.repos => node.matrix.premultiply node.repos
+
+    opacity = if values.opacity? => values.opacity else 1
+    if node.material.uniforms and node.material.uniforms.alpha => 
+      node.material.uniforms.alpha.value = opacity
+    else
+      node.material.transparent = true
+      node.material.opacity = opacity
+    
 
   animate: (node, opt={}) ->
     opt = {} <<< @config <<< opt

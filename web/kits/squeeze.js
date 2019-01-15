@@ -31,21 +31,22 @@ ret = {
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     zoomx: {
       'default': 0.5,
       type: 'number',
       min: 0,
       max: 3,
-      step: 0.1
+      step: 0.01
     },
     zoomy: {
       'default': 0.5,
       type: 'number',
       min: 0,
       max: 3,
-      step: 0.1
+      step: 0.01
     }
   },
   timing: function(t, opt){

@@ -15,8 +15,9 @@ ret = {
     steep: {
       'default': 0.0,
       type: 'number',
-      min: 0.3,
-      max: 1
+      min: 0.0,
+      max: 1,
+      step: 0.01
     },
     showtime: {
       'default': 0.5,

@@ -139,7 +139,8 @@ ret = {
       'default': 0.4,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     cycle: {
       'default': 360,

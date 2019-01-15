@@ -13,7 +13,8 @@ ret = {
       'default': 0.7,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     count: {
       'default': 12,

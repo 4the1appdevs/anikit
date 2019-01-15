@@ -11,7 +11,7 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.01
     },
     offset: {
       'default': 15,
@@ -25,7 +25,7 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.01
     },
     shadow_offset: {
       'default': 23,

@@ -4,7 +4,7 @@ ret = do
     clock: {}
   edit: 
     dur: default: 12
-    steep: default: 0.7, type: \number, min: 0, max: 1
+    steep: default: 0.7, type: \number, min: 0, max: 1, step: 0.01
     count: default: 12, type: \number, min: 1, max: 60, step: 1
 
   timing: (t, opt) ->

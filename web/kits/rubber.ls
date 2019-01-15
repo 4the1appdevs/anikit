@@ -46,8 +46,8 @@ ret = do
       value: (t, c) -> {opacity: 1 - t * c.offset}
   edit: 
     count: default: 10, type: \number, min: 0, max: 50
-    offset: default: 1, type: \number, min: 0, max: 1, step: 0.1, unit: \px
-    ratio: default: 0.8, type: \number, min: 0, max: 1, step: 0.1
+    offset: default: 1, type: \number, min: 0, max: 1, step: 0.01, unit: \px
+    ratio: default: 0.8, type: \number, min: 0, max: 1, step: 0.01
     delay: default: 0.2, type: \number, min: 0, max: 1, step: 0.01
     unit: default: \px, type: \choice, values: ["px", "%", ""]
   timing: (t, opt) ->

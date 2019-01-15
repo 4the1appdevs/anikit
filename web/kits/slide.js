@@ -85,7 +85,8 @@ ret = {
       'default': 0.3,
       type: 'number',
       min: 0.3,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     offset: {
       'default': 200,

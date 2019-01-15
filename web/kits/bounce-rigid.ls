@@ -30,11 +30,11 @@ ret = do
       value: (t, c) -> transform: anikit.util.ty t * c.offset
 
   edit: 
-    steep: default: 0.4, type: \number, min: 0.3, max: 1
+    steep: default: 0.4, type: \number, min: 0.3, max: 1, step: 0.01
     count: default: 5, type: \number, min: 0, max: 10
     decay: default: 0.6, type: \number, min: 0, max: 1, step: 0.1
     power: default: 1.1, type: \number, min:0, max: 10, step: 0.1
-    offset: default: -14, type: \number, unit: \px, min: -100, max: 100
+    offset: default: -14, type: \number, unit: \px, min: -300, max: 300
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   timing: (t, opt) ->

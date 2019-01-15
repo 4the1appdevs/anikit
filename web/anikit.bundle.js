@@ -1960,16 +1960,27 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return import$(node.style, this.js(t - Math.floor(t)));
   },
   animateThree: function(node, t, opt){
-    var values, box, ref$, wx, wy, wz, mat, gmat;
+    var values, box, bbox, ref$, wx, wy, wz, nx, ny, nz, m, mat, gmat, opacity;
     values = this.affine(t, opt
       ? import$(import$({}, this.config), opt)
       : this.config);
     box = new THREE.Box3().setFromObject(node);
+    node.geometry.computeBoundingBox();
+    bbox = node.geometry.boundingBox;
     ref$ = ['x', 'y', 'z'].map(function(it){
-      return box.max[it] - box.min[it];
+      return bbox.max[it] - bbox.min[it];
     }).map(function(d, i){
       return ((values.transformOrigin || [0.5, 0.5, 0.5])[i] - 0.5) * d;
     }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
+    ref$ = ['x', 'y', 'z'].map(function(it){
+      return (bbox.max[it] + bbox.min[it]) * 0.5;
+    }), nx = ref$[0], ny = ref$[1], nz = ref$[2];
+    if (nx || ny || nz) {
+      m = new THREE.Matrix4();
+      m.set(1, 0, 0, -nx, 0, 1, 0, -ny, 0, 0, 1, -nz, 0, 0, 0, 1);
+      node.geometry.applyMatrix(m);
+      node.repos = m.getInverse(m);
+    }
     node.matrixAutoUpdate = false;
     mat = values.transform || [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
     [3, 7, 11].map(function(it){
@@ -1979,7 +1990,16 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     node.matrix.set.apply(node.matrix, mat);
     node.matrix.multiply(gmat);
     node.matrix.premultiply(gmat.getInverse(gmat));
-    return node.material.uniforms.alpha.value = values.opacity != null ? values.opacity : 1;
+    if (node.repos) {
+      node.matrix.premultiply(node.repos);
+    }
+    opacity = values.opacity != null ? values.opacity : 1;
+    if (node.material.uniforms && node.material.uniforms.alpha) {
+      return node.material.uniforms.alpha.value = opacity;
+    } else {
+      node.material.transparent = true;
+      return node.material.opacity = opacity;
+    }
   },
   animate: function(node, opt){
     opt == null && (opt = {});
@@ -2122,6 +2142,7 @@ var mods = {
   "bounce": require("./kits/bounce"),
   "clock": require("./kits/clock"),
   "fade": require("./kits/fade"),
+  "float": require("./kits/float"),
   "heartbeat": require("./kits/heartbeat"),
   "hit": require("./kits/hit"),
   "orbit": require("./kits/orbit"),
@@ -2137,10 +2158,10 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce":"bounce","clock":"clock","fade":"fade","heartbeat":"heartbeat","hit":"hit","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
-},{"./kits/blink":11,"./kits/blur":12,"./kits/bounce":14,"./kits/bounce-rigid":13,"./kits/clock":15,"./kits/fade":16,"./kits/heartbeat":17,"./kits/hit":18,"./kits/orbit":19,"./kits/patrol":20,"./kits/rubber":21,"./kits/rush":22,"./kits/slide":23,"./kits/spin":24,"./kits/squeeze":25,"./kits/surprise":26,"./kits/tremble":27,"./kits/vortex":28,"./kits/wrench":29}],11:[function(require,module,exports){
+},{"./kits/blink":11,"./kits/blur":12,"./kits/bounce":14,"./kits/bounce-rigid":13,"./kits/clock":15,"./kits/fade":16,"./kits/float":17,"./kits/heartbeat":18,"./kits/hit":19,"./kits/orbit":20,"./kits/patrol":21,"./kits/rubber":22,"./kits/rush":23,"./kits/slide":24,"./kits/spin":25,"./kits/squeeze":26,"./kits/surprise":27,"./kits/tremble":28,"./kits/vortex":29,"./kits/wrench":30}],11:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -2158,8 +2179,9 @@ ret = {
     steep: {
       'default': 0.0,
       type: 'number',
-      min: 0.3,
-      max: 1
+      min: 0.0,
+      max: 1,
+      step: 0.01
     },
     showtime: {
       'default': 0.5,
@@ -2233,7 +2255,8 @@ ret = {
       unit: 'px',
       units: ['px', '%'],
       min: 0,
-      max: 100
+      max: 100,
+      step: 1
     },
     unit: {
       'default': 'px',
@@ -2359,7 +2382,8 @@ ret = {
       'default': 0.4,
       type: 'number',
       min: 0.3,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     count: {
       'default': 5,
@@ -2385,8 +2409,8 @@ ret = {
       'default': -14,
       type: 'number',
       unit: 'px',
-      min: -100,
-      max: 100
+      min: -300,
+      max: 300
     },
     unit: {
       'default': 'px',
@@ -2469,13 +2493,6 @@ ret = {
     bounce: {}
   },
   edit: {
-    blur: {
-      'default': 10,
-      type: 'number',
-      unit: 'px',
-      min: 0,
-      max: 100
-    },
     unit: {
       'default': 'px',
       type: 'choice',
@@ -2497,13 +2514,15 @@ ret = {
       'default': 13 / 18,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     deflate: {
       'default': 0.6,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     }
   },
   step: function(t, opt){
@@ -2541,7 +2560,6 @@ ret = {
       format: 'css',
       prop: function(f, c, idx){
         var s, y;
-        console.log(f, c);
         if (idx < ret1.length) {
           return {
             transform: "translate(0," + f.value * c.height + "px) scaleY(1)"
@@ -2591,7 +2609,8 @@ ret = {
       'default': 0.7,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     count: {
       'default': 12,
@@ -2682,7 +2701,8 @@ ret = {
       'default': 0,
       type: 'number',
       min: 0,
-      max: 0.5
+      max: 0.5,
+      step: 0.01
     }
   },
   timing: function(t, opt){
@@ -2717,6 +2737,68 @@ ret = {
 };
 module.exports = ret;
 },{}],17:[function(require,module,exports){
+// Generated by LiveScript 1.3.1
+var ret;
+ret = {
+  name: 'float',
+  preset: {
+    float: {}
+  },
+  edit: {
+    steep: {
+      'default': 0.4,
+      type: 'number',
+      min: 0,
+      max: 1,
+      step: 0.01
+    },
+    offset: {
+      'default': 15,
+      type: 'number',
+      unit: 'px',
+      min: 0,
+      max: 1000
+    },
+    zoom: {
+      'default': 0.7,
+      type: 'number',
+      min: 0,
+      max: 1,
+      step: 0.01
+    },
+    shadow_offset: {
+      'default': 23,
+      type: 'number',
+      unit: 'px',
+      min: 0,
+      max: 1000
+    },
+    shadow_blur: {
+      'default': 5,
+      type: 'number',
+      unit: 'px',
+      min: 0,
+      max: 100
+    },
+    shadow_expand: {
+      'default': -15,
+      type: 'number',
+      unit: 'px',
+      min: -1000,
+      max: 1000
+    },
+    unit: {
+      'default': 'px',
+      type: 'choice',
+      values: ["px", "%", ""]
+    }
+  },
+  css: function(c){
+    return "@keyframes " + c.name + " {\n  0% {\n    animation-timing-function: cubic-bezier(0," + c.steep + "," + (1 - c.steep) + ",1);\n    transform: translate(0,0) scale(" + c.zoom + ");\n    box-shadow: 0 0 0 rgba(0,0,0,.3);\n  }\n  50% {\n    animation-timing-function: cubic-bezier(" + c.steep + ",0,1," + (1 - c.steep) + ");\n    transform: translate(0," + (-c.offset) + c.unit + ") scale(1);\n    box-shadow: 0 " + c.shadow_offset + c.unit + " " + c.shadow_blur + c.unit + " " + c.shadow_expand + c.unit + " rgba(0,0,0,.2)\n  }\n  100% {\n    transform: translate(0,0) scale(" + c.zoom + ");\n    box-shadow: 0 0 0 rgba(0,0,0,.3)\n  }\n} ";
+  }
+};
+module.exports = ret;
+},{}],18:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -2817,7 +2899,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -2833,20 +2915,23 @@ ret = {
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     zoom: {
       'default': 1,
       type: 'number',
       min: 0,
-      max: 10
+      max: 10,
+      step: 0.1
     },
     skew: {
       'default': 20,
       type: 'number',
       unit: 'deg',
       min: -90,
-      max: 90
+      max: 90,
+      step: 0.1
     },
     offset: {
       'default': 200,
@@ -2921,7 +3006,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -2986,7 +3071,7 @@ ret = {
   }
 };
 module.exports = ret;
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -3084,26 +3169,30 @@ ret = {
       }
     }
   },
-  edit: {
-    steep: {
-      'default': 0.6,
-      type: 'number',
-      min: 0,
-      max: 1
-    },
-    offset: {
-      'default': 10,
-      type: 'number',
-      unit: 'px',
-      min: 0,
-      max: 30
-    },
-    unit: {
-      'default': 'px',
-      type: 'choice',
-      values: ["px", "%", ""]
+  edit: [
+    {
+      steep: {
+        'default': 0.6,
+        type: 'number',
+        min: 0,
+        max: 1,
+        step: 0.01
+      },
+      offset: {
+        'default': 10,
+        type: 'number',
+        unit: 'px',
+        min: 0,
+        max: 100
+      }
+    }, 0.01, {
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
+      }
     }
-  },
+  ],
   timing: function(t, opt){
     var p;
     p = [opt.steep, 0, 1 - opt.steep, 1];
@@ -3143,7 +3232,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -3336,7 +3425,7 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1,
+      step: 0.01,
       unit: 'px'
     },
     ratio: {
@@ -3344,7 +3433,7 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.01
     },
     delay: {
       'default': 0.2,
@@ -3402,7 +3491,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -3627,7 +3716,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -3715,7 +3804,8 @@ ret = {
       'default': 0.3,
       type: 'number',
       min: 0.3,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     offset: {
       'default': 200,
@@ -3781,7 +3871,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -3923,7 +4013,8 @@ ret = {
       'default': 0.4,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     cycle: {
       'default': 360,
@@ -3993,7 +4084,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -4027,21 +4118,22 @@ ret = {
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     zoomx: {
       'default': 0.5,
       type: 'number',
       min: 0,
       max: 3,
-      step: 0.1
+      step: 0.01
     },
     zoomy: {
       'default': 0.5,
       type: 'number',
       min: 0,
       max: 3,
-      step: 0.1
+      step: 0.01
     }
   },
   timing: function(t, opt){
@@ -4081,7 +4173,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],26:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -4153,7 +4245,7 @@ ret = {
   }
 };
 module.exports = ret;
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {
@@ -4215,7 +4307,8 @@ ret = {
       'default': 0.0,
       type: 'number',
       min: 0,
-      max: 2
+      max: 2,
+      step: 0.01
     },
     unit: {
       'default': 'px',
@@ -4305,7 +4398,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var value, ret;
 value = function(t, c){
@@ -4373,7 +4466,8 @@ ret = {
       'default': 0.3,
       type: 'number',
       min: 0,
-      max: 0.3
+      max: 0.3,
+      step: 0.01
     },
     rotate: {
       'default': 5,
@@ -4385,7 +4479,8 @@ ret = {
       'default': 3,
       type: 'number',
       min: 0,
-      max: 10
+      max: 10,
+      step: 0.1
     }
   },
   timing: function(t, opt){
@@ -4433,7 +4528,7 @@ ret = {
   */
 };
 module.exports = ret;
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 var ret;
 ret = {

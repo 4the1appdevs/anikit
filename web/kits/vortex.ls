@@ -37,9 +37,9 @@ ret = do
 
   edit: 
     dur: default: 2
-    steep: default: 0.3, type: \number, min: 0, max: 0.3
+    steep: default: 0.3, type: \number, min: 0, max: 0.3, step: 0.01
     rotate: default: 5, type: \number, min: 0, max: 20
-    zoom: default: 3, type: \number, min: 0, max: 10
+    zoom: default: 3, type: \number, min: 0, max: 10, step: 0.1
 
   timing: (t, opt) ->
     p1 = [opt.steep, 0, 1, 1 - opt.steep]

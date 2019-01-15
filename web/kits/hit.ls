@@ -4,9 +4,9 @@ ret = do
     hit: {}
   edit: 
     dur: default: 2.0
-    steep: default: 0.5, type: \number, min: 0, max: 1
-    zoom: default: 1, type: \number, min: 0, max: 10
-    skew: default: 20, type: \number, unit: \deg, min: -90, max: 90
+    steep: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
+    zoom: default: 1, type: \number, min: 0, max: 10, step: 0.1
+    skew: default: 20, type: \number, unit: \deg, min: -90, max: 90, step: 0.1
     offset: default: 200, type: \number, unit: \px, min: 0, max: 10000
     fade: default: 1, type: \number, min: 0, max: 1, step: 0.01
     unit: default: \px, type: \choice, values: ["px", "%", ""]

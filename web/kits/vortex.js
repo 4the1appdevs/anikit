@@ -65,7 +65,8 @@ ret = {
       'default': 0.3,
       type: 'number',
       min: 0,
-      max: 0.3
+      max: 0.3,
+      step: 0.01
     },
     rotate: {
       'default': 5,
@@ -77,7 +78,8 @@ ret = {
       'default': 3,
       type: 'number',
       min: 0,
-      max: 10
+      max: 10,
+      step: 0.1
     }
   },
   timing: function(t, opt){

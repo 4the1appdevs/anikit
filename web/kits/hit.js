@@ -13,20 +13,23 @@ ret = {
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     zoom: {
       'default': 1,
       type: 'number',
       min: 0,
-      max: 10
+      max: 10,
+      step: 0.1
     },
     skew: {
       'default': 20,
       type: 'number',
       unit: 'deg',
       min: -90,
-      max: 90
+      max: 90,
+      step: 0.1
     },
     offset: {
       'default': 200,

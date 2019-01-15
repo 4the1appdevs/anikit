@@ -12,9 +12,9 @@ ret = do
         sy = 1 - 2 * (0.5 - Math.abs(0.5 - t)) * c.zoomy
         return transform: [ sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ]
   edit: 
-    steep: default: 0.5, type: \number, min: 0, max: 1
-    zoomx: default: 0.5, type: \number, min: 0, max: 3, step: 0.1
-    zoomy: default: 0.5, type: \number, min: 0, max: 3, step: 0.1
+    steep: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
+    zoomx: default: 0.5, type: \number, min: 0, max: 3, step: 0.01
+    zoomy: default: 0.5, type: \number, min: 0, max: 3, step: 0.01
 
   timing: (t, opt) ->
     p1 = [0, opt.steep, 1 - opt.steep, 1]

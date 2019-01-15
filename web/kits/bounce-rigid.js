@@ -105,7 +105,8 @@ ret = {
       'default': 0.4,
       type: 'number',
       min: 0.3,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     count: {
       'default': 5,
@@ -131,8 +132,8 @@ ret = {
       'default': -14,
       type: 'number',
       unit: 'px',
-      min: -100,
-      max: 100
+      min: -300,
+      max: 300
     },
     unit: {
       'default': 'px',

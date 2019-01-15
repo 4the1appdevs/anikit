@@ -42,7 +42,7 @@ ret = do
         opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
 
   edit: 
-    steep: default: 0.3, type: \number, min: 0.3, max: 1
+    steep: default: 0.3, type: \number, min: 0.3, max: 1, step: 0.01
     offset: default: 200, type: \number, unit: \px, min: -2000, max: 2000
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 

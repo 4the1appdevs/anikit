@@ -53,7 +53,7 @@ threeInit = function(root, w, h){
 suite = {
   init: function(){
     /* CSS */
-    var ref$, renderer, scene, camera, shape, d, geom, mat, mesh, light;
+    var ref$, renderer, scene, camera, shape, d, geom, mat, mesh, group, light;
     this.style = document.createElement("style");
     document.head.appendChild(this.style);
     this.style.setAttribute('type', 'text/css');
@@ -83,10 +83,11 @@ suite = {
       fragmentShader: 'varying vec2 vUv;\nvarying float vA;\nvoid main() {\n  vec3 c1 = vec3(.3, .5, 0.9);\n  vec3 c2 = vec3(.6, .8, 1.);\n  vec2 v = vUv;\n  float len = 0.;\n  len = length(v - 0.);\n  len = smoothstep(0.88,0.89,len);\n  if(v.y + v.x < 0.0 || v.y - v.x < 0.0 ) { len = 0.; }\n\n  gl_FragColor = vec4(mix(c1, c2, len), vA);\n}'
     });
     this.mesh = mesh = new THREE.Mesh(geom, mat);
+    this.group = group = new THREE.Group();
+    group.add(mesh);
+    scene.add(group);
     this.light = light = new THREE.HemisphereLight(0x0099ff, 0xff9900, 0.9);
     scene.add(light);
-    mesh.matrixAutoUpdate = false;
-    scene.add(mesh);
     camera.position.set(0, 0, 10);
     camera.lookAt(0, 0, 0);
     return renderer.render(scene, camera);

@@ -5,7 +5,7 @@ ret = do
       showtime: 0.5, transtime: 0.01
   edit: 
     dur: default: 1
-    steep: default: 0.0, type: \number, min: 0.3, max: 1
+    steep: default: 0.0, type: \number, min: 0.0, max: 1, step: 0.01
     showtime: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
     transtime: default: 0.01, type: \number, min: 0.01, max: 1, step: 0.01
 

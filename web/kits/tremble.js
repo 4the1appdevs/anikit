@@ -59,7 +59,8 @@ ret = {
       'default': 0.0,
       type: 'number',
       min: 0,
-      max: 2
+      max: 2,
+      step: 0.01
     },
     unit: {
       'default': 'px',
