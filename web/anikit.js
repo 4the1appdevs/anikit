@@ -104,6 +104,11 @@ anikit.prototype = import$(Object.create(Object.prototype), {
 });
 import$(anikit, {
   util: {
+    m4to3: function(m){
+      return [m[0], m[1], m[4], m[5], m[3], -m[7]].map(function(it){
+        return easingFit.round(it);
+      });
+    },
     noise: function(t){
       return (Math.sin(t * 43758.5453) + 1) * 0.5;
     },

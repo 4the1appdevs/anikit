@@ -11,27 +11,26 @@ ret = do
     shadow_expand: default: -15, type: \number, unit: \px, min: -1000, max: 1000
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
-  css: (opt) ->
+  css: (c) ->
 
     """
-    @keyframes #{opt.name} {
+    @keyframes #{c.name} {
       0% {
-        animation-timing-function: cubic-bezier(0,#{opt.steep},#{1 - opt.steep},1);
-        transform: translate(0,0) scale(#{opt.zoom});
+        animation-timing-function: cubic-bezier(0,#{c.steep},#{1 - c.steep},1);
+        transform: translate(0,0) scale(#{c.zoom});
         box-shadow: 0 0 0 rgba(0,0,0,.3);
       }
       50% {
-        animation-timing-function: cubic-bezier(#{opt.steep},0,1,#{1 - opt.steep});
-        transform: translate(0,#{-opt.offset}#{opt.unit}) scale(1);
-        box-shadow: 0 #{opt.shadow_offset}#{opt.unit} #{opt.shadow_blur}#{opt.unit} #{opt.shadow_expand}#{opt.unit} rgba(0,0,0,.2)
+        animation-timing-function: cubic-bezier(#{c.steep},0,1,#{1 - c.steep});
+        transform: translate(0,#{-c.offset}#{c.unit}) scale(1);
+        box-shadow: 0 #{c.shadow_offset}#{c.unit} #{c.shadow_blur}#{c.unit} #{c.shadow_expand}#{c.unit} rgba(0,0,0,.2)
       }
       100% {
-        transform: translate(0,0) scale(#{opt.zoom});
+        transform: translate(0,0) scale(#{c.zoom});
         box-shadow: 0 0 0 rgba(0,0,0,.3)
       }
     } """
 
-  js: (t, opt) ->
 
 
 module.exports = ret

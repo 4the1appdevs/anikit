@@ -21,6 +21,14 @@ ret = {
     return "@keyframes " + opt.name + " {\n  20%, 36%, 70%, 86% {\n    transform: rotate(0deg);\n  }\n  0%, 50%, 100% {\n    transform: rotate(" + opt.rotate + "deg);\n  }\n}";
   },
   js: function(t, opt){
+    var m;
+    m = anikit.util.m4to3(this.affine(t, opt).transform);
+    return {
+      transform: "matrix(" + m.join(',') + ")"
+    };
+  },
+  affine: function(t, opt){
+    var r;
     t = (t * 2 - Math.floor(t * 2)) * 0.5;
     if (t < 0.2) {
       t = 1 - t / 0.2;
@@ -29,8 +37,9 @@ ret = {
     } else {
       t = 0;
     }
+    r = t * opt.rotate * Math.PI / 180;
     return {
-      transform: "rotate(" + t * opt.rotate + "deg)"
+      transform: [Math.cos(r), Math.sin(r), 0, 0, -Math.sin(r), Math.cos(r), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     };
   }
 };

@@ -4,9 +4,14 @@ ret = {
   name: 'fade',
   preset: {
     fade: {
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
           opacity: 1 - f.value
+        };
+      },
+      value: function(t, c){
+        return {
+          opacity: 1 - t
         };
       }
     }
@@ -25,18 +30,21 @@ ret = {
   timing: function(t, opt){
     var p1;
     p1 = [opt.steep, 0.5 - opt.steep, 0.5 + opt.steep, 1.0 - opt.steep];
-    return t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t, p1), p1);
+    return t = cubic.Bezier.y(cubic.Bezier.t(t, p1), p1);
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

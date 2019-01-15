@@ -4,14 +4,24 @@ ret = {
   name: 'squeeze',
   preset: {
     squeeze: {
-      sampleCount: 20,
-      errorThreshold: 0.001,
-      propFunc: function(f, opt){
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.001
+      },
+      prop: function(f, c){
         var sx, sy;
-        sx = 1 - 2 * Math.abs(0.5 - f.value) * opt.zoomx;
-        sy = 1 - 2 * (0.5 - Math.abs(0.5 - f.value)) * opt.zoomy;
+        sx = 1 - 2 * Math.abs(0.5 - f.value) * c.zoomx;
+        sy = 1 - 2 * (0.5 - Math.abs(0.5 - f.value)) * c.zoomy;
         return {
           transform: "scale(" + sx + "," + sy + ")"
+        };
+      },
+      value: function(t, c){
+        var sx, sy;
+        sx = 1 - 2 * Math.abs(0.5 - t) * c.zoomx;
+        sy = 1 - 2 * (0.5 - Math.abs(0.5 - t)) * c.zoomy;
+        return {
+          transform: [sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
       }
     }
@@ -42,20 +52,23 @@ ret = {
     var p1, d;
     p1 = [0, opt.steep, 1 - opt.steep, 1];
     d = (t - Math.floor(t * 2) * 0.5) * 2;
-    d = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(d, p1), p1) * 0.5;
+    d = cubic.Bezier.y(cubic.Bezier.t(d, p1), p1) * 0.5;
     d = d + Math.floor(t * 2) * 0.5;
     return d;
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

@@ -6,52 +6,76 @@ ret = do
       steep: 0.4, offset_near: 20, offset_far: 200, direction: -1
       percent_in: 0.6, percent_out: 0.8, skew: 30, unit: \px
       sample-count: 40, error-threshold: 0.001
-      propFunc: (f, opt) -> {
+      prop: (f, c) -> {
         transform: """
-          translate(0,#{f.value * opt.offset_far * opt.direction}#{opt.unit})
-          skewY(#{f.value * opt.skew * opt.direction}deg)
+          translate(0,#{f.value * c.offset_far * c.direction}#{c.unit})
+          skewY(#{f.value * c.skew * c.direction}deg)
         """
         opacity: Math.cos(f.value * Math.PI * 0.5)
       }
+      value: (t, c) -> do
+        transform: [
+          1, -Math.tan(t * c.skew * c.direction * Math.PI / 180), 0, 0,
+          0, 1, 0, -t * c.offset_far * c.direction, 0, 0, 1, 0, 0, 0, 0, 1
+        ]
+        opacity: Math.cos(t * Math.PI * 0.5)
 
     "rush-ttb":
       dur: 2
       steep: 0.4, offset_near: 20, offset_far: 200, direction: 1
       percent_in: 0.6, percent_out: 0.8, skew: 30, unit: \px
       sample-count: 40, error-threshold: 0.001
-      propFunc: (f, opt) -> {
+      prop: (f, c) -> {
         transform: """
-          translate(0,#{f.value * opt.offset_far * opt.direction}#{opt.unit})
-          skewY(#{f.value * opt.skew * opt.direction}deg)
+          translate(0,#{f.value * c.offset_far * c.direction}#{c.unit})
+          skewY(#{f.value * c.skew * c.direction}deg)
         """
         opacity: Math.cos(f.value * Math.PI * 0.5)
       }
+      value: (t, c) -> do
+        transform: [
+          1, -Math.tan(t * c.skew * c.direction * Math.PI / 180), 0, 0,
+          0, 1, 0, -t * c.offset_far * c.direction, 0, 0, 1, 0, 0, 0, 0, 1
+        ]
+        opacity: Math.cos(t * Math.PI * 0.5)
 
     "rush-rtl":
       dur: 2
       steep: 0.4, offset_near: 20, offset_far: 200, direction: -1
       percent_in: 0.6, percent_out: 0.8, skew: 30, unit: \px
       sample-count: 40, error-threshold: 0.001
-      propFunc: (f, opt) -> {
+      prop: (f, c) -> {
         transform: """
-          translate(#{f.value * opt.offset_far * opt.direction}#{opt.unit},0)
-          skew(#{f.value * opt.skew * -opt.direction}deg)
+          translate(#{f.value * c.offset_far * c.direction}#{c.unit},0)
+          skew(#{f.value * c.skew * -c.direction}deg)
         """
         opacity: Math.cos(f.value * Math.PI * 0.5)
       }
+      value: (t, c) -> do
+        transform: [
+          1, -Math.tan(t * c.skew * -c.direction * Math.PI / 180), 0, t * c.offset_far * c.direction,
+          0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+        ]
+        opacity: Math.cos(t * Math.PI * 0.5)
 
     "rush-ltr":
       dur: 2
       steep: 0.4, offset_near: 20, offset_far: 200, direction: 1
       percent_in: 0.6, percent_out: 0.8, skew: 30, unit: \px
       sample-count: 40, error-threshold: 0.001
-      propFunc: (f, opt) -> {
+      prop: (f, c) -> {
         transform: """
-          translate(#{f.value * opt.offset_far * opt.direction}#{opt.unit},0)
-          skew(#{f.value * opt.skew * -opt.direction}deg)
+          translate(#{f.value * c.offset_far * c.direction}#{c.unit},0)
+          skew(#{f.value * c.skew * -c.direction}deg)
         """
         opacity: Math.cos(f.value * Math.PI * 0.5)
       }
+      value: (t, c) -> do
+        transform: [
+          1, -Math.tan(t * c.skew * -c.direction * Math.PI / 180), 0, t * c.offset_far * c.direction,
+          0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+        ]
+        opacity: Math.cos(t * Math.PI * 0.5)
 
   edit: 
     steep: default: 0.6, type: \number, min: 0, max: 1
@@ -71,7 +95,7 @@ ret = do
     near = opt.offset_near / opt.offset_far
     if t == 0 => return -1
     if t < (pi / 3) =>
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 3/pi, p1), p1) * pi/3
+      t = cubic.Bezier.y(cubic.Bezier.t(t * 3/pi, p1), p1) * pi/3
       return ((near + 1) * t / (pi/3)) - 1
     if t < pi =>
       t = ((t - (pi/3)) * 3.75 / pi)
@@ -79,8 +103,10 @@ ret = do
     if t < po => return 0
     return (t - po) / (1 - po)
 
-  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-  js: (t, opt) -> opt.propFunc {value: @timing t, opt}, opt
+  css: (opt) -> 
+    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  affine: (t, opt) -> opt.value @timing(t, opt), opt
 
   /* equivalent keyframes */
   /*

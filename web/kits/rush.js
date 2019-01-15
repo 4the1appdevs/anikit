@@ -15,10 +15,16 @@ ret = {
       unit: 'px',
       sampleCount: 40,
       errorThreshold: 0.001,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset_far * opt.direction + opt.unit + ")\nskewY(" + f.value * opt.skew * opt.direction + "deg)",
+          transform: "translate(0," + f.value * c.offset_far * c.direction + c.unit + ")\nskewY(" + f.value * c.skew * c.direction + "deg)",
           opacity: Math.cos(f.value * Math.PI * 0.5)
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: [1, -Math.tan(t * c.skew * c.direction * Math.PI / 180), 0, 0, 0, 1, 0, -t * c.offset_far * c.direction, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: Math.cos(t * Math.PI * 0.5)
         };
       }
     },
@@ -34,10 +40,16 @@ ret = {
       unit: 'px',
       sampleCount: 40,
       errorThreshold: 0.001,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(0," + f.value * opt.offset_far * opt.direction + opt.unit + ")\nskewY(" + f.value * opt.skew * opt.direction + "deg)",
+          transform: "translate(0," + f.value * c.offset_far * c.direction + c.unit + ")\nskewY(" + f.value * c.skew * c.direction + "deg)",
           opacity: Math.cos(f.value * Math.PI * 0.5)
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: [1, -Math.tan(t * c.skew * c.direction * Math.PI / 180), 0, 0, 0, 1, 0, -t * c.offset_far * c.direction, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: Math.cos(t * Math.PI * 0.5)
         };
       }
     },
@@ -53,10 +65,16 @@ ret = {
       unit: 'px',
       sampleCount: 40,
       errorThreshold: 0.001,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset_far * opt.direction + opt.unit + ",0)\nskew(" + f.value * opt.skew * -opt.direction + "deg)",
+          transform: "translate(" + f.value * c.offset_far * c.direction + c.unit + ",0)\nskew(" + f.value * c.skew * -c.direction + "deg)",
           opacity: Math.cos(f.value * Math.PI * 0.5)
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: [1, -Math.tan(t * c.skew * -c.direction * Math.PI / 180), 0, t * c.offset_far * c.direction, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: Math.cos(t * Math.PI * 0.5)
         };
       }
     },
@@ -72,10 +90,16 @@ ret = {
       unit: 'px',
       sampleCount: 40,
       errorThreshold: 0.001,
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "translate(" + f.value * opt.offset_far * opt.direction + opt.unit + ",0)\nskew(" + f.value * opt.skew * -opt.direction + "deg)",
+          transform: "translate(" + f.value * c.offset_far * c.direction + c.unit + ",0)\nskew(" + f.value * c.skew * -c.direction + "deg)",
           opacity: Math.cos(f.value * Math.PI * 0.5)
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: [1, -Math.tan(t * c.skew * -c.direction * Math.PI / 180), 0, t * c.offset_far * c.direction, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: Math.cos(t * Math.PI * 0.5)
         };
       }
     }
@@ -148,7 +172,7 @@ ret = {
       return -1;
     }
     if (t < pi / 3) {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t * 3 / pi, p1), p1) * pi / 3;
+      t = cubic.Bezier.y(cubic.Bezier.t(t * 3 / pi, p1), p1) * pi / 3;
       return (near + 1) * t / (pi / 3) - 1;
     }
     if (t < pi) {
@@ -161,15 +185,18 @@ ret = {
     return (t - po) / (1 - po);
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* equivalent keyframes */
   /*

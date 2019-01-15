@@ -4,9 +4,14 @@ ret = {
   name: 'heartbeat',
   preset: {
     heartbeat: {
-      propFunc: function(f, opt){
+      prop: function(f, c){
         return {
-          transform: "scale(" + (1 + f.value * opt.scale) + ")"
+          transform: "scale(" + (1 + f.value * c.scale) + ")"
+        };
+      },
+      value: function(t, c){
+        return {
+          transform: anikit.util.s(1 + t * c.scale)
         };
       }
     }
@@ -62,15 +67,18 @@ ret = {
     return t;
   },
   css: function(opt){
-    var this$ = this;
-    return anikit.stepToKeyframes(function(it){
+    var ref$, ref1$, this$ = this;
+    return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, opt);
+    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
-    return opt.propFunc({
+    return opt.prop({
       value: this.timing(t, opt)
     }, opt);
+  },
+  affine: function(t, opt){
+    return opt.value(this.timing(t, opt), opt);
   }
   /* similar keyframes */
   /*

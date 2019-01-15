@@ -25,6 +25,12 @@ ret = do
     """
 
   js: (t, opt) ->
+    m = @affine t, opt .transform
+    m = [m.0, -m.1, m.4, m.5, m.3, -m.7]
+    return {
+      transform: "matrix(#{m.join(',')})"#"skewX(#{k * opt.skew}deg) scale(#{s})"
+    }
+  affine: (t, opt) ->
     [k1,k2,s1,s2] = [0,0,opt.zoom_min,opt.zoom_min]
     d = Math.floor(t * 10)
     if d == 0 => [k1,k2] = [0, -1]
@@ -38,6 +44,9 @@ ret = do
     k = (k2 - k1) * t + k1
     s = (s2 - s1) * t + s1
     return {
-      transform: "skewX(#{k * opt.skew}deg) scale(#{s})"
+      transform: [
+        s, -Math.tan(k * opt.skew * Math.PI / 180), 0, 0, 0, s, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
+      ]
     }
+
 module.exports = ret

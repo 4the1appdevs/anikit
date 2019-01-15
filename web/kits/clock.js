@@ -29,7 +29,7 @@ ret = {
     base = Math.floor(t * opt.count) / opt.count;
     next = Math.ceil(t * opt.count) / opt.count;
     offset = t - base;
-    t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(offset * opt.count, p1), p1);
+    t = cubic.Bezier.y(cubic.Bezier.t(offset * opt.count, p1), p1);
     return (next - base) * t + base;
   },
   css: function(opt){
@@ -46,6 +46,11 @@ ret = {
   js: function(t, opt){
     return {
       transform: "rotate(" + this.timing(t, opt) * 360 + "deg)"
+    };
+  },
+  affine: function(t, opt){
+    return {
+      transform: anikit.util.rz(this.timing(t, opt) * Math.PI * 2)
     };
   }
   /* equivalent keyframes */

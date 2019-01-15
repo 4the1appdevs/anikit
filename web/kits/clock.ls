@@ -12,7 +12,7 @@ ret = do
     base = Math.floor(t * opt.count) / opt.count
     next = Math.ceil(t * opt.count ) /opt.count
     offset = t - base
-    t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(offset * opt.count, p1), p1)
+    t = cubic.Bezier.y(cubic.Bezier.t(offset * opt.count, p1), p1)
     return (next - base) * t + base
 
   css: (opt) ->
@@ -35,6 +35,9 @@ ret = do
 
   js: (t, opt) -> 
     return {transform: "rotate(#{@timing(t, opt) * 360}deg)"}
+
+  affine: (t, opt) ->
+    return {transform: anikit.util.rz(@timing(t,opt) * Math.PI * 2) }
 
   /* equivalent keyframes */
   /*

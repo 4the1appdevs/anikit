@@ -7,9 +7,6 @@ mods = fs.readdirSync('kits').filter(function(it){
 }).map(function(it){
   return [it.replace(/\.ls$/, ''), require("./kits/" + it)];
 });
-mods = mods.filter(function(it){
-  return ~['bounce-rigid', 'blink', 'blur', 'spin', 'rubber', 'tremble', 'patrol', 'slide'].indexOf(it[0]);
-});
 for (i$ = 0, len$ = mods.length; i$ < len$; ++i$) {
   ref$ = mods[i$], name = ref$[0], mod = ref$[1];
   if (mod.preset) {

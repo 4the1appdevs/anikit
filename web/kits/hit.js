@@ -53,22 +53,32 @@ ret = {
     return "@keyframes " + opt.name + " {\n  0% {\n    animation-timing-function: cubic-bezier(" + opt.steep + ",0,1," + (1 - opt.steep) + ");\n    transform: scale(0) translate(0,0) skewX(0);\n    opacity: 1;\n  }\n  20% {\n    transform: scale(" + opt.zoom + ") translate(0,0) skewX(" + opt.skew + "deg);\n  }\n  50% {\n    animation-timing-function: cubic-bezier(" + opt.steep * 1.2 + ",0,1," + (1 - opt.steep * 1.2) + ");\n    transform: scale(" + opt.zoom + ") translate(0,0) skewX(" + opt.skew + "deg);\n  }\n  " + (100 - opt.fade * 50) + "% {\n    opacity: 1;\n  }\n  100% {\n    transform: scale(" + opt.zoom + ")  translate(0," + opt.offset + opt.unit + ") skewX(" + opt.skew + "deg);\n    opacity: 0;\n  }\n} ";
   },
   js: function(t, opt){
+    var values, m;
+    values = this.affine(t, opt);
+    m = values.transform;
+    m = [m[0], -m[1], m[4], m[5], m[3], -m[7]];
+    return {
+      transform: "matrix(" + m.join(void 8) + ")",
+      opacity: values.o
+    };
+  },
+  affine: function(t, opt){
     var p1, ref$, s, p, k, o;
     p1 = [opt.steep, 0, 1, 1 - opt.steep];
     ref$ = [opt.zoom, 0, opt.skew, 1], s = ref$[0], p = ref$[1], k = ref$[2], o = ref$[3];
     if (t < 0.2) {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t(t / 0.2, p1), p1);
+      t = cubic.Bezier.y(cubic.Bezier.t(t / 0.2, p1), p1);
       s = t * opt.zoom;
       k = t * opt.skew;
     } else if (t >= 0.5) {
-      t = anikit.cubic.Bezier.y(anikit.cubic.Bezier.t((t - 0.5) * 2, p1), p1);
+      t = cubic.Bezier.y(cubic.Bezier.t((t - 0.5) * 2, p1), p1);
       p = opt.offset * t;
       if (t >= 1 - 0.5 * opt.fade) {
         o = (1 - t) / (1 - 0.5 * opt.fade);
       }
     }
     return {
-      transform: "scale(" + s + ") translate(0," + p + opt.unit + ") skewX(" + k + "deg)",
+      transform: [s, -Math.tan(k * Math.PI / 180), 0, 0, 0, 1, 0, -p, 0, 0, 1, 0, 0, 0, 0, 1],
       opacity: o
     };
   }

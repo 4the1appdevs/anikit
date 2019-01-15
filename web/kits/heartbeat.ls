@@ -2,7 +2,8 @@ ret = do
   name: \heartbeat
   preset:
     heartbeat: 
-      prop-func: (f, opt) -> {transform: "scale(#{1 + f.value * opt.scale})"}
+      prop: (f, c) -> {transform: "scale(#{1 + f.value * c.scale})"}
+      value: (t, c) -> transform: anikit.util.s 1 + t * c.scale
   edit: 
     dur: default: 1
     scale: default: 0.3, type: \number, min: 0, max: 100, step: 0.01
@@ -30,8 +31,10 @@ ret = do
       t = Math.pow(t, opt.decay) * opt.peak2
     t
 
-  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-  js: (t, opt) -> opt.propFunc {value: @timing t, opt}, opt
+  css: (opt) -> 
+    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
+  affine: (t, opt) -> opt.value @timing(t, opt), opt
 
   /* similar keyframes */
   /*

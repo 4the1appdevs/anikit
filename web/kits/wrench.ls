@@ -18,11 +18,15 @@ ret = do
     }
     """
   js: (t, opt) ->
+    m = anikit.util.m4to3 @affine(t, opt).transform
+    return transform: "matrix(#{m.join(',')})"
+  affine: (t, opt) ->
     t = (t * 2 - Math.floor(t * 2)) * 0.5
     if t < 0.2 => t = 1 - (t / 0.2)
     else if t > 0.36 => t = (t - 0.36) / 0.14
     else t = 0
-    return { transform: "rotate(#{t * opt.rotate}deg)" }
+    r = t * opt.rotate * Math.PI / 180
+    return transform: [Math.cos(r), Math.sin(r), 0, 0, -Math.sin(r), Math.cos(r), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
 
 
 module.exports = ret

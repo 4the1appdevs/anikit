@@ -51,6 +51,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
 anikit <<< do
   util:
+    m4to3: (m) -> [m.0, m.1, m.4, m.5, m.3, -m.7].map -> easing-fit.round it
     noise: (t) -> (Math.sin(t * 43758.5453) + 1 ) * 0.5
     rx: (t) -> [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1]
     ry: (t) -> [cos(t), 0, sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1]
