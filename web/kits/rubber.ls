@@ -1,3 +1,4 @@
+require! <[easing-fit cubic ../anikit ../easing]>
 ret = do
   name: \rubber
   type: \animation

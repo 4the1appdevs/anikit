@@ -1,3 +1,4 @@
+require! <[easing-fit cubic ../anikit]>
 value = (t, c) ->
   if t < 0.6 =>
     r = (t * c.rotate / 0.6) * Math.PI * 2

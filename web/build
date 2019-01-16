@@ -1,4 +1,15 @@
 #!/usr/bin/env bash
+echo "Generate kits-list..."
 lsc kits-bundle
+
+echo "Bundle Anikit modules into anikit.bundle.js ..."
 browserify anikit.js > anikit.bundle.js
+
+echo "Uglify anikit.bundle.js ..."
 uglifyjs anikit.bundle.js > anikit.bundle.min.js
+
+echo "Building CSS Bundle..."
+lsc build-css
+
+echo "Uglify CSS bundles..."
+uglifycss anikit.bundle.css > anikit.bundle.min.css

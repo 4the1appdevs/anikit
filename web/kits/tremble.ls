@@ -1,3 +1,4 @@
+require! <[easing-fit cubic ../anikit]>
 ret = do
   name: \tremble
   type: \animation

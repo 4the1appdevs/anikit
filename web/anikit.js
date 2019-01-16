@@ -202,7 +202,7 @@ if (typeof window != 'undefined' && window !== null) {
   window.cubic = cubic;
 }
 if (typeof module != 'undefined' && module !== null) {
-  module.exports = anikit;
+  import$(module.exports, anikit);
 }
 function import$(obj, src){
   var own = {}.hasOwnProperty;

@@ -96,4 +96,4 @@ anikit <<< do
 
 
 if window? => window <<< {easing, anikit, easing-fit, cubic}
-if module? => module.exports = anikit
+if module? => module.exports <<< anikit
