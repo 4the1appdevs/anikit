@@ -5,6 +5,13 @@ body {
   margin: 0;
   padding: 0;
 }
+#title {
+  width: 200px;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 64px;
+  font-family: sans-serif;
+}
 #root {
   width: 80%;
   height: 100%;

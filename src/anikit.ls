@@ -1,4 +1,5 @@
-require! <[easing-fit cubic ./kits-list ./easing]>
+require! <[easing-fit cubic ./easing]>
+kits-list = require './kits-list.gen'
 uuid = require 'uuid/v4'
 
 {cos,sin,tan} = Math{cos,sin,tan}

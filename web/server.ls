@@ -1,27 +1,14 @@
-require! <[chokidar http fs path pug stylus markdown js-yaml]>
+require! <[chokidar http fs path pug stylus]>
 require! 'uglify-js': uglify, LiveScript: lsc
 
 useMarkdown = true
-markdown = markdown.markdown
 
 RegExp.escape = -> it.replace /[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&"
 
 cwd = path.resolve process.cwd!
 cwd-re = new RegExp RegExp.escape "#cwd#{if cwd[* - 1]=='/' => "" else \/}"
 
-pug-extapi = do
-  md: -> markdown.toHTML it
-  yaml: -> js-yaml.safe-load fs.read-file-sync it
-  yamls: (dir) ->
-    ret = fs.readdir-sync dir
-      .map -> "#dir/#it"
-      .filter -> /\.yaml$/.exec(it)
-      .map ->
-        try
-          js-yaml.safe-load(fs.read-file-sync it)
-        catch e
-          console.log "[ERROR@#it]: ", e
-    return ret
+pug-extapi = {}
 
 pad = -> if "#it".length < 2 => "0#it" else "#it"
 now = -> new Date! |> -> 
@@ -252,15 +239,6 @@ server = (req, res) ->
 
   length = 0
   buf = fs.readFileSync file-path
-  if useMarkdown =>
-    if /\.md$/.exec(file-path) =>
-      buf = markdown.toHTML(buf.toString!).toString!
-      buf = [
-        '<meta charset="utf-8">'
-        '<link rel="stylesheet" type="text/css" href="/assets/markdown-air/air.css"></link>'
-        buf
-      ].join("")
-      length = Buffer.byteLength buf, 'utf-8'
 
   res.writeHead 200, do
     "Content-Length": length or buf.length

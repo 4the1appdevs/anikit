@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+mkdir -p dist
+
+echo "Generate kits-list..."
+./node_modules/.bin/lsc tool/kits-bundle
+
+echo "Transpiling LiveScript..." 
+./node_modules/.bin/lsc -cbp src/anikit.ls > dist/anikit.js
+./node_modules/.bin/lsc -cbp src/easing.ls > dist/easing.js
+./node_modules/.bin/lsc -o dist/kits/ -cb src/kits/*
+
+echo "Bundle Anikit modules into anikit.bundle.js ..."
+./node_modules/.bin/browserify dist/anikit.js > dist/anikit.bundle.js
+rm dist/easing.js dist/kits-list.gen.js
+
+echo "Uglify anikit.bundle.js ..."
+./node_modules/.bin/uglifyjs dist/anikit.bundle.js > dist/anikit.bundle.min.js
+
+echo "Building CSS Bundle..."
+./node_modules/.bin/lsc tool/build-css
+
+echo "Uglify CSS bundles..."
+./node_modules/.bin/uglifycss dist/anikit.bundle.css > dist/anikit.bundle.min.css
+
+echo "Done."
