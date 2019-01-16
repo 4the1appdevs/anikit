@@ -134,6 +134,9 @@ ret = {
   },
   css: function(opt){
     var ref$, ref1$, this$ = this;
+    easingFit.fitToKeyframes(function(it){
+      return this$.timing(it, opt);
+    }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
     return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
     }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
@@ -160,3 +163,8 @@ ret = {
   */
 };
 module.exports = ret;
+function import$(obj, src){
+  var own = {}.hasOwnProperty;
+  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
+  return obj;
+}

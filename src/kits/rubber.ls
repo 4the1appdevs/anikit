@@ -62,7 +62,7 @@ ret = do
     v2 = (opt.ratio ** (idx + 1)) * ((-1) ** (idx + 1))
     return (v2 - v1) * t + v1
   css: (opt) -> 
-    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+    easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
   js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
   affine: (t, opt) -> opt.value @timing(t, opt), opt
 

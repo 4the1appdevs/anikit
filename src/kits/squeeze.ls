@@ -26,7 +26,7 @@ ret = do
     return d
 
   css: (opt) -> 
-    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+    easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
   js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
   affine: (t, opt) -> opt.value @timing(t, opt), opt
 
