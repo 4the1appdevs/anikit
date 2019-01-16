@@ -86,9 +86,25 @@ anikit <<< do
   get: (name, opt={}) ->
     mod = if @types[name] => @mods[@types[name]] else @mods[name]
     config = {name: name, dur: 1}
+
+    # overwrite edit settings
+    if mod.preset[name] => for k,v of mod.edit =>
+      o = mod.preset[name][k]
+      if o and o.default => mod.edit[k] <<< mod.preset[name][k]
+
     for k,v of mod.edit => config[k] = v.default
-    /* default / preset / overwrite */
-    config <<< mod.preset[name] <<< opt
+
+    # overwrite configs: deprecated, should use 'overwrite edit settings'.
+    if mod.preset[name] =>
+      for k,v of config =>
+        o = mod.preset[name][k]
+        # if o exists, and it's an edit setting (check with default attr) then pass
+        if typeof(o) == \undefined or (typeof(o) == \object and o.default?) => continue
+        config[k] = o
+      config <<< mod.preset[name]{prop, value}
+
+    # overwrite by custom
+    config <<< opt
     return {mod, config}
   /* all available mods */
   mods: kits-list.mods

@@ -12,16 +12,22 @@ ret = {
       count: 1,
       decay: 0.5,
       power: 1.1,
-      offset: 0.2,
       unit: '',
+      offset: {
+        name: "Scale Amount",
+        'default': 0.2,
+        min: -1,
+        max: 1,
+        step: 0.01
+      },
       prop: function(f, c){
         return {
-          transform: "scale(" + (1 - c.offset * f.value) + ")"
+          transform: "scale(" + (1 + c.offset * f.value) + ")"
         };
       },
       value: function(t, c){
         return {
-          transform: anikit.util.s(1 - t * c.offset)
+          transform: anikit.util.s(1 + t * c.offset)
         };
       }
     },

@@ -5,9 +5,10 @@ ret = do
   type: \animation
   preset:
     beat:
-      steep: 0.4, count: 1, decay: 0.5, power: 1.1, offset: 0.2, unit: ''
-      prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
-      value: (t, c) -> transform: anikit.util.s 1 - t * c.offset
+      steep: 0.4, count: 1, decay: 0.5, power: 1.1, unit: ''
+      offset: name: "Scale Amount", default: 0.2, min: -1, max: 1, step: 0.01
+      prop: (f, c) -> {transform: "scale(#{1 + c.offset * f.value})"}
+      value: (t, c) -> transform: anikit.util.s 1 + t * c.offset
 
     bounce-alt:
       steep: 0.5, count: 0, decay: 0.5, power: 0, offset: -14, unit: 'px'

@@ -170,7 +170,7 @@ import$(anikit, {
     }
   },
   get: function(name, opt){
-    var mod, config, k, ref$, v;
+    var mod, config, k, ref$, v, o;
     opt == null && (opt = {});
     mod = this.types[name]
       ? this.mods[this.types[name]]
@@ -179,12 +179,32 @@ import$(anikit, {
       name: name,
       dur: 1
     };
+    if (mod.preset[name]) {
+      for (k in ref$ = mod.edit) {
+        v = ref$[k];
+        o = mod.preset[name][k];
+        if (o && o['default']) {
+          import$(mod.edit[k], mod.preset[name][k]);
+        }
+      }
+    }
     for (k in ref$ = mod.edit) {
       v = ref$[k];
       config[k] = v['default'];
     }
-    /* default / preset / overwrite */
-    import$(import$(config, mod.preset[name]), opt);
+    if (mod.preset[name]) {
+      for (k in config) {
+        v = config[k];
+        o = mod.preset[name][k];
+        if (typeof o === 'undefined' || (typeof o === 'object' && o['default'] != null)) {
+          continue;
+        }
+        config[k] = o;
+      }
+      config.prop = (ref$ = mod.preset[name]).prop;
+      config.value = ref$.value;
+    }
+    import$(config, opt);
     return {
       mod: mod,
       config: config

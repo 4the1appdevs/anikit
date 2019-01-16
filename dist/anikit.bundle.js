@@ -261,7 +261,7 @@ import$(anikit, {
     }
   },
   get: function(name, opt){
-    var mod, config, k, ref$, v;
+    var mod, config, k, ref$, v, o;
     opt == null && (opt = {});
     mod = this.types[name]
       ? this.mods[this.types[name]]
@@ -270,12 +270,32 @@ import$(anikit, {
       name: name,
       dur: 1
     };
+    if (mod.preset[name]) {
+      for (k in ref$ = mod.edit) {
+        v = ref$[k];
+        o = mod.preset[name][k];
+        if (o && o['default']) {
+          import$(mod.edit[k], mod.preset[name][k]);
+        }
+      }
+    }
     for (k in ref$ = mod.edit) {
       v = ref$[k];
       config[k] = v['default'];
     }
-    /* default / preset / overwrite */
-    import$(import$(config, mod.preset[name]), opt);
+    if (mod.preset[name]) {
+      for (k in config) {
+        v = config[k];
+        o = mod.preset[name][k];
+        if (typeof o === 'undefined' || (typeof o === 'object' && o['default'] != null)) {
+          continue;
+        }
+        config[k] = o;
+      }
+      config.prop = (ref$ = mod.preset[name]).prop;
+      config.value = ref$.value;
+    }
+    import$(config, opt);
     return {
       mod: mod,
       config: config
@@ -494,16 +514,22 @@ ret = {
       count: 1,
       decay: 0.5,
       power: 1.1,
-      offset: 0.2,
       unit: '',
+      offset: {
+        name: "Scale Amount",
+        'default': 0.2,
+        min: -1,
+        max: 1,
+        step: 0.01
+      },
       prop: function(f, c){
         return {
-          transform: "scale(" + (1 - c.offset * f.value) + ")"
+          transform: "scale(" + (1 + c.offset * f.value) + ")"
         };
       },
       value: function(t, c){
         return {
-          transform: anikit.util.s(1 - t * c.offset)
+          transform: anikit.util.s(1 + t * c.offset)
         };
       }
     },
