@@ -29,7 +29,7 @@ ret = do
       value: (t, c) -> {transform: anikit.util.rz(t * c.offset * Math.PI / 180)}
     smash:
       count: 4, offset: 30, ratio: 0, delay: 0.5, unit: ""
-      sample-count: 20, error-threshold: 0.001
+      local: sample-count: 20, error-threshold: 0.001
       prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
       value: (t, c) -> {transform: anikit.util.rz(t * c.offset * Math.PI / 180)}
     "jelly-alt":

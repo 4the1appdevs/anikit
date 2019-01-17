@@ -52,7 +52,7 @@ ret = {
       },
       value: function(t, c){
         var a;
-        a = t * c.rotate * Math.PI / 180;
+        a = t * c.offset * 2 * Math.PI / 180;
         return {
           transform: [Math.cos(a), Math.sin(a), 0, t * c.offset, -Math.sin(a), Math.cos(a), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };

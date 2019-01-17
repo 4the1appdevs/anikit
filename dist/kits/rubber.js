@@ -118,8 +118,10 @@ ret = {
       ratio: 0,
       delay: 0.5,
       unit: "",
-      sampleCount: 20,
-      errorThreshold: 0.001,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.001
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
