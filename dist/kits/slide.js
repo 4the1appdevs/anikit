@@ -116,11 +116,7 @@ ret = {
       t = t * 2 - 1;
     }
     return t;
-  }
-  /*
-  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
-  */,
+  },
   css: function(opt){
     var ref$, ref1$, this$ = this;
     return easingFit.fitToKeyframes(function(it){

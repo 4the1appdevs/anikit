@@ -58,11 +58,6 @@ ret = do
       t = t * 2 - 1
     return t
 
-  /*
-  css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-  js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
-  */
-
   css: (opt) -> 
     easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
   js: (t, opt) -> opt.prop {value: @timing t, opt}, opt

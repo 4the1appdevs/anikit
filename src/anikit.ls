@@ -101,7 +101,7 @@ anikit <<< do
         # if o exists, and it's an edit setting (check with default attr) then pass
         if typeof(o) == \undefined or (typeof(o) == \object and o.default?) => continue
         config[k] = o
-      config <<< mod.preset[name]{prop, value}
+      config <<< mod.preset[name]{prop, value, local}
 
     # overwrite by custom
     config <<< opt

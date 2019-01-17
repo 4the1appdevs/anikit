@@ -54,12 +54,20 @@
 @keyframes ld-pulse
 {
   0% {
-    animation-timing-function: cubic-bezier(0.1115,0.3596,0.0686,0.9395);
+    animation-timing-function: cubic-bezier(0.0386,0.3684,0.3921,0.678);
     transform: scale(1);
   }
-  51% {
-    animation-timing-function: cubic-bezier(0.9332,0.084,0.8876,0.6436);
-    transform: scale(0.8);
+  12.2% {
+    animation-timing-function: cubic-bezier(0.1573,0.6622,0.5119,1);
+    transform: scale(0.8618);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.5093,0,0.7863,0.5714);
+    transform: scale(0.8008);
+  }
+  89.5% {
+    animation-timing-function: cubic-bezier(0.856,0.2757,1,0.6801);
+    transform: scale(0.8695999999999999);
   }
   100% {
     transform: scale(1);
@@ -943,19 +951,39 @@ skew(-30deg);
 @keyframes ld-slide-ltr
 {
   0% {
-    animation-timing-function: cubic-bezier(1.3778,-0.4478,0.614,-2.0843);
+    animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
     transform: translate(0px,0);
     opacity: 1;
   }
+  22.5% {
+    animation-timing-function: cubic-bezier(0.4142,0.3131,0.7623,0.6513);
+    transform: translate(47.800000000000004px,0);
+    opacity: 1;
+  }
+  45% {
+    animation-timing-function: cubic-bezier(0.3615,0.331,0.9646,1.3461);
+    transform: translate(147.8px,0);
+    opacity: 1;
+  }
+  47.5% {
+    animation-timing-function: cubic-bezier(0.7006,0.3332,0.6667,0.6667);
+    transform: translate(165.60000000000002px,0);
+    opacity: 0;
+  }
   50% {
-    animation-timing-function: cubic-bezier(0.1635,0.3399,0.4368,0.6655);
+    animation-timing-function: cubic-bezier(0.1604,0.3176,-0.0218,0.6965);
     transform: translate(-200px,0);
     opacity: 0;
   }
   51% {
-    animation-timing-function: cubic-bezier(0.1946,0.3475,0.3984,0.7925);
+    animation-timing-function: cubic-bezier(0.1983,0.3529,0.5263,0.6945);
     transform: translate(-179.8px,0);
     opacity: 0;
+  }
+  80.4% {
+    animation-timing-function: cubic-bezier(0.2342,0.3708,0.5422,0.9065);
+    transform: translate(-38.4px,0);
+    opacity: 1;
   }
   100% {
     transform: translate(0px,0);
@@ -966,19 +994,39 @@ skew(-30deg);
 @keyframes ld-slide-rtl
 {
   0% {
-    animation-timing-function: cubic-bezier(1.3778,-0.4478,0.614,-2.0843);
+    animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
     transform: translate(0px,0);
     opacity: 1;
   }
+  22.5% {
+    animation-timing-function: cubic-bezier(0.4142,0.3131,0.7623,0.6513);
+    transform: translate(-47.800000000000004px,0);
+    opacity: 1;
+  }
+  45% {
+    animation-timing-function: cubic-bezier(0.3615,0.331,0.9646,1.3461);
+    transform: translate(-147.8px,0);
+    opacity: 1;
+  }
+  47.5% {
+    animation-timing-function: cubic-bezier(0.7006,0.3332,0.6667,0.6667);
+    transform: translate(-165.60000000000002px,0);
+    opacity: 0;
+  }
   50% {
-    animation-timing-function: cubic-bezier(0.1635,0.3399,0.4368,0.6655);
+    animation-timing-function: cubic-bezier(0.1604,0.3176,-0.0218,0.6965);
     transform: translate(200px,0);
     opacity: 0;
   }
   51% {
-    animation-timing-function: cubic-bezier(0.1946,0.3475,0.3984,0.7925);
+    animation-timing-function: cubic-bezier(0.1983,0.3529,0.5263,0.6945);
     transform: translate(179.8px,0);
     opacity: 0;
+  }
+  80.4% {
+    animation-timing-function: cubic-bezier(0.2342,0.3708,0.5422,0.9065);
+    transform: translate(38.4px,0);
+    opacity: 1;
   }
   100% {
     transform: translate(0px,0);
@@ -989,19 +1037,39 @@ skew(-30deg);
 @keyframes ld-slide-btt
 {
   0% {
-    animation-timing-function: cubic-bezier(1.3778,-0.4478,0.614,-2.0843);
+    animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
     transform: translate(0,0px);
     opacity: 1;
   }
+  22.5% {
+    animation-timing-function: cubic-bezier(0.4142,0.3131,0.7623,0.6513);
+    transform: translate(0,-47.800000000000004px);
+    opacity: 1;
+  }
+  45% {
+    animation-timing-function: cubic-bezier(0.3615,0.331,0.9646,1.3461);
+    transform: translate(0,-147.8px);
+    opacity: 1;
+  }
+  47.5% {
+    animation-timing-function: cubic-bezier(0.7006,0.3332,0.6667,0.6667);
+    transform: translate(0,-165.60000000000002px);
+    opacity: 0;
+  }
   50% {
-    animation-timing-function: cubic-bezier(0.1635,0.3399,0.4368,0.6655);
+    animation-timing-function: cubic-bezier(0.1604,0.3176,-0.0218,0.6965);
     transform: translate(0,200px);
     opacity: 0;
   }
   51% {
-    animation-timing-function: cubic-bezier(0.1946,0.3475,0.3984,0.7925);
+    animation-timing-function: cubic-bezier(0.1983,0.3529,0.5263,0.6945);
     transform: translate(0,179.8px);
     opacity: 0;
+  }
+  80.4% {
+    animation-timing-function: cubic-bezier(0.2342,0.3708,0.5422,0.9065);
+    transform: translate(0,38.4px);
+    opacity: 1;
   }
   100% {
     transform: translate(0,0px);
@@ -1012,19 +1080,39 @@ skew(-30deg);
 @keyframes ld-slide-ttb
 {
   0% {
-    animation-timing-function: cubic-bezier(1.3778,-0.4478,0.614,-2.0843);
+    animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
     transform: translate(0,0px);
     opacity: 1;
   }
+  22.5% {
+    animation-timing-function: cubic-bezier(0.4142,0.3131,0.7623,0.6513);
+    transform: translate(0,47.800000000000004px);
+    opacity: 1;
+  }
+  45% {
+    animation-timing-function: cubic-bezier(0.3615,0.331,0.9646,1.3461);
+    transform: translate(0,147.8px);
+    opacity: 1;
+  }
+  47.5% {
+    animation-timing-function: cubic-bezier(0.7006,0.3332,0.6667,0.6667);
+    transform: translate(0,165.60000000000002px);
+    opacity: 0;
+  }
   50% {
-    animation-timing-function: cubic-bezier(0.1635,0.3399,0.4368,0.6655);
+    animation-timing-function: cubic-bezier(0.1604,0.3176,-0.0218,0.6965);
     transform: translate(0,-200px);
     opacity: 0;
   }
   51% {
-    animation-timing-function: cubic-bezier(0.1946,0.3475,0.3984,0.7925);
+    animation-timing-function: cubic-bezier(0.1983,0.3529,0.5263,0.6945);
     transform: translate(0,-179.8px);
     opacity: 0;
+  }
+  80.4% {
+    animation-timing-function: cubic-bezier(0.2342,0.3708,0.5422,0.9065);
+    transform: translate(0,-38.4px);
+    opacity: 1;
   }
   100% {
     transform: translate(0,0px);
@@ -1035,7 +1123,7 @@ skew(-30deg);
 @keyframes ld-coin-h
 {
   0% {
-    animation-timing-function: cubic-bezier(0.5454,0.1991,0.4546,0.8009);
+    animation-timing-function: cubic-bezier(0.5857,0.0703,0.4144,0.9297);
     transform: rotateY(0deg);
   }
   100% {
@@ -1046,7 +1134,7 @@ skew(-30deg);
 @keyframes ld-coin-v
 {
   0% {
-    animation-timing-function: cubic-bezier(0.5454,0.1991,0.4546,0.8009);
+    animation-timing-function: cubic-bezier(0.5857,0.0703,0.4144,0.9297);
     transform: rotateX(0deg);
   }
   100% {
@@ -1068,8 +1156,20 @@ skew(-30deg);
 @keyframes ld-flip-h
 {
   0% {
-    animation-timing-function: cubic-bezier(0.2122,0.3702,0.5832,0.8479);
+    animation-timing-function: cubic-bezier(0.1909,0.4373,0.4509,0.7454);
     transform: rotateY(0deg);
+  }
+  30% {
+    animation-timing-function: cubic-bezier(0.1288,0.2329,0.9697,0.8604);
+    transform: rotateY(153.72deg);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.5781,0.2998,0.5637,0.6782);
+    transform: rotateY(180deg);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.155,0.4933,0.6069,0.9372);
+    transform: rotateY(238.32000000000002deg);
   }
   100% {
     transform: rotateY(360deg);
@@ -1079,8 +1179,20 @@ skew(-30deg);
 @keyframes ld-flip-v
 {
   0% {
-    animation-timing-function: cubic-bezier(0.2122,0.3702,0.5832,0.8479);
+    animation-timing-function: cubic-bezier(0.1909,0.4373,0.4509,0.7454);
     transform: rotateX(0deg);
+  }
+  30% {
+    animation-timing-function: cubic-bezier(0.1288,0.2329,0.9697,0.8604);
+    transform: rotateX(153.72deg);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.5781,0.2998,0.5637,0.6782);
+    transform: rotateX(180deg);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.155,0.4933,0.6069,0.9372);
+    transform: rotateX(238.32000000000002deg);
   }
   100% {
     transform: rotateX(360deg);
@@ -1090,7 +1202,7 @@ skew(-30deg);
 @keyframes ld-spin-fast
 {
   0% {
-    animation-timing-function: cubic-bezier(0.5454,0.1991,0.4546,0.8009);
+    animation-timing-function: cubic-bezier(0.5857,0.0703,0.4144,0.9297);
     transform: rotate(0deg);
   }
   100% {
@@ -1101,7 +1213,7 @@ skew(-30deg);
 @keyframes ld-spin
 {
   0% {
-    animation-timing-function: cubic-bezier(0.5454,0.1991,0.4546,0.8009);
+    animation-timing-function: cubic-bezier(0.5857,0.0703,0.4144,0.9297);
     transform: rotate(0deg);
   }
   100% {
@@ -1112,8 +1224,20 @@ skew(-30deg);
 @keyframes ld-squeeze
 {
   0% {
-    animation-timing-function: cubic-bezier(0.1944,0.3724,0.5644,0.8889);
+    animation-timing-function: cubic-bezier(0.1685,0.4459,0.3641,0.7833);
     transform: scale(0.5,1);
+  }
+  30% {
+    animation-timing-function: cubic-bezier(0.0995,0.199,0.9948,0.959);
+    transform: scale(0.9490000000000001,0.5509999999999999);
+  }
+  50% {
+    animation-timing-function: cubic-bezier(0.6064,0.3078,0.5406,0.6764);
+    transform: scale(1,0.5);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.1401,0.5826,0.6091,0.9651);
+    transform: scale(0.8019999999999999,0.6980000000000001);
   }
   100% {
     transform: scale(0.5,1);

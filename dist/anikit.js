@@ -203,6 +203,7 @@ import$(anikit, {
       }
       config.prop = (ref$ = mod.preset[name]).prop;
       config.value = ref$.value;
+      config.local = ref$.local;
     }
     import$(config, opt);
     return {
