@@ -40,9 +40,14 @@ ret = {
       offset: 10,
       rotate: 30,
       unit: 'px',
+      local: {
+        errorThreshold: 0.001,
+        sampleCount: 20,
+        segSampleCount: 1000
+      },
       prop: function(f, c){
         return {
-          transform: "translate(" + f.value * c.offset + c.unit + ") rotate(" + f.value * c.rotate + "deg)"
+          transform: "translate(" + f.value * c.offset + c.unit + ") rotate(" + f.value * c.offset * 2 + "deg)"
         };
       },
       value: function(t, c){
@@ -134,12 +139,9 @@ ret = {
   },
   css: function(opt){
     var ref$, ref1$, this$ = this;
-    easingFit.fitToKeyframes(function(it){
-      return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
     return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = opt.local || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
+    }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
     return opt.prop({

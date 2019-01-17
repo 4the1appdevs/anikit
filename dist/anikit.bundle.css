@@ -396,15 +396,31 @@ transform: translate(-1.469576158976824e-14px,-60px) rotate(360deg) }  }
 @keyframes ld-metronome
 {
   0% {
-    animation-timing-function: cubic-bezier(0.9647,0.2413,-0.0705,0.7911);
-    transform: translate(-10px) rotate(NaNdeg);
+    animation-timing-function: cubic-bezier(0.7806,0.0715,0.8998,0.731);
+    transform: translate(-10px) rotate(-20deg);
   }
-  51% {
-    animation-timing-function: cubic-bezier(0.9226,0.2631,-0.0308,0.7628);
-    transform: translate(9.99px) rotate(NaNdeg);
+  17.5% {
+    animation-timing-function: cubic-bezier(0.484,0.3308,0.6853,0.6667);
+    transform: translate(-6.18px) rotate(-12.36deg);
+  }
+  27.6% {
+    animation-timing-function: cubic-bezier(0.0676,0.1836,0.0518,0.9433);
+    transform: translate(2.48px) rotate(4.96deg);
+  }
+  50.1% {
+    animation-timing-function: cubic-bezier(0.7773,0.0708,0.9008,0.735);
+    transform: translate(10px) rotate(20deg);
+  }
+  67.6% {
+    animation-timing-function: cubic-bezier(0.4888,0.331,0.6153,0.6674);
+    transform: translate(6.16px) rotate(12.32deg);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.0801,0.2206,0.1357,0.9363);
+    transform: translate(-4.57px) rotate(-9.14deg);
   }
   100% {
-    transform: translate(-10px) rotate(NaNdeg);
+    transform: translate(-10px) rotate(-20deg);
   }
 }
 .ld.ld-metronome { animation: ld-metronome 1s infinite; }

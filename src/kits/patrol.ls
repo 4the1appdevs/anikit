@@ -13,8 +13,9 @@ ret = do
       value: (t, c) -> opacity: 0.5 + t * c.offset
     metronome:
       steep: 0.6, offset: 10, rotate: 30, unit: \px
+      local: error-threshold: 0.001, sample-count: 20, seg-sample-count: 1000
       prop: (f, c) -> {
-        transform: "translate(#{f.value * c.offset}#{c.unit}) rotate(#{f.value * c.rotate}deg)"
+        transform: "translate(#{f.value * c.offset}#{c.unit}) rotate(#{f.value * c.offset * 2}deg)"
       }
       value: (t, c) -> 
         a = t * c.rotate * Math.PI / 180
@@ -51,7 +52,6 @@ ret = do
 
   css: (opt) -> 
     easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
-    easing-fit.fit-to-keyframes (~> @timing it, opt), (opt.local or {}) <<< {config: opt} <<< opt{name, prop}
   js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
   affine: (t, opt) -> opt.value @timing(t, opt), opt
 
