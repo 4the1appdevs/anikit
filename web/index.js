@@ -106,7 +106,7 @@ suite = {
     });
   },
   use: function(name){
-    var kit, t1, args, shader, this$ = this;
+    var kit, t1, start, stop, args, shader, this$ = this;
     this.kit = kit = new anikit(name, {
       name: 'kit'
     });
@@ -117,11 +117,25 @@ suite = {
     });
     kit.animate(tomatoCss);
     console.log("CSS Generation elapsed: " + (Date.now() - t1) * 0.001);
+    start = 0;
+    stop = false;
     this.animate(function(t){
-      t = (t + (this$.animate.offset || 0)) / (kit.config.dur || 1);
-      t = t - Math.floor(t);
+      if (!start) {
+        start = t;
+      }
+      if (stop) {
+        return;
+      }
+      t = (t - start + (this$.animate.offset || 0)) / (kit.config.dur || 1);
+      if (kit.config.repeat && t > kit.config.repeat) {
+        stop = true;
+      }
+      if (t > 0.99) {
+        t = 0.99;
+      }
       /* JS */
       kit.animateJs(tomatoJs, t);
+      return;
       /* THREEJS */
       kit.animateThree(this$.mesh, t - Math.floor(t));
       return this$.renderer.render(this$.scene, this$.camera);

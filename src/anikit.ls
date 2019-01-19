@@ -62,7 +62,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if !@dom =>
       document.body.appendChild(@dom = document.createElement \style)
       @set-config!
-    node.style.animation = "#{@config.name}-#{@id} #{opt.dur or 1}s #{opt.repeatCount or \infinite} linear"
+    node.style.animation = "#{@config.name}-#{@id} #{opt.dur or 1}s #{if opt.repeat => that else \infinite} linear forwards"
     node.style.animationDelay = "#{opt.delay or 0}s"
   statify: (node) -> node.style.animation = node.style.animationDelay = ""
   destroy: -> @dom.parentNode.removechild @dom
@@ -71,6 +71,13 @@ anikit <<< do
   util:
     m4to3: (m) -> [m.0, m.1, m.4, m.5, m.3, -m.7].map -> easing-fit.round it
     noise: (t) -> (Math.sin(t * 43758.5453) + 1 ) * 0.5
+    kth: (n,m,k) ->
+      if k > n => k = n
+      if m == 1 => return k
+      k = k * m + m - 1
+      while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
+      return k
+
     rx: (t) -> [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1]
     ry: (t) -> [cos(t), 0, sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1]
     rz: (t) -> [cos(t), sin(t), 0, 0, -sin(t), cos(t), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
@@ -85,7 +92,7 @@ anikit <<< do
     ky: (t) -> [1, 0, 0, 0, tan(t), 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   get: (name, opt={}) ->
     mod = if @types[name] => @mods[@types[name]] else @mods[name]
-    config = {name: name, dur: 1}
+    config = {name: name, dur: 1, repeat: 1}
 
     # overwrite edit settings
     if mod.preset[name] => for k,v of mod.edit =>

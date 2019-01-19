@@ -102,13 +102,18 @@ suite = do
     kit.animate(tomato-css)
     console.log "CSS Generation elapsed: #{(Date.now! - t1) * 0.001}"
 
-
+    start = 0
+    stop = false
     @animate (t) ~>
-      t = (t + (@animate.offset or 0)) / (kit.config.dur or 1)
-      t = t - Math.floor(t)
+      if !start => start := t
+      if stop => return
+      t = (t - start + (@animate.offset or 0)) / (kit.config.dur or 1)
+      if kit.config.repeat and t > kit.config.repeat => stop := true
+      if t > 0.99 => t = 0.99
 
       /* JS */
       kit.animate-js tomato-js, t
+      return
 
       /* THREEJS */
       kit.animate-three @mesh, t - Math.floor(t)

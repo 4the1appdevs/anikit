@@ -106,13 +106,14 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }
   },
   animate: function(node, opt){
+    var that;
     opt == null && (opt = {});
     opt = import$(import$({}, this.config), opt);
     if (!this.dom) {
       document.body.appendChild(this.dom = document.createElement('style'));
       this.setConfig();
     }
-    node.style.animation = this.config.name + "-" + this.id + " " + (opt.dur || 1) + "s " + (opt.repeatCount || 'infinite') + " linear";
+    node.style.animation = this.config.name + "-" + this.id + " " + (opt.dur || 1) + "s " + ((that = opt.repeat) ? that : 'infinite') + " linear forwards";
     return node.style.animationDelay = (opt.delay || 0) + "s";
   },
   statify: function(node){
@@ -131,6 +132,19 @@ import$(anikit, {
     },
     noise: function(t){
       return (Math.sin(t * 43758.5453) + 1) * 0.5;
+    },
+    kth: function(n, m, k){
+      if (k > n) {
+        k = n;
+      }
+      if (m === 1) {
+        return k;
+      }
+      k = k * m + m - 1;
+      while (k >= n) {
+        k = k - n + Math.floor((k - n) / (m - 1));
+      }
+      return k;
     },
     rx: function(t){
       return [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1];
@@ -177,7 +191,8 @@ import$(anikit, {
       : this.mods[name];
     config = {
       name: name,
-      dur: 1
+      dur: 1,
+      repeat: 1
     };
     if (mod.preset[name]) {
       for (k in ref$ = mod.edit) {
