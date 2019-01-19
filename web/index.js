@@ -135,7 +135,6 @@ suite = {
       }
       /* JS */
       kit.animateJs(tomatoJs, t);
-      return;
       /* THREEJS */
       kit.animateThree(this$.mesh, t - Math.floor(t));
       return this$.renderer.render(this$.scene, this$.camera);

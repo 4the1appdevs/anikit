@@ -113,7 +113,6 @@ suite = do
 
       /* JS */
       kit.animate-js tomato-js, t
-      return
 
       /* THREEJS */
       kit.animate-three @mesh, t - Math.floor(t)
