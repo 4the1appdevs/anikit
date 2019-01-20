@@ -192,7 +192,7 @@ import$(anikit, {
     config = {
       name: name,
       dur: 1,
-      repeat: 1
+      repeat: 0
     };
     if (mod.preset[name]) {
       for (k in ref$ = mod.edit) {

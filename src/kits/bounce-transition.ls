@@ -52,12 +52,34 @@ ret = do
       prop: (f, c) -> spring.prop f, c, 4
       value: (t, c) -> spring.value t, c, 4
 
+    "throw-ltr-in":
+      dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+      local: sample-count: 20, error-threshold: 0.001, seg-sample-count: 1000
+      prop: ((f, c) -> spring.prop f, c, 2), value: ((t, c) -> spring.value t, c, 2)
+
+    "throw-rtl-in":
+      dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+      local: sample-count: 20, error-threshold: 0.001, seg-sample-count: 1000
+      prop: ((f, c) -> spring.prop f, c, 1), value: ((t, c) -> spring.value t, c, 1)
+
+    "throw-ttb-in":
+      dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+      local: sample-count: 20, error-threshold: 0.001, seg-sample-count: 1000
+      prop: ((f, c) -> spring.prop f, c, 3), value: ((t, c) -> spring.value t, c, 3)
+
+    "throw-btt-in":
+      dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+      local: sample-count: 20, error-threshold: 0.001, seg-sample-count: 1000
+      prop: ((f, c) -> spring.prop f, c, 4), value: ((t, c) -> spring.value t, c, 4)
+
   edit: 
     dir: type: \number, default: 1, hidden: true
     count: type: \number, default: 30, min: 0, max: 100, step: 0.1
     mag: type: \number, default: 0.3, min: 0, max: 1, step: 0.01
     extrude: type: \number, default: 0, min: 0, max: 1, step: 0.01
     offset: type: \number, default: 0, min: -300, max: 300, step: 1
+    throw: type: \boolean, default: false
+    repeat: default: 1
   local: 
     prop: (f, c) ->
       value = @value f.value, c
@@ -69,14 +91,11 @@ ret = do
       return transform: [t,0,0,0,0,t,0,0,0,0,t,0,0,0,0,1]
 
   timing: (t, opt) ->
-    return 1 - (
-      Math.cos(t * 6.28 * opt.count) * ( 1 - t ** opt.mag ) + ( 1 - t ** (opt.mag * (1 - opt.extrude)) )
-    )
-    return ( 1 - (
-      (1 - Math.exp(t * 5 - 5)) * Math.sin(t * opt.count) * (1 - t ** opt.mag) * Math.max(0,(0.9 - t)) * 1.11 +
-      Math.min(Math.pow(2,-t * opt.count ), 1)
-    ))
-
+    wave = Math.cos(t * 6.28 * opt.count) * ( 1 - t ** opt.mag )
+    delta = ( 1 - t ** (opt.mag * (1 - opt.extrude)) )
+    if opt.throw and t > 0.5 / opt.count => wave = -Math.abs(wave)
+    return 1 - (wave + delta)
+    
   css: (opt) -> 
     prop = (f, c) ~> if opt.prop => opt.prop(f,c) else @local.prop(f, c)
     ret = easing-fit.fit-to-keyframes(

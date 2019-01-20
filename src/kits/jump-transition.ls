@@ -1,24 +1,20 @@
 require! <[easing-fit cubic ../anikit ../easing]>
 
 slide = do
-  prop: (f, c, d) ->
-    value = @value f.value, c, d
+  prop: (f, c, d, o) ->
+    value = @value f.value, c, d, o
     return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
-  value: (t, c, d) ->
+  value: (t, c, d, o) ->
     if c.dir > 0 => t = 1 - t
     if t <= 0.01 => t = 0.01
     if d < 3 => 
       sgn = if d == 1 => 1 else -1
-      {
-        transform: [1, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-        opacity: t
-      }
+      ret = transform: [1, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     else 
       sgn = if d == 3 => 1 else -1
-      {
-        transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
-        opacity: t
-      }
+      ret = transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
+    if o => ret.opacity = t
+    ret
 
 flip = do
   prop: (f, c, d) ->
@@ -127,37 +123,70 @@ ret = do
       value: (t, c) -> flip.value t, c, 2
 
     "slide-rtl-in":
-      dir: 1, count: 1, power: 0.25
+      dir: 1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 1
       value: (t, c) -> slide.value t, c, 1
     "slide-rtl-out":
-      dir: -1, count: 1, power: 0.25
+      dir: -1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 1
       value: (t, c) -> slide.value t, c, 1
     "slide-ltr-in":
-      dir: 1, count: 1, power: 0.25
+      dir: 1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 2
       value: (t, c) -> slide.value t, c, 2
     "slide-ltr-out":
-      dir: -1, count: 1, power: 0.25
+      dir: -1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 2
       value: (t, c) -> slide.value t, c, 2
     "slide-ttb-in":
-      dir: 1, count: 1, power: 0.25
+      dir: 1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 3
       value: (t, c) -> slide.value t, c, 3
     "slide-ttb-out":
-      dir: -1, count: 1, power: 0.25
+      dir: -1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 3
       value: (t, c) -> slide.value t, c, 3
     "slide-btt-in":
-      dir: 1, count: 1, power: 0.25
+      dir: 1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 4
       value: (t, c) -> slide.value t, c, 4
     "slide-btt-out":
-      dir: -1, count: 1, power: 0.25
+      dir: -1, count: 1, power: 0.25, offset: 200
       prop: (f, c) -> slide.prop f, c, 4
       value: (t, c) -> slide.value t, c, 4
+
+    "float-rtl-in":
+      dir: 1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 1, 1
+      value: (t, c) -> slide.value t, c, 1, 1
+    "float-rtl-out":
+      dir: -1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 1, 1
+      value: (t, c) -> slide.value t, c, 1, 1
+    "float-ltr-in":
+      dir: 1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 2, 1
+      value: (t, c) -> slide.value t, c, 2, 1
+    "float-ltr-out":
+      dir: -1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 2, 1
+      value: (t, c) -> slide.value t, c, 2, 1
+    "float-ttb-in":
+      dir: 1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 3, 1
+      value: (t, c) -> slide.value t, c, 3, 1
+    "float-ttb-out":
+      dir: -1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 3, 1
+      value: (t, c) -> slide.value t, c, 3, 1
+    "float-btt-in":
+      dir: 1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 4, 1
+      value: (t, c) -> slide.value t, c, 4, 1
+    "float-btt-out":
+      dir: -1, count: 1, power: 0.25, offset: 15
+      prop: (f, c) -> slide.prop f, c, 4, 1
+      value: (t, c) -> slide.value t, c, 4, 1
 
     "fall-rtl-in":
       dir: 1, count: 3
@@ -185,6 +214,7 @@ ret = do
     decay: type: \number, default: 0.4, min: 0, max: 1, step: 0.01
     power: type: \number, default: 2, min: 0, max: 10, step: 0.01, hidden: true
     offset: type: \number, default: 50, min: 0, max: 100, step: 1
+    repeat: default: 1
   local: 
     prop: (f, c) ->
       value = @value f.value, c

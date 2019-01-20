@@ -5,16 +5,16 @@ cubic = require('cubic');
 anikit = require('../anikit');
 easing = require('../easing');
 slide = {
-  prop: function(f, c, d){
+  prop: function(f, c, d, o){
     var value;
-    value = this.value(f.value, c, d);
+    value = this.value(f.value, c, d, o);
     return {
       transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
       opacity: value.opacity
     };
   },
-  value: function(t, c, d){
-    var sgn;
+  value: function(t, c, d, o){
+    var sgn, ret;
     if (c.dir > 0) {
       t = 1 - t;
     }
@@ -25,19 +25,21 @@ slide = {
       sgn = d === 1
         ? 1
         : -1;
-      return {
-        transform: [1, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        opacity: t
+      ret = {
+        transform: [1, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     } else {
       sgn = d === 3
         ? 1
         : -1;
-      return {
-        transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1],
-        opacity: t
+      ret = {
+        transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     }
+    if (o) {
+      ret.opacity = t;
+    }
+    return ret;
   }
 };
 flip = {
@@ -331,6 +333,7 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 1);
       },
@@ -342,6 +345,7 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 1);
       },
@@ -353,6 +357,7 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 2);
       },
@@ -364,6 +369,7 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 2);
       },
@@ -375,6 +381,7 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 3);
       },
@@ -386,6 +393,7 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 3);
       },
@@ -397,6 +405,7 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 4);
       },
@@ -408,11 +417,108 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      offset: 200,
       prop: function(f, c){
         return slide.prop(f, c, 4);
       },
       value: function(t, c){
         return slide.value(t, c, 4);
+      }
+    },
+    "float-rtl-in": {
+      dir: 1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 1, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 1, 1);
+      }
+    },
+    "float-rtl-out": {
+      dir: -1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 1, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 1, 1);
+      }
+    },
+    "float-ltr-in": {
+      dir: 1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 2, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 2, 1);
+      }
+    },
+    "float-ltr-out": {
+      dir: -1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 2, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 2, 1);
+      }
+    },
+    "float-ttb-in": {
+      dir: 1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 3, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 3, 1);
+      }
+    },
+    "float-ttb-out": {
+      dir: -1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 3, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 3, 1);
+      }
+    },
+    "float-btt-in": {
+      dir: 1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 4, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 4, 1);
+      }
+    },
+    "float-btt-out": {
+      dir: -1,
+      count: 1,
+      power: 0.25,
+      offset: 15,
+      prop: function(f, c){
+        return slide.prop(f, c, 4, 1);
+      },
+      value: function(t, c){
+        return slide.value(t, c, 4, 1);
       }
     },
     "fall-rtl-in": {
@@ -497,6 +603,9 @@ ret = {
       min: 0,
       max: 100,
       step: 1
+    },
+    repeat: {
+      'default': 1
     }
   },
   local: {

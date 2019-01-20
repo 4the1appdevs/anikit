@@ -92,7 +92,7 @@ anikit <<< do
     ky: (t) -> [1, 0, 0, 0, tan(t), 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   get: (name, opt={}) ->
     mod = if @types[name] => @mods[@types[name]] else @mods[name]
-    config = {name: name, dur: 1, repeat: 1}
+    config = {name: name, dur: 1, repeat: 0}
 
     # overwrite edit settings
     if mod.preset[name] => for k,v of mod.edit =>

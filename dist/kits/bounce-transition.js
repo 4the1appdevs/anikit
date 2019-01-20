@@ -158,6 +158,82 @@ ret = {
       value: function(t, c){
         return spring.value(t, c, 4);
       }
+    },
+    "throw-ltr-in": {
+      dir: 1,
+      count: 2,
+      mag: 0.08,
+      extrude: 0.5,
+      offset: 500,
+      'throw': true,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.001,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        return spring.prop(f, c, 2);
+      },
+      value: function(t, c){
+        return spring.value(t, c, 2);
+      }
+    },
+    "throw-rtl-in": {
+      dir: 1,
+      count: 2,
+      mag: 0.08,
+      extrude: 0.5,
+      offset: 500,
+      'throw': true,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.001,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        return spring.prop(f, c, 1);
+      },
+      value: function(t, c){
+        return spring.value(t, c, 1);
+      }
+    },
+    "throw-ttb-in": {
+      dir: 1,
+      count: 2,
+      mag: 0.08,
+      extrude: 0.5,
+      offset: 500,
+      'throw': true,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.001,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        return spring.prop(f, c, 3);
+      },
+      value: function(t, c){
+        return spring.value(t, c, 3);
+      }
+    },
+    "throw-btt-in": {
+      dir: 1,
+      count: 2,
+      mag: 0.08,
+      extrude: 0.5,
+      offset: 500,
+      'throw': true,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.001,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        return spring.prop(f, c, 4);
+      },
+      value: function(t, c){
+        return spring.value(t, c, 4);
+      }
     }
   },
   edit: {
@@ -193,6 +269,13 @@ ret = {
       min: -300,
       max: 300,
       step: 1
+    },
+    'throw': {
+      type: 'boolean',
+      'default': false
+    },
+    repeat: {
+      'default': 1
     }
   },
   local: {
@@ -217,8 +300,13 @@ ret = {
     }
   },
   timing: function(t, opt){
-    return 1 - (Math.cos(t * 6.28 * opt.count) * (1 - Math.pow(t, opt.mag)) + (1 - Math.pow(t, opt.mag * (1 - opt.extrude))));
-    return 1 - ((1 - Math.exp(t * 5 - 5)) * Math.sin(t * opt.count) * (1 - Math.pow(t, opt.mag)) * Math.max(0, 0.9 - t) * 1.11 + Math.min(Math.pow(2, -t * opt.count), 1));
+    var wave, delta;
+    wave = Math.cos(t * 6.28 * opt.count) * (1 - Math.pow(t, opt.mag));
+    delta = 1 - Math.pow(t, opt.mag * (1 - opt.extrude));
+    if (opt['throw'] && t > 0.5 / opt.count) {
+      wave = -Math.abs(wave);
+    }
+    return 1 - (wave + delta);
   },
   css: function(opt){
     var prop, ret, ref$, ref1$, ref2$, this$ = this;

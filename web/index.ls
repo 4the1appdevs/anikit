@@ -108,8 +108,9 @@ suite = do
       if !start => start := t
       if stop => return
       t = (t - start + (@animate.offset or 0)) / (kit.config.dur or 1)
-      if kit.config.repeat and t > kit.config.repeat => stop := true
-      if t > 0.99 => t = 0.99
+      if kit.config.repeat and t > kit.config.repeat =>
+        stop := true
+        if t > 0.99 => t = 0.99
 
       /* JS */
       kit.animate-js tomato-js, t

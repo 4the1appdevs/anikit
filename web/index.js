@@ -129,9 +129,9 @@ suite = {
       t = (t - start + (this$.animate.offset || 0)) / (kit.config.dur || 1);
       if (kit.config.repeat && t > kit.config.repeat) {
         stop = true;
-      }
-      if (t > 0.99) {
-        t = 0.99;
+        if (t > 0.99) {
+          t = 0.99;
+        }
       }
       /* JS */
       kit.animateJs(tomatoJs, t);
