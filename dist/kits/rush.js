@@ -36,6 +36,7 @@ ret = {
   type: 'animation',
   preset: {
     "rush-btt-in": {
+      repeat: 1,
       direction: -1,
       percent_in: 0.9,
       percent_out: 1,
@@ -51,6 +52,7 @@ ret = {
       }
     },
     "rush-ttb-in": {
+      repeat: 1,
       direction: 1,
       percent_in: 0.9,
       percent_out: 1,
@@ -66,6 +68,7 @@ ret = {
       }
     },
     "rush-ltr-in": {
+      repeat: 1,
       direction: 1,
       percent_in: 0.9,
       percent_out: 1,
@@ -81,6 +84,7 @@ ret = {
       }
     },
     "rush-rtl-in": {
+      repeat: 1,
       direction: -1,
       percent_in: 0.9,
       percent_out: 1,

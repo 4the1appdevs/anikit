@@ -36,19 +36,19 @@ ret = do
   preset:
 
     "rush-btt-in":
-      direction: -1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: -1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
       prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
 
     "rush-ttb-in":
-      direction: 1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: 1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
       prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
 
     "rush-ltr-in":
-      direction: 1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: 1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
       prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
 
     "rush-rtl-in":
-      direction: -1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: -1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
       prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
 
     "rush-btt":

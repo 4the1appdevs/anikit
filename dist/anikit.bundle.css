@@ -1453,32 +1453,16 @@ skew(-30deg);
 }
 .ld.ld-tremble { animation: ld-tremble 0.5s infinite; }
 @keyframes ld-vortex-out {
-  0%, 60% {
-    animation-timing-function: cubic-bezier(0.3, 0, 1, 0.7);
-  }
-  0% {
-    opacity: 0;
-    transform: rotate(-1800deg) scale(0.3);
-  }
-  60% {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
+  0%, 60% { animation-timing-function: cubic-bezier(0.3, 0, 1, 0.7); }
+  0% { opacity: 0; transform: rotate(-1800deg) scale(0.3); }
+  60% { opacity: 1; transform: rotate(0deg) scale(1); }
   100% { opacity: 0; }
 }
 .ld.ld-vortex-out { animation: ld-vortex-out 2s infinite; }
 @keyframes ld-vortex-in {
-  0%, 60% {
-    animation-timing-function: cubic-bezier(0.3, 0, 1, 0.7);
-  }
-  0% {
-    opacity: 0;
-    transform: rotate(-1800deg) scale(3);
-  }
-  60% {
-    opacity: 1;
-    transform: rotate(0deg) scale(1);
-  }
+  0%, 60% { animation-timing-function: cubic-bezier(0.3, 0, 1, 0.7); }
+  0% { opacity: 0; transform: rotate(-1800deg) scale(3); }
+  60% { opacity: 1; transform: rotate(0deg) scale(1); }
   100% { opacity: 0; }
 }
 .ld.ld-vortex-in { animation: ld-vortex-in 2s infinite; }

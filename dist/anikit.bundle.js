@@ -396,7 +396,7 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-in-alt":"bounce-transition","bounce-out-alt":"bounce-transition","bounce-in":"bounce-transition","bounce-out":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","throw-ltr-in":"bounce-transition","throw-rtl-in":"bounce-transition","throw-ttb-in":"bounce-transition","throw-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-in-alt":"bounce-transition","bounce-out-alt":"bounce-transition","bounce-in":"bounce-transition","bounce-out":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","throw-ltr-in":"bounce-transition","throw-rtl-in":"bounce-transition","throw-ttb-in":"bounce-transition","throw-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
 },{"./kits/blink":7,"./kits/blur":9,"./kits/blur-transition":8,"./kits/bounce":12,"./kits/bounce-rigid":10,"./kits/bounce-transition":11,"./kits/clock":13,"./kits/fade":14,"./kits/float":15,"./kits/heartbeat":16,"./kits/hit":17,"./kits/jump-transition":18,"./kits/orbit":19,"./kits/patrol":20,"./kits/power":21,"./kits/rubber":22,"./kits/rush":23,"./kits/slide":24,"./kits/spin":25,"./kits/squeeze":26,"./kits/static":27,"./kits/surprise":28,"./kits/tremble":29,"./kits/vortex":30,"./kits/wrench":31}],7:[function(require,module,exports){
@@ -3045,6 +3045,7 @@ ret = {
   type: 'animation',
   preset: {
     "rush-btt-in": {
+      repeat: 1,
       direction: -1,
       percent_in: 0.9,
       percent_out: 1,
@@ -3060,6 +3061,7 @@ ret = {
       }
     },
     "rush-ttb-in": {
+      repeat: 1,
       direction: 1,
       percent_in: 0.9,
       percent_out: 1,
@@ -3075,6 +3077,7 @@ ret = {
       }
     },
     "rush-ltr-in": {
+      repeat: 1,
       direction: 1,
       percent_in: 0.9,
       percent_out: 1,
@@ -3090,6 +3093,7 @@ ret = {
       }
     },
     "rush-rtl-in": {
+      repeat: 1,
       direction: -1,
       percent_in: 0.9,
       percent_out: 1,
@@ -4025,7 +4029,7 @@ easingFit = require('easing-fit');
 cubic = require('cubic');
 anikit = require('../anikit');
 value = function(t, c){
-  var r, s, o;
+  var r, s, o, ret;
   if (t < 0.6) {
     r = (t * c.rotate / 0.6) * Math.PI * 2;
     s = (1 - c.zoom) * (t / 0.6) + c.zoom;
@@ -4035,17 +4039,19 @@ value = function(t, c){
     s = 1;
     o = 1 - (t - 0.6) / (1 - 0.6);
   }
-  return {
+  ret = {
     transform: [s * Math.cos(r), s * Math.sin(r), 0, 0, -s * Math.sin(r), s * Math.cos(r), 0, 0, 0, 0, s, 0, 0, 0, 0, 1]
   };
+  if (c.fade) {
+    ret.opacity = o;
+  }
+  return ret;
 };
 ret = {
   name: 'vortex',
   type: 'animation',
   preset: {
     "vortex-out": {
-      steep: 0.3,
-      rotate: 5,
       zoom: 0.3,
       local: {
         sampleCount: 20,
@@ -4063,9 +4069,45 @@ ret = {
       }
     },
     "vortex-in": {
-      steep: 0.3,
-      rotate: 5,
       zoom: 3,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.01,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        var v, m;
+        v = value(f.value, c);
+        m = anikit.util.m4to3(v.transform);
+        return v.transform = "matrix(" + m.join(',') + ")", v;
+      },
+      value: function(t, c){
+        return value(t, c);
+      }
+    },
+    "vortex-alt-out": {
+      zoom: 0.3,
+      fade: false,
+      repeat: 1,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.01,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        var v, m;
+        v = value(f.value, c);
+        m = anikit.util.m4to3(v.transform);
+        return v.transform = "matrix(" + m.join(',') + ")", v;
+      },
+      value: function(t, c){
+        return value(t, c);
+      }
+    },
+    "vortex-alt-in": {
+      zoom: 3,
+      fade: false,
+      repeat: 1,
       local: {
         sampleCount: 20,
         errorThreshold: 0.01,
@@ -4105,6 +4147,10 @@ ret = {
       min: 0,
       max: 10,
       step: 0.1
+    },
+    fade: {
+      'default': true,
+      type: 'boolean'
     }
   },
   timing: function(t, opt){
@@ -4121,9 +4167,16 @@ ret = {
     return t;
   },
   css: function(opt){
-    var s;
+    var s, opacity;
     s = opt.steep;
-    return "@keyframes " + opt.name + " {\n  0%, 60% {\n    animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + ");\n  }\n  0% {\n    opacity: 0;\n    transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + ");\n  }\n  60% {\n    opacity: 1;\n    transform: rotate(0deg) scale(1);\n  }\n  100% { opacity: 0; }\n}";
+    opacity = function(v){
+      if (opt.fade) {
+        return "opacity: " + v + ";";
+      } else {
+        return "";
+      }
+    };
+    return "@keyframes " + opt.name + " {\n  0%, 60% { animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + "); }\n  0% { " + opacity(0) + " transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + "); }\n  60% { " + opacity(1) + " transform: rotate(0deg) scale(1); }\n  100% { " + opacity(0) + " }\n}";
   },
   js: function(t, opt){
     return opt.prop({

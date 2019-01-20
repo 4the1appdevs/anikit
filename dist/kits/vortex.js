@@ -4,7 +4,7 @@ easingFit = require('easing-fit');
 cubic = require('cubic');
 anikit = require('../anikit');
 value = function(t, c){
-  var r, s, o;
+  var r, s, o, ret;
   if (t < 0.6) {
     r = (t * c.rotate / 0.6) * Math.PI * 2;
     s = (1 - c.zoom) * (t / 0.6) + c.zoom;
@@ -14,17 +14,19 @@ value = function(t, c){
     s = 1;
     o = 1 - (t - 0.6) / (1 - 0.6);
   }
-  return {
+  ret = {
     transform: [s * Math.cos(r), s * Math.sin(r), 0, 0, -s * Math.sin(r), s * Math.cos(r), 0, 0, 0, 0, s, 0, 0, 0, 0, 1]
   };
+  if (c.fade) {
+    ret.opacity = o;
+  }
+  return ret;
 };
 ret = {
   name: 'vortex',
   type: 'animation',
   preset: {
     "vortex-out": {
-      steep: 0.3,
-      rotate: 5,
       zoom: 0.3,
       local: {
         sampleCount: 20,
@@ -42,9 +44,45 @@ ret = {
       }
     },
     "vortex-in": {
-      steep: 0.3,
-      rotate: 5,
       zoom: 3,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.01,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        var v, m;
+        v = value(f.value, c);
+        m = anikit.util.m4to3(v.transform);
+        return v.transform = "matrix(" + m.join(',') + ")", v;
+      },
+      value: function(t, c){
+        return value(t, c);
+      }
+    },
+    "vortex-alt-out": {
+      zoom: 0.3,
+      fade: false,
+      repeat: 1,
+      local: {
+        sampleCount: 20,
+        errorThreshold: 0.01,
+        segSampleCount: 1000
+      },
+      prop: function(f, c){
+        var v, m;
+        v = value(f.value, c);
+        m = anikit.util.m4to3(v.transform);
+        return v.transform = "matrix(" + m.join(',') + ")", v;
+      },
+      value: function(t, c){
+        return value(t, c);
+      }
+    },
+    "vortex-alt-in": {
+      zoom: 3,
+      fade: false,
+      repeat: 1,
       local: {
         sampleCount: 20,
         errorThreshold: 0.01,
@@ -84,6 +122,10 @@ ret = {
       min: 0,
       max: 10,
       step: 0.1
+    },
+    fade: {
+      'default': true,
+      type: 'boolean'
     }
   },
   timing: function(t, opt){
@@ -100,9 +142,16 @@ ret = {
     return t;
   },
   css: function(opt){
-    var s;
+    var s, opacity;
     s = opt.steep;
-    return "@keyframes " + opt.name + " {\n  0%, 60% {\n    animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + ");\n  }\n  0% {\n    opacity: 0;\n    transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + ");\n  }\n  60% {\n    opacity: 1;\n    transform: rotate(0deg) scale(1);\n  }\n  100% { opacity: 0; }\n}";
+    opacity = function(v){
+      if (opt.fade) {
+        return "opacity: " + v + ";";
+      } else {
+        return "";
+      }
+    };
+    return "@keyframes " + opt.name + " {\n  0%, 60% { animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + "); }\n  0% { " + opacity(0) + " transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + "); }\n  60% { " + opacity(1) + " transform: rotate(0deg) scale(1); }\n  100% { " + opacity(0) + " }\n}";
   },
   js: function(t, opt){
     return opt.prop({
