@@ -1,51 +1,28 @@
 require! <[easing-fit cubic ../anikit]>
+slide = do
+  prop: (f, c) -> 
+    value = @value f.value, c
+    return do 
+      transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
+      opacity: value.opacity
+  value: (t, c) -> do
+    transform: anikit.util[if c.dir == 1 => \tx else \ty] t * c.offset
+    opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
+
+
 ret = do
   name: \slide
   type: \animation
   preset:
-    "slide-ltr": 
-      local: error-threshold: 0.0001, sample-count: 20
-      offset: 200
-      prop: (f, c) -> do
-        transform: "translate(#{f.value * c.offset}#{c.unit},0)"
-        opacity: if f.value <= -0.8 or f.value >= 0.8 => 0 else 1
-      value: (t, c) -> do
-        transform: anikit.util.tx t * c.offset
-        opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
-
-    "slide-rtl": 
-      local: error-threshold: 0.0001, sample-count: 20
-      offset: -200
-      prop: (f, c) -> do
-        transform: "translate(#{f.value * c.offset}#{c.unit},0)"
-        opacity: if f.value <= -0.8 or f.value >= 0.8 => 0 else 1
-      value: (t, c) -> do
-        transform: anikit.util.tx t * c.offset
-        opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
-
-    "slide-btt": 
-      local: error-threshold: 0.0001, sample-count: 20
-      offset: -200
-      prop: (f, c) -> do
-        transform: "translate(0,#{f.value * c.offset}#{c.unit})"
-        opacity: if f.value <= -0.8 or f.value >= 0.8 => 0 else 1
-      value: (t, c) -> do
-        transform: anikit.util.ty t * c.offset
-        opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
-
-    "slide-ttb": 
-      local: error-threshold: 0.0001, sample-count: 20
-      offset: 200
-      prop: (f, c) -> do
-        transform: "translate(0,#{f.value * c.offset}#{c.unit})"
-        opacity: if f.value <= -0.8 or f.value >= 0.8 => 0 else 1
-      value: (t, c) -> do
-        transform: anikit.util.ty t * c.offset
-        opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
+    "slide-ltr": {offset: 200} <<< slide
+    "slide-rtl": {offset: -200} <<< slide
+    "slide-btt": {offset: -200, dir: 2} <<< slide
+    "slide-ttb": {offset: 200, dir: 2} <<< slide
 
   edit: 
     steep: default: 0.3, type: \number, min: 0.3, max: 1, step: 0.01
-    offset: default: 200, type: \number, unit: \px, min: -2000, max: 2000
+    offset: name: "Move Distance", default: 200, type: \number, unit: \px, min: -2000, max: 2000
+    dir: default: 1, type: \number, hidden: true
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   timing: (t, opt) ->
@@ -59,7 +36,9 @@ ret = do
     return t
 
   css: (opt) -> 
-    easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+    local = error-threshold: 0.0001, sample-count: 20
+    prop = (f, c) -> opt.prop f, c
+    easing-fit.fit-to-keyframes (~> @timing it, opt), (local <<< opt.local or {}) <<< {prop, config: opt} <<< opt{name}
   js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
   affine: (t, opt) -> opt.value @timing(t, opt), opt
 

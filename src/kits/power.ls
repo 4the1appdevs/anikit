@@ -3,15 +3,11 @@ ret = do
   name: \power
   type: \animation
   preset: 
-    "power-off":
-      local: sample-count: 50, error-threshold: 0.0001, seg-sample-count: 1000
-      steep: 0.5, dir: -1
-    "power-on":
-      local: sample-count: 50, error-threshold: 0.0001, seg-sample-count: 1000
-      steep: 0.5, dir: 1
+    "power-off": dir: -1, repeat: 1
+    "power-on": dir: 1, repeat: 1
 
   edit: 
-    steep: default: 0.6, type: \number, min: 0, max: 1, step: 0.01
+    steep: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
     dir: default: 1, hidden: true
   local: 
     value: (t, c) -> 

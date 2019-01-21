@@ -4,44 +4,37 @@ ret = do
   type: \animation
   preset:
     "coin-h":
-      steep: 0.4, cycle: 3600, dur: 2
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle}deg)"}
+      cycle: 10, dur: 2
+      prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI / 180)}
     "coin-v":
-      steep: 0.4, cycle: 3600, dur: 2
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle}deg)"}
+      cycle: 10, dur: 2
+      prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI / 180)}
     "cycle":
       steep: 0.0, cycle: 360
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
+      prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
     "flip-h":
-      steep: 0.4, cycle: 360, flip: true
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle}deg)"}
+      cycle: 1, flip: true
+      prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI / 180)}
     "flip-v":
-      steep: 0.4, cycle: 360, flip: true
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle}deg)"}
+      cycle: 1, flip: true
+      prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI / 180)}
     "spin-fast":
-      steep: 0.4, cycle: 1800
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
+      cycle: 5
+      prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
     spin:
-      steep: 0.4, cycle: 360
-      local: error-threshold: 0.001, sample-count: 20
-      prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle}deg)"}
+      cycle: 1
+      prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
   edit: 
     steep: default: 0.4, type: \number, min: 0, max: 1, step: 0.01
-    cycle: default: 360, type: \number, unit: \deg, min: 0, max: 3600, step: 360
-    flip: default: false, type: \boolean
+    cycle: default: 1, type: \number, min: 0, max: 100, step: 1
+    flip: default: false, type: \boolean, hidden: true
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   timing: (t, opt) ->
@@ -58,7 +51,8 @@ ret = do
     return t
 
   css: (opt) ->
-    easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
+    local = error-threshold: 0.001, sample-count: 20
+    easing-fit.fit-to-keyframes (~> @timing it, opt), (local <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
   js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
   affine: (t, opt) -> opt.value @timing(t, opt), opt
 

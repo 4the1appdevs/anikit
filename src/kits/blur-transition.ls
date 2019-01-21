@@ -6,8 +6,8 @@ ret = do
     "blur-in": dir: -1, repeat: 1
     "blur-out": dir: 1, repeat: 1
   edit: 
-    blur: default: 10, type: \number, unit: \px, units: <[px %]>, min: 0, max: 100, step: 1
-    dir: default: 1, type: \number, min: -1, max: 1, step: 2
+    blur: name: "Blur Amount", default: 10, type: \number, unit: \px, units: <[px %]>, min: 0, max: 100, step: 1
+    dir: default: 1, type: \number, min: -1, max: 1, step: 2, hidden: true
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   css: (opt) ->

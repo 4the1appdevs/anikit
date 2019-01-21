@@ -6,7 +6,7 @@ ret = do
     wrench: {}
   edit: 
     dur: default: 1
-    rotate: default: 45, type: \number, min: 0, max: 360, step: 1
+    rotate: name: "Rotate Degree", default: 45, type: \number, min: 0, max: 360, step: 1
 
   css: (opt) ->
     """

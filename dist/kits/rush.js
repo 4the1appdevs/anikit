@@ -39,10 +39,13 @@ ret = {
       repeat: 1,
       direction: -1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushV.prop(f, c);
@@ -55,10 +58,13 @@ ret = {
       repeat: 1,
       direction: 1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushV.prop(f, c);
@@ -71,10 +77,13 @@ ret = {
       repeat: 1,
       direction: 1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushH.prop(f, c);
@@ -87,10 +96,13 @@ ret = {
       repeat: 1,
       direction: -1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushH.prop(f, c);
@@ -154,15 +166,17 @@ ret = {
   },
   edit: {
     dur: {
-      'default': 2
+      'default': 1
     },
     steep: {
       'default': 0.4,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     offset_near: {
+      name: "Offset(Break)",
       'default': 20,
       type: 'number',
       unit: 'px',
@@ -170,6 +184,7 @@ ret = {
       max: 1000
     },
     offset_far: {
+      name: "Offset(Transition)",
       'default': 200,
       type: 'number',
       unit: 'px',
@@ -181,26 +196,32 @@ ret = {
       type: 'number',
       min: -1,
       max: 1,
-      step: 2
+      step: 2,
+      hidden: true
     },
     percent_in: {
+      name: "Duration(Enter)",
       'default': 0.6,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     percent_out: {
+      name: "Duration(Exit)",
       'default': 0.8,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     skew: {
+      name: "Skew",
       'default': 30,
       type: 'number',
       unit: 'deg',
       min: 0,
-      max: 360
+      max: 90
     },
     unit: {
       'default': 'px',

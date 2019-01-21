@@ -36,19 +36,23 @@ ret = do
   preset:
 
     "rush-btt-in":
-      repeat: 1, direction: -1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: -1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
+      percent_out: default: 1, hidden: true
       prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
 
     "rush-ttb-in":
-      repeat: 1, direction: 1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: 1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
+      percent_out: default: 1, hidden: true
       prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
 
     "rush-ltr-in":
-      repeat: 1, direction: 1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: 1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
+      percent_out: default: 1, hidden: true
       prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
 
     "rush-rtl-in":
-      repeat: 1, direction: -1, percent_in: 0.9, percent_out: 1, local: sample-count: 40, error-threshold: 0.001
+      repeat: 1, direction: -1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
+      percent_out: default: 1, hidden: true
       prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
 
     "rush-btt":
@@ -68,14 +72,14 @@ ret = do
       prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
 
   edit: 
-    dur: default: 2
-    steep: default: 0.4, type: \number, min: 0, max: 1
-    offset_near: default: 20, type: \number, unit: \px, min: 0, max: 1000
-    offset_far: default: 200, type: \number, unit: \px, min: 0, max: 1000
-    direction: default: -1, type: \number, min: -1, max: 1, step: 2
-    percent_in: default: 0.6, type: \number, min: 0, max: 1
-    percent_out: default: 0.8, type: \number, min: 0, max: 1
-    skew: default: 30, type: \number, unit: \deg, min: 0, max: 360
+    dur: default: 1
+    steep: default: 0.4, type: \number, min: 0, max: 1, step: 0.01
+    offset_near: name: "Offset(Break)", default: 20, type: \number, unit: \px, min: 0, max: 1000
+    offset_far: name: "Offset(Transition)", default: 200, type: \number, unit: \px, min: 0, max: 1000
+    direction: default: -1, type: \number, min: -1, max: 1, step: 2, hidden: true
+    percent_in: name: "Duration(Enter)", default: 0.6, type: \number, min: 0, max: 1, step: 0.01
+    percent_out: name: "Duration(Exit)", default: 0.8, type: \number, min: 0, max: 1, step: 0.01
+    skew: name: "Skew", default: 30, type: \number, unit: \deg, min: 0, max: 90
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   timing: (t, opt) ->

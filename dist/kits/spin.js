@@ -8,16 +8,11 @@ ret = {
   type: 'animation',
   preset: {
     "coin-h": {
-      steep: 0.4,
-      cycle: 3600,
+      cycle: 10,
       dur: 2,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateY(" + f.value * c.cycle + "deg)"
+          transform: "rotateY(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -27,16 +22,11 @@ ret = {
       }
     },
     "coin-v": {
-      steep: 0.4,
-      cycle: 3600,
+      cycle: 10,
       dur: 2,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateX(" + f.value * c.cycle + "deg)"
+          transform: "rotateX(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -48,13 +38,9 @@ ret = {
     "cycle": {
       steep: 0.0,
       cycle: 360,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -64,16 +50,11 @@ ret = {
       }
     },
     "flip-h": {
-      steep: 0.4,
-      cycle: 360,
+      cycle: 1,
       flip: true,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateY(" + f.value * c.cycle + "deg)"
+          transform: "rotateY(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -83,16 +64,11 @@ ret = {
       }
     },
     "flip-v": {
-      steep: 0.4,
-      cycle: 360,
+      cycle: 1,
       flip: true,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateX(" + f.value * c.cycle + "deg)"
+          transform: "rotateX(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -102,15 +78,10 @@ ret = {
       }
     },
     "spin-fast": {
-      steep: 0.4,
-      cycle: 1800,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
+      cycle: 5,
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -120,15 +91,10 @@ ret = {
       }
     },
     spin: {
-      steep: 0.4,
-      cycle: 360,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
+      cycle: 1,
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -147,16 +113,16 @@ ret = {
       step: 0.01
     },
     cycle: {
-      'default': 360,
+      'default': 1,
       type: 'number',
-      unit: 'deg',
       min: 0,
-      max: 3600,
-      step: 360
+      max: 100,
+      step: 1
     },
     flip: {
       'default': false,
-      type: 'boolean'
+      type: 'boolean',
+      hidden: true
     },
     unit: {
       'default': 'px',
@@ -184,10 +150,14 @@ ret = {
     return t;
   },
   css: function(opt){
-    var ref$, ref1$, this$ = this;
+    var local, ref$, ref1$, this$ = this;
+    local = {
+      errorThreshold: 0.001,
+      sampleCount: 20
+    };
     return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
+    }, (ref$ = (ref1$ = import$(local, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
     return opt.prop({

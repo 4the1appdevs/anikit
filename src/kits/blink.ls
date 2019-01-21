@@ -2,13 +2,10 @@ require! <[easing-fit cubic ../anikit]>
 ret = do
   name: \blink
   type: \animation
-  preset:
-    blink: 
-      showtime: 0.5, transtime: 0.01
+  preset: blink: {}
   edit: 
     dur: default: 1
-    steep: default: 0.0, type: \number, min: 0.0, max: 1, step: 0.01
-    showtime: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
+    showtime: default: 0.5, type: \number, min: 0.01, max: 0.99, step: 0.01
     transtime: default: 0.01, type: \number, min: 0.01, max: 1, step: 0.01
 
   css: (opt) ->
@@ -30,22 +27,5 @@ ret = do
     else t = 0
     return { opacity: t }
   affine: (t, opt) -> @js t, opt
-
-  /* equivalent keyframes */
-  /*
-    @keyframes ld-blink
-      0%
-        opacity: 1
-      {config.showtime * 1%}
-        opacity: 1
-      {(config.transitiontime + config.showtime) * 1%}
-        opacity: 0
-      {(100 - config.transitiontime) * 1%}
-        opacity: 0
-      100%
-        opacity: 1
-    .ld-blink
-      animation: ld-blink config.dur linear infinite
-  */
 
 module.exports = ret

@@ -7,10 +7,10 @@ ret = do
   edit: 
     dur: default: 2.0
     steep: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
-    zoom: default: 1, type: \number, min: 0, max: 10, step: 0.1
-    skew: default: 20, type: \number, unit: \deg, min: -90, max: 90, step: 0.1
-    offset: default: 200, type: \number, unit: \px, min: 0, max: 10000
-    fade: default: 1, type: \number, min: 0, max: 1, step: 0.01
+    zoom: name: "Scale Amount", default: 1, type: \number, min: 0, max: 2, step: 0.01
+    skew: name: "Skew Amount", default: 20, type: \number, unit: \deg, min: -90, max: 90, step: 0.1
+    offset: name: "Fall Offset", default: 200, type: \number, unit: \px, min: 0, max: 2000
+    fade: name: "Fade Duration", default: 1, type: \number, min: 0.01, max: 1, step: 0.01
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   timing: (t, opt) ->

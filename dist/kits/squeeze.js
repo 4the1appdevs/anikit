@@ -39,17 +39,19 @@ ret = {
       step: 0.01
     },
     zoomx: {
+      name: "X Scale",
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 3,
+      max: 1,
       step: 0.01
     },
     zoomy: {
+      name: "Y Scale",
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 3,
+      max: 1,
       step: 0.01
     }
   },

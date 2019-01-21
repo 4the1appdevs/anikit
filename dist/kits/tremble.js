@@ -40,12 +40,14 @@ ret = {
   },
   edit: {
     count: {
+      name: "Sample Count",
       'default': 30,
       type: 'number',
-      min: 0,
-      max: 100
+      min: 1,
+      max: 99
     },
     offset: {
+      name: "Position Variance",
       'default': 4,
       type: 'number',
       unit: 'px',
@@ -53,6 +55,7 @@ ret = {
       max: 30
     },
     degree: {
+      name: "Angle Variance",
       'default': 0,
       type: 'number',
       unit: 'degree',
@@ -60,6 +63,7 @@ ret = {
       max: 360
     },
     zoom: {
+      name: "Scale Variance",
       'default': 0.0,
       type: 'number',
       min: 0,

@@ -6,10 +6,10 @@ ret = do
     bounce: {}
   edit: 
     unit: default: \px, type: \choice, values: ["px", "%", ""]
-    height: default: -40, type: \number, min: -500, max: 500
+    height: name: "Bounce Height", default: -40, type: \number, min: -500, max: 500
     offset: default: 50, type: \number, min: -500, max: 500
-    rate: default: 13/18, type: \number, min: 0, max: 1, step: 0.01
-    deflate: default: 0.6, type: \number, min: 0, max: 1, step: 0.01
+    rate: default: 13/18, type: \number, min: 0, max: 1, step: 0.01, hidden: true
+    deflate: name: "Scale Amount", default: 0.6, type: \number, min: 0, max: 1, step: 0.01
 
   step: (t, opt = {}) ->
     args = [opt.height, opt.offset, opt.rate, opt.deflate]

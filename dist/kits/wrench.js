@@ -14,6 +14,7 @@ ret = {
       'default': 1
     },
     rotate: {
+      name: "Rotate Degree",
       'default': 45,
       type: 'number',
       min: 0,

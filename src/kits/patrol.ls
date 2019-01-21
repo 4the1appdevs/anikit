@@ -4,15 +4,15 @@ ret = do
   type: \animation
   preset: 
     breath:
-      steep: 0.6, offset: 0.06
+      offset: default: 0.06, min: 0.01, max: 1, step: 0.01, name: "Scale Amount"
       prop: (f, c) -> {transform: "scale(#{1 + f.value * c.offset - 0.03})"}
       value: (t, c) -> transform: anikit.util.s(1 + t * c.offset - 0.03)
     dim:
-      steep: 0.6, offset: 0.5
+      offset: default: 0.5, min: 0, max: 1, step: 0.01, name: "Dim Amount"
       prop: (f, c) -> {opacity: 0.5 + f.value * c.offset}
       value: (t, c) -> opacity: 0.5 + t * c.offset
     metronome:
-      steep: 0.6, offset: 10, rotate: 30, unit: \px
+      offset: default: 10, min: 0, max: 90, step: 1, name: "Shaking Amount"
       local: error-threshold: 0.001, sample-count: 20, seg-sample-count: 1000
       prop: (f, c) -> {
         transform: "translate(#{f.value * c.offset}#{c.unit}) rotate(#{f.value * c.offset * 2}deg)"
@@ -25,20 +25,22 @@ ret = do
           0, 0, 1, 0, 0, 0, 0, 1
         ]
     swing:
-      steep: 0.6, offset: 30, unit: ''
+      offset: default: 30, unit: 'deg', min: 0, max: 90, step: 1, name: "Rotate Amount"
       prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
       value: (t, c) -> transform: anikit.util.rz t * c.offset * Math.PI / 180
     "wander-v": 
-      steep: 0.6, offset: 10, unit: \px
+      offset: default: 10, max: 500, step: 1, name: "Move Amount"
+      unit: \px
       prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
       value: (t, c) -> transform: anikit.util.ty t * c.offset
     wander:
-      steep: 0.6, offset: 10, unit: \px
+      offset: default: 10, max: 500, step: 1, name: "Move Amount"
+      unit: \px
       prop: (f, c) -> {transform: "translate(#{f.value * c.offset}#{c.unit},0)"}
       value: (t, c) -> transform: anikit.util.tx t * c.offset
 
   edit: do
-    steep: default: 0.6, type: \number, min: 0, max: 1, step: 0.01
+    steep: default: 0.6, type: \number, min: 0.34, max: 1, step: 0.01
     offset: default: 10, type: \number, unit: \px, min: 0, max: 100, step: 0.01
     unit: default: \px, type: \choice, values: ["px", "%", ""]
   timing: (t, opt) ->

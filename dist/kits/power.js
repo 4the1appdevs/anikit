@@ -9,27 +9,17 @@ ret = {
   type: 'animation',
   preset: {
     "power-off": {
-      local: {
-        sampleCount: 50,
-        errorThreshold: 0.0001,
-        segSampleCount: 1000
-      },
-      steep: 0.5,
-      dir: -1
+      dir: -1,
+      repeat: 1
     },
     "power-on": {
-      local: {
-        sampleCount: 50,
-        errorThreshold: 0.0001,
-        segSampleCount: 1000
-      },
-      steep: 0.5,
-      dir: 1
+      dir: 1,
+      repeat: 1
     }
   },
   edit: {
     steep: {
-      'default': 0.6,
+      'default': 0.5,
       type: 'number',
       min: 0,
       max: 1,

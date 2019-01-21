@@ -10,10 +10,16 @@ ret = {
   preset: {
     jingle: {
       count: 7,
-      offset: 10,
       ratio: 0.6,
       delay: 0.1,
       unit: '',
+      offset: {
+        'default': 10,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)",
@@ -29,10 +35,16 @@ ret = {
     },
     "rubber-v": {
       count: 7,
-      offset: 0.2,
       ratio: 0.7,
       delay: 0.3,
       unit: '',
+      offset: {
+        'default': 0.2,
+        min: 0.01,
+        max: 1,
+        step: 0.01,
+        name: "Scale Amount"
+      },
       prop: function(f, c){
         return {
           transform: "scaleY(" + (1 + f.value * c.offset) + ")"
@@ -46,10 +58,16 @@ ret = {
     },
     rubber: {
       count: 7,
-      offset: 0.2,
       ratio: 0.7,
       delay: 0.3,
       unit: '',
+      offset: {
+        'default': 0.2,
+        min: 0.01,
+        max: 1,
+        step: 0.01,
+        name: "Scale Amount"
+      },
       prop: function(f, c){
         return {
           transform: "scaleX(" + (1 + f.value * c.offset) + ")"
@@ -63,10 +81,16 @@ ret = {
     },
     "shake-v": {
       count: 5,
-      offset: 10,
       ratio: 0.6,
       delay: 0.3,
       unit: 'px',
+      offset: {
+        'default': 10,
+        min: 0,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       prop: function(f, c){
         return {
           transform: "translate(0," + f.value * c.offset + c.unit + ")"
@@ -80,10 +104,16 @@ ret = {
     },
     shake: {
       count: 5,
-      offset: 10,
       ratio: 0.7,
       delay: 0.3,
       unit: 'px',
+      offset: {
+        'default': 10,
+        min: 0,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       prop: function(f, c){
         return {
           transform: "translate(" + f.value * c.offset + c.unit + ",0)"
@@ -97,10 +127,16 @@ ret = {
     },
     tick: {
       count: 7,
-      offset: 20,
       ratio: 0.7,
       delay: 0.3,
       unit: "",
+      offset: {
+        'default': 20,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
@@ -114,10 +150,16 @@ ret = {
     },
     smash: {
       count: 4,
-      offset: 30,
       ratio: 0,
       delay: 0.5,
       unit: "",
+      offset: {
+        'default': 30,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       local: {
         sampleCount: 20,
         errorThreshold: 0.001
@@ -135,10 +177,16 @@ ret = {
     },
     "jelly-alt": {
       count: 7,
-      offset: 10,
       ratio: 0.7,
       delay: 0.3,
       unit: "",
+      offset: {
+        'default': 10,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "skewX(" + f.value * c.offset + "deg)"
@@ -152,10 +200,16 @@ ret = {
     },
     jelly: {
       count: 5,
-      offset: 10,
       ratio: 0.6,
       delay: 0.3,
       unit: 'px',
+      offset: {
+        'default': 10,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "translate(" + f.value * -c.offset + c.unit + ",0) skewX(" + f.value * c.offset + "deg)"
@@ -169,10 +223,16 @@ ret = {
     },
     damage: {
       count: 10,
-      offset: 1,
       ratio: 0.8,
       delay: 0.2,
       unit: "",
+      offset: {
+        'default': 1,
+        min: 0,
+        max: 1,
+        step: 0.01,
+        name: "Amount"
+      },
       prop: function(f, c){
         return {
           opacity: 1 - f.value * c.offset
@@ -187,6 +247,7 @@ ret = {
   },
   edit: {
     count: {
+      name: "Bounce Count",
       'default': 10,
       type: 'number',
       min: 0,
@@ -201,6 +262,7 @@ ret = {
       unit: 'px'
     },
     ratio: {
+      name: "Decay",
       'default': 0.8,
       type: 'number',
       min: 0,
@@ -208,6 +270,7 @@ ret = {
       step: 0.01
     },
     delay: {
+      name: "Prepare Time",
       'default': 0.2,
       type: 'number',
       min: 0,

@@ -1,12 +1,18 @@
 require! <[easing-fit cubic ../anikit ../easing]>
 
+no-bounce = do
+  count: {default: 1, hidden: true}
+  decay: {default: 2, hidden: true}
+  dtime: {default: 0.7, hidden: true}
+  power: 0.25
+ 
 slide = do
   prop: (f, c, d, o) ->
     value = @value f.value, c, d, o
     return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
   value: (t, c, d, o) ->
     if c.dir > 0 => t = 1 - t
-    if t <= 0.01 => t = 0.01
+    if t <= 0.005 => t = 0.005
     if d < 3 => 
       sgn = if d == 1 => 1 else -1
       ret = transform: [1, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
@@ -14,17 +20,20 @@ slide = do
       sgn = if d == 3 => 1 else -1
       ret = transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
     if o? => ret.opacity = t
+    else ret.opacity = if t <= 0.005 => 0 else 1
     ret
 
 flip = do
   prop: (f, c, d) ->
     value = @value f.value, c, d
-    return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
+    return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
   value: (t, c, d) ->
     if c.dir > 0 => t = 1 - t
-    if t <= 0.01 => t = 0.01
-    if d == 1 => {transform: [1, 0, 0, 0, 0, t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}
+    if t <= 0.005 => t = 0.005
+    ret = if d == 1 => {transform: [1, 0, 0, 0, 0, t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}
     else  {transform: [t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}
+    ret.opacity = if t <= 0.005 => 0 else 1
+    ret
 
 grow = do
   prop: (f, c, d) ->
@@ -77,130 +86,169 @@ ret = do
       prop: (f, c) -> {opacity: f.value}
       value: (t, c) -> {opacity: t}
 
-    "grow-rtl-in":
-      dir: 1, count: 1, power: 0.25
+    "grow-rtl-in": {
+      dir: 1
       local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 1
       value: (t, c) -> grow.value t, c, 1
-    "grow-rtl-out":
-      dir: -1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-rtl-out": {
+      dir: -1
       local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 1
       value: (t, c) -> grow.value t, c, 1
-    "grow-ltr-in":
-      dir: 1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-ltr-in": {
+      dir: 1
       local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 2
       value: (t, c) -> grow.value t, c, 2
-    "grow-ltr-out":
-      dir: -1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-ltr-out": {
+      dir: -1
       local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 2
       value: (t, c) -> grow.value t, c, 2
-    "grow-ttb-in":
-      dir: 1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-ttb-in": {
+      dir: 1
       local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 3
       value: (t, c) -> grow.value t, c, 3
-    "grow-ttb-out":
-      dir: -1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-ttb-out": {
+      dir: -1
       local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 3
       value: (t, c) -> grow.value t, c, 3
-    "grow-btt-in":
-      dir: 1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-btt-in": {
+      dir: 1
       local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 4
       value: (t, c) -> grow.value t, c, 4
-    "grow-btt-out":
-      dir: -1, count: 1, power: 0.25
+    } <<< no-bounce
+    "grow-btt-out": {
+      dir: -1
       local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 4
       value: (t, c) -> grow.value t, c, 4
+    } <<< no-bounce
 
-    "flip-v-in":
-      dir: 1, count: 1, power: 0.25
+    "flip-v-in": {
+      dir: 1
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> flip.prop f, c, 1
       value: (t, c) -> flip.value t, c, 1
-    "flip-v-out":
-      dir: -1, count: 1, power: 0.25
+    } <<< no-bounce
+    "flip-v-out": {
+      dir: -1
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> flip.prop f, c, 1
       value: (t, c) -> flip.value t, c, 1
-
-    "flip-h-in":
-      dir: 1, count: 1, power: 0.25
+    } <<< no-bounce
+    "flip-h-in": {
+      dir: 1
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> flip.prop f, c, 2
       value: (t, c) -> flip.value t, c, 2
-    "flip-h-out":
-      dir: -1, count: 1, power: 0.25
+    } <<< no-bounce
+    "flip-h-out": {
+      dir: -1
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> flip.prop f, c, 2
       value: (t, c) -> flip.value t, c, 2
+    } <<< no-bounce
 
-    "slide-rtl-in":
-      dir: 1, count: 1, power: 0.25, offset: 200
+    "slide-rtl-in": {
+      dir: 1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> slide.prop f, c, 1
       value: (t, c) -> slide.value t, c, 1
-    "slide-rtl-out":
-      dir: -1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-rtl-out": {
+      dir: -1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> slide.prop f, c, 1
       value: (t, c) -> slide.value t, c, 1
-    "slide-ltr-in":
-      dir: 1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-ltr-in": {
+      dir: 1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> slide.prop f, c, 2
       value: (t, c) -> slide.value t, c, 2
-    "slide-ltr-out":
-      dir: -1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-ltr-out": {
+      dir: -1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> slide.prop f, c, 2
       value: (t, c) -> slide.value t, c, 2
-    "slide-ttb-in":
-      dir: 1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-ttb-in": {
+      dir: 1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> slide.prop f, c, 3
       value: (t, c) -> slide.value t, c, 3
-    "slide-ttb-out":
-      dir: -1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-ttb-out": {
+      dir: -1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> slide.prop f, c, 3
       value: (t, c) -> slide.value t, c, 3
-    "slide-btt-in":
-      dir: 1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-btt-in": {
+      dir: 1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> slide.prop f, c, 4
       value: (t, c) -> slide.value t, c, 4
-    "slide-btt-out":
-      dir: -1, count: 1, power: 0.25, offset: 200
+    } <<< no-bounce
+    "slide-btt-out": {
+      dir: -1, offset: default: 200, hidden: false
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> slide.prop f, c, 4
       value: (t, c) -> slide.value t, c, 4
+    } <<< no-bounce
 
-    "float-rtl-in":
-      dir: 1, count: 1, power: 0.25, offset: 15
+    "float-rtl-in": {
+      dir: 1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 1, 1
       value: (t, c) -> slide.value t, c, 1, 1
-    "float-rtl-out":
-      dir: -1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-rtl-out": {
+      dir: -1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 1, 1
       value: (t, c) -> slide.value t, c, 1, 1
-    "float-ltr-in":
-      dir: 1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-ltr-in": {
+      dir: 1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 2, 1
       value: (t, c) -> slide.value t, c, 2, 1
-    "float-ltr-out":
-      dir: -1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-ltr-out": {
+      dir: -1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 2, 1
       value: (t, c) -> slide.value t, c, 2, 1
-    "float-ttb-in":
-      dir: 1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-ttb-in": {
+      dir: 1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 3, 1
       value: (t, c) -> slide.value t, c, 3, 1
-    "float-ttb-out":
-      dir: -1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-ttb-out": {
+      dir: -1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 3, 1
       value: (t, c) -> slide.value t, c, 3, 1
-    "float-btt-in":
-      dir: 1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-btt-in": {
+      dir: 1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 4, 1
       value: (t, c) -> slide.value t, c, 4, 1
-    "float-btt-out":
-      dir: -1, count: 1, power: 0.25, offset: 15
+    } <<< no-bounce
+    "float-btt-out": {
+      dir: -1, offset: default: 15, hidden: false
       prop: (f, c) -> slide.prop f, c, 4, 1
       value: (t, c) -> slide.value t, c, 4, 1
+    } <<< no-bounce
 
     "fall-rtl-in":
       dir: 1, count: 3
@@ -223,11 +271,11 @@ ret = do
   edit: 
   
     dir: type: \number, default: 1, hidden: true
-    count: type: \number, default: 5, min: 1, max: 30, step: 2
-    dtime: type: \number, default: 0.7, min: 0, max: 1, step: 0.01
-    decay: type: \number, default: 0.4, min: 0, max: 1, step: 0.01
+    count: name: "Bounce Count", type: \number, default: 5, min: 1, max: 30, step: 2
+    dtime: name: "Time Decay", type: \number, default: 0.7, min: 0, max: 1, step: 0.01
+    decay: name: "Amount Decay", type: \number, default: 0.4, min: 0, max: 1, step: 0.01
     power: type: \number, default: 2, min: 0, max: 10, step: 0.01, hidden: true
-    offset: type: \number, default: 50, min: 0, max: 100, step: 1
+    offset: type: \number, default: 50, min: 0, max: 500, step: 1, hidden: true
     repeat: default: 1
   local: 
     prop: (f, c) ->

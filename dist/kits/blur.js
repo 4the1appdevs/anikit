@@ -11,6 +11,7 @@ ret = {
   },
   edit: {
     blur: {
+      name: "Blur Amount",
       'default': 10,
       type: 'number',
       unit: 'px',

@@ -2,15 +2,14 @@ require! <[easing-fit cubic ../anikit]>
 ret = do
   name: \float
   type: \animation
-  preset:
-    float: {}
+  preset: float: {}
   edit: 
     steep: default: 0.4, type: \number, min: 0, max: 1, step: 0.01
-    offset: default: 15, type: \number, unit: \px, min: 0, max: 1000
-    zoom: default: 0.7, type: \number, min: 0, max: 1, step: 0.01
-    shadow_offset: default: 23, type: \number, unit: \px, min: 0, max: 1000
-    shadow_blur: default: 5, type: \number, unit: \px, min: 0, max: 100
-    shadow_expand: default: -15, type: \number, unit: \px, min: -1000, max: 1000
+    offset: name: "Float Height", default: 15, type: \number, unit: \px, min: 0, max: 1000
+    zoom: name: "Min Scale", default: 0.7, type: \number, min: 0, max: 1, step: 0.01
+    shadow_offset: name: "Shadow offset", default: 23, type: \number, unit: \px, min: 0, max: 1000
+    shadow_blur: name: "Shadow Blur", default: 5, type: \number, unit: \px, min: 0, max: 100
+    shadow_expand: name: "Shadow Expand", default: -15, type: \number, unit: \px, min: -1000, max: 1000
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   css: (c) ->

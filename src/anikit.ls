@@ -100,8 +100,13 @@ anikit <<< do
     kx: (t) -> [1, -tan(t), 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     ky: (t) -> [1, 0, 0, 0, tan(t), 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
   get: (name, opt={}) ->
-    mod = if @types[name] => @mods[@types[name]] else @mods[name]
     config = {name: name, dur: 1, repeat: 0}
+    ret = if @types[name] => @mods[@types[name]] else @mods[name]
+    mod = {}
+    # make a whole new object and clone the subject-to-modified edit
+    # so we won't pollute the raw mod
+    for k,v of ret => mod[k] = v
+    mod.edit = JSON.parse JSON.stringify mod.edit
 
     # overwrite edit settings
     if mod.preset[name] => for k,v of mod.edit =>

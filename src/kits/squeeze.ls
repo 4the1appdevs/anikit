@@ -15,8 +15,8 @@ ret = do
         return transform: [ sx, 0, 0, 0, 0, sy, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 ]
   edit: 
     steep: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
-    zoomx: default: 0.5, type: \number, min: 0, max: 3, step: 0.01
-    zoomy: default: 0.5, type: \number, min: 0, max: 3, step: 0.01
+    zoomx: name: "X Scale", default: 0.5, type: \number, min: 0, max: 1, step: 0.01
+    zoomy: name: "Y Scale", default: 0.5, type: \number, min: 0, max: 1, step: 0.01
 
   timing: (t, opt) ->
     p1 = [0, opt.steep, 1 - opt.steep, 1]

@@ -2,11 +2,9 @@ require! <[easing-fit cubic ../anikit]>
 ret = do
   name: \orbit
   type: \animation
-  preset:
-    orbit:
-      count: 12, radius: 60, unit: \px
+  preset: orbit: {count: 12, radius: 60, unit: \px}
   edit: 
-    count: default: 8, type: \number, min: 4, max: 36
+    count: name: "Sample Count", default: 8, type: \number, min: 4, max: 36
     radius: default: 60, type: \number, unit: \%, min: 0, max: 1000
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 

@@ -18,6 +18,7 @@ ret = {
       step: 0.01
     },
     offset: {
+      name: "Float Height",
       'default': 15,
       type: 'number',
       unit: 'px',
@@ -25,6 +26,7 @@ ret = {
       max: 1000
     },
     zoom: {
+      name: "Min Scale",
       'default': 0.7,
       type: 'number',
       min: 0,
@@ -32,6 +34,7 @@ ret = {
       step: 0.01
     },
     shadow_offset: {
+      name: "Shadow offset",
       'default': 23,
       type: 'number',
       unit: 'px',
@@ -39,6 +42,7 @@ ret = {
       max: 1000
     },
     shadow_blur: {
+      name: "Shadow Blur",
       'default': 5,
       type: 'number',
       unit: 'px',
@@ -46,6 +50,7 @@ ret = {
       max: 100
     },
     shadow_expand: {
+      name: "Shadow Expand",
       'default': -15,
       type: 'number',
       unit: 'px',

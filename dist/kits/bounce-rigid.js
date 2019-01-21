@@ -8,17 +8,16 @@ ret = {
   type: 'animation',
   preset: {
     beat: {
-      steep: 0.4,
       count: 1,
       decay: 0.5,
-      power: 1.1,
       unit: '',
       offset: {
         name: "Scale Amount",
         'default': 0.2,
         min: -1,
         max: 1,
-        step: 0.01
+        step: 0.01,
+        unit: ''
       },
       prop: function(f, c){
         return {
@@ -32,12 +31,18 @@ ret = {
       }
     },
     bounceAlt: {
-      steep: 0.5,
       count: 0,
       decay: 0.5,
       power: 0,
-      offset: -14,
       unit: 'px',
+      offset: {
+        name: "Jump Height",
+        'default': -14,
+        min: -300,
+        max: 300,
+        unit: 'px',
+        step: 1
+      },
       prop: function(f, c){
         return {
           transform: "translate(0, " + c.offset * f.value + c.unit + ")"
@@ -51,12 +56,17 @@ ret = {
     },
     pulse: {
       dur: 0.5,
-      steep: 0.6,
       count: 0,
       decay: 0.5,
-      power: 1.1,
-      offset: 0.2,
       unit: '',
+      offset: {
+        name: "Scale Amount",
+        'default': 0.2,
+        min: -1,
+        max: 1,
+        step: 0.01,
+        unit: ''
+      },
       local: {
         errorThreshold: 0.001,
         segSampleCount: 20,
@@ -74,12 +84,16 @@ ret = {
       }
     },
     "tick-alt": {
-      steep: 0.4,
       count: 5,
-      decay: 0.6,
-      power: 1.1,
-      offset: -45,
       unit: '',
+      offset: {
+        name: "Rotate Amount",
+        'default': -45,
+        min: -180,
+        max: 180,
+        step: 1,
+        unit: 'deg'
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
@@ -92,12 +106,16 @@ ret = {
       }
     },
     jump: {
-      steep: 0.4,
       count: 5,
-      decay: 0.6,
-      power: 1.1,
-      offset: -14,
       unit: 'px',
+      offset: {
+        name: "Jump Height",
+        'default': -14,
+        min: -300,
+        max: 300,
+        unit: 'px',
+        step: 1
+      },
       prop: function(f, c){
         return {
           transform: "translate(0," + f.value * c.offset + c.unit + ")"
@@ -119,26 +137,30 @@ ret = {
       step: 0.01
     },
     count: {
+      name: "Bounce Count",
       'default': 5,
       type: 'number',
       min: 0,
       max: 10
     },
     decay: {
+      name: "Bounce Decay",
       'default': 0.6,
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.01
     },
     power: {
+      name: "Decay Speed",
       'default': 1.1,
       type: 'number',
       min: 0,
       max: 10,
-      step: 0.1
+      step: 0.01
     },
     offset: {
+      name: "Offset",
       'default': -14,
       type: 'number',
       unit: 'px',

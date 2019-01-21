@@ -292,16 +292,22 @@ import$(anikit, {
     }
   },
   get: function(name, opt){
-    var mod, config, k, ref$, v, o;
+    var config, ret, mod, k, v, ref$, o;
     opt == null && (opt = {});
-    mod = this.types[name]
-      ? this.mods[this.types[name]]
-      : this.mods[name];
     config = {
       name: name,
       dur: 1,
       repeat: 0
     };
+    ret = this.types[name]
+      ? this.mods[this.types[name]]
+      : this.mods[name];
+    mod = {};
+    for (k in ret) {
+      v = ret[k];
+      mod[k] = v;
+    }
+    mod.edit = JSON.parse(JSON.stringify(mod.edit));
     if (mod.preset[name]) {
       for (k in ref$ = mod.edit) {
         v = ref$[k];
@@ -413,7 +419,7 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-in-alt":"bounce-transition","bounce-out-alt":"bounce-transition","bounce-in":"bounce-transition","bounce-out":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","throw-ltr-in":"bounce-transition","throw-rtl-in":"bounce-transition","throw-ttb-in":"bounce-transition","throw-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","throw-ltr-in":"bounce-transition","throw-rtl-in":"bounce-transition","throw-ttb-in":"bounce-transition","throw-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
 },{"./kits/blink":7,"./kits/blur":9,"./kits/blur-transition":8,"./kits/bounce":12,"./kits/bounce-rigid":10,"./kits/bounce-transition":11,"./kits/clock":13,"./kits/fade":14,"./kits/float":15,"./kits/heartbeat":16,"./kits/hit":17,"./kits/jump-transition":18,"./kits/orbit":19,"./kits/patrol":20,"./kits/power":21,"./kits/rubber":22,"./kits/rush":23,"./kits/slide":24,"./kits/spin":25,"./kits/squeeze":26,"./kits/static":27,"./kits/surprise":28,"./kits/tremble":29,"./kits/vortex":30,"./kits/wrench":31}],7:[function(require,module,exports){
@@ -426,27 +432,17 @@ ret = {
   name: 'blink',
   type: 'animation',
   preset: {
-    blink: {
-      showtime: 0.5,
-      transtime: 0.01
-    }
+    blink: {}
   },
   edit: {
     dur: {
       'default': 1
     },
-    steep: {
-      'default': 0.0,
-      type: 'number',
-      min: 0.0,
-      max: 1,
-      step: 0.01
-    },
     showtime: {
       'default': 0.5,
       type: 'number',
-      min: 0,
-      max: 1,
+      min: 0.01,
+      max: 0.99,
       step: 0.01
     },
     transtime: {
@@ -481,22 +477,6 @@ ret = {
   affine: function(t, opt){
     return this.js(t, opt);
   }
-  /* equivalent keyframes */
-  /*
-    @keyframes ld-blink
-      0%
-        opacity: 1
-      {config.showtime * 1%}
-        opacity: 1
-      {(config.transitiontime + config.showtime) * 1%}
-        opacity: 0
-      {(100 - config.transitiontime) * 1%}
-        opacity: 0
-      100%
-        opacity: 1
-    .ld-blink
-      animation: ld-blink config.dur linear infinite
-  */
 };
 module.exports = ret;
 },{"../anikit":4,"cubic":32,"easing-fit":33}],8:[function(require,module,exports){
@@ -520,6 +500,7 @@ ret = {
   },
   edit: {
     blur: {
+      name: "Blur Amount",
       'default': 10,
       type: 'number',
       unit: 'px',
@@ -533,7 +514,8 @@ ret = {
       type: 'number',
       min: -1,
       max: 1,
-      step: 2
+      step: 2,
+      hidden: true
     },
     unit: {
       'default': 'px',
@@ -573,6 +555,7 @@ ret = {
   },
   edit: {
     blur: {
+      name: "Blur Amount",
       'default': 10,
       type: 'number',
       unit: 'px',
@@ -608,17 +591,16 @@ ret = {
   type: 'animation',
   preset: {
     beat: {
-      steep: 0.4,
       count: 1,
       decay: 0.5,
-      power: 1.1,
       unit: '',
       offset: {
         name: "Scale Amount",
         'default': 0.2,
         min: -1,
         max: 1,
-        step: 0.01
+        step: 0.01,
+        unit: ''
       },
       prop: function(f, c){
         return {
@@ -632,12 +614,18 @@ ret = {
       }
     },
     bounceAlt: {
-      steep: 0.5,
       count: 0,
       decay: 0.5,
       power: 0,
-      offset: -14,
       unit: 'px',
+      offset: {
+        name: "Jump Height",
+        'default': -14,
+        min: -300,
+        max: 300,
+        unit: 'px',
+        step: 1
+      },
       prop: function(f, c){
         return {
           transform: "translate(0, " + c.offset * f.value + c.unit + ")"
@@ -651,12 +639,17 @@ ret = {
     },
     pulse: {
       dur: 0.5,
-      steep: 0.6,
       count: 0,
       decay: 0.5,
-      power: 1.1,
-      offset: 0.2,
       unit: '',
+      offset: {
+        name: "Scale Amount",
+        'default': 0.2,
+        min: -1,
+        max: 1,
+        step: 0.01,
+        unit: ''
+      },
       local: {
         errorThreshold: 0.001,
         segSampleCount: 20,
@@ -674,12 +667,16 @@ ret = {
       }
     },
     "tick-alt": {
-      steep: 0.4,
       count: 5,
-      decay: 0.6,
-      power: 1.1,
-      offset: -45,
       unit: '',
+      offset: {
+        name: "Rotate Amount",
+        'default': -45,
+        min: -180,
+        max: 180,
+        step: 1,
+        unit: 'deg'
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
@@ -692,12 +689,16 @@ ret = {
       }
     },
     jump: {
-      steep: 0.4,
       count: 5,
-      decay: 0.6,
-      power: 1.1,
-      offset: -14,
       unit: 'px',
+      offset: {
+        name: "Jump Height",
+        'default': -14,
+        min: -300,
+        max: 300,
+        unit: 'px',
+        step: 1
+      },
       prop: function(f, c){
         return {
           transform: "translate(0," + f.value * c.offset + c.unit + ")"
@@ -719,26 +720,30 @@ ret = {
       step: 0.01
     },
     count: {
+      name: "Bounce Count",
       'default': 5,
       type: 'number',
       min: 0,
       max: 10
     },
     decay: {
+      name: "Bounce Decay",
       'default': 0.6,
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.1
+      step: 0.01
     },
     power: {
+      name: "Decay Speed",
       'default': 1.1,
       type: 'number',
       min: 0,
       max: 10,
-      step: 0.1
+      step: 0.01
     },
     offset: {
+      name: "Offset",
       'default': -14,
       type: 'number',
       unit: 'px',
@@ -870,25 +875,32 @@ ret = {
   name: 'bounce-transition',
   type: 'animation',
   preset: {
+    "bounce-out-alt": {
+      dir: -1,
+      count: 3,
+      mag: 0.1,
+      offset: {
+        'default': 0,
+        hidden: true
+      }
+    },
     "bounce-in-alt": {
       dir: 1,
       count: 3,
       mag: 0.1,
       extrude: 0.5,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
+      offset: {
+        'default': 0,
+        hidden: true
       }
     },
-    "bounce-out-alt": {
+    "bounce-out": {
       dir: -1,
-      count: 3,
-      mag: 0.1,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
+      count: 4,
+      mag: 0.2,
+      offset: {
+        'default': 0,
+        hidden: true
       }
     },
     "bounce-in": {
@@ -896,19 +908,13 @@ ret = {
       count: 4,
       mag: 0.2,
       extrude: 0.5,
+      offset: {
+        'default': 0,
+        hidden: true
+      },
       local: {
         sampleCount: 40,
         errorThreshold: 0.0001,
-        segSampleCount: 1000
-      }
-    },
-    "bounce-out": {
-      dir: -1,
-      count: 4,
-      mag: 0.2,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
         segSampleCount: 1000
       }
     },
@@ -918,11 +924,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 2);
       },
@@ -936,11 +937,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 1);
       },
@@ -954,11 +950,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 3);
       },
@@ -972,11 +963,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 4);
       },
@@ -991,11 +977,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 2);
       },
@@ -1010,11 +991,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 1);
       },
@@ -1029,11 +1005,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 3);
       },
@@ -1048,11 +1019,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 4);
       },
@@ -1068,16 +1034,18 @@ ret = {
       hidden: true
     },
     count: {
+      name: "Bounce Count",
       type: 'number',
       'default': 30,
       min: 0,
-      max: 100,
-      step: 0.1
+      max: 50,
+      step: 1
     },
     mag: {
+      name: "Amount",
       type: 'number',
       'default': 0.3,
-      min: 0,
+      min: 0.01,
       max: 1,
       step: 0.01
     },
@@ -1086,18 +1054,21 @@ ret = {
       'default': 0,
       min: 0,
       max: 1,
-      step: 0.01
+      step: 0.01,
+      hidden: true
     },
     offset: {
       type: 'number',
       'default': 0,
-      min: -300,
-      max: 300,
+      min: -500,
+      max: 500,
       step: 1
     },
     'throw': {
+      name: "Throw in?",
       type: 'boolean',
-      'default': false
+      'default': false,
+      hidden: true
     },
     repeat: {
       'default': 1
@@ -1134,7 +1105,12 @@ ret = {
     return 1 - (wave + delta);
   },
   css: function(opt){
-    var prop, ret, ref$, ref1$, ref2$, this$ = this;
+    var local, prop, ret, ref$, ref1$, ref2$, this$ = this;
+    local = {
+      sampleCount: 20,
+      errorThreshold: 0.001,
+      segSampleCount: 1000
+    };
     prop = function(f, c){
       if (opt.prop) {
         return opt.prop(f, c);
@@ -1144,7 +1120,7 @@ ret = {
     };
     ret = easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = (ref2$ = import$({}, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
+    }, (ref$ = (ref1$ = (ref2$ = import$(local, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
     return ret;
   },
   js: function(t, opt){
@@ -1191,6 +1167,7 @@ ret = {
       values: ["px", "%", ""]
     },
     height: {
+      name: "Bounce Height",
       'default': -40,
       type: 'number',
       min: -500,
@@ -1207,9 +1184,11 @@ ret = {
       type: 'number',
       min: 0,
       max: 1,
-      step: 0.01
+      step: 0.01,
+      hidden: true
     },
     deflate: {
+      name: "Scale Amount",
       'default': 0.6,
       type: 'number',
       min: 0,
@@ -1462,6 +1441,7 @@ ret = {
       step: 0.01
     },
     offset: {
+      name: "Float Height",
       'default': 15,
       type: 'number',
       unit: 'px',
@@ -1469,6 +1449,7 @@ ret = {
       max: 1000
     },
     zoom: {
+      name: "Min Scale",
       'default': 0.7,
       type: 'number',
       min: 0,
@@ -1476,6 +1457,7 @@ ret = {
       step: 0.01
     },
     shadow_offset: {
+      name: "Shadow offset",
       'default': 23,
       type: 'number',
       unit: 'px',
@@ -1483,6 +1465,7 @@ ret = {
       max: 1000
     },
     shadow_blur: {
+      name: "Shadow Blur",
       'default': 5,
       type: 'number',
       unit: 'px',
@@ -1490,6 +1473,7 @@ ret = {
       max: 100
     },
     shadow_expand: {
+      name: "Shadow Expand",
       'default': -15,
       type: 'number',
       unit: 'px',
@@ -1538,7 +1522,7 @@ ret = {
       'default': 0.3,
       type: 'number',
       min: 0,
-      max: 100,
+      max: 1,
       step: 0.01
     },
     peak2: {
@@ -1567,7 +1551,8 @@ ret = {
       type: 'number',
       min: 0.1,
       max: 1,
-      step: 0.01
+      step: 0.01,
+      hidden: true
     }
   },
   timing: function(t, opt){
@@ -1641,13 +1626,15 @@ ret = {
       step: 0.01
     },
     zoom: {
+      name: "Scale Amount",
       'default': 1,
       type: 'number',
       min: 0,
-      max: 10,
-      step: 0.1
+      max: 2,
+      step: 0.01
     },
     skew: {
+      name: "Skew Amount",
       'default': 20,
       type: 'number',
       unit: 'deg',
@@ -1656,16 +1643,18 @@ ret = {
       step: 0.1
     },
     offset: {
+      name: "Fall Offset",
       'default': 200,
       type: 'number',
       unit: 'px',
       min: 0,
-      max: 10000
+      max: 2000
     },
     fade: {
+      name: "Fade Duration",
       'default': 1,
       type: 'number',
-      min: 0,
+      min: 0.01,
       max: 1,
       step: 0.01
     },
@@ -1730,11 +1719,26 @@ ret = {
 module.exports = ret;
 },{"../anikit":4,"cubic":32,"easing-fit":33}],18:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
-var easingFit, cubic, anikit, easing, slide, flip, grow, ret;
+var easingFit, cubic, anikit, easing, noBounce, slide, flip, grow, ret;
 easingFit = require('easing-fit');
 cubic = require('cubic');
 anikit = require('../anikit');
 easing = require('../easing');
+noBounce = {
+  count: {
+    'default': 1,
+    hidden: true
+  },
+  decay: {
+    'default': 2,
+    hidden: true
+  },
+  dtime: {
+    'default': 0.7,
+    hidden: true
+  },
+  power: 0.25
+};
 slide = {
   prop: function(f, c, d, o){
     var value;
@@ -1749,8 +1753,8 @@ slide = {
     if (c.dir > 0) {
       t = 1 - t;
     }
-    if (t <= 0.01) {
-      t = 0.01;
+    if (t <= 0.005) {
+      t = 0.005;
     }
     if (d < 3) {
       sgn = d === 1
@@ -1769,6 +1773,8 @@ slide = {
     }
     if (o != null) {
       ret.opacity = t;
+    } else {
+      ret.opacity = t <= 0.005 ? 0 : 1;
     }
     return ret;
   }
@@ -1778,25 +1784,27 @@ flip = {
     var value;
     value = this.value(f.value, c, d);
     return {
-      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+      opacity: value.opacity
     };
   },
   value: function(t, c, d){
+    var ret;
     if (c.dir > 0) {
       t = 1 - t;
     }
-    if (t <= 0.01) {
-      t = 0.01;
+    if (t <= 0.005) {
+      t = 0.005;
     }
-    if (d === 1) {
-      return {
+    ret = d === 1
+      ? {
         transform: [1, 0, 0, 0, 0, t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
-      };
-    } else {
-      return {
+      }
+      : {
         transform: [t, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
       };
-    }
+    ret.opacity = t <= 0.005 ? 0 : 1;
+    return ret;
   }
 };
 grow = {
@@ -1935,10 +1943,8 @@ ret = {
         };
       }
     },
-    "grow-rtl-in": {
+    "grow-rtl-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.02]
       },
@@ -1948,11 +1954,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 1);
       }
-    },
-    "grow-rtl-out": {
+    }, noBounce),
+    "grow-rtl-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.97]
       },
@@ -1962,11 +1966,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 1);
       }
-    },
-    "grow-ltr-in": {
+    }, noBounce),
+    "grow-ltr-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.02]
       },
@@ -1976,11 +1978,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 2);
       }
-    },
-    "grow-ltr-out": {
+    }, noBounce),
+    "grow-ltr-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.97]
       },
@@ -1990,11 +1990,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 2);
       }
-    },
-    "grow-ttb-in": {
+    }, noBounce),
+    "grow-ttb-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.02]
       },
@@ -2004,11 +2002,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 3);
       }
-    },
-    "grow-ttb-out": {
+    }, noBounce),
+    "grow-ttb-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.97]
       },
@@ -2018,11 +2014,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 3);
       }
-    },
-    "grow-btt-in": {
+    }, noBounce),
+    "grow-btt-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.02]
       },
@@ -2032,11 +2026,9 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 4);
       }
-    },
-    "grow-btt-out": {
+    }, noBounce),
+    "grow-btt-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
       local: {
         segPtrs: [0.97]
       },
@@ -2046,243 +2038,287 @@ ret = {
       value: function(t, c){
         return grow.value(t, c, 4);
       }
-    },
-    "flip-v-in": {
+    }, noBounce),
+    "flip-v-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return flip.prop(f, c, 1);
       },
       value: function(t, c){
         return flip.value(t, c, 1);
       }
-    },
-    "flip-v-out": {
+    }, noBounce),
+    "flip-v-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return flip.prop(f, c, 1);
       },
       value: function(t, c){
         return flip.value(t, c, 1);
       }
-    },
-    "flip-h-in": {
+    }, noBounce),
+    "flip-h-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return flip.prop(f, c, 2);
       },
       value: function(t, c){
         return flip.value(t, c, 2);
       }
-    },
-    "flip-h-out": {
+    }, noBounce),
+    "flip-h-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return flip.prop(f, c, 2);
       },
       value: function(t, c){
         return flip.value(t, c, 2);
       }
-    },
-    "slide-rtl-in": {
+    }, noBounce),
+    "slide-rtl-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 1);
       }
-    },
-    "slide-rtl-out": {
+    }, noBounce),
+    "slide-rtl-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 1);
       }
-    },
-    "slide-ltr-in": {
+    }, noBounce),
+    "slide-ltr-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 2);
       },
       value: function(t, c){
         return slide.value(t, c, 2);
       }
-    },
-    "slide-ltr-out": {
+    }, noBounce),
+    "slide-ltr-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 2);
       },
       value: function(t, c){
         return slide.value(t, c, 2);
       }
-    },
-    "slide-ttb-in": {
+    }, noBounce),
+    "slide-ttb-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 3);
       },
       value: function(t, c){
         return slide.value(t, c, 3);
       }
-    },
-    "slide-ttb-out": {
+    }, noBounce),
+    "slide-ttb-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 3);
       },
       value: function(t, c){
         return slide.value(t, c, 3);
       }
-    },
-    "slide-btt-in": {
+    }, noBounce),
+    "slide-btt-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 4);
       },
       value: function(t, c){
         return slide.value(t, c, 4);
       }
-    },
-    "slide-btt-out": {
+    }, noBounce),
+    "slide-btt-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 200,
+      offset: {
+        'default': 200,
+        hidden: false
+      },
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return slide.prop(f, c, 4);
       },
       value: function(t, c){
         return slide.value(t, c, 4);
       }
-    },
-    "float-rtl-in": {
+    }, noBounce),
+    "float-rtl-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 1, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 1, 1);
       }
-    },
-    "float-rtl-out": {
+    }, noBounce),
+    "float-rtl-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 1, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 1, 1);
       }
-    },
-    "float-ltr-in": {
+    }, noBounce),
+    "float-ltr-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 2, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 2, 1);
       }
-    },
-    "float-ltr-out": {
+    }, noBounce),
+    "float-ltr-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 2, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 2, 1);
       }
-    },
-    "float-ttb-in": {
+    }, noBounce),
+    "float-ttb-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 3, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 3, 1);
       }
-    },
-    "float-ttb-out": {
+    }, noBounce),
+    "float-ttb-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 3, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 3, 1);
       }
-    },
-    "float-btt-in": {
+    }, noBounce),
+    "float-btt-in": import$({
       dir: 1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 4, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 4, 1);
       }
-    },
-    "float-btt-out": {
+    }, noBounce),
+    "float-btt-out": import$({
       dir: -1,
-      count: 1,
-      power: 0.25,
-      offset: 15,
+      offset: {
+        'default': 15,
+        hidden: false
+      },
       prop: function(f, c){
         return slide.prop(f, c, 4, 1);
       },
       value: function(t, c){
         return slide.value(t, c, 4, 1);
       }
-    },
+    }, noBounce),
     "fall-rtl-in": {
       dir: 1,
       count: 3,
@@ -2331,6 +2367,7 @@ ret = {
       hidden: true
     },
     count: {
+      name: "Bounce Count",
       type: 'number',
       'default': 5,
       min: 1,
@@ -2338,6 +2375,7 @@ ret = {
       step: 2
     },
     dtime: {
+      name: "Time Decay",
       type: 'number',
       'default': 0.7,
       min: 0,
@@ -2345,6 +2383,7 @@ ret = {
       step: 0.01
     },
     decay: {
+      name: "Amount Decay",
       type: 'number',
       'default': 0.4,
       min: 0,
@@ -2363,8 +2402,9 @@ ret = {
       type: 'number',
       'default': 50,
       min: 0,
-      max: 100,
-      step: 1
+      max: 500,
+      step: 1,
+      hidden: true
     },
     repeat: {
       'default': 1
@@ -2464,6 +2504,7 @@ ret = {
   },
   edit: {
     count: {
+      name: "Sample Count",
       'default': 8,
       type: 'number',
       min: 4,
@@ -2526,8 +2567,13 @@ ret = {
   type: 'animation',
   preset: {
     breath: {
-      steep: 0.6,
-      offset: 0.06,
+      offset: {
+        'default': 0.06,
+        min: 0.01,
+        max: 1,
+        step: 0.01,
+        name: "Scale Amount"
+      },
       prop: function(f, c){
         return {
           transform: "scale(" + (1 + f.value * c.offset - 0.03) + ")"
@@ -2540,8 +2586,13 @@ ret = {
       }
     },
     dim: {
-      steep: 0.6,
-      offset: 0.5,
+      offset: {
+        'default': 0.5,
+        min: 0,
+        max: 1,
+        step: 0.01,
+        name: "Dim Amount"
+      },
       prop: function(f, c){
         return {
           opacity: 0.5 + f.value * c.offset
@@ -2554,10 +2605,13 @@ ret = {
       }
     },
     metronome: {
-      steep: 0.6,
-      offset: 10,
-      rotate: 30,
-      unit: 'px',
+      offset: {
+        'default': 10,
+        min: 0,
+        max: 90,
+        step: 1,
+        name: "Shaking Amount"
+      },
       local: {
         errorThreshold: 0.001,
         sampleCount: 20,
@@ -2577,9 +2631,14 @@ ret = {
       }
     },
     swing: {
-      steep: 0.6,
-      offset: 30,
-      unit: '',
+      offset: {
+        'default': 30,
+        unit: 'deg',
+        min: 0,
+        max: 90,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
@@ -2592,8 +2651,12 @@ ret = {
       }
     },
     "wander-v": {
-      steep: 0.6,
-      offset: 10,
+      offset: {
+        'default': 10,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       unit: 'px',
       prop: function(f, c){
         return {
@@ -2607,8 +2670,12 @@ ret = {
       }
     },
     wander: {
-      steep: 0.6,
-      offset: 10,
+      offset: {
+        'default': 10,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       unit: 'px',
       prop: function(f, c){
         return {
@@ -2626,7 +2693,7 @@ ret = {
     steep: {
       'default': 0.6,
       type: 'number',
-      min: 0,
+      min: 0.34,
       max: 1,
       step: 0.01
     },
@@ -2700,27 +2767,17 @@ ret = {
   type: 'animation',
   preset: {
     "power-off": {
-      local: {
-        sampleCount: 50,
-        errorThreshold: 0.0001,
-        segSampleCount: 1000
-      },
-      steep: 0.5,
-      dir: -1
+      dir: -1,
+      repeat: 1
     },
     "power-on": {
-      local: {
-        sampleCount: 50,
-        errorThreshold: 0.0001,
-        segSampleCount: 1000
-      },
-      steep: 0.5,
-      dir: 1
+      dir: 1,
+      repeat: 1
     }
   },
   edit: {
     steep: {
-      'default': 0.6,
+      'default': 0.5,
       type: 'number',
       min: 0,
       max: 1,
@@ -2796,10 +2853,16 @@ ret = {
   preset: {
     jingle: {
       count: 7,
-      offset: 10,
       ratio: 0.6,
       delay: 0.1,
       unit: '',
+      offset: {
+        'default': 10,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)",
@@ -2815,10 +2878,16 @@ ret = {
     },
     "rubber-v": {
       count: 7,
-      offset: 0.2,
       ratio: 0.7,
       delay: 0.3,
       unit: '',
+      offset: {
+        'default': 0.2,
+        min: 0.01,
+        max: 1,
+        step: 0.01,
+        name: "Scale Amount"
+      },
       prop: function(f, c){
         return {
           transform: "scaleY(" + (1 + f.value * c.offset) + ")"
@@ -2832,10 +2901,16 @@ ret = {
     },
     rubber: {
       count: 7,
-      offset: 0.2,
       ratio: 0.7,
       delay: 0.3,
       unit: '',
+      offset: {
+        'default': 0.2,
+        min: 0.01,
+        max: 1,
+        step: 0.01,
+        name: "Scale Amount"
+      },
       prop: function(f, c){
         return {
           transform: "scaleX(" + (1 + f.value * c.offset) + ")"
@@ -2849,10 +2924,16 @@ ret = {
     },
     "shake-v": {
       count: 5,
-      offset: 10,
       ratio: 0.6,
       delay: 0.3,
       unit: 'px',
+      offset: {
+        'default': 10,
+        min: 0,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       prop: function(f, c){
         return {
           transform: "translate(0," + f.value * c.offset + c.unit + ")"
@@ -2866,10 +2947,16 @@ ret = {
     },
     shake: {
       count: 5,
-      offset: 10,
       ratio: 0.7,
       delay: 0.3,
       unit: 'px',
+      offset: {
+        'default': 10,
+        min: 0,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       prop: function(f, c){
         return {
           transform: "translate(" + f.value * c.offset + c.unit + ",0)"
@@ -2883,10 +2970,16 @@ ret = {
     },
     tick: {
       count: 7,
-      offset: 20,
       ratio: 0.7,
       delay: 0.3,
       unit: "",
+      offset: {
+        'default': 20,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
@@ -2900,10 +2993,16 @@ ret = {
     },
     smash: {
       count: 4,
-      offset: 30,
       ratio: 0,
       delay: 0.5,
       unit: "",
+      offset: {
+        'default': 30,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       local: {
         sampleCount: 20,
         errorThreshold: 0.001
@@ -2921,10 +3020,16 @@ ret = {
     },
     "jelly-alt": {
       count: 7,
-      offset: 10,
       ratio: 0.7,
       delay: 0.3,
       unit: "",
+      offset: {
+        'default': 10,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "skewX(" + f.value * c.offset + "deg)"
@@ -2938,10 +3043,16 @@ ret = {
     },
     jelly: {
       count: 5,
-      offset: 10,
       ratio: 0.6,
       delay: 0.3,
       unit: 'px',
+      offset: {
+        'default': 10,
+        min: -180,
+        max: 180,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "translate(" + f.value * -c.offset + c.unit + ",0) skewX(" + f.value * c.offset + "deg)"
@@ -2955,10 +3066,16 @@ ret = {
     },
     damage: {
       count: 10,
-      offset: 1,
       ratio: 0.8,
       delay: 0.2,
       unit: "",
+      offset: {
+        'default': 1,
+        min: 0,
+        max: 1,
+        step: 0.01,
+        name: "Amount"
+      },
       prop: function(f, c){
         return {
           opacity: 1 - f.value * c.offset
@@ -2973,6 +3090,7 @@ ret = {
   },
   edit: {
     count: {
+      name: "Bounce Count",
       'default': 10,
       type: 'number',
       min: 0,
@@ -2987,6 +3105,7 @@ ret = {
       unit: 'px'
     },
     ratio: {
+      name: "Decay",
       'default': 0.8,
       type: 'number',
       min: 0,
@@ -2994,6 +3113,7 @@ ret = {
       step: 0.01
     },
     delay: {
+      name: "Prepare Time",
       'default': 0.2,
       type: 'number',
       min: 0,
@@ -3096,10 +3216,13 @@ ret = {
       repeat: 1,
       direction: -1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushV.prop(f, c);
@@ -3112,10 +3235,13 @@ ret = {
       repeat: 1,
       direction: 1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushV.prop(f, c);
@@ -3128,10 +3254,13 @@ ret = {
       repeat: 1,
       direction: 1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushH.prop(f, c);
@@ -3144,10 +3273,13 @@ ret = {
       repeat: 1,
       direction: -1,
       percent_in: 0.9,
-      percent_out: 1,
       local: {
         sampleCount: 40,
         errorThreshold: 0.001
+      },
+      percent_out: {
+        'default': 1,
+        hidden: true
       },
       prop: function(f, c){
         return rushH.prop(f, c);
@@ -3211,15 +3343,17 @@ ret = {
   },
   edit: {
     dur: {
-      'default': 2
+      'default': 1
     },
     steep: {
       'default': 0.4,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     offset_near: {
+      name: "Offset(Break)",
       'default': 20,
       type: 'number',
       unit: 'px',
@@ -3227,6 +3361,7 @@ ret = {
       max: 1000
     },
     offset_far: {
+      name: "Offset(Transition)",
       'default': 200,
       type: 'number',
       unit: 'px',
@@ -3238,26 +3373,32 @@ ret = {
       type: 'number',
       min: -1,
       max: 1,
-      step: 2
+      step: 2,
+      hidden: true
     },
     percent_in: {
+      name: "Duration(Enter)",
       'default': 0.6,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     percent_out: {
+      name: "Duration(Exit)",
       'default': 0.8,
       type: 'number',
       min: 0,
-      max: 1
+      max: 1,
+      step: 0.01
     },
     skew: {
+      name: "Skew",
       'default': 30,
       type: 'number',
       unit: 'deg',
       min: 0,
-      max: 360
+      max: 90
     },
     unit: {
       'default': 'px',
@@ -3335,90 +3476,44 @@ function import$(obj, src){
 }
 },{"../anikit":4,"cubic":32,"easing-fit":33}],24:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
-var easingFit, cubic, anikit, ret;
+var easingFit, cubic, anikit, slide, ret;
 easingFit = require('easing-fit');
 cubic = require('cubic');
 anikit = require('../anikit');
+slide = {
+  prop: function(f, c){
+    var value;
+    value = this.value(f.value, c);
+    return {
+      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+      opacity: value.opacity
+    };
+  },
+  value: function(t, c){
+    return {
+      transform: anikit.util[c.dir === 1 ? 'tx' : 'ty'](t * c.offset),
+      opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
+    };
+  }
+};
 ret = {
   name: 'slide',
   type: 'animation',
   preset: {
-    "slide-ltr": {
-      local: {
-        errorThreshold: 0.0001,
-        sampleCount: 20
-      },
-      offset: 200,
-      prop: function(f, c){
-        return {
-          transform: "translate(" + f.value * c.offset + c.unit + ",0)",
-          opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
-        };
-      },
-      value: function(t, c){
-        return {
-          transform: anikit.util.tx(t * c.offset),
-          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
-        };
-      }
-    },
-    "slide-rtl": {
-      local: {
-        errorThreshold: 0.0001,
-        sampleCount: 20
-      },
+    "slide-ltr": import$({
+      offset: 200
+    }, slide),
+    "slide-rtl": import$({
+      offset: -200
+    }, slide),
+    "slide-btt": import$({
       offset: -200,
-      prop: function(f, c){
-        return {
-          transform: "translate(" + f.value * c.offset + c.unit + ",0)",
-          opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
-        };
-      },
-      value: function(t, c){
-        return {
-          transform: anikit.util.tx(t * c.offset),
-          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
-        };
-      }
-    },
-    "slide-btt": {
-      local: {
-        errorThreshold: 0.0001,
-        sampleCount: 20
-      },
-      offset: -200,
-      prop: function(f, c){
-        return {
-          transform: "translate(0," + f.value * c.offset + c.unit + ")",
-          opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
-        };
-      },
-      value: function(t, c){
-        return {
-          transform: anikit.util.ty(t * c.offset),
-          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
-        };
-      }
-    },
-    "slide-ttb": {
-      local: {
-        errorThreshold: 0.0001,
-        sampleCount: 20
-      },
+      dir: 2
+    }, slide),
+    "slide-ttb": import$({
       offset: 200,
-      prop: function(f, c){
-        return {
-          transform: "translate(0," + f.value * c.offset + c.unit + ")",
-          opacity: f.value <= -0.8 || f.value >= 0.8 ? 0 : 1
-        };
-      },
-      value: function(t, c){
-        return {
-          transform: anikit.util.ty(t * c.offset),
-          opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
-        };
-      }
-    }
+      dir: 2
+    }, slide)
   },
   edit: {
     steep: {
@@ -3429,11 +3524,17 @@ ret = {
       step: 0.01
     },
     offset: {
+      name: "Move Distance",
       'default': 200,
       type: 'number',
       unit: 'px',
       min: -2000,
       max: 2000
+    },
+    dir: {
+      'default': 1,
+      type: 'number',
+      hidden: true
     },
     unit: {
       'default': 'px',
@@ -3454,10 +3555,17 @@ ret = {
     return t;
   },
   css: function(opt){
-    var ref$, ref1$, this$ = this;
+    var local, prop, ref$, ref1$, this$ = this;
+    local = {
+      errorThreshold: 0.0001,
+      sampleCount: 20
+    };
+    prop = function(f, c){
+      return opt.prop(f, c);
+    };
     return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
+    }, (ref$ = (ref1$ = import$(local, opt.local) || {}, ref1$.prop = prop, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$));
   },
   js: function(t, opt){
     return opt.prop({
@@ -3504,16 +3612,11 @@ ret = {
   type: 'animation',
   preset: {
     "coin-h": {
-      steep: 0.4,
-      cycle: 3600,
+      cycle: 10,
       dur: 2,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateY(" + f.value * c.cycle + "deg)"
+          transform: "rotateY(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3523,16 +3626,11 @@ ret = {
       }
     },
     "coin-v": {
-      steep: 0.4,
-      cycle: 3600,
+      cycle: 10,
       dur: 2,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateX(" + f.value * c.cycle + "deg)"
+          transform: "rotateX(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3544,13 +3642,9 @@ ret = {
     "cycle": {
       steep: 0.0,
       cycle: 360,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3560,16 +3654,11 @@ ret = {
       }
     },
     "flip-h": {
-      steep: 0.4,
-      cycle: 360,
+      cycle: 1,
       flip: true,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateY(" + f.value * c.cycle + "deg)"
+          transform: "rotateY(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3579,16 +3668,11 @@ ret = {
       }
     },
     "flip-v": {
-      steep: 0.4,
-      cycle: 360,
+      cycle: 1,
       flip: true,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
       prop: function(f, c){
         return {
-          transform: "rotateX(" + f.value * c.cycle + "deg)"
+          transform: "rotateX(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3598,15 +3682,10 @@ ret = {
       }
     },
     "spin-fast": {
-      steep: 0.4,
-      cycle: 1800,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
+      cycle: 5,
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3616,15 +3695,10 @@ ret = {
       }
     },
     spin: {
-      steep: 0.4,
-      cycle: 360,
-      local: {
-        errorThreshold: 0.001,
-        sampleCount: 20
-      },
+      cycle: 1,
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.cycle + "deg)"
+          transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
         };
       },
       value: function(t, c){
@@ -3643,16 +3717,16 @@ ret = {
       step: 0.01
     },
     cycle: {
-      'default': 360,
+      'default': 1,
       type: 'number',
-      unit: 'deg',
       min: 0,
-      max: 3600,
-      step: 360
+      max: 100,
+      step: 1
     },
     flip: {
       'default': false,
-      type: 'boolean'
+      type: 'boolean',
+      hidden: true
     },
     unit: {
       'default': 'px',
@@ -3680,10 +3754,14 @@ ret = {
     return t;
   },
   css: function(opt){
-    var ref$, ref1$, this$ = this;
+    var local, ref$, ref1$, this$ = this;
+    local = {
+      errorThreshold: 0.001,
+      sampleCount: 20
+    };
     return easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
+    }, (ref$ = (ref1$ = import$(local, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
   },
   js: function(t, opt){
     return opt.prop({
@@ -3757,17 +3835,19 @@ ret = {
       step: 0.01
     },
     zoomx: {
+      name: "X Scale",
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 3,
+      max: 1,
       step: 0.01
     },
     zoomy: {
+      name: "Y Scale",
       'default': 0.5,
       type: 'number',
       min: 0,
-      max: 3,
+      max: 1,
       step: 0.01
     }
   },
@@ -3851,6 +3931,7 @@ ret = {
   },
   edit: {
     zoom_min: {
+      name: "Min Scale",
       'default': 0.5,
       type: 'number',
       min: 0,
@@ -3858,6 +3939,7 @@ ret = {
       step: 0.1
     },
     zoom_max: {
+      name: "Max Scale",
       'default': 1.0,
       type: 'number',
       min: 0,
@@ -3865,6 +3947,7 @@ ret = {
       step: 0.1
     },
     skew: {
+      name: "Skew Amount",
       'default': 25,
       type: 'number',
       unit: 'deg',
@@ -3956,12 +4039,14 @@ ret = {
   },
   edit: {
     count: {
+      name: "Sample Count",
       'default': 30,
       type: 'number',
-      min: 0,
-      max: 100
+      min: 1,
+      max: 99
     },
     offset: {
+      name: "Position Variance",
       'default': 4,
       type: 'number',
       unit: 'px',
@@ -3969,6 +4054,7 @@ ret = {
       max: 30
     },
     degree: {
+      name: "Angle Variance",
       'default': 0,
       type: 'number',
       unit: 'degree',
@@ -3976,6 +4062,7 @@ ret = {
       max: 360
     },
     zoom: {
+      name: "Scale Variance",
       'default': 0.0,
       type: 'number',
       min: 0,
@@ -4090,7 +4177,7 @@ value = function(t, c){
   ret = {
     transform: [s * Math.cos(r), s * Math.sin(r), 0, 0, -s * Math.sin(r), s * Math.cos(r), 0, 0, 0, 0, s, 0, 0, 0, 0, 1]
   };
-  if (c.fade) {
+  if (c.fade || t < 0.6) {
     ret.opacity = o;
   }
   return ret;
@@ -4134,7 +4221,7 @@ ret = {
       }
     },
     "vortex-alt-out": {
-      zoom: 0.3,
+      zoom: 0.1,
       fade: false,
       repeat: 1,
       local: {
@@ -4184,12 +4271,14 @@ ret = {
       step: 0.01
     },
     rotate: {
+      name: "Rotate Times",
       'default': 5,
       type: 'number',
-      min: 0,
+      min: 1,
       max: 20
     },
     zoom: {
+      name: "Scale",
       'default': 3,
       type: 'number',
       min: 0,
@@ -4198,7 +4287,8 @@ ret = {
     },
     fade: {
       'default': true,
-      type: 'boolean'
+      type: 'boolean',
+      hidden: true
     }
   },
   timing: function(t, opt){
@@ -4217,14 +4307,14 @@ ret = {
   css: function(opt){
     var s, opacity;
     s = opt.steep;
-    opacity = function(v){
-      if (opt.fade) {
+    opacity = function(v, force){
+      if (opt.fade || force) {
         return "opacity: " + v + ";";
       } else {
-        return "";
+        return "opacity: 1;";
       }
     };
-    return "@keyframes " + opt.name + " {\n  0%, 60% { animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + "); }\n  0% { " + opacity(0) + " transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + "); }\n  60% { " + opacity(1) + " transform: rotate(0deg) scale(1); }\n  100% { " + opacity(0) + " }\n}";
+    return "@keyframes " + opt.name + " {\n  0%, 60% { animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + "); }\n  0% { " + opacity(0, 1) + " transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + "); }\n  60% { " + opacity(1) + " transform: rotate(0deg) scale(1); }\n  100% { " + opacity(0) + " transform: rotate(0deg) scale(1); }\n}";
   },
   js: function(t, opt){
     return opt.prop({
@@ -4270,6 +4360,7 @@ ret = {
       'default': 1
     },
     rotate: {
+      name: "Rotate Degree",
       'default': 45,
       type: 'number',
       min: 0,

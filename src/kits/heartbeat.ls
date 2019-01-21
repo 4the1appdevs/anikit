@@ -8,11 +8,11 @@ ret = do
       value: (t, c) -> transform: anikit.util.s 1 + t * c.scale
   edit: 
     dur: default: 1
-    scale: default: 0.3, type: \number, min: 0, max: 100, step: 0.01
+    scale: default: 0.3, type: \number, min: 0, max: 1, step: 0.01
     peak2: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
     decay: default: 2, type: \number, min: 0.1, max: 10, step: 0.01
     span: default: 0.3, type: \number, min: 0.1, max: 1, step: 0.01
-    len: default: 0.5, type: \number, min: 0.1, max: 1, step: 0.01
+    len: default: 0.5, type: \number, min: 0.1, max: 1, step: 0.01, hidden: true
 
   timing: (t, opt) ->
     # use exp

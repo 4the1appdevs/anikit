@@ -5,39 +5,43 @@ ret = do
   type: \animation
   preset:
     beat:
-      steep: 0.4, count: 1, decay: 0.5, power: 1.1, unit: ''
-      offset: name: "Scale Amount", default: 0.2, min: -1, max: 1, step: 0.01
+      count: 1, decay: 0.5, unit: ''
+      offset: name: "Scale Amount", default: 0.2, min: -1, max: 1, step: 0.01, unit: ''
       prop: (f, c) -> {transform: "scale(#{1 + c.offset * f.value})"}
       value: (t, c) -> transform: anikit.util.s 1 + t * c.offset
 
     bounce-alt:
-      steep: 0.5, count: 0, decay: 0.5, power: 0, offset: -14, unit: 'px'
+      count: 0, decay: 0.5, power: 0, unit: 'px'
+      offset: name: "Jump Height", default: -14, min: -300, max: 300, unit: \px, step: 1
       prop: (f, c) -> {transform: "translate(0, #{c.offset * f.value}#{c.unit})"}
       value: (t, c) -> transform: anikit.util.ty c.offset * t
 
     pulse:
       dur: 0.5
-      steep: 0.6, count: 0, decay: 0.5, power: 1.1, offset: 0.2, unit: ''
+      count: 0, decay: 0.5, unit: ''
+      offset: name: "Scale Amount", default: 0.2, min: -1, max: 1, step: 0.01, unit: ''
       local: error-threshold: 0.001, seg-sample-count: 20, sample-count: 1000
       prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
       value: (t, c) -> transform: anikit.util.s 1 - c.offset * t
 
     "tick-alt":
-      steep: 0.4, count: 5, decay: 0.6, power: 1.1, offset: -45, unit: ''
+      count: 5, unit: ''
+      offset: name: "Rotate Amount", default: -45, min: -180, max: 180, step: 1, unit: 'deg'
       prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
       value: (t, c) -> transform: anikit.util.rz t * c.offset * Math.PI / 180
 
     jump:
-      steep: 0.4, count: 5, decay: 0.6, power: 1.1, offset: -14, unit: \px
+      count: 5, unit: \px
+      offset: name: "Jump Height", default: -14, min: -300, max: 300, unit: \px, step: 1
       prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
       value: (t, c) -> transform: anikit.util.ty t * c.offset
 
   edit: 
     steep: default: 0.4, type: \number, min: 0.3, max: 1, step: 0.01
-    count: default: 5, type: \number, min: 0, max: 10
-    decay: default: 0.6, type: \number, min: 0, max: 1, step: 0.1
-    power: default: 1.1, type: \number, min:0, max: 10, step: 0.1
-    offset: default: -14, type: \number, unit: \px, min: -300, max: 300
+    count: name: "Bounce Count", default: 5, type: \number, min: 0, max: 10
+    decay: name: "Bounce Decay", default: 0.6, type: \number, min: 0, max: 1, step: 0.01
+    power: name: "Decay Speed", default: 1.1, type: \number, min:0, max: 10, step: 0.01
+    offset: name: "Offset", default: -14, type: \number, unit: \px, min: -300, max: 300
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   timing: (t, opt) ->

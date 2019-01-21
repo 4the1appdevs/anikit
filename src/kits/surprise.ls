@@ -5,9 +5,9 @@ ret = do
   preset:
     surprise: {}
   edit: 
-    zoom_min: default: 0.5, type: \number, min: 0, max: 10, step: 0.1
-    zoom_max: default: 1.0, type: \number, min: 0, max: 10, step: 0.1
-    skew: default: 25, type: \number, unit: \deg, min: -90, max: 90
+    zoom_min: name: "Min Scale", default: 0.5, type: \number, min: 0, max: 10, step: 0.1
+    zoom_max: name: "Max Scale", default: 1.0, type: \number, min: 0, max: 10, step: 0.1
+    skew: name: "Skew Amount", default: 25, type: \number, unit: \deg, min: -90, max: 90
 
   css: (opt) ->
     """

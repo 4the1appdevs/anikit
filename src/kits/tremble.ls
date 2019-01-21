@@ -9,10 +9,10 @@ ret = do
     tremble: dur: 0.5, count: 30, offset: 8, degree: 0, zoom: 0, unit: \px
 
   edit: 
-    count: default: 30, type: \number, min: 0, max: 100
-    offset: default: 4, type: \number, unit: \px, min: 0, max: 30
-    degree: default: 0, type: \number, unit: \degree, min: 0, max: 360
-    zoom: default: 0.0, type: \number, min: 0, max: 2, step: 0.01
+    count: name: "Sample Count", default: 30, type: \number, min: 1, max: 99
+    offset: name: "Position Variance", default: 4, type: \number, unit: \px, min: 0, max: 30
+    degree: name: "Angle Variance", default: 0, type: \number, unit: \degree, min: 0, max: 360
+    zoom: name: "Scale Variance", default: 0.0, type: \number, min: 0, max: 2, step: 0.01
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   prop: (f, opt) ->

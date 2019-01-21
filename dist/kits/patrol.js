@@ -8,8 +8,13 @@ ret = {
   type: 'animation',
   preset: {
     breath: {
-      steep: 0.6,
-      offset: 0.06,
+      offset: {
+        'default': 0.06,
+        min: 0.01,
+        max: 1,
+        step: 0.01,
+        name: "Scale Amount"
+      },
       prop: function(f, c){
         return {
           transform: "scale(" + (1 + f.value * c.offset - 0.03) + ")"
@@ -22,8 +27,13 @@ ret = {
       }
     },
     dim: {
-      steep: 0.6,
-      offset: 0.5,
+      offset: {
+        'default': 0.5,
+        min: 0,
+        max: 1,
+        step: 0.01,
+        name: "Dim Amount"
+      },
       prop: function(f, c){
         return {
           opacity: 0.5 + f.value * c.offset
@@ -36,10 +46,13 @@ ret = {
       }
     },
     metronome: {
-      steep: 0.6,
-      offset: 10,
-      rotate: 30,
-      unit: 'px',
+      offset: {
+        'default': 10,
+        min: 0,
+        max: 90,
+        step: 1,
+        name: "Shaking Amount"
+      },
       local: {
         errorThreshold: 0.001,
         sampleCount: 20,
@@ -59,9 +72,14 @@ ret = {
       }
     },
     swing: {
-      steep: 0.6,
-      offset: 30,
-      unit: '',
+      offset: {
+        'default': 30,
+        unit: 'deg',
+        min: 0,
+        max: 90,
+        step: 1,
+        name: "Rotate Amount"
+      },
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.offset + "deg)"
@@ -74,8 +92,12 @@ ret = {
       }
     },
     "wander-v": {
-      steep: 0.6,
-      offset: 10,
+      offset: {
+        'default': 10,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       unit: 'px',
       prop: function(f, c){
         return {
@@ -89,8 +111,12 @@ ret = {
       }
     },
     wander: {
-      steep: 0.6,
-      offset: 10,
+      offset: {
+        'default': 10,
+        max: 500,
+        step: 1,
+        name: "Move Amount"
+      },
       unit: 'px',
       prop: function(f, c){
         return {
@@ -108,7 +134,7 @@ ret = {
     steep: {
       'default': 0.6,
       type: 'number',
-      min: 0,
+      min: 0.34,
       max: 1,
       step: 0.01
     },

@@ -17,7 +17,7 @@ value = function(t, c){
   ret = {
     transform: [s * Math.cos(r), s * Math.sin(r), 0, 0, -s * Math.sin(r), s * Math.cos(r), 0, 0, 0, 0, s, 0, 0, 0, 0, 1]
   };
-  if (c.fade) {
+  if (c.fade || t < 0.6) {
     ret.opacity = o;
   }
   return ret;
@@ -61,7 +61,7 @@ ret = {
       }
     },
     "vortex-alt-out": {
-      zoom: 0.3,
+      zoom: 0.1,
       fade: false,
       repeat: 1,
       local: {
@@ -111,12 +111,14 @@ ret = {
       step: 0.01
     },
     rotate: {
+      name: "Rotate Times",
       'default': 5,
       type: 'number',
-      min: 0,
+      min: 1,
       max: 20
     },
     zoom: {
+      name: "Scale",
       'default': 3,
       type: 'number',
       min: 0,
@@ -125,7 +127,8 @@ ret = {
     },
     fade: {
       'default': true,
-      type: 'boolean'
+      type: 'boolean',
+      hidden: true
     }
   },
   timing: function(t, opt){
@@ -144,14 +147,14 @@ ret = {
   css: function(opt){
     var s, opacity;
     s = opt.steep;
-    opacity = function(v){
-      if (opt.fade) {
+    opacity = function(v, force){
+      if (opt.fade || force) {
         return "opacity: " + v + ";";
       } else {
-        return "";
+        return "opacity: 1;";
       }
     };
-    return "@keyframes " + opt.name + " {\n  0%, 60% { animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + "); }\n  0% { " + opacity(0) + " transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + "); }\n  60% { " + opacity(1) + " transform: rotate(0deg) scale(1); }\n  100% { " + opacity(0) + " }\n}";
+    return "@keyframes " + opt.name + " {\n  0%, 60% { animation-timing-function: cubic-bezier(" + s + ", 0, 1, " + (1 - s) + "); }\n  0% { " + opacity(0, 1) + " transform: rotate(" + -360 * opt.rotate + "deg) scale(" + opt.zoom + "); }\n  60% { " + opacity(1) + " transform: rotate(0deg) scale(1); }\n  100% { " + opacity(0) + " transform: rotate(0deg) scale(1); }\n}";
   },
   js: function(t, opt){
     return opt.prop({

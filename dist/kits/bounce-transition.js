@@ -45,25 +45,32 @@ ret = {
   name: 'bounce-transition',
   type: 'animation',
   preset: {
+    "bounce-out-alt": {
+      dir: -1,
+      count: 3,
+      mag: 0.1,
+      offset: {
+        'default': 0,
+        hidden: true
+      }
+    },
     "bounce-in-alt": {
       dir: 1,
       count: 3,
       mag: 0.1,
       extrude: 0.5,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
+      offset: {
+        'default': 0,
+        hidden: true
       }
     },
-    "bounce-out-alt": {
+    "bounce-out": {
       dir: -1,
-      count: 3,
-      mag: 0.1,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
+      count: 4,
+      mag: 0.2,
+      offset: {
+        'default': 0,
+        hidden: true
       }
     },
     "bounce-in": {
@@ -71,19 +78,13 @@ ret = {
       count: 4,
       mag: 0.2,
       extrude: 0.5,
+      offset: {
+        'default': 0,
+        hidden: true
+      },
       local: {
         sampleCount: 40,
         errorThreshold: 0.0001,
-        segSampleCount: 1000
-      }
-    },
-    "bounce-out": {
-      dir: -1,
-      count: 4,
-      mag: 0.2,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
         segSampleCount: 1000
       }
     },
@@ -93,11 +94,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 2);
       },
@@ -111,11 +107,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 1);
       },
@@ -129,11 +120,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 3);
       },
@@ -147,11 +133,6 @@ ret = {
       mag: 0.2,
       extrude: 0.5,
       offset: 50,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 4);
       },
@@ -166,11 +147,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 2);
       },
@@ -185,11 +161,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 1);
       },
@@ -204,11 +175,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 3);
       },
@@ -223,11 +189,6 @@ ret = {
       extrude: 0.5,
       offset: 500,
       'throw': true,
-      local: {
-        sampleCount: 20,
-        errorThreshold: 0.001,
-        segSampleCount: 1000
-      },
       prop: function(f, c){
         return spring.prop(f, c, 4);
       },
@@ -243,16 +204,18 @@ ret = {
       hidden: true
     },
     count: {
+      name: "Bounce Count",
       type: 'number',
       'default': 30,
       min: 0,
-      max: 100,
-      step: 0.1
+      max: 50,
+      step: 1
     },
     mag: {
+      name: "Amount",
       type: 'number',
       'default': 0.3,
-      min: 0,
+      min: 0.01,
       max: 1,
       step: 0.01
     },
@@ -261,18 +224,21 @@ ret = {
       'default': 0,
       min: 0,
       max: 1,
-      step: 0.01
+      step: 0.01,
+      hidden: true
     },
     offset: {
       type: 'number',
       'default': 0,
-      min: -300,
-      max: 300,
+      min: -500,
+      max: 500,
       step: 1
     },
     'throw': {
+      name: "Throw in?",
       type: 'boolean',
-      'default': false
+      'default': false,
+      hidden: true
     },
     repeat: {
       'default': 1
@@ -309,7 +275,12 @@ ret = {
     return 1 - (wave + delta);
   },
   css: function(opt){
-    var prop, ret, ref$, ref1$, ref2$, this$ = this;
+    var local, prop, ret, ref$, ref1$, ref2$, this$ = this;
+    local = {
+      sampleCount: 20,
+      errorThreshold: 0.001,
+      segSampleCount: 1000
+    };
     prop = function(f, c){
       if (opt.prop) {
         return opt.prop(f, c);
@@ -319,7 +290,7 @@ ret = {
     };
     ret = easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
-    }, (ref$ = (ref1$ = (ref2$ = import$({}, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
+    }, (ref$ = (ref1$ = (ref2$ = import$(local, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
     return ret;
   },
   js: function(t, opt){

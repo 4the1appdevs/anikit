@@ -15,6 +15,7 @@ ret = {
   },
   edit: {
     count: {
+      name: "Sample Count",
       'default': 8,
       type: 'number',
       min: 4,

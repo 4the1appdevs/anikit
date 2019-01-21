@@ -28,7 +28,7 @@ ret = {
       'default': 0.3,
       type: 'number',
       min: 0,
-      max: 100,
+      max: 1,
       step: 0.01
     },
     peak2: {
@@ -57,7 +57,8 @@ ret = {
       type: 'number',
       min: 0.1,
       max: 1,
-      step: 0.01
+      step: 0.01,
+      hidden: true
     }
   },
   timing: function(t, opt){

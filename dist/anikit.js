@@ -201,16 +201,22 @@ import$(anikit, {
     }
   },
   get: function(name, opt){
-    var mod, config, k, ref$, v, o;
+    var config, ret, mod, k, v, ref$, o;
     opt == null && (opt = {});
-    mod = this.types[name]
-      ? this.mods[this.types[name]]
-      : this.mods[name];
     config = {
       name: name,
       dur: 1,
       repeat: 0
     };
+    ret = this.types[name]
+      ? this.mods[this.types[name]]
+      : this.mods[name];
+    mod = {};
+    for (k in ret) {
+      v = ret[k];
+      mod[k] = v;
+    }
+    mod.edit = JSON.parse(JSON.stringify(mod.edit));
     if (mod.preset[name]) {
       for (k in ref$ = mod.edit) {
         v = ref$[k];
