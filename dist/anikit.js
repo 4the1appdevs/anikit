@@ -55,6 +55,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
   timing: function(t, opt){
     opt == null && (opt = this.config);
     t = t / (opt.dur || 1);
+    if (opt.repeat < 0) {
+      return t;
+    }
     if (opt.repeat && t > opt.repeat) {
       t = 1;
     }

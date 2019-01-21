@@ -4,6 +4,7 @@ types = {}
 mods = fs.readdir-sync \./src/kits/
   .filter -> /\.ls$/.exec(it)
   .map -> [it.replace(/\.ls$/, ''), require("../src/kits/#it")]
+  .filter -> !it.1.debug
 
 #mods = mods.filter -> it.0 in <[power bounce-transition jump-transition]>
 
