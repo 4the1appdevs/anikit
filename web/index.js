@@ -96,17 +96,23 @@ suite = {
     return this.animate.aniid = -1;
   },
   animate: function(func){
-    var aniid, step, this$ = this;
-    this.animate.aniid = aniid = Math.random();
+    var ref$, aniid, start, step, this$ = this;
+    ref$ = this.animate;
+    ref$.aniid = aniid = Math.random();
+    ref$.start = 0;
+    start = 0;
     return requestAnimationFrame(step = function(t){
-      func(t * 0.001);
+      if (!start) {
+        start = t;
+      }
+      func((t - start) * 0.001);
       if (this$.animate.aniid === aniid) {
         return requestAnimationFrame(step);
       }
     });
   },
   use: function(name){
-    var kit, t1, start, stop, args, shader, this$ = this;
+    var kit, t1, args, shader, this$ = this;
     this.kit = kit = new anikit(name, {
       name: 'kit'
     });
@@ -114,29 +120,15 @@ suite = {
     t1 = Date.now();
     this.style.textContent = kit.css({
       name: 'kit'
-    });
+    }) + (".cell .tomato.ref { animation: kit " + (kit.config.dur || 1) + "s linear " + (kit.config.repeat || 'infinite') + " forwards }");
     kit.animate(tomatoCss);
     console.log("CSS Generation elapsed: " + (Date.now() - t1) * 0.001);
-    start = 0;
-    stop = false;
     this.animate(function(t){
-      if (!start) {
-        start = t;
-      }
-      if (stop) {
-        return;
-      }
-      t = (t - start + (this$.animate.offset || 0)) / (kit.config.dur || 1);
-      if (kit.config.repeat && t > kit.config.repeat) {
-        stop = true;
-        if (t > 0.99) {
-          t = 0.99;
-        }
-      }
+      t = t + (this$.animate.offset || 0);
       /* JS */
       kit.animateJs(tomatoJs, t);
       /* THREEJS */
-      kit.animateThree(this$.mesh, t - Math.floor(t));
+      kit.animateThree(this$.mesh, t);
       return this$.renderer.render(this$.scene, this$.camera);
     });
     /* WEBGL */

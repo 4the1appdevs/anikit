@@ -82,6 +82,21 @@ All animations are defined under src/kits/ as separated files, extend ldEditor "
  * generate CSS Animation with custom config:
    - anikit.get("kit-name").mod.css({ ... });
 
+## Timing Consideration
+
+All these animations include speed and repeat information in their configuration:
+  * speed: speed of animation. equals to 1/duration, which duration is in seconds. default to be 1.
+  * repeat: play count of animation. 0 means infinite, loop forever. default to be 0.
+
+According to repeat count and timing, there are several types of animations:
+ * the whole animation is defined between 0 ~ 1 sec, with different repeat count:
+   * loop animation: loop seamlessly forever. ( start frame = end frame )
+   * transitional animation: play only once, mainly for exiting or entering means. (sprite is gone either in start(entering) or end(exiting) frame )
+   * hint animation: play several times then stop. (start frame = end frame )
+ * the whole animation is defined in arbitrary time. -infinity ~ infinity
+   * endless, non-repeatable animation, deterministic for each time t.
+
+to better suppot all kinds of animation, always provide time t begining with 0 to tell Anikit that the animation is just started, and increase it according to the elapsed time in the following animate-js and animate-three call.
 
 ## Building
 
@@ -92,7 +107,6 @@ anikit provides two bundles:
 
 ## TODO
 
- * integrate transition.css
  * following animation from loading.css are still not implemented:
    - spin/flip.ls
    - other/
@@ -105,6 +119,7 @@ anikit provides two bundles:
      - slot.ls
      - leaf.ls
  * implement "set-kit" - animation set for operating multiple elements at one time.
+ * fully support glsl, perhaps in glslify style
 
 
 ## LICENSE

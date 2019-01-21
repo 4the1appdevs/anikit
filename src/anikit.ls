@@ -19,12 +19,20 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   js: (t, opt=@config) -> if @mod.js => @mod.js t, opt else {}
   affine: (t, opt=@config) -> if @mod.affine => @mod.affine t, opt else {}
 
-  animate-js: (node, t, opt) ->
+  timing: (t, opt=@config) ->
+    t = t / (opt.dur or 1)
+    if opt.repeat and t > opt.repeat => t = 1
+    if t != Math.floor(t) => t = t - Math.floor(t)
+    t
+
+  animate-js: (node, t, opt=@config) ->
     if node.ld-style => for k,v of that => node.style[k] = ""
-    node.ld-style = @js (t - Math.floor(t))
-    node.style <<< @js (t - Math.floor(t))
+    t = @timing t, opt
+    node.ld-style = @js t, opt
+    node.style <<< node.ld-style
 
   animate-three: (node, t, opt) ->
+    t = @timing t, opt
     values = @affine t, (if opt => {} <<< @config <<< opt else @config)
     box = new THREE.Box3!setFromObject node
     node.geometry.computeBoundingBox!

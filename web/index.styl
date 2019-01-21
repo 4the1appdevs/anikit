@@ -61,13 +61,12 @@ html,body
 
 .cell
   .tomato.ref
-    animation: kit 1s linear infinite
     transition: opacity 0.2s ease-in-out
-    opacity: 0!important
+.cell .reflayer
+  opacity: 0!important
 
-.cell:hover
-  .tomato.ref
-    opacity: 0.5!important
+.cell:hover .reflayer
+  opacity: 0.5!important
 
 .cell .ctrl
   margin: 10px

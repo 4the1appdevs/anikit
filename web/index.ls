@@ -86,9 +86,12 @@ suite = do
 
   stop: -> @animate.aniid = -1
   animate: (func) ->
-    @animate.aniid = aniid = Math.random!
+    @animate <<< aniid: (aniid = Math.random!), start: 0
+    start = 0
+    
     requestAnimationFrame (step = (t) ~> 
-      func t * 0.001
+      if !start => start := t
+      func (t - start) * 0.001
       if @animate.aniid == aniid => requestAnimationFrame step
     )
 
@@ -98,25 +101,20 @@ suite = do
 
     /* CSS */
     t1 = Date.now!
-    @style.textContent = kit.css name: \kit
+    @style.textContent = kit.css(name: \kit) + """
+      .cell .tomato.ref { animation: kit #{kit.config.dur or 1}s linear #{kit.config.repeat or 'infinite'} forwards }
+    """
     kit.animate(tomato-css)
     console.log "CSS Generation elapsed: #{(Date.now! - t1) * 0.001}"
 
-    start = 0
-    stop = false
     @animate (t) ~>
-      if !start => start := t
-      if stop => return
-      t = (t - start + (@animate.offset or 0)) / (kit.config.dur or 1)
-      if kit.config.repeat and t > kit.config.repeat =>
-        stop := true
-        if t > 0.99 => t = 0.99
+      t = (t + (@animate.offset or 0))
 
       /* JS */
       kit.animate-js tomato-js, t
 
       /* THREEJS */
-      kit.animate-three @mesh, t - Math.floor(t)
+      kit.animate-three @mesh, t
       @renderer.render @scene, @camera
 
     /* WEBGL */

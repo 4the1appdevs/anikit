@@ -143,19 +143,33 @@ anikit.prototype = import$(Object.create(Object.prototype), {
       return {};
     }
   },
+  timing: function(t, opt){
+    opt == null && (opt = this.config);
+    t = t / (opt.dur || 1);
+    if (opt.repeat && t > opt.repeat) {
+      t = 1;
+    }
+    if (t !== Math.floor(t)) {
+      t = t - Math.floor(t);
+    }
+    return t;
+  },
   animateJs: function(node, t, opt){
     var that, k, v;
+    opt == null && (opt = this.config);
     if (that = node.ldStyle) {
       for (k in that) {
         v = that[k];
         node.style[k] = "";
       }
     }
-    node.ldStyle = this.js(t - Math.floor(t));
-    return import$(node.style, this.js(t - Math.floor(t)));
+    t = this.timing(t, opt);
+    node.ldStyle = this.js(t, opt);
+    return import$(node.style, node.ldStyle);
   },
   animateThree: function(node, t, opt){
     var values, box, bbox, ref$, wx, wy, wz, nx, ny, nz, m, mat, gmat, opacity;
+    t = this.timing(t, opt);
     values = this.affine(t, opt
       ? import$(import$({}, this.config), opt)
       : this.config);

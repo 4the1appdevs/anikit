@@ -62,11 +62,12 @@ body {
   border-color: #7e6 transparent transparent transparent;
 }
 .cell .tomato.ref {
-  animation: kit 1s linear infinite;
   transition: opacity 0.2s ease-in-out;
+}
+.cell .reflayer {
   opacity: 0 !important;
 }
-.cell:hover .tomato.ref {
+.cell:hover .reflayer {
   opacity: 0.5 !important;
 }
 .cell .ctrl {
