@@ -1767,7 +1767,7 @@ slide = {
         transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     }
-    if (o) {
+    if (o != null) {
       ret.opacity = t;
     }
     return ret;
@@ -1801,35 +1801,42 @@ flip = {
 };
 grow = {
   prop: function(f, c, d){
-    var value;
+    var value, ret;
     value = this.value(f.value, c, d);
-    return {
+    ret = {
       transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
     };
+    if (value.opacity != null) {
+      ret.opacity = value.opacity;
+    }
+    return ret;
   },
   value: function(t, c, d){
-    var sgn;
+    var o, sgn, ret;
     if (c.dir > 0) {
       t = 1 - t;
     }
-    if (t <= 0.01) {
-      t = 0.01;
+    if (t <= 0.005) {
+      t = 0.005;
     }
+    o = t <= 0.005 ? 0 : 1;
     if (d < 3) {
       sgn = d === 1
         ? 1
         : -1;
-      return {
+      ret = {
         transform: [t, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     } else {
       sgn = d === 3
         ? 1
         : -1;
-      return {
+      ret = {
         transform: [1, 0, 0, 0, 0, t, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     }
+    ret.opacity = o;
+    return ret;
   }
 };
 ret = {
@@ -1932,6 +1939,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 1);
       },
@@ -1943,6 +1953,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 1);
       },
@@ -1954,6 +1967,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 2);
       },
@@ -1965,6 +1981,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 2);
       },
@@ -1976,6 +1995,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 3);
       },
@@ -1987,6 +2009,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 3);
       },
@@ -1998,6 +2023,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 4);
       },
@@ -2009,6 +2037,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 4);
       },
@@ -2388,6 +2419,7 @@ ret = {
     ret = easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
     }, (ref$ = (ref1$ = (ref2$ = import$({}, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
+    console.log(ret);
     return ret;
   },
   js: function(t, opt){
@@ -2397,7 +2429,7 @@ ret = {
     if (value.transform) {
       ret.transform = "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")";
     }
-    if (value.opacity) {
+    if (value.opacity != null) {
       ret.opacity = value.opacity;
     }
     return ret;
@@ -4384,7 +4416,7 @@ sampleFunc = function(t){
   return Math.abs(Math.sin(Math.pow(3 * t + 1.77, 2)) / (Math.pow(3 * t + 2, 5 * t) + 1));
 };
 fit = function(func, opt){
-  var ref$, ox, oy, dy, count, segments, i$, step$, to$, x, y, points, segIdx, seg, cur, j$, to1$, py, keyframes, len$, ps, curves, len1$, curve, x1, x2, y1, y2, ncurve, k$, j;
+  var ref$, ox, oy, dy, count, segments, i$, step$, to$, x, y, p, j$, to1$, i, points, segIdx, seg, cur, py, keyframes, len$, ps, curves, len1$, curve, x1, x2, y1, y2, ncurve, k$, j;
   opt == null && (opt = {});
   opt = import$({
     segSampleCount: 100,
@@ -4392,7 +4424,8 @@ fit = function(func, opt){
     sampleCount: 5,
     errorThreshold: 0.1,
     start: 0,
-    end: 1
+    end: 1,
+    segPtrs: []
   }, opt);
   ref$ = [opt.start, 0, 1, 0, []], ox = ref$[0], oy = ref$[1], dy = ref$[2], count = ref$[3], segments = ref$[4];
   for (i$ = opt.start, to$ = opt.end, step$ = 1 / opt.segSampleCount; step$ < 0 ? i$ >= to$ : i$ <= to$; i$ += step$) {
@@ -4401,6 +4434,14 @@ fit = function(func, opt){
     if (count > 2 && Math.sign(y - oy) * Math.sign(dy) < 0) {
       segments.push([ox, x]);
       ox = x;
+    }
+    p = opt.segPtrs.filter(fn$).filter(fn1$);
+    if (p.length) {
+      for (j$ = 0, to1$ = p.length; j$ < to1$; ++j$) {
+        i = j$;
+        segments.push([ox, p[i]]);
+        ox = p[i];
+      }
     }
     dy = y - oy;
     oy = y;
@@ -4444,7 +4485,7 @@ fit = function(func, opt){
       keyframes.push({
         percent: round(x1 * 100),
         value: y1,
-        cubicBezier: [ncurve[1][0], ncurve[1][1], ncurve[2][0], ncurve[2][1]].map(fn$)
+        cubicBezier: [ncurve[1][0], ncurve[1][1], ncurve[2][0], ncurve[2][1]].map(fn2$)
       });
     }
   }
@@ -4454,6 +4495,12 @@ fit = function(func, opt){
   });
   return keyframes;
   function fn$(it){
+    return it > x;
+  }
+  function fn1$(it){
+    return it <= x + 1 / opt.segSampleCount;
+  }
+  function fn2$(it){
     return round(it);
   }
 };

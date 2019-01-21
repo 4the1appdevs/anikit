@@ -13,7 +13,7 @@ slide = do
     else 
       sgn = if d == 3 => 1 else -1
       ret = transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
-    if o => ret.opacity = t
+    if o? => ret.opacity = t
     ret
 
 flip = do
@@ -29,16 +29,22 @@ flip = do
 grow = do
   prop: (f, c, d) ->
     value = @value f.value, c, d
-    return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
+    ret = transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
+    if value.opacity? => ret.opacity = value.opacity
+    ret
   value: (t, c, d) ->
     if c.dir > 0 => t = 1 - t
-    if t <= 0.01 => t = 0.01
+    if t <= 0.005 => t = 0.005
+    o = if t <= 0.005 => 0 else 1
+
     if d < 3 => 
       sgn = if d == 1 => 1 else -1
-      {transform: [t, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}
+      ret = {transform: [t, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]}
     else 
       sgn = if d == 3 => 1 else -1
-      {transform: [1, 0, 0, 0, 0, t, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]}
+      ret = {transform: [1, 0, 0, 0, 0, t, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]}
+    ret.opacity = o
+    return ret
 
 ret = do
   name: \jump-transition
@@ -73,34 +79,42 @@ ret = do
 
     "grow-rtl-in":
       dir: 1, count: 1, power: 0.25
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 1
       value: (t, c) -> grow.value t, c, 1
     "grow-rtl-out":
       dir: -1, count: 1, power: 0.25
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 1
       value: (t, c) -> grow.value t, c, 1
     "grow-ltr-in":
       dir: 1, count: 1, power: 0.25
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 2
       value: (t, c) -> grow.value t, c, 2
     "grow-ltr-out":
       dir: -1, count: 1, power: 0.25
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 2
       value: (t, c) -> grow.value t, c, 2
     "grow-ttb-in":
       dir: 1, count: 1, power: 0.25
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 3
       value: (t, c) -> grow.value t, c, 3
     "grow-ttb-out":
       dir: -1, count: 1, power: 0.25
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 3
       value: (t, c) -> grow.value t, c, 3
     "grow-btt-in":
       dir: 1, count: 1, power: 0.25
+      local: seg-ptrs: [0.02]
       prop: (f, c) -> grow.prop f, c, 4
       value: (t, c) -> grow.value t, c, 4
     "grow-btt-out":
       dir: -1, count: 1, power: 0.25
+      local: seg-ptrs: [0.97]
       prop: (f, c) -> grow.prop f, c, 4
       value: (t, c) -> grow.value t, c, 4
 
@@ -249,7 +263,7 @@ ret = do
     value = @affine t, opt
     ret = {}
     if value.transform => ret.transform = "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-    if value.opacity => ret.opacity = value.opacity
+    if value.opacity? => ret.opacity = value.opacity
     return ret
   affine: (t, opt) -> 
     t = @timing(t, opt)

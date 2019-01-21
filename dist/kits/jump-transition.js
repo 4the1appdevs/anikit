@@ -36,7 +36,7 @@ slide = {
         transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     }
-    if (o) {
+    if (o != null) {
       ret.opacity = t;
     }
     return ret;
@@ -70,35 +70,42 @@ flip = {
 };
 grow = {
   prop: function(f, c, d){
-    var value;
+    var value, ret;
     value = this.value(f.value, c, d);
-    return {
+    ret = {
       transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
     };
+    if (value.opacity != null) {
+      ret.opacity = value.opacity;
+    }
+    return ret;
   },
   value: function(t, c, d){
-    var sgn;
+    var o, sgn, ret;
     if (c.dir > 0) {
       t = 1 - t;
     }
-    if (t <= 0.01) {
-      t = 0.01;
+    if (t <= 0.005) {
+      t = 0.005;
     }
+    o = t <= 0.005 ? 0 : 1;
     if (d < 3) {
       sgn = d === 1
         ? 1
         : -1;
-      return {
+      ret = {
         transform: [t, 0, 0, sgn * (1 - t) * c.offset, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     } else {
       sgn = d === 3
         ? 1
         : -1;
-      return {
+      ret = {
         transform: [1, 0, 0, 0, 0, t, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
       };
     }
+    ret.opacity = o;
+    return ret;
   }
 };
 ret = {
@@ -201,6 +208,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 1);
       },
@@ -212,6 +222,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 1);
       },
@@ -223,6 +236,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 2);
       },
@@ -234,6 +250,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 2);
       },
@@ -245,6 +264,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 3);
       },
@@ -256,6 +278,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 3);
       },
@@ -267,6 +292,9 @@ ret = {
       dir: 1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.02]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 4);
       },
@@ -278,6 +306,9 @@ ret = {
       dir: -1,
       count: 1,
       power: 0.25,
+      local: {
+        segPtrs: [0.97]
+      },
       prop: function(f, c){
         return grow.prop(f, c, 4);
       },
@@ -657,6 +688,7 @@ ret = {
     ret = easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
     }, (ref$ = (ref1$ = (ref2$ = import$({}, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
+    console.log(ret);
     return ret;
   },
   js: function(t, opt){
@@ -666,7 +698,7 @@ ret = {
     if (value.transform) {
       ret.transform = "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")";
     }
-    if (value.opacity) {
+    if (value.opacity != null) {
       ret.opacity = value.opacity;
     }
     return ret;
