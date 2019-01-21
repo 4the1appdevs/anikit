@@ -688,7 +688,6 @@ ret = {
     ret = easingFit.fitToKeyframes(function(it){
       return this$.timing(it, opt);
     }, (ref$ = (ref1$ = (ref2$ = import$({}, opt.local) || {}, ref2$.config = opt, ref2$), ref1$.name = opt.name, ref1$), ref$.prop = prop, ref$));
-    console.log(ret);
     return ret;
   },
   js: function(t, opt){
