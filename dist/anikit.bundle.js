@@ -306,7 +306,7 @@ import$(anikit, {
       for (k in ref$ = mod.edit) {
         v = ref$[k];
         o = mod.preset[name][k];
-        if (o && o['default']) {
+        if (o && o['default'] != null) {
           import$(mod.edit[k], mod.preset[name][k]);
         }
       }

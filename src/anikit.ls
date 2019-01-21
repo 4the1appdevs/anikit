@@ -106,7 +106,7 @@ anikit <<< do
     # overwrite edit settings
     if mod.preset[name] => for k,v of mod.edit =>
       o = mod.preset[name][k]
-      if o and o.default => mod.edit[k] <<< mod.preset[name][k]
+      if o and o.default? => mod.edit[k] <<< mod.preset[name][k]
 
     for k,v of mod.edit => config[k] = v.default
 

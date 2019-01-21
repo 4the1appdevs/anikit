@@ -12,12 +12,12 @@ ret = {
       dur: 5,
       local: {
         segSampleCount: 3,
-        sampleCount: 5000,
-        errorThreshold: 0.00001
+        sampleCount: 100000,
+        errorThreshold: 0.0005
       },
       prop: function(f, c){
         return {
-          transform: "matrix(" + anikit.util.m4to3(this.value(f.value, c).transform).join(',') + ")"
+          transform: "translate(0, " + (f.value - 0.5) * c.offset + c.unit + ")"
         };
       },
       value: function(t, c){
@@ -35,8 +35,8 @@ ret = {
         hidden: true
       },
       local: {
-        segSampleCount: 40,
-        sampleCount: 200,
+        segSampleCount: 10,
+        sampleCount: 1000,
         errorThreshold: 0.001
       },
       prop: function(f, c){
@@ -72,6 +72,11 @@ ret = {
       min: 0,
       max: 1000,
       step: 1
+    },
+    unit: {
+      'default': 'px',
+      type: 'choice',
+      values: ['px', '%', '']
     }
   },
   timing: function(t, opt){
@@ -82,34 +87,32 @@ ret = {
     return (t - min) / (max - min);
   },
   css: function(opt){
-    var prop, ref$, ref1$, this$ = this;
+    var prop, timing, ref$, ref1$, this$ = this;
     prop = function(f, c){
       return opt.prop(f, c);
     };
+    if (opt.offset) {
+      console.log(123);
+      timing = function(t, opt){
+        t = this$.timing(t, opt);
+        t = t * opt.amount + 0.5;
+        return t = t - Math.floor(t);
+      };
+    } else {
+      timing = this.timing;
+    }
     return easingFit.fitToKeyframes(function(it){
-      return this$.timing(it, opt);
+      return timing(it, opt);
     }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.prop = prop, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$));
   },
   js: function(t, opt){
-    var value;
-    value = this.affine(t, opt);
     return {
-      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+      transform: "matrix(" + anikit.util.m4to3(this.affine(t, opt).transform).join(',') + ")"
     };
   },
   affine: function(t, opt){
     return opt.value(this.timing(t, opt), opt);
   }
-  /*
-  css: (opt) ->
-    prop = (f, c) -> return transform: "rotate(#{f.value * c.amount * 360}deg)"
-    easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {prop, config: opt} <<< opt{name}
-  js: (t, opt) -> 
-    value = @affine t, opt
-    return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-  affine: (t, opt) ->
-    return transform: anikit.util.rz(@timing(t,opt) * opt.amount * Math.PI * 2)
-  */
 };
 module.exports = ret;
 function import$(obj, src){
