@@ -90,11 +90,11 @@ All these animations include speed and repeat information in their configuration
 
 According to repeat count and timing, there are several types of animations:
  * the whole animation is defined between 0 ~ 1 sec, with different repeat count:
-   * loop animation: loop seamlessly forever. ( start frame = end frame )
-   * transitional animation: play only once, mainly for exiting or entering means. (sprite is gone either in start(entering) or end(exiting) frame )
-   * hint animation: play several times then stop. (start frame = end frame )
+   * repeat = 0: loop animation: loop seamlessly forever. ( start frame = end frame )
+   * repeat = 1: transitional animation: play only once, mainly for exiting or entering means. (sprite is gone either in start(entering) or end(exiting) frame )
+   * repeat = 1 ~ n: hint animation: play several times then stop. (start frame = end frame )
  * the whole animation is defined in arbitrary time. -infinity ~ infinity
-   * endless, non-repeatable animation, deterministic for each time t.
+   * repeat = -1: endless, non-repeatable animation, deterministic for each time t.
 
 to better suppot all kinds of animation, always provide time t begining with 0 to tell Anikit that the animation is just started, and increase it according to the elapsed time in the following animate-js and animate-three call.
 

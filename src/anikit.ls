@@ -21,6 +21,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
   timing: (t, opt=@config) ->
     t = t / (opt.dur or 1)
+    if opt.repeat < 0 => return t
     if opt.repeat and t > opt.repeat => t = 1
     if t != Math.floor(t) => t = t - Math.floor(t)
     t
