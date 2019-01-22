@@ -16,8 +16,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if @dom => @dom.textContent = @mod.css({} <<< @config <<< name: "#{@config.name}-#{@id}")
     @mod.config = @config
   css: (opt={}) -> if @mod.css => @mod.css {} <<< @config <<< opt else {}
-  js: (t, opt=@config) -> if @mod.js => @mod.js t, opt else {}
-  affine: (t, opt=@config) -> if @mod.affine => @mod.affine t, opt else {}
+  js: (t, opt={}) -> if @mod.js => @mod.js t, opt = {} <<< @config <<< opt
+  affine: (t, opt={}) -> if @mod.affine => @mod.affine t, opt = {} <<< @config <<< opt
 
   timing: (t, opt=@config) ->
     t = t / (opt.dur or 1)
@@ -26,21 +26,23 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if t != Math.floor(t) => t = t - Math.floor(t)
     t
 
-  animate-js: (node, t, opt=@config) ->
+  animate-js: (node, t, opt={}) ->
+    opt = {} <<< @config <<< opt
     if node.ld-style => for k,v of that => node.style[k] = ""
     t = @timing t, opt
     node.ld-style = @js t, opt
     node.style <<< node.ld-style
 
-  animate-three: (node, t, opt) ->
+  animate-three: (node, t, opt={}) ->
+    opt = {} <<< @config <<< opt
     t = @timing t, opt
-    values = @affine t, (if opt => {} <<< @config <<< opt else @config)
+    values = @affine t, opt
     box = new THREE.Box3!setFromObject node
     node.geometry.computeBoundingBox!
     bbox = node.geometry.boundingBox
     [wx,wy,wz] = <[x y z]>
       .map -> bbox.max[it] - bbox.min[it]
-      .map (d,i) -> ((values.transform-origin or [0.5,0.5,0.5])[i] - 0.5) * d
+      .map (d,i) -> ((opt.origin or values.transform-origin or [0.5,0.5,0.5])[i] - 0.5) * d
     [nx,ny,nz] = <[x y z]>
       .map -> (bbox.max[it] + bbox.min[it]) * 0.5
     if nx or ny or nz =>
@@ -59,20 +61,31 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if node.repos => node.matrix.premultiply node.repos
 
     opacity = if values.opacity? => values.opacity else 1
-    if node.material.uniforms and node.material.uniforms.alpha => 
+    if node.material.uniforms and node.material.uniforms.alpha =>
       node.material.uniforms.alpha.value = opacity
     else
       node.material.transparent = true
       node.material.opacity = opacity
-    
 
   animate: (node, opt={}) ->
     opt = {} <<< @config <<< opt
     if !@dom =>
       document.body.appendChild(@dom = document.createElement \style)
       @set-config!
-    node.style.animation = "#{@config.name}-#{@id} #{opt.dur or 1}s #{if opt.repeat => that else \infinite} linear forwards"
+    [dur,rpt] = [opt.dur or 1, if opt.repeat => that else \infinite]
+    if @config.origin =>
+      node.style.transformOrigin = [@config.origin.0 or 0.5, @config.origin.1 or 0.5].map(-> "{it * 50}%").join(' ')
+    node.style.animation = "#{@config.name}-#{@id} #{dur}s #{rpt} linear forwards"
     node.style.animationDelay = "#{opt.delay or 0}s"
+  origin: (n,h,x,y) ->
+    if x? and y? => return anikit.util.origin n, h, x, y
+    if @config.origin => [x,y,z] = that
+    else if @mod.affine =>
+      value = @mod.affine 0, @config
+      if value.transform-origin => [x,y,z] = value.transform-origin
+    if !(x?) or !(y?) => [x,y,z] = [0.5, 0.5, 0.5]
+    anikit.util.origin n, h, x, y
+
   statify: (node) -> node.style.animation = node.style.animationDelay = ""
   destroy: -> @dom.parentNode.removechild @dom
 
@@ -86,6 +99,12 @@ anikit <<< do
       k = k * m + m - 1
       while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
       return k
+    origin: (n,h,px,py) ->
+      [nb, hb] = [n,h].map -> it.getBoundingClientRect!
+      x = nb.width * px + nb.x - hb.x - hb.width * 0.5
+      y = nb.height * py + nb.y - hb.y - hb.height * 0.5
+      n.style.transform-origin = "#{x}px #{y}px"
+      [x,y]
 
     rx: (t) -> [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1]
     ry: (t) -> [cos(t), 0, sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1]
@@ -122,7 +141,7 @@ anikit <<< do
         # if o exists, and it's an edit setting (check with default attr) then pass
         if typeof(o) == \undefined or (typeof(o) == \object and o.default?) => continue
         config[k] = o
-      config <<< mod.preset[name]{prop, value, local}
+      config <<< mod.preset[name]{prop, value, local, origin}
 
     # overwrite by custom
     config <<< opt

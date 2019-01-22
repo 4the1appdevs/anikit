@@ -128,19 +128,15 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }
   },
   js: function(t, opt){
-    opt == null && (opt = this.config);
+    opt == null && (opt = {});
     if (this.mod.js) {
-      return this.mod.js(t, opt);
-    } else {
-      return {};
+      return this.mod.js(t, opt = import$(import$({}, this.config), opt));
     }
   },
   affine: function(t, opt){
-    opt == null && (opt = this.config);
+    opt == null && (opt = {});
     if (this.mod.affine) {
-      return this.mod.affine(t, opt);
-    } else {
-      return {};
+      return this.mod.affine(t, opt = import$(import$({}, this.config), opt));
     }
   },
   timing: function(t, opt){
@@ -159,7 +155,8 @@ anikit.prototype = import$(Object.create(Object.prototype), {
   },
   animateJs: function(node, t, opt){
     var that, k, v;
-    opt == null && (opt = this.config);
+    opt == null && (opt = {});
+    opt = import$(import$({}, this.config), opt);
     if (that = node.ldStyle) {
       for (k in that) {
         v = that[k];
@@ -172,17 +169,17 @@ anikit.prototype = import$(Object.create(Object.prototype), {
   },
   animateThree: function(node, t, opt){
     var values, box, bbox, ref$, wx, wy, wz, nx, ny, nz, m, mat, gmat, opacity;
+    opt == null && (opt = {});
+    opt = import$(import$({}, this.config), opt);
     t = this.timing(t, opt);
-    values = this.affine(t, opt
-      ? import$(import$({}, this.config), opt)
-      : this.config);
+    values = this.affine(t, opt);
     box = new THREE.Box3().setFromObject(node);
     node.geometry.computeBoundingBox();
     bbox = node.geometry.boundingBox;
     ref$ = ['x', 'y', 'z'].map(function(it){
       return bbox.max[it] - bbox.min[it];
     }).map(function(d, i){
-      return ((values.transformOrigin || [0.5, 0.5, 0.5])[i] - 0.5) * d;
+      return ((opt.origin || values.transformOrigin || [0.5, 0.5, 0.5])[i] - 0.5) * d;
     }), wx = ref$[0], wy = ref$[1], wz = ref$[2];
     ref$ = ['x', 'y', 'z'].map(function(it){
       return (bbox.max[it] + bbox.min[it]) * 0.5;
@@ -214,15 +211,39 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }
   },
   animate: function(node, opt){
-    var that;
+    var that, ref$, dur, rpt;
     opt == null && (opt = {});
     opt = import$(import$({}, this.config), opt);
     if (!this.dom) {
       document.body.appendChild(this.dom = document.createElement('style'));
       this.setConfig();
     }
-    node.style.animation = this.config.name + "-" + this.id + " " + (opt.dur || 1) + "s " + ((that = opt.repeat) ? that : 'infinite') + " linear forwards";
+    ref$ = [opt.dur || 1, (that = opt.repeat) ? that : 'infinite'], dur = ref$[0], rpt = ref$[1];
+    if (this.config.origin) {
+      node.style.transformOrigin = [this.config.origin[0] || 0.5, this.config.origin[1] || 0.5].map(function(){
+        return "{it * 50}%";
+      }).join(' ');
+    }
+    node.style.animation = this.config.name + "-" + this.id + " " + dur + "s " + rpt + " linear forwards";
     return node.style.animationDelay = (opt.delay || 0) + "s";
+  },
+  origin: function(n, h, x, y){
+    var that, z, value, ref$;
+    if (x != null && y != null) {
+      return anikit.util.origin(n, h, x, y);
+    }
+    if (that = this.config.origin) {
+      x = that[0], y = that[1], z = that[2];
+    } else if (this.mod.affine) {
+      value = this.mod.affine(0, this.config);
+      if (value.transformOrigin) {
+        ref$ = value.transformOrigin, x = ref$[0], y = ref$[1], z = ref$[2];
+      }
+    }
+    if (!(x != null) || !(y != null)) {
+      ref$ = [0.5, 0.5, 0.5], x = ref$[0], y = ref$[1], z = ref$[2];
+    }
+    return anikit.util.origin(n, h, x, y);
   },
   statify: function(node){
     return node.style.animation = node.style.animationDelay = "";
@@ -253,6 +274,16 @@ import$(anikit, {
         k = k - n + Math.floor((k - n) / (m - 1));
       }
       return k;
+    },
+    origin: function(n, h, px, py){
+      var ref$, nb, hb, x, y;
+      ref$ = [n, h].map(function(it){
+        return it.getBoundingClientRect();
+      }), nb = ref$[0], hb = ref$[1];
+      x = nb.width * px + nb.x - hb.x - hb.width * 0.5;
+      y = nb.height * py + nb.y - hb.y - hb.height * 0.5;
+      n.style.transformOrigin = x + "px " + y + "px";
+      return [x, y];
     },
     rx: function(t){
       return [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1];
@@ -333,6 +364,7 @@ import$(anikit, {
       config.prop = (ref$ = mod.preset[name]).prop;
       config.value = ref$.value;
       config.local = ref$.local;
+      config.origin = ref$.origin;
     }
     import$(config, opt);
     return {
@@ -2863,16 +2895,15 @@ ret = {
         step: 1,
         name: "Rotate Amount"
       },
+      origin: [0.5, 0, 0.5],
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.offset + "deg)",
-          "transform-origin": "50% 0%"
+          transform: "rotate(" + f.value * c.offset + "deg)"
         };
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rz(t * c.offset * Math.PI / 180),
-          transformOrigin: [0.5, 0.0, 0.5]
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180)
         };
       }
     },

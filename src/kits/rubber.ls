@@ -6,8 +6,9 @@ ret = do
     jingle:
       count: 7, ratio: 0.6, delay: 0.1, unit: ''
       offset: default: 10, min: -180, max: 180, step: 1, name: "Rotate Amount"
-      prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)", "transform-origin": "50% 0%"}
-      value: (t, c) -> {transform: anikit.util.rz(t * c.offset * Math.PI / 180), transform-origin: [0.5, 0.0, 0.5]}
+      origin: [0.5, 0, 0.5]
+      prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.offset * Math.PI / 180)}
     "rubber-v":
       count: 7, ratio: 0.7, delay: 0.3, unit: ''
       offset: default: 0.2, min: 0.01, max: 1, step: 0.01, name: "Scale Amount"

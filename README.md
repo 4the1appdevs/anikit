@@ -15,6 +15,7 @@ All animations are defined under src/kits/ as separated files, extend ldEditor "
    {
      "animation-name": {
        configs...
+       origin: [x, y, z], (optional)
        local: { not-exposed-configs... }
        prop: (f, c, i)  (optional)
        value: (t, c, i) (optional)

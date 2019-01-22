@@ -20,16 +20,15 @@ ret = {
         step: 1,
         name: "Rotate Amount"
       },
+      origin: [0.5, 0, 0.5],
       prop: function(f, c){
         return {
-          transform: "rotate(" + f.value * c.offset + "deg)",
-          "transform-origin": "50% 0%"
+          transform: "rotate(" + f.value * c.offset + "deg)"
         };
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rz(t * c.offset * Math.PI / 180),
-          transformOrigin: [0.5, 0.0, 0.5]
+          transform: anikit.util.rz(t * c.offset * Math.PI / 180)
         };
       }
     },
