@@ -45,7 +45,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
       .map (d,i) -> ((opt.origin or values.transform-origin or [0.5,0.5,0.5])[i] - 0.5) * d
     [nx,ny,nz] = <[x y z]>
       .map -> (bbox.max[it] + bbox.min[it]) * 0.5
-    if nx or ny or nz =>
+    if (nx or ny or nz) and !node.repos =>
       m = new THREE.Matrix4!
       m.set 1,0,0,-nx,0,1,0,-ny,0,0,1,-nz,0,0,0,1
       node.geometry.applyMatrix m
@@ -77,14 +77,15 @@ anikit.prototype = Object.create(Object.prototype) <<< do
       node.style.transformOrigin = [@config.origin.0 or 0.5, @config.origin.1 or 0.5].map(-> "{it * 50}%").join(' ')
     node.style.animation = "#{@config.name}-#{@id} #{dur}s #{rpt} linear forwards"
     node.style.animationDelay = "#{opt.delay or 0}s"
-  origin: (n,h,x,y) ->
-    if x? and y? => return anikit.util.origin n, h, x, y
+  origin: (n,h,opt={}) ->
+    {x,y,ox,oy} = opt
+    if x? and y? => return anikit.util.origin n, h, x, y, ox, oy
     if @config.origin => [x,y,z] = that
     else if @mod.affine =>
       value = @mod.affine 0, @config
       if value.transform-origin => [x,y,z] = value.transform-origin
     if !(x?) or !(y?) => [x,y,z] = [0.5, 0.5, 0.5]
-    anikit.util.origin n, h, x, y
+    if n.style => anikit.util.origin n, h, x, y, ox, oy
 
   statify: (node) -> node.style.animation = node.style.animationDelay = ""
   destroy: -> @dom.parentNode.removechild @dom
@@ -99,12 +100,17 @@ anikit <<< do
       k = k * m + m - 1
       while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
       return k
-    origin: (n,h,px,py) ->
+    origin: (n,h,px=0.5,py=0.5,ox=0,oy=0) ->
       [nb, hb] = [n,h].map -> it.getBoundingClientRect!
-      x = nb.width * px + nb.x - hb.x - hb.width * 0.5
-      y = nb.height * py + nb.y - hb.y - hb.height * 0.5
+      x = nb.width * px + nb.x - hb.x + ox # - hb.width * 0.5
+      y = nb.height * py + nb.y - hb.y + oy # - hb.height * 0.5
       n.style.transform-origin = "#{x}px #{y}px"
       [x,y]
+    /* forward, reverse, random */
+    order: (i,n,t = 0) ->
+      if t == 0 => return i
+      else if t == 1 => return n - i - 1
+      else if t == 2 => return @kth n, n * n + 7, i
 
     rx: (t) -> [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1]
     ry: (t) -> [cos(t), 0, sin(t), 0, 0, 1, 0, 0, -sin(t), 0, cos(t), 0, 0, 0, 0, 1]

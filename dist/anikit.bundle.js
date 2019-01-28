@@ -184,7 +184,7 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     ref$ = ['x', 'y', 'z'].map(function(it){
       return (bbox.max[it] + bbox.min[it]) * 0.5;
     }), nx = ref$[0], ny = ref$[1], nz = ref$[2];
-    if (nx || ny || nz) {
+    if ((nx || ny || nz) && !node.repos) {
       m = new THREE.Matrix4();
       m.set(1, 0, 0, -nx, 0, 1, 0, -ny, 0, 0, 1, -nz, 0, 0, 0, 1);
       node.geometry.applyMatrix(m);
@@ -227,10 +227,12 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     node.style.animation = this.config.name + "-" + this.id + " " + dur + "s " + rpt + " linear forwards";
     return node.style.animationDelay = (opt.delay || 0) + "s";
   },
-  origin: function(n, h, x, y){
-    var that, z, value, ref$;
+  origin: function(n, h, opt){
+    var x, y, ox, oy, that, z, value, ref$;
+    opt == null && (opt = {});
+    x = opt.x, y = opt.y, ox = opt.ox, oy = opt.oy;
     if (x != null && y != null) {
-      return anikit.util.origin(n, h, x, y);
+      return anikit.util.origin(n, h, x, y, ox, oy);
     }
     if (that = this.config.origin) {
       x = that[0], y = that[1], z = that[2];
@@ -243,7 +245,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     if (!(x != null) || !(y != null)) {
       ref$ = [0.5, 0.5, 0.5], x = ref$[0], y = ref$[1], z = ref$[2];
     }
-    return anikit.util.origin(n, h, x, y);
+    if (n.style) {
+      return anikit.util.origin(n, h, x, y, ox, oy);
+    }
   },
   statify: function(node){
     return node.style.animation = node.style.animationDelay = "";
@@ -275,15 +279,30 @@ import$(anikit, {
       }
       return k;
     },
-    origin: function(n, h, px, py){
+    origin: function(n, h, px, py, ox, oy){
       var ref$, nb, hb, x, y;
+      px == null && (px = 0.5);
+      py == null && (py = 0.5);
+      ox == null && (ox = 0);
+      oy == null && (oy = 0);
       ref$ = [n, h].map(function(it){
         return it.getBoundingClientRect();
       }), nb = ref$[0], hb = ref$[1];
-      x = nb.width * px + nb.x - hb.x - hb.width * 0.5;
-      y = nb.height * py + nb.y - hb.y - hb.height * 0.5;
+      x = nb.width * px + nb.x - hb.x + ox;
+      y = nb.height * py + nb.y - hb.y + oy;
       n.style.transformOrigin = x + "px " + y + "px";
       return [x, y];
+    }
+    /* forward, reverse, random */,
+    order: function(i, n, t){
+      t == null && (t = 0);
+      if (t === 0) {
+        return i;
+      } else if (t === 1) {
+        return n - i - 1;
+      } else if (t === 2) {
+        return this.kth(n, n * n + 7, i);
+      }
     },
     rx: function(t){
       return [1, 0, 0, 0, 0, cos(t), -sin(t), 0, 0, sin(t), cos(t), 0, 0, 0, 0, 1];
