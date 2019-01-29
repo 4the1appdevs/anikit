@@ -105,6 +105,12 @@ anikit.prototype = import$(Object.create(Object.prototype), {
       return mat[it] = mat[it] / 40;
     });
     gmat = new THREE.Matrix4().makeTranslation(wx, wy, wz);
+    if (mat[0] > 1) {
+      console.log(mat[0], t, opt);
+      mat[0] = 0.7;
+      mat[5] = 0.7;
+      mat[10] = 0.7;
+    }
     node.matrix.set.apply(node.matrix, mat);
     node.matrix.multiply(gmat);
     node.matrix.premultiply(gmat.getInverse(gmat));
