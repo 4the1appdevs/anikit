@@ -31,7 +31,6 @@ ret = do
   css: (opt) ->
     prop = (f, c) -> opt.prop f, c
     if opt.offset =>
-      console.log 123
       timing = (t, opt) ~>
         t = @timing t, opt
         t = t * opt.amount + 0.5

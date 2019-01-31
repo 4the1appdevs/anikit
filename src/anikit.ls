@@ -37,6 +37,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     opt = {} <<< @config <<< opt
     t = @timing t, opt
     values = @affine t, opt
+    if !values => return
     box = new THREE.Box3!setFromObject node
     node.geometry.computeBoundingBox!
     bbox = node.geometry.boundingBox

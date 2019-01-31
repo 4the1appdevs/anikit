@@ -92,7 +92,6 @@ ret = {
       return opt.prop(f, c);
     };
     if (opt.offset) {
-      console.log(123);
       timing = function(t, opt){
         t = this$.timing(t, opt);
         t = t * opt.amount + 0.5;
