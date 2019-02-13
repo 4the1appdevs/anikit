@@ -1,6 +1,6 @@
 {
   "author": "Kirby Wu",
-  "name": "Anikit",
+  "name": "anikit",
   "description": "Animation Toolkit",
   "version": "0.0.1",
   "main": "dist/anikit.js",
