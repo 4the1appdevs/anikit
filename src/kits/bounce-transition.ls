@@ -72,7 +72,7 @@ ret = do
     value: (t, c) ->
       t = if c.dir > 0 => t else 1 - t
       if c.dir < 0 and t > 1 => t = 1
-      t >?= 0
+      t >?= 0.01
       return transform: [t,0,0,0,0,t,0,0,0,0,t,0,0,0,0,1]
 
   timing: (t, opt) ->

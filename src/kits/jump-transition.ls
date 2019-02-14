@@ -283,7 +283,7 @@ ret = do
       return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
     value: (t, c) ->
       if c.dir > 0 => t = 1 - t
-      if t <= 0.01 => t = 0.01
+      t >?= 0.01
       return transform: [t,0,0,0,0,t,0,0,0,0,t,0,0,0,0,1]
 
   timing: (t, opt) ->
