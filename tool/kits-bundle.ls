@@ -14,7 +14,7 @@ for [name,mod] in mods =>
 load-mod = mods.map(-> """  "#{it.0}": require("./kits/#{it.0}")""").join(',\n')
 
 fs-extra.ensure-dir-sync \dist
-fs.write-file-sync "./dist/kits-list.gen.js", """
+out = """
 var mods = {
 #load-mod
 };
@@ -23,3 +23,6 @@ var types = #{JSON.stringify(types)};
 
 module.exports = {mods: mods, types: types};
 """
+
+fs.write-file-sync "./dist/kits-list.gen.js", out
+fs.write-file-sync "./src/kits-list.gen.js", out
