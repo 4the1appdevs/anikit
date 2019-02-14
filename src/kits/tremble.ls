@@ -48,7 +48,7 @@ ret = do
     t2 = Math.ceil(t * opt.count) / opt.count
     [x1, y1, r1, s1] = @calc (t1 - Math.floor(t1)), opt
     [x2, y2, r2, s2] = @calc (t2 - Math.floor(t2)), opt
-    t = (t - t1) / (t2 - t1)
+    t = if t == 0 => 0 else (t - t1) / (t2 - t1)
     x = (x2 - x1) * t + x1
     y = (y2 - y1) * t + y1
     r = ((r2 - r1) * t + r1) * Math.PI / 180

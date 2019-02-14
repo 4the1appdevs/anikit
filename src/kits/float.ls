@@ -13,7 +13,6 @@ ret = do
     unit: default: \px, type: \choice, values: ["px", "%", ""]
 
   css: (c) ->
-
     """
     @keyframes #{c.name} {
       0% {
