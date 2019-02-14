@@ -11,7 +11,7 @@ for k,v of anikit.types =>
   css = mod.css config
   if mod.js and config.repeat =>
     js = mod.js 0, config
-    init-values = ["#name: #value" for name,value of js].join(\;)
+    init-values = (["animation-fill-mode: forwards"] ++ ["#name: #value" for name,value of js]).join(\;)
   else init-values = "";
 
   output.push css
