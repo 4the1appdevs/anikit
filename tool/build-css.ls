@@ -10,7 +10,7 @@ for k,v of anikit.types =>
   css = mod.css config
   output.push css
   output.push """
-    .ld.#{config.name} { animation: #{config.name} #{config.dur or 1}s infinite; }
+    .ld.#{config.name} { animation: #{config.name} #{config.dur or 1}s #{config.repeat or \infinite}; }
   """
 
 fs-extra.ensure-dir-sync \dist
