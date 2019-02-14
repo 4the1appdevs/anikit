@@ -127,7 +127,9 @@ ret = {
     t2 = Math.ceil(t * opt.count) / opt.count;
     ref$ = this.calc(t1 - Math.floor(t1), opt), x1 = ref$[0], y1 = ref$[1], r1 = ref$[2], s1 = ref$[3];
     ref$ = this.calc(t2 - Math.floor(t2), opt), x2 = ref$[0], y2 = ref$[1], r2 = ref$[2], s2 = ref$[3];
-    t = (t - t1) / (t2 - t1);
+    t = t === 0
+      ? 0
+      : (t - t1) / (t2 - t1);
     x = (x2 - x1) * t + x1;
     y = (y2 - y1) * t + y1;
     r = ((r2 - r1) * t + r1) * Math.PI / 180;

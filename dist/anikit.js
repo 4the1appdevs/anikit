@@ -178,6 +178,13 @@ import$(anikit, {
     noise: function(t){
       return (Math.sin(t * 43758.5453) + 1) * 0.5;
     },
+    round: easingFit.round
+    /* TBD: we should design a better flow for rounding output
+    rounds: (v, d = 5) ->
+      if v.opacity? => v.opacity = easing-fit.round v.opacity, d
+      if v.transform? => v.transform = v.transform.map -> easing-fit.round it, d
+      return v
+    */,
     kth: function(n, m, k){
       if (k > n) {
         k = n;
