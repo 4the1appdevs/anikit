@@ -95,6 +95,13 @@ anikit <<< do
   util:
     m4to3: (m) -> [m.0, m.1, m.4, m.5, m.3, -m.7].map -> easing-fit.round it
     noise: (t) -> (Math.sin(t * 43758.5453) + 1 ) * 0.5
+    round: easing-fit.round
+    /* TBD: we should design a better flow for rounding output
+    rounds: (v, d = 5) ->
+      if v.opacity? => v.opacity = easing-fit.round v.opacity, d
+      if v.transform? => v.transform = v.transform.map -> easing-fit.round it, d
+      return v
+    */
     kth: (n,m,k) ->
       if k > n => k = n
       if m == 1 => return k
