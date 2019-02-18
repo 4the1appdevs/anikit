@@ -1,34 +1,28 @@
 doctype html
 html
   head
-    link(rel="stylesheet",type="text/css",href="index.css")
-    link(rel="stylesheet",type="text/css",href="anikit.bundle.min.css")
-    link(rel="Stylesheet",type="text/css",href="lib/ion-rangeslider/2.1.7/css/ion.rangeSlider.css")
-    link(rel="Stylesheet",type="text/css",href="lib/ion-rangeslider/2.1.7/css/ion.rangeSlider.skinFlat.css")
+    link(rel="stylesheet",type="text/css",href="assets/anikit/anikit.bundle.min.css")
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm",crossorigin="anonymous")
+    style(type="text/css").
+      .ld {
+        display: inline-block; width: 36px; height:36px;
+        border-radius:50%;background:#09f;border: 24px solid #222;border-color: #fff transparent transparent
+      }
+       
+      .inner { transform: scale(0.3); position: absolute; bottom: 0; top: 0;left: 0;right: 0;margin: auto}
+      .outer { width: 16px; height: 16px; display: inline-block; position: relative; float: right }
+      .dropdown-menu { height: 500px; overflow: scroll; }
+      .dropdown-item { cursor: pointer }
+      .dropdown-item .ld { animation-play-state: paused; display: none; }
+      .dropdown-item:hover .ld { animation-play-state: running; animation-iteration-count: infinite; display: block }
+      .dropdown-item { overflow: hidden; height: 32px }
   body
-    #title.ld.ld-breath Anikit
-    .form
-      select#select
-        option(value="static") static
-    #root
-      .cell: .tomato.css
-      .cell
-        .ctrl: input.slider
-        .tomato.js
-        .reflayer: .tomato.css.ref
-      .cell
-        .ctrl: input.slider
-        .tomato.webgl
-        .reflayer: .tomato.css.ref
-      .cell
-        .ctrl: input.slider
-        .tomato.three
-        .reflayer: .tomato.css.ref
+    div(style="margin:50px")
+      .dropdown
+        .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Animations...
+        .dropdown-menu
+          a.dropdown-item(href="#") #[span] #[.outer: .inner: .ld]
 
-  script(src="lib/three.min.js")
-  script(src="lib/three-bundle.min.js")
-  script(src="lib/jquery.min.js")
-  script(src="lib/ion-rangeslider/2.1.7/js/ion.rangeSlider.min.js")
-  script(src="lib/shader.min.js")
-  script(src="anikit.bundle.min.js")
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.25/bootstrap-native-v4.min.js")
+  script(src="assets/anikit/anikit.bundle.min.js")
   script(src="index.js")

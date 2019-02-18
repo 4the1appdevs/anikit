@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    link(rel="stylesheet",type="text/css",href="dev.css")
+    link(rel="stylesheet",type="text/css",href="assets/anikit/anikit.bundle.min.css")
+    link(rel="Stylesheet",type="text/css",href="assets/lib/ion-rangeslider/2.1.7/css/ion.rangeSlider.css")
+    link(rel="Stylesheet",type="text/css",href="assets/lib/ion-rangeslider/2.1.7/css/ion.rangeSlider.skinFlat.css")
+  body
+    #title.ld.ld-breath Anikit
+    .form
+      select#select
+        option(value="static") static
+    #root
+      .cell: .tomato.css
+      .cell
+        .ctrl: input.slider
+        .tomato.js
+        .reflayer: .tomato.css.ref
+      .cell
+        .ctrl: input.slider
+        .tomato.webgl
+        .reflayer: .tomato.css.ref
+      .cell
+        .ctrl: input.slider
+        .tomato.three
+        .reflayer: .tomato.css.ref
+
+  script(src="assets/lib/three.min.js")
+  script(src="assets/lib/three-bundle.min.js")
+  script(src="assets/lib/jquery.min.js")
+  script(src="assets/lib/ion-rangeslider/2.1.7/js/ion.rangeSlider.min.js")
+  script(src="assets/lib/shader.min.js")
+  script(src="assets/anikit/anikit.bundle.min.js")
+  script(src="dev.js")

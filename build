@@ -22,4 +22,9 @@ echo "Building CSS Bundle..."
 echo "Uglify CSS bundles..."
 ./node_modules/.bin/uglifycss dist/anikit.bundle.css > dist/anikit.bundle.min.css
 
+echo "Copy files to web..."
+mkdir -p web/assets/anikit/
+cp dist/anikit.bundle.min.js web/assets/anikit/
+cp dist/anikit.bundle.min.css web/assets/anikit/
+
 echo "Done."
