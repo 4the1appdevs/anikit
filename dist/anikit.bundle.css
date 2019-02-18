@@ -3341,4 +3341,91 @@ skew(-30deg);
 }
 .ld.ld-wrench {
   animation: ld-wrench 1s infinite; 
+}.anikits {
+  display: flex;
+  flex-wrap: wrap;
+}
+.anikit .demo {
+  width: 48px;
+  height: 48px;
+  display: inline-block;
+}
+.anikit .ld {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  border: 24px solid transparent;
+  border-radius: 50%;
+  background: #09f;
+  border-top-color: #fff;
+  animation-iteration-count: infinite !important;
+  display: none;
+}
+.anikit:hover .ld {
+  animation-play-state: running;
+  display: block;
+}
+.anikit.disabled {
+  background: #f9fafb;
+  color: #ccc;
+}
+.anikit.disabled .ld {
+  border-top-color: #f9fafb;
+  background: #ccc;
+}
+.anikits .anikit {
+  flex: 0 0 88px;
+  text-align: center;
+  font-size: 12px;
+  margin: 20px;
+  width: 88px;
+  height: 84px;
+  padding: 3px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.anikits .anikit .demo {
+  display: block;
+  margin: auto;
+}
+.anikits .anikit .inner {
+  transform: scale(0.5);
+}
+.anikits .anikit .ld {
+  animation-play-state: running;
+  display: block;
+}
+.anikits .anikit:hover {
+  background: #09f;
+  color: #fff;
+}
+.anikits .anikit:hover .ld {
+  background: #fff;
+  border-top-color: #09f;
+}
+.anikits .anikit span {
+  width: 120px;
+  position: relative;
+  left: -19px;
+  display: block;
+}
+.anikit.dropdown-item.disabled {
+  background: #f9fafb;
+  color: #ccc;
+}
+.anikit.dropdown-item .demo .inner {
+  transform: scale(0.3);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.anikit.dropdown-item .demo {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  float: right;
 }

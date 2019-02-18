@@ -6,6 +6,7 @@ echo "Generate kits-list..."
 
 echo "Transpiling LiveScript..." 
 ./node_modules/.bin/lsc -cbp src/anikit.ls > dist/anikit.js
+./node_modules/.bin/lsc -cbp src/ldap.ls >> dist/anikit.js
 ./node_modules/.bin/lsc -cbp src/easing.ls > dist/easing.js
 ./node_modules/.bin/lsc -o dist/kits/ -cb src/kits/*
 
@@ -19,12 +20,19 @@ echo "Uglify anikit.bundle.js ..."
 echo "Building CSS Bundle..."
 ./node_modules/.bin/lsc tool/build-css
 
+echo "Transpiling Stylus..."
+./node_modules/.bin/stylus -p src/ldap.styl >> dist/anikit.bundle.css
+
 echo "Uglify CSS bundles..."
 ./node_modules/.bin/uglifycss dist/anikit.bundle.css > dist/anikit.bundle.min.css
+
+echo "Generate pug file..."
+lsc tool/build-pug.ls > dist/anikit.pug
 
 echo "Copy files to web..."
 mkdir -p web/assets/anikit/
 cp dist/anikit.bundle.min.js web/assets/anikit/
 cp dist/anikit.bundle.min.css web/assets/anikit/
+cp dist/anikit.pug web/assets/anikit/
 
 echo "Done."
