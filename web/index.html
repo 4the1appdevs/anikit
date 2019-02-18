@@ -1,12 +1,60 @@
-<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="assets/anikit/anikit.bundle.min.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><style type="text/css">.ld {
-  display: inline-block; width: 36px; height:36px;
-  border-radius:50%;background:#09f;border: 24px solid #222;border-color: #fff transparent transparent
+<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" href="assets/ldui/ldui.min.css"><link rel="stylesheet" type="text/css" href="assets/anikit/anikit.bundle.min.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"><style type="text/css">.ld {
+  display: inline-block;
+  width: 36px; height:36px;
+  border: 24px solid transparent;
+  border-radius:50%;background:#09f;
+  border-top-color: #fff;
 }
  
-.inner { transform: scale(0.3); position: absolute; bottom: 0; top: 0;left: 0;right: 0;margin: auto}
+.outer .inner { transform: scale(0.3); position: absolute; bottom: 0; top: 0;left: 0;right: 0;margin: auto}
 .outer { width: 16px; height: 16px; display: inline-block; position: relative; float: right }
-.dropdown-menu { height: 500px; overflow: scroll; }
+.dropdown-menu .in { height: 500px; overflow: scroll; margin-bottom: 40px; }
 .dropdown-item { cursor: pointer }
 .dropdown-item .ld { animation-play-state: paused; display: none; }
 .dropdown-item:hover .ld { animation-play-state: running; animation-iteration-count: infinite; display: block }
-.dropdown-item { overflow: hidden; height: 32px }</style></head><body><div style="margin:50px"><div class="dropdown"><div class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown">Animations...</div><div class="dropdown-menu"><a class="dropdown-item" href="#"><span></span> <div class="outer"><div class="inner"><div class="ld"></div></div></div></a></div></div></div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.25/bootstrap-native-v4.min.js"></script><script src="assets/anikit/anikit.bundle.min.js"></script><script src="index.js"></script></html>
+.dropdown-item { overflow: hidden; height: 32px }
+.dropdown-item.disabled { background: #f9fafb; color: #ccc; }
+.hint { 
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.dropdown-menu .alert {
+  position: absolute;bottom:0;margin:0;
+  border-radius:0; width: 100%;
+  :text-decoration: underline; cursor: pointer
+}
+.lditems { display: flex; flex-wrap: wrap;}
+.lditem {
+  flex: 0 0 88px;
+  text-align: center;
+  font-size: 12px;
+  margin: 20px;
+  overflow: hidden;
+  width: 88px;
+  height: 84px;
+  cursor: pointer;
+  padding: 3px;
+}
+.lditem .ld {
+  animation-play-state: running; animation-iteration-count: infinite; display: block;
+}
+.ldo { width: 48px; height: 48px; display: inline-block; }
+.ldin { transform: scale(0.5) }
+.lditem:hover .ld {
+  animation-play-state: running; animation-iteration-count: infinite; display: block;
+  background: #fff;
+  border-top-color: #09f;
+}
+.lditem.disabled { background: #f9fafb; color: #ccc; }
+.lditem.disabled .ld { border-top-color:#f9fafb; background: #ccc; }
+.lditem:hover { background: #09f; color: #fff; }
+.lditem .name { width: 120px; position: relative; left: -19px; }
+.tgt { width: 32px;height: 32px;margin: 30px;background: #f00; }
+.ldcv .alert {
+  position: absolute;bottom:10px;margin:auto; width:480px; cursor: pointer;
+  left: 0; right: 0;
+}
+.ldcv span { vertical-align: middle }
+.ldcv > .base > .inner { padding-bottom: 65px; }</style></head><body><div style="margin:50px"><div class="dropdown"><div class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown">Animations...</div><div class="dropdown-menu"><div class="in"></div><a class="dropdown-item" href="#"><span></span> <div class="outer"><div class="inner"><div class="ld"></div></div></div></a><div class="alert alert-primary small">Go Pro to Unlock All</div></div></div><div class="ldcv default-size"><div class="base" style="position:relative"><div class="inner"><div class="closebtn lg" data-ldcv-set></div></div><div class="alert alert-primary small text-center"><span>Go Pro to Unlock All</span> <div class="btn btn-sm btn-primary ml-2">Upgrade Now</div></div></div></div><div class="btn btn-primary mt-2" onclick="popupit()">Popup</div><div class="tgt ld"></div></div></body><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.25/bootstrap-native-v4.min.js"></script><script src="assets/ldui/ldui.min.js"></script><script src="assets/anikit/anikit.bundle.min.js"></script><script src="index.js"></script></html>
