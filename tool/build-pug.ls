@@ -2,7 +2,7 @@ require! <[fs fs-extra ../src/anikit easing-fit]>
 output = []
 gn = ["No Animation", "Popular Animation", "Repeat Animation", "Transition"]
 gs = [[],[],[],[]]
-pop = <[spin bounce bounce-in bounce-out blink fade breath spin tremble]>
+pop = <[spin bounce bounce-in bounce-out blink fade breath tremble slide-ltr float-btt-in flip-h]>
 for k,v of anikit.types => 
   idx = if k == \static => 0 else if /\-(on|off|in|out)$/.exec(k) => 3 else 2
   gs[idx].push k
