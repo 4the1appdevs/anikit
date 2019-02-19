@@ -380,13 +380,16 @@ var slice$ = [].slice;
       }
       n = ld$.parent(tgt, '[data-anikit]', this$.root);
       if (!n) {
-        return;
+        return e.stopPropagation();
+      }
+      kit = n.getAttribute('data-anikit');
+      if (!kit) {
+        return e.stopPropagation();
       }
       if (this$.active) {
         this$.active.classList.remove('active');
       }
       n.classList.add('active');
-      kit = n.getAttribute('data-anikit');
       if (kit !== this$.anikit) {
         this$.fire('choose', kit);
       }

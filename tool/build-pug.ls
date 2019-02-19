@@ -46,5 +46,11 @@ mixin anikit-modal-content
   if i < 3
     hr
 
+mixin anikit-select-options
+  each n,i in anikit.groupName
+    optgroup(label=n)
+      each k in anikit.members[i]
+        option(value=k)= k
+
 """
 console.log output

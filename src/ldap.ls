@@ -26,10 +26,11 @@
       n = ld$.parent(tgt, '.disabled', @root) 
       if n => return e.stopPropagation!
       n = ld$.parent(tgt, '[data-anikit]', @root)
-      if !n => return
+      if !n => return e.stopPropagation!
+      kit = n.getAttribute \data-anikit
+      if !kit => return e.stopPropagation!
       if @active => @active.classList.remove \active
       n.classList.add \active
-      kit = n.getAttribute \data-anikit
       if kit != @anikit => @fire \choose, kit
       @anikit = kit
       @active = n

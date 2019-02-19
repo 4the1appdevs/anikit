@@ -27,6 +27,7 @@
   cursor: pointer;
   left: 0;
   right: 0;
+  text-align: center;
 }
 .ldcv span {
   vertical-align: middle;
@@ -36,5 +37,11 @@
 }
 .dropdown-menu {
   height: 300px;
+}
+.dropdown-menu .in {
+  height: 240px;
   overflow: scroll;
+}
+.dropdown-menu {
+  padding-bottom: 60px;
 }
