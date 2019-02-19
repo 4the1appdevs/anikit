@@ -24,7 +24,7 @@ mixin anikit-dropdown-menu
   each n,i in anikit.groupName
     h6.dropdown-header.head #\{n}
     each k in anikit.members[i]
-      a.dropdown-item.anikit(href="#",data-anikit=k) #[span= k] #[.demo: .inner: .ld(class="ld-" + k)]
+      a.dropdown-item.anikit(data-anikit=k) #[span= k] #[.demo: .inner: .ld(class="ld-" + k)]
     if i < 3
       .dropdown-divider
 
