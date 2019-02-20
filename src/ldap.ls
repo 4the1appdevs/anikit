@@ -21,7 +21,7 @@
       return if type == \modal => """<div class="anikit" data-anikit="#name" data-ldcv-set=k>#demo</div>"""
       else """<a href="#" class="dropdown-item anikit" data-anikit="#name">#demo</a>"""
 
-    @root.addEventListener \click, (e) ~>
+    ld$.find(@root, '.inner', 0).addEventListener \click, (e) ~>
       tgt = e.target
       n = ld$.parent(tgt, '.disabled', @root) 
       if n => return e.stopPropagation!

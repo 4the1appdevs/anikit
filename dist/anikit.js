@@ -371,7 +371,7 @@ var slice$ = [].slice;
         ? "<div class=\"anikit\" data-anikit=\"" + name + "\" data-ldcv-set=k>" + demo + "</div>"
         : "<a href=\"#\" class=\"dropdown-item anikit\" data-anikit=\"" + name + "\">" + demo + "</a>";
     };
-    return this.root.addEventListener('click', function(e){
+    return ld$.find(this.root, '.inner', 0).addEventListener('click', function(e){
       var tgt, n, kit;
       tgt = e.target;
       n = ld$.parent(tgt, '.disabled', this$.root);
