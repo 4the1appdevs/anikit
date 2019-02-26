@@ -6,7 +6,7 @@ uuid = require 'uuid/v4'
 
 anikit = (name, opt={}) ->
   @{mod, config} = anikit.get(name, opt)
-  [@dom, @id] = [null, uuid!]
+  [@name, @dom, @id] = [name, null, uuid!]
   @set-config @config
   @
 
@@ -18,6 +18,13 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   css: (opt={}) -> if @mod.css => @mod.css {} <<< @config <<< opt else {}
   js: (t, opt={}) -> if @mod.js => @mod.js t, opt = {} <<< @config <<< opt
   affine: (t, opt={}) -> if @mod.affine => @mod.affine t, opt = {} <<< @config <<< opt
+  get-dom: ->
+    if !@dom =>
+      document.body.appendChild(@dom = document.createElement \style)
+      @dom.setAttribute \id, "#{@config.name}-#{@id}"
+      @dom.setAttribute \data-anikit, ""
+      @set-config!
+    @dom
 
   timing: (t, opt=@config) ->
     t = t / (opt.dur or 1)
@@ -70,11 +77,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
   animate: (node, opt={}) ->
     opt = {} <<< @config <<< opt
-    if !@dom =>
-      document.body.appendChild(@dom = document.createElement \style)
-      @dom.setAttribute \id, "#{@config.name}-#{@id}"
-      @dom.setAttribute \data-anikit, ""
-      @set-config!
+    @get-dom!
+
     [dur,rpt] = [opt.dur or 1, if opt.repeat => that else \infinite]
     if @config.origin =>
       node.style.transformOrigin = [@config.origin.0 or 0.5, @config.origin.1 or 0.5].map(-> "{it * 50}%").join(' ')

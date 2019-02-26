@@ -14,7 +14,7 @@ anikit = function(name, opt){
   var ref$;
   opt == null && (opt = {});
   ref$ = anikit.get(name, opt), this.mod = ref$.mod, this.config = ref$.config;
-  ref$ = [null, uuid()], this.dom = ref$[0], this.id = ref$[1];
+  ref$ = [name, null, uuid()], this.name = ref$[0], this.dom = ref$[1], this.id = ref$[2];
   this.setConfig(this.config);
   return this;
 };
@@ -47,6 +47,15 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     if (this.mod.affine) {
       return this.mod.affine(t, opt = import$(import$({}, this.config), opt));
     }
+  },
+  getDom: function(){
+    if (!this.dom) {
+      document.body.appendChild(this.dom = document.createElement('style'));
+      this.dom.setAttribute('id', this.config.name + "-" + this.id);
+      this.dom.setAttribute('data-anikit', "");
+      this.setConfig();
+    }
+    return this.dom;
   },
   timing: function(t, opt){
     opt == null && (opt = this.config);
@@ -126,12 +135,7 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     var that, ref$, dur, rpt;
     opt == null && (opt = {});
     opt = import$(import$({}, this.config), opt);
-    if (!this.dom) {
-      document.body.appendChild(this.dom = document.createElement('style'));
-      this.dom.setAttribute('id', this.config.name + "-" + this.id);
-      this.dom.setAttribute('data-anikit', "");
-      this.setConfig();
-    }
+    this.getDom();
     ref$ = [opt.dur || 1, (that = opt.repeat) ? that : 'infinite'], dur = ref$[0], rpt = ref$[1];
     if (this.config.origin) {
       node.style.transformOrigin = [this.config.origin[0] || 0.5, this.config.origin[1] || 0.5].map(function(){
