@@ -72,6 +72,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     opt = {} <<< @config <<< opt
     if !@dom =>
       document.body.appendChild(@dom = document.createElement \style)
+      @dom.setAttribute \id, "#{@config.name}-#{@id}"
+      @dom.setAttribute \data-anikit, ""
       @set-config!
     [dur,rpt] = [opt.dur or 1, if opt.repeat => that else \infinite]
     if @config.origin =>
@@ -89,7 +91,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if n.style => anikit.util.origin n, h, x, y, ox, oy
 
   statify: (node) -> node.style.animation = node.style.animationDelay = ""
-  destroy: -> @dom.parentNode.removechild @dom
+  destroy: -> if @dom => @dom.parentNode.removeChild @dom
 
 anikit <<< do
   util:

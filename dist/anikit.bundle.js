@@ -219,6 +219,8 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     opt = import$(import$({}, this.config), opt);
     if (!this.dom) {
       document.body.appendChild(this.dom = document.createElement('style'));
+      this.dom.setAttribute('id', this.config.name + "-" + this.id);
+      this.dom.setAttribute('data-anikit', "");
       this.setConfig();
     }
     ref$ = [opt.dur || 1, (that = opt.repeat) ? that : 'infinite'], dur = ref$[0], rpt = ref$[1];
@@ -256,7 +258,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return node.style.animation = node.style.animationDelay = "";
   },
   destroy: function(){
-    return this.dom.parentNode.removechild(this.dom);
+    if (this.dom) {
+      return this.dom.parentNode.removeChild(this.dom);
+    }
   }
 });
 import$(anikit, {
@@ -435,14 +439,7 @@ var slice$ = [].slice;
     this.active = null;
     this.anikit = null;
     this.evtHandler = {};
-    ld$.find(this.root, '.anikit').map(function(d, i){
-      if (this$.opt.disableFilter && this$.opt.disableFilter(d.getAttribute('data-anikit'), i)) {
-        d.classList.add('disabled');
-      }
-      if (this$.opt.defaultFilter && !this$.opt.defaultFilter(d.getAttribute('data-anikit'), i)) {
-        return ld$.remove(d);
-      }
-    });
+    this.applyFilters();
     ld$.find(this.root, '.anikits').map(function(d, i){
       if (d.childNodes.length === 0) {
         return ld$.remove(d);
@@ -504,6 +501,26 @@ var slice$ = [].slice;
         results$.push(cb.apply(this, v));
       }
       return results$;
+    },
+    applyFilters: function(o){
+      var this$ = this;
+      if (o != null) {
+        ['disableFilter', 'defaultFilter'].map(function(it){
+          if (o[it]) {
+            return this$.opt[it] = o[it];
+          }
+        });
+      }
+      return ld$.find(this.root, '.anikit').map(function(d, i){
+        if (this$.opt.disableFilter) {
+          ld$.cls(d, {
+            disabled: this$.opt.disableFilter(d.getAttribute('data-anikit'), i)
+          });
+        }
+        if (this$.opt.defaultFilter && !this$.opt.defaultFilter(d.getAttribute('data-anikit'), i)) {
+          return ld$.remove(d);
+        }
+      });
     }
   });
   if (typeof window != 'undefined' && window !== null) {
