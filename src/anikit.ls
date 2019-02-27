@@ -71,9 +71,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     opacity = if values.opacity? => values.opacity else 1
     if node.material.uniforms and node.material.uniforms.alpha =>
       node.material.uniforms.alpha.value = opacity
-    else
-      node.material.transparent = true
-      node.material.opacity = opacity
+    node.material.transparent = true
+    node.material.opacity = opacity
 
   animate: (node, opt={}) ->
     opt = {} <<< @config <<< opt

@@ -216,11 +216,10 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }
     opacity = values.opacity != null ? values.opacity : 1;
     if (node.material.uniforms && node.material.uniforms.alpha) {
-      return node.material.uniforms.alpha.value = opacity;
-    } else {
-      node.material.transparent = true;
-      return node.material.opacity = opacity;
+      node.material.uniforms.alpha.value = opacity;
     }
+    node.material.transparent = true;
+    return node.material.opacity = opacity;
   },
   animate: function(node, opt){
     var that, ref$, dur, rpt;
