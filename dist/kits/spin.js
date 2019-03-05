@@ -17,7 +17,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.ry(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.ry(t * c.cycle * Math.PI * 2)
         };
       }
     },
@@ -31,7 +31,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rx(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.rx(t * c.cycle * Math.PI * 2)
         };
       }
     },
@@ -45,7 +45,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rz(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.rz(t * c.cycle * Math.PI * 2)
         };
       }
     },
@@ -59,7 +59,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.ry(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.ry(t * c.cycle * Math.PI * 2)
         };
       }
     },
@@ -73,7 +73,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rx(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.rx(t * c.cycle * Math.PI * 2)
         };
       }
     },
@@ -86,7 +86,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rz(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.rz(t * c.cycle * Math.PI * 2)
         };
       }
     },
@@ -99,7 +99,7 @@ ret = {
       },
       value: function(t, c){
         return {
-          transform: anikit.util.rz(t * c.cycle * Math.PI / 180)
+          transform: anikit.util.rz(t * c.cycle * Math.PI * 2)
         };
       }
     }

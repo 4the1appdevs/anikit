@@ -6,31 +6,31 @@ ret = do
     "coin-h":
       cycle: 10, dur: 2
       prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI * 2)}
     "coin-v":
       cycle: 10, dur: 2
       prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI * 2)}
     "cycle":
       steep: 0.0, cycle: 360
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI * 2)}
     "flip-h":
       cycle: 1, flip: true
       prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI * 2)}
     "flip-v":
       cycle: 1, flip: true
       prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI * 2)}
     "spin-fast":
       cycle: 5
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI * 2)}
     spin:
       cycle: 1
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
-      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI / 180)}
+      value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI * 2)}
   edit: 
     steep: default: 0.4, type: \number, min: 0, max: 1, step: 0.01
     cycle: default: 1, type: \number, min: 0, max: 100, step: 1
