@@ -1930,13 +1930,10 @@
 @keyframes ld-move-ltr
 {
   0% {
-    animation-timing-function: cubic-bezier(0.3333,0.3333,0.6667,0.6667);
     transform: matrix(1,0,0,1,0,0);
-    opacity: undefined;
   }
   100% {
-    transform: matrix(1,0,0,1,200,0);
-    opacity: undefined;
+    transform: matrix(1,0,0,1,100,0);
   }
 }
 .ld.ld-move-ltr {
@@ -1945,47 +1942,38 @@
 @keyframes ld-move-rtl
 {
   0% {
-    animation-timing-function: cubic-bezier(0.3333,0.3333,0.6667,0.6667);
     transform: matrix(1,0,0,1,0,0);
-    opacity: undefined;
   }
   100% {
-    transform: matrix(1,0,0,1,-200,0);
-    opacity: undefined;
+    transform: matrix(1,0,0,1,-100,0);
   }
 }
 .ld.ld-move-rtl {
   animation: ld-move-rtl 1s infinite; 
 }
-@keyframes ld-move-btt
-{
-  0% {
-    animation-timing-function: cubic-bezier(0.3333,0.3333,0.6667,0.6667);
-    transform: matrix(1,0,0,1,0,0);
-    opacity: undefined;
-  }
-  100% {
-    transform: matrix(1,0,0,1,0,-200);
-    opacity: undefined;
-  }
-}
-.ld.ld-move-btt {
-  animation: ld-move-btt 1s infinite; 
-}
 @keyframes ld-move-ttb
 {
   0% {
-    animation-timing-function: cubic-bezier(0.3333,0.3333,0.6667,0.6667);
     transform: matrix(1,0,0,1,0,0);
-    opacity: undefined;
   }
   100% {
-    transform: matrix(1,0,0,1,0,200);
-    opacity: undefined;
+    transform: matrix(1,0,0,1,0,100);
   }
 }
 .ld.ld-move-ttb {
   animation: ld-move-ttb 1s infinite; 
+}
+@keyframes ld-move-btt
+{
+  0% {
+    transform: matrix(1,0,0,1,0,0);
+  }
+  100% {
+    transform: matrix(1,0,0,1,0,-100);
+  }
+}
+.ld.ld-move-btt {
+  animation: ld-move-btt 1s infinite; 
 }
  @keyframes ld-orbit {  0% {
 animation-timing-function: linear;

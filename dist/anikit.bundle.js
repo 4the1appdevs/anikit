@@ -596,7 +596,7 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","throw-ltr-in":"bounce-transition","throw-rtl-in":"bounce-transition","throw-ttb-in":"bounce-transition","throw-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-btt":"move","move-ttb":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","pulse":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","throw-ltr-in":"bounce-transition","throw-rtl-in":"bounce-transition","throw-ttb-in":"bounce-transition","throw-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
 },{"./kits/blink":7,"./kits/blur":9,"./kits/blur-transition":8,"./kits/bounce":12,"./kits/bounce-rigid":10,"./kits/bounce-transition":11,"./kits/clock":13,"./kits/fade":14,"./kits/float":15,"./kits/heartbeat":16,"./kits/hit":17,"./kits/jump-transition":18,"./kits/move":19,"./kits/orbit":20,"./kits/patrol":21,"./kits/power":22,"./kits/rubber":23,"./kits/rush":24,"./kits/slide":25,"./kits/spin":26,"./kits/squeeze":27,"./kits/static":28,"./kits/surprise":29,"./kits/tremble":30,"./kits/vortex":31,"./kits/wrench":32}],7:[function(require,module,exports){
@@ -2672,14 +2672,12 @@ move = {
     var value;
     value = this.value(f.value, c);
     return {
-      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
-      opacity: c.fade ? value.opacity : void 8
+      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
     };
   },
   value: function(t, c){
     return {
-      transform: anikit.util[c.dir === 1 ? 'tx' : 'ty'](t * c.offset),
-      opacity: c.fade ? t <= -0.8 || t >= 0.8 ? 0 : 1 : void 8
+      transform: anikit.util[c.dir % 2 ? 'tx' : 'ty']((c.dir > 2 ? -1 : 1) * 2 * (t - 0.5) * c.offset)
     };
   }
 };
@@ -2688,18 +2686,20 @@ ret = {
   type: 'animation',
   preset: {
     "move-ltr": import$({
-      offset: 200
+      offset: 100,
+      dir: 1
     }, move),
     "move-rtl": import$({
-      offset: -200
-    }, move),
-    "move-btt": import$({
-      offset: -200,
-      dir: 2
+      offset: 100,
+      dir: 3
     }, move),
     "move-ttb": import$({
-      offset: 200,
+      offset: 100,
       dir: 2
+    }, move),
+    "move-btt": import$({
+      offset: 100,
+      dir: 4
     }, move)
   },
   edit: {
@@ -2712,11 +2712,11 @@ ret = {
     },
     offset: {
       name: "Move Distance",
-      'default': 200,
+      'default': 100,
       type: 'number',
       unit: 'px',
-      min: -2000,
-      max: 2000
+      min: 0,
+      max: 1000
     },
     dir: {
       'default': 1,
@@ -2733,18 +2733,32 @@ ret = {
       'default': false
     }
   },
+  timing: function(t, opt){
+    return ((2 * t + 1) % 2 - 1) * 0.5 + 0.5;
+  },
   css: function(opt){
-    var local, prop, ref$, ref1$, this$ = this;
-    local = {
-      errorThreshold: 0.0001,
-      sampleCount: 20
-    };
-    prop = function(f, c){
-      return opt.prop(f, c);
-    };
-    return easingFit.fitToKeyframes(function(it){
-      return it;
-    }, (ref$ = (ref1$ = import$(local, opt.local) || {}, ref1$.prop = prop, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$));
+    return easingFit.toKeyframes([
+      {
+        percent: 0,
+        value: 0
+      }, {
+        percent: 100,
+        value: 1
+      }
+    ], {
+      name: opt.name,
+      prop: function(f, c){
+        var ref$, a, b;
+        ref$ = [0, f.value * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
+        if (c.dir % 2) {
+          ref$ = [b, a], a = ref$[0], b = ref$[1];
+        }
+        return {
+          transform: "matrix(1,0,0,1," + a + "," + b + ")"
+        };
+      },
+      config: opt
+    });
   },
   js: function(t, opt){
     return opt.prop({
@@ -3760,13 +3774,13 @@ slide = {
     value = this.value(f.value, c);
     return {
       transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
-      opacity: value.opacity
+      opacity: c.fade ? value.opacity : 1
     };
   },
   value: function(t, c){
     return {
       transform: anikit.util[c.dir === 1 ? 'tx' : 'ty'](t * c.offset),
-      opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
+      opacity: c.fade && (t <= -0.8 || t >= 0.8) ? 0 : 1
     };
   }
 };
@@ -3790,6 +3804,11 @@ ret = {
     }, slide)
   },
   edit: {
+    fade: {
+      'default': true,
+      type: 'boolean',
+      hidden: true
+    },
     steep: {
       'default': 0.3,
       type: 'number',

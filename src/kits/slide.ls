@@ -4,22 +4,23 @@ slide = do
     value = @value f.value, c
     return do 
       transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-      opacity: value.opacity
+      opacity: if c.fade => value.opacity else 1
   value: (t, c) -> do
     transform: anikit.util[if c.dir == 1 => \tx else \ty] t * c.offset
-    opacity: if t <= -0.8 or t >= 0.8 => 0 else 1
+    opacity: if c.fade and (t <= -0.8 or t >= 0.8) => 0 else 1
 
 
 ret = do
   name: \slide
   type: \animation
   preset:
-    "slide-ltr": {offset: 200} <<< slide
+    "slide-ltr": {offset:  200} <<< slide
     "slide-rtl": {offset: -200} <<< slide
     "slide-btt": {offset: -200, dir: 2} <<< slide
-    "slide-ttb": {offset: 200, dir: 2} <<< slide
+    "slide-ttb": {offset:  200, dir: 2} <<< slide
 
   edit: 
+    fade: default: true, type: \boolean, hidden: true
     steep: default: 0.3, type: \number, min: 0.3, max: 1, step: 0.01
     offset: name: "Move Distance", default: 200, type: \number, unit: \px, min: -2000, max: 2000
     dir: default: 1, type: \number, hidden: true

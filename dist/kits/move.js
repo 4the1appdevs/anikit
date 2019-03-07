@@ -8,14 +8,12 @@ move = {
     var value;
     value = this.value(f.value, c);
     return {
-      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
-      opacity: c.fade ? value.opacity : void 8
+      transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
     };
   },
   value: function(t, c){
     return {
-      transform: anikit.util[c.dir === 1 ? 'tx' : 'ty'](t * c.offset),
-      opacity: c.fade ? t <= -0.8 || t >= 0.8 ? 0 : 1 : void 8
+      transform: anikit.util[c.dir % 2 ? 'tx' : 'ty']((c.dir > 2 ? -1 : 1) * 2 * (t - 0.5) * c.offset)
     };
   }
 };
@@ -24,18 +22,20 @@ ret = {
   type: 'animation',
   preset: {
     "move-ltr": import$({
-      offset: 200
+      offset: 100,
+      dir: 1
     }, move),
     "move-rtl": import$({
-      offset: -200
-    }, move),
-    "move-btt": import$({
-      offset: -200,
-      dir: 2
+      offset: 100,
+      dir: 3
     }, move),
     "move-ttb": import$({
-      offset: 200,
+      offset: 100,
       dir: 2
+    }, move),
+    "move-btt": import$({
+      offset: 100,
+      dir: 4
     }, move)
   },
   edit: {
@@ -48,11 +48,11 @@ ret = {
     },
     offset: {
       name: "Move Distance",
-      'default': 200,
+      'default': 100,
       type: 'number',
       unit: 'px',
-      min: -2000,
-      max: 2000
+      min: 0,
+      max: 1000
     },
     dir: {
       'default': 1,
@@ -69,18 +69,32 @@ ret = {
       'default': false
     }
   },
+  timing: function(t, opt){
+    return ((2 * t + 1) % 2 - 1) * 0.5 + 0.5;
+  },
   css: function(opt){
-    var local, prop, ref$, ref1$, this$ = this;
-    local = {
-      errorThreshold: 0.0001,
-      sampleCount: 20
-    };
-    prop = function(f, c){
-      return opt.prop(f, c);
-    };
-    return easingFit.fitToKeyframes(function(it){
-      return it;
-    }, (ref$ = (ref1$ = import$(local, opt.local) || {}, ref1$.prop = prop, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$));
+    return easingFit.toKeyframes([
+      {
+        percent: 0,
+        value: 0
+      }, {
+        percent: 100,
+        value: 1
+      }
+    ], {
+      name: opt.name,
+      prop: function(f, c){
+        var ref$, a, b;
+        ref$ = [0, f.value * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
+        if (c.dir % 2) {
+          ref$ = [b, a], a = ref$[0], b = ref$[1];
+        }
+        return {
+          transform: "matrix(1,0,0,1," + a + "," + b + ")"
+        };
+      },
+      config: opt
+    });
   },
   js: function(t, opt){
     return opt.prop({

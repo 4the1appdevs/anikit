@@ -9,13 +9,13 @@ slide = {
     value = this.value(f.value, c);
     return {
       transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
-      opacity: value.opacity
+      opacity: c.fade ? value.opacity : 1
     };
   },
   value: function(t, c){
     return {
       transform: anikit.util[c.dir === 1 ? 'tx' : 'ty'](t * c.offset),
-      opacity: t <= -0.8 || t >= 0.8 ? 0 : 1
+      opacity: c.fade && (t <= -0.8 || t >= 0.8) ? 0 : 1
     };
   }
 };
@@ -39,6 +39,11 @@ ret = {
     }, slide)
   },
   edit: {
+    fade: {
+      'default': true,
+      type: 'boolean',
+      hidden: true
+    },
     steep: {
       'default': 0.3,
       type: 'number',
