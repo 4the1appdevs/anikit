@@ -84,14 +84,14 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     node.style.animation = "#{@config.name}-#{@id} #{dur}s #{rpt} linear forwards"
     node.style.animationDelay = "#{opt.delay or 0}s"
   origin: (n,h,opt={}) ->
-    {x,y,ox,oy} = opt
-    if x? and y? => return anikit.util.origin n, h, x, y, ox, oy
+    {x,y,ox,oy,s} = opt
+    if x? and y? => return anikit.util.origin n, h, x, y, ox, oy, if s? => s else 1
     if @config.origin => [x,y,z] = that
     else if @mod.affine =>
       value = @mod.affine 0, @config
       if value.transform-origin => [x,y,z] = value.transform-origin
     if !(x?) or !(y?) => [x,y,z] = [0.5, 0.5, 0.5]
-    if n.style => anikit.util.origin n, h, x, y, ox, oy
+    if n.style => anikit.util.origin n, h, x, y, ox, oy, if s? => s else 1
 
   statify: (node) -> node.style.animation = node.style.animationDelay = ""
   destroy: -> if @dom => @dom.parentNode.removeChild @dom
@@ -113,11 +113,11 @@ anikit <<< do
       k = k * m + m - 1
       while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
       return k
-    origin: (n,h,px=0.5,py=0.5,ox=0,oy=0) ->
+    origin: (n,h,px=0.5,py=0.5,ox=0,oy=0, s = 1) ->
       [nb, hb] = [n,h].map -> it.getBoundingClientRect!
       x = nb.width * px + nb.x - hb.x + ox # - hb.width * 0.5
       y = nb.height * py + nb.y - hb.y + oy # - hb.height * 0.5
-      n.style.transform-origin = "#{x}px #{y}px"
+      n.style.transform-origin = "#{x * s}px #{y * s}px"
       [x,y]
     /* forward, reverse, random */
     order: (i,n,t = 0) ->

@@ -236,11 +236,11 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return node.style.animationDelay = (opt.delay || 0) + "s";
   },
   origin: function(n, h, opt){
-    var x, y, ox, oy, that, z, value, ref$;
+    var x, y, ox, oy, s, that, z, value, ref$;
     opt == null && (opt = {});
-    x = opt.x, y = opt.y, ox = opt.ox, oy = opt.oy;
+    x = opt.x, y = opt.y, ox = opt.ox, oy = opt.oy, s = opt.s;
     if (x != null && y != null) {
-      return anikit.util.origin(n, h, x, y, ox, oy);
+      return anikit.util.origin(n, h, x, y, ox, oy, s != null ? s : 1);
     }
     if (that = this.config.origin) {
       x = that[0], y = that[1], z = that[2];
@@ -254,7 +254,7 @@ anikit.prototype = import$(Object.create(Object.prototype), {
       ref$ = [0.5, 0.5, 0.5], x = ref$[0], y = ref$[1], z = ref$[2];
     }
     if (n.style) {
-      return anikit.util.origin(n, h, x, y, ox, oy);
+      return anikit.util.origin(n, h, x, y, ox, oy, s != null ? s : 1);
     }
   },
   statify: function(node){
@@ -296,18 +296,19 @@ import$(anikit, {
       }
       return k;
     },
-    origin: function(n, h, px, py, ox, oy){
+    origin: function(n, h, px, py, ox, oy, s){
       var ref$, nb, hb, x, y;
       px == null && (px = 0.5);
       py == null && (py = 0.5);
       ox == null && (ox = 0);
       oy == null && (oy = 0);
+      s == null && (s = 1);
       ref$ = [n, h].map(function(it){
         return it.getBoundingClientRect();
       }), nb = ref$[0], hb = ref$[1];
       x = nb.width * px + nb.x - hb.x + ox;
       y = nb.height * py + nb.y - hb.y + oy;
-      n.style.transformOrigin = x + "px " + y + "px";
+      n.style.transformOrigin = x * s + "px " + y * s + "px";
       return [x, y];
     }
     /* forward, reverse, random */,
