@@ -2,6 +2,17 @@ require! <[easing-fit cubic ./easing]>
 kits-list = require './kits-list.gen'
 uuid = require 'uuid/v4'
 
+GBCR = (n) -> n.getBoundingClientRect!
+if navigator? => if /Firefox\/([0-9.]+)/.exec(navigator.userAgent) =>
+  GBCR = (n) ->
+    box = n.getBoundingClientRect!
+    t = getComputedStyle(n).transform
+    t = t.trim!.substring(7).replace(/[)]/g,'').split(\,)
+    if t.length < 6 => t = [1,0,0,1,0,0]
+    t = t.map -> +it
+    box <<< x: box.x + t.4, y: box.y + t.5
+
+
 {cos,sin,tan} = Math{cos,sin,tan}
 
 anikit = (name, opt={}) ->
@@ -114,7 +125,7 @@ anikit <<< do
       while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
       return k
     origin: (n,h,px=0.5,py=0.5,ox=0,oy=0, s = 1) ->
-      [nb, hb] = [n,h].map -> it.getBoundingClientRect!
+      [nb, hb] = [n,h].map -> GBCR it #!it.getBoundingClientRect!
       x = nb.width * px + nb.x - hb.x + ox # - hb.width * 0.5
       y = nb.height * py + nb.y - hb.y + oy # - hb.height * 0.5
       n.style.transform-origin = "#{x * s}px #{y * s}px"
