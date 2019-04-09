@@ -29,7 +29,7 @@
       if !kit => return e.stopPropagation!
       if @active => @active.classList.remove \active
       n.classList.add \active
-      if kit != @anikit => @fire \choose, kit
+      if kit != @anikit => @fire \choose, kit, {limited: !!ld$.parent(tgt, '.limited', @root)}
       @anikit = kit
       @active = n
       if @btn => @btn.innerText = @anikit
@@ -41,7 +41,9 @@
     apply-filters: (o) ->
       if o? => <[disableFilter defaultFilter]>.map ~> if o[it] => @opt[it] = o[it]
       ld$.find @root, '.anikit' .map (d,i) ~>
-        if @opt.disable-filter => ld$.cls d, {disabled: @opt.disable-filter(d.getAttribute(\data-anikit),i)}
+        if @opt.disable-filter =>
+          ret = @opt.disable-filter(d.getAttribute(\data-anikit),i)
+          ld$.cls d, (if @opt.limit-hard => {disabled: ret} else {limited: ret})
         if @opt.default-filter and !@opt.default-filter(d.getAttribute(\data-anikit),i) => ld$.remove d
 
   if window? => window.ldAnikitPicker = ldAnikitPicker

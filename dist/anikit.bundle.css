@@ -3461,6 +3461,17 @@ skew(-30deg);
   background: #f9fafb;
   color: #ccc;
 }
+.anikit.dropdown-item.limited {
+  background: #f9fafb;
+}
+.anikit.dropdown-item.limited:hover span:after {
+  opacity: 0.5;
+  display: inline;
+  margin-left: 3px;
+  content: "\e90b";
+  vertical-align: middle;
+  font-family: ldi;
+}
 .anikit.dropdown-item .demo .inner {
   transform: scale(0.3);
   position: absolute;
@@ -3468,7 +3479,7 @@ skew(-30deg);
   top: 0;
   left: 0;
   right: 0;
-  margin: auto;
+  margin: -5px auto 0;
 }
 .anikit.dropdown-item .demo {
   width: 16px;
