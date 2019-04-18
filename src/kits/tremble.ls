@@ -6,7 +6,7 @@ ret = do
     measure: dur: 5, count: 30, offset: 0, degree: 30, zoom: 0
     shiver: dur: 0.5, count: 30, offset: 0, degree: 0, zoom: 0.1
     swim: dur: 10, count: 12, offset: 12, degree: 30, zoom: 0, unit: \px
-    tremble: dur: 0.5, count: 30, offset: 8, degree: 0, zoom: 0, unit: \px
+    tremble: dur: 0.5, count: 30, offset: 2, degree: 0, zoom: 0, unit: \px
 
   edit: 
     count: name: "Sample Count", default: 30, type: \number, min: 1, max: 99

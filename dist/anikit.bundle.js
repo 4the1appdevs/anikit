@@ -4353,7 +4353,7 @@ ret = {
     tremble: {
       dur: 0.5,
       count: 30,
-      offset: 8,
+      offset: 2,
       degree: 0,
       zoom: 0,
       unit: 'px'
