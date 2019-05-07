@@ -124,12 +124,34 @@ anikit <<< do
       k = k * m + m - 1
       while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
       return k
-    origin: (n,h,px=0.5,py=0.5,ox=0,oy=0, s = 1) ->
-      [nb, hb] = [n,h].map -> GBCR it #!it.getBoundingClientRect!
-      x = nb.width * px + nb.x - hb.x + ox # - hb.width * 0.5
-      y = nb.height * py + nb.y - hb.y + oy # - hb.height * 0.5
-      n.style.transform-origin = "#{x * s}px #{y * s}px"
-      [x,y]
+    origin: (n,h,px=0.5,py=0.5,ox=0,oy=0,s=1) ->
+      if h.x? and h.width? =>
+        [x,y] = [h.x + h.width * px, h.y + h.height * py]
+        n.style.transform-origin = "#{x}px #{y}px"
+        [x,y]
+      else if n.transform
+        svg = null
+        _ = (n) ~>
+          if n.nodeName.toLowerCase! == \svg => svg := n; return n.createSVGMatrix!
+          return _(n.parentNode).multiply(
+            if n.transform.baseVal.consolidate! => that.matrix else svg.createSVGMatrix!
+          )
+        mat = _ n.parentNode
+        abox = n.getBoundingClientRect!
+        rbox = h.getBoundingClientRect!
+        p1 = (p <<< x: abox.x - rbox.x, y: abox.y - rbox.y).matrixTransform(mat.inverse!)
+        p2 = (p <<< x: abox.x + abox.width - rbox.x, y: abox.y + abox.height - rbox.y).matrixTransform(mat.inverse!)
+        box = x: p1.x, y: p1.y, width: p2.x - p1.x, height: p2.y - p1.y
+        [x,y] = [h.x + h.width * px, h.y + h.height * py]
+        n.style.transform-origin = "#{x}px #{y}px"
+        [x,y]
+
+      else
+        [nb, hb] = [n,h].map -> GBCR it #!it.getBoundingClientRect!
+        x = nb.width * px + nb.x - hb.x + ox # - hb.width * 0.5
+        y = nb.height * py + nb.y - hb.y + oy # - hb.height * 0.5
+        n.style.transform-origin = "#{x * s}px #{y * s}px"
+        [x,y]
     /* forward, reverse, random */
     order: (i,n,t = 0) ->
       if t == 0 => return i

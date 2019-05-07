@@ -317,19 +317,51 @@ import$(anikit, {
       return k;
     },
     origin: function(n, h, px, py, ox, oy, s){
-      var ref$, nb, hb, x, y;
+      var ref$, x, y, svg, _, mat, abox, rbox, p1, p2, box, nb, hb, this$ = this;
       px == null && (px = 0.5);
       py == null && (py = 0.5);
       ox == null && (ox = 0);
       oy == null && (oy = 0);
       s == null && (s = 1);
-      ref$ = [n, h].map(function(it){
-        return GBCR(it);
-      }), nb = ref$[0], hb = ref$[1];
-      x = nb.width * px + nb.x - hb.x + ox;
-      y = nb.height * py + nb.y - hb.y + oy;
-      n.style.transformOrigin = x * s + "px " + y * s + "px";
-      return [x, y];
+      if (h.x != null && h.width != null) {
+        ref$ = [h.x + h.width * px, h.y + h.height * py], x = ref$[0], y = ref$[1];
+        n.style.transformOrigin = x + "px " + y + "px";
+        return [x, y];
+      } else if (n.transform) {
+        svg = null;
+        _ = function(n){
+          var that;
+          if (n.nodeName.toLowerCase() === 'svg') {
+            svg = n;
+            return n.createSVGMatrix();
+          }
+          return _(n.parentNode).multiply((that = n.transform.baseVal.consolidate())
+            ? that.matrix
+            : svg.createSVGMatrix());
+        };
+        mat = _(n.parentNode);
+        abox = n.getBoundingClientRect();
+        rbox = h.getBoundingClientRect();
+        p1 = (p.x = abox.x - rbox.x, p.y = abox.y - rbox.y, p).matrixTransform(mat.inverse());
+        p2 = (p.x = abox.x + abox.width - rbox.x, p.y = abox.y + abox.height - rbox.y, p).matrixTransform(mat.inverse());
+        box = {
+          x: p1.x,
+          y: p1.y,
+          width: p2.x - p1.x,
+          height: p2.y - p1.y
+        };
+        ref$ = [h.x + h.width * px, h.y + h.height * py], x = ref$[0], y = ref$[1];
+        n.style.transformOrigin = x + "px " + y + "px";
+        return [x, y];
+      } else {
+        ref$ = [n, h].map(function(it){
+          return GBCR(it);
+        }), nb = ref$[0], hb = ref$[1];
+        x = nb.width * px + nb.x - hb.x + ox;
+        y = nb.height * py + nb.y - hb.y + oy;
+        n.style.transformOrigin = x * s + "px " + y * s + "px";
+        return [x, y];
+      }
     }
     /* forward, reverse, random */,
     order: function(i, n, t){
