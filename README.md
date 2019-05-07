@@ -74,6 +74,9 @@ All animations are defined under src/kits/ as separated files, extend ldEditor "
  * Apply THREEJS Animation over THREE.Mesh:
    - kit.animate-three(mesh, time, opt); // opt is optional
 
+ * Setting transform origin:
+   - kit.origin(node, root, option);
+
  * Update kit config:
    - kit.setConfig(opt);
 
