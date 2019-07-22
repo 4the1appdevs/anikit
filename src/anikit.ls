@@ -125,7 +125,7 @@ anikit <<< do
       while k >= n => k = k - n + Math.floor((k - n) / (m - 1))
       return k
     origin: (n,h,px=0.5,py=0.5,ox=0,oy=0,s=1) ->
-      if h.x? and h.width? =>
+      if typeof(h.x) == typeof(h.width) == \number =>
         [x,y] = [h.x + h.width * px, h.y + h.height * py]
         n.style.transform-origin = "#{x}px #{y}px"
         [x,y]
@@ -134,18 +134,18 @@ anikit <<< do
         _ = (n) ~>
           if n.nodeName.toLowerCase! == \svg => svg := n; return n.createSVGMatrix!
           return _(n.parentNode).multiply(
-            if n.transform.baseVal.consolidate! => that.matrix else svg.createSVGMatrix!
+            if n.transform and n.transform.baseVal.consolidate! => that.matrix else svg.createSVGMatrix!
           )
         mat = _ n.parentNode
+        p = svg.createSVGPoint!
         abox = n.getBoundingClientRect!
         rbox = h.getBoundingClientRect!
         p1 = (p <<< x: abox.x - rbox.x, y: abox.y - rbox.y).matrixTransform(mat.inverse!)
         p2 = (p <<< x: abox.x + abox.width - rbox.x, y: abox.y + abox.height - rbox.y).matrixTransform(mat.inverse!)
         box = x: p1.x, y: p1.y, width: p2.x - p1.x, height: p2.y - p1.y
-        [x,y] = [h.x + h.width * px, h.y + h.height * py]
+        [x,y] = [box.x + box.width * px, box.y + box.height * py]
         n.style.transform-origin = "#{x}px #{y}px"
         [x,y]
-
       else
         [nb, hb] = [n,h].map -> GBCR it #!it.getBoundingClientRect!
         x = nb.width * px + nb.x - hb.x + ox # - hb.width * 0.5

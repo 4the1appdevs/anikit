@@ -3409,6 +3409,7 @@ skew(-30deg);
   animation-iteration-count: infinite !important;
   display: none;
 }
+.anikit.active .ld,
 .anikit:hover .ld {
   animation-play-state: running;
   display: block;
@@ -3443,10 +3444,12 @@ skew(-30deg);
   animation-play-state: running;
   display: block;
 }
+.anikits .anikit.active,
 .anikits .anikit:hover {
   background: #09f;
   color: #fff;
 }
+.anikits .anikit.active .ld,
 .anikits .anikit:hover .ld {
   background: #fff;
   border-top-color: #09f;
@@ -3462,14 +3465,16 @@ skew(-30deg);
   color: #ccc;
 }
 .anikit.dropdown-item.limited {
+  color: #444;
   background: #f9fafb;
 }
 .anikit.dropdown-item.limited:hover span:after {
   opacity: 0.5;
   display: inline;
   margin-left: 3px;
-  content: "\e91a";
-  vertical-align: middle;
+  content: "\f011";
+  vertical-align: -15%;
+  line-height: 1;
   font-family: ldi;
 }
 .anikit.dropdown-item .demo .inner {
