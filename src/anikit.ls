@@ -89,7 +89,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     opt = {} <<< @config <<< opt
     @get-dom!
 
-    [dur,rpt, dir] = [opt.dur or 1, if opt.repeat => that else \infinite, opt.dir or \normal]
+    [dur,rpt, dir] = [opt.dur or 1, if opt.repeat => that else \infinite, opt.animation-dir or \normal]
     if @config.origin =>
       node.style.transformOrigin = [@config.origin.0 or 0.5, @config.origin.1 or 0.5].map(-> "{it * 50}%").join(' ')
     node.style.animation = "#{@config.name}-#{@id} #{dur}s #{rpt} linear forwards #{dir}"

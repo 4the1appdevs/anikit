@@ -116,7 +116,7 @@ Anikit object support following configurations:
  * name - animation name
  * repeat - repeat count. 0 for infinite
  * dur - animation duration. default 1s
- * dir - animation direction. default normal
+ * animation-dir - animation direction. default normal
  * origin - origin of animation transformation. default [0.5, 0.5]
 
 Config could be overwritten by options when calling animate function, e.g.,
