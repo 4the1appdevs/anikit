@@ -151,17 +151,17 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return node.material.opacity = opacity;
   },
   animate: function(node, opt){
-    var that, ref$, dur, rpt;
+    var that, ref$, dur, rpt, dir;
     opt == null && (opt = {});
     opt = import$(import$({}, this.config), opt);
     this.getDom();
-    ref$ = [opt.dur || 1, (that = opt.repeat) ? that : 'infinite'], dur = ref$[0], rpt = ref$[1];
+    ref$ = [opt.dur || 1, (that = opt.repeat) ? that : 'infinite', opt.dir || 'normal'], dur = ref$[0], rpt = ref$[1], dir = ref$[2];
     if (this.config.origin) {
       node.style.transformOrigin = [this.config.origin[0] || 0.5, this.config.origin[1] || 0.5].map(function(){
         return "{it * 50}%";
       }).join(' ');
     }
-    node.style.animation = this.config.name + "-" + this.id + " " + dur + "s " + rpt + " linear forwards";
+    node.style.animation = this.config.name + "-" + this.id + " " + dur + "s " + rpt + " linear forwards " + dir;
     return node.style.animationDelay = (opt.delay || 0) + "s";
   },
   origin: function(n, h, opt){
