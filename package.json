@@ -3,7 +3,7 @@
   "name": "anikit",
   "description": "Animation Toolkit",
   "version": "0.0.1",
-  "main": "dist/anikit.js",
+  "main": "src/anikit.ls",
   "homepage": "https://github.com/loadingio/anikit",
   "license": "MIT",
   "repository": {
