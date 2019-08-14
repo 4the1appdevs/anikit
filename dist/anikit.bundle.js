@@ -250,10 +250,6 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     origin = (that = this.config.origin)
       ? that
       : [0.5, 0.5, 0.5];
-    node.style.transformOrigin = [origin[0] || 0.5, origin[1] || 0.5].map(function(it){
-      return it * 100 + "%";
-    }).join(' ');
-    node.style.transformBox = "fill-box";
     node.style.animation = this.config.name + "-" + this.id + " " + dur + "s " + rpt + " linear forwards " + dir;
     return node.style.animationDelay = (opt.delay || 0) + "s";
   },
@@ -325,6 +321,7 @@ import$(anikit, {
       ox == null && (ox = 0);
       oy == null && (oy = 0);
       s == null && (s = 1);
+      console.log("(px, py)", px, py);
       if (typeof h.x === (ref$ = typeof h.width) && ref$ === 'number') {
         ref$ = [h.x + h.width * px, h.y + h.height * py], x = ref$[0], y = ref$[1];
         n.style.transformOrigin = x + "px " + y + "px";
@@ -355,6 +352,7 @@ import$(anikit, {
         };
         ref$ = [box.x + box.width * px, box.y + box.height * py], x = ref$[0], y = ref$[1];
         n.style.transformOrigin = x + "px " + y + "px";
+        console.log(x + "px " + y + "px");
         return [x, y];
       } else {
         ref$ = [n, h].map(function(it){
@@ -363,6 +361,7 @@ import$(anikit, {
         x = nb.width * px + nb.x - hb.x + ox;
         y = nb.height * py + nb.y - hb.y + oy;
         n.style.transformOrigin = x * s + "px " + y * s + "px";
+        console.log(x * s + "px " + y * s + "px");
         return [x, y];
       }
     }
