@@ -143,6 +143,16 @@ Config could be overwritten by options when calling animate function, e.g.,
  * fully support glsl, perhaps in glslify style
 
 
+## MISC
+
+ * transform-box: fill-box inconsistent result - seems to be browser bug. 
+   following samples give inconsistent result about circle position when scale reaches 0.5, which should be all the same:
+   - g(style="animation:scale 1s linear;transform-origin:20px 20px;transform-box:fill-box"): circle(r="20")
+     style @keyframes scale { 0% { transform: scale(1); } 100%: {transform: scale(0.5); }}
+   - g(style="transform:scale(0.5);transform-origin:20px 20px;transform-box:fill-box"): circle(r="20")
+   - g(style="transform:scale(0.5);transform-origin:50%;transform-box:fill-box"): circle(r="20")
+
+
 ## LICENSE
 
 MIT
