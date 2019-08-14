@@ -90,8 +90,9 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     @get-dom!
 
     [dur,rpt, dir] = [opt.dur or 1, if opt.repeat => that else \infinite, opt.animation-dir or \normal]
-    if @config.origin =>
-      node.style.transformOrigin = [@config.origin.0 or 0.5, @config.origin.1 or 0.5].map(-> "{it * 50}%").join(' ')
+    origin = if @config.origin => that else [0.5, 0.5, 0.5]
+    node.style.transformOrigin = [origin.0 or 0.5, origin.1 or 0.5].map(-> "#{it * 100}%").join(' ')
+    node.style.transformBox = "fill-box"
     node.style.animation = "#{@config.name}-#{@id} #{dur}s #{rpt} linear forwards #{dir}"
     node.style.animationDelay = "#{opt.delay or 0}s"
   origin: (n,h,opt={}) ->
