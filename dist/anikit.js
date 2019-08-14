@@ -192,7 +192,7 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return node.style.animation = node.style.animationDelay = "";
   },
   destroy: function(){
-    if (this.dom) {
+    if (this.dom && this.dom.parentNode) {
       return this.dom.parentNode.removeChild(this.dom);
     }
   }

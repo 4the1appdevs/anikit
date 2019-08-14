@@ -106,7 +106,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if n.style => anikit.util.origin n, h, x, y, ox, oy, if s? => s else 1
 
   statify: (node) -> node.style.animation = node.style.animationDelay = ""
-  destroy: -> if @dom => @dom.parentNode.removeChild @dom
+  destroy: -> if @dom and @dom.parentNode => @dom.parentNode.removeChild @dom
 
 anikit <<< do
   util:
