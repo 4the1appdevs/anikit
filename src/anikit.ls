@@ -26,6 +26,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     @config <<< c
     if @dom => @dom.textContent = @mod.css({} <<< @config <<< name: "#{@config.name}-#{@id}")
     @mod.config = @config
+  get-config: -> @config
   css: (opt={}) -> if @mod.css => @mod.css {} <<< @config <<< opt else {}
   js: (t, opt={}) -> if @mod.js => @mod.js t, opt = {} <<< @config <<< opt
   affine: (t, opt={}) -> if @mod.affine => @mod.affine t, opt = {} <<< @config <<< opt

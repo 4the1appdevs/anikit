@@ -139,6 +139,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }
     return this.mod.config = this.config;
   },
+  getConfig: function(){
+    return this.config;
+  },
   css: function(opt){
     opt == null && (opt = {});
     if (this.mod.css) {
