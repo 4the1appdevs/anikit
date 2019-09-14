@@ -1,21 +1,154 @@
 doctype html
 include ../../static/assets/lib/pug/ldui.pug
+include ../../static/assets/anikit/anikit.pug
 html(lang="en")
   head
     meta(charset="utf-8")
     link(href="https://fonts.googleapis.com/css?family=Oxygen:300,700|Roboto:300,500,700|BenchNine|Varela+Round&display=swap", rel="stylesheet")
-    +css("/assets/lib/bootstrap.min.css")
-    +css("/assets/lib/ldui.min.css")
-    +css("/assets/anikit/anikit.bundle.min.css")
-    +css("/css/index.css")
+    +css("assets/lib/bootstrap.min.css")
+    +css("assets/lib/ldui.min.css")
+    +css("assets/anikit/anikit.bundle.min.css")
+    +css("css/index.css")
   body
     .w-100.h-gr.vertical-center.bg-light
       .w-100.text-center
         h1 Anikit
         p Animation Toolkit for CSS Animation, WebGL and JavaScript
-    .w-1024.rwd.mx-auto.p-4
-      h1 About
-      p Anikit ( stands for #[b Ani]mation tool#[b kit] ) is an utility for generating CSS Animation from JavaScript functions.
-      div.ld.ld-cycle(style="width:100px;height:100px;border-radius:3px;background:#000;margin:20px;")
-    +script("/assets/lib/ldui.min.js")
-    +script("/assets/anikit/anikit.bundle.min.js")
+    .w-1024.rwd.mx-auto.p-4.typeset.heading-contrast
+      h2 About
+      p Anikit ( stands for #[b Ani]mation tool#[b kit] ) is an utility for generating CSS Animation from JavaScript functions, with a set of prebuilt CSS animations. Following is an example powered by anikit:
+      img.d-block.mx-auto(src="assets/img/thunder.svg")
+      h2 Concept
+      p Anikit works with animations written as #[b ldEditor modules]. Every module contains a set of configurations calls "#[b edits]". Given a set of values for each edit, anikit generates a CSS keyframes for it.
+      p Some modules ship along with set of edit values called "#[b preset]". Every preset ships with a name, and Anikit build named CSS animation and corresponding CSS classe for each preset, bundling it into #[b anikit.bundle.css].
+      ul
+        li #[b module] - define the rules, configs about how to generate an animation.
+        li #[b edit] - configuration of a module
+        li #[b preset] - a set of configuration values for a module
+      h2 Available Presets
+      p.text-muted If animation stopped ( transitional animation plays only once ), click to re-animate it.
+
+      each g,$index in anikit.groupName
+        h4.font-weight-lighter
+          span #{g} 
+          span.text-sm.text-primary: small ( #{anikit.members[$index].length} )
+        .d-flex.flex-wrap.justify-content-between.bg-light.p-4
+          each m in anikit.members[$index]
+            .item(data-name=`ld-${m}`)
+              .square(class=`ld ld-${m}`)
+              div= m
+      h2 Library
+      p Anikit presets are separated into two groups by their purpose and released under MIT License.
+      h3: a(href="https://loading.io/animation/") loading.css
+      p CSS library dedicated for seamless repeatable animations. A set of pure css shapes are also included, for quickly setup a css spinner with animation preset.
+      h3: a(href="https://loading.io/transition/") transition.css
+      p CSS library dedicated for transitional animations ( both entering and exiting transitions ).
+      h2 UI Kits
+      p Anikit ships along with a Pug UI kits for easily building an interface of choosing animation.
+      h3 Form Select Box
+      p plain select box with #[code &lt;select&gt;] tag. Useful when simply want to provide a list for user to choose, since built-in select box usually works perfectly.
+      .row
+        .col-md
+          .example.code-block.
+            select: +anikit-select-options
+        .col-md: .vertical-center
+          select.form-control
+            +anikit-select-options
+      h3 Modal
+      p For using in a popup modal. Here we use ldCover for an example. Useful when you want to show a preview for each animation.
+
+      .row.mb-1
+        .col-md
+          .example.code-block.
+            .ldcv: .base: .inner
+              +anikit-modal-content
+        .col-md: .vertical-center
+          .w-100.text-center
+            .btn.btn-primary(onclick="ldcv2.toggle()") Toggle Modal
+
+      .row
+        .col-md
+          .example.code-block.
+            //- or for shorthand:
+            +anikit-modal
+        .col-md: .vertical-center
+          .w-100.text-center
+            .btn.btn-primary(onclick="ldcv1.toggle()") Toggle Modal
+
+      +anikit-modal
+      .ldcv: .base(style="width:700px;height:500px"): .inner.card: .card-body
+        +anikit-modal-content
+      h3 Bootstrap Dropdown
+      p Generate a list of items compatible with bootstrap dropdown component. Useful when working with an editor, since unlike modal this won't block the whole UI.
+
+      .row.mb-1
+        .col-md
+          .example.code-block.
+            .dropdown
+              .btn.btn-primary.dropdown-toggle(
+              data-toggle="dropdown") Choose ..
+              .dropdown-menu
+                +anikit-dropdown-menu
+        .col-md: .vertical-center
+          .w-100.text-center: .d-inline-block
+            .dropdown
+              .btn.btn-primary.dropdown-toggle(data-toggle="dropdown") Animations ...
+              .dropdown-menu
+                +anikit-dropdown-menu
+
+      .row
+        .col-md
+          .example.code-block.
+            //- or for shorthand:
+            +anikit-dropdown
+        .col-md: .vertical-center
+          .w-100.text-center: .d-inline-block
+            +anikit-dropdown
+
+      h2 APIs
+      p While Anikit can be used to generate CSS animation based on JavaScript functions, you can also use it to animate thing directly via JS.
+      p First, you will have to create an anikit object. It's quite straight forward to do some based on presets - just create an object with the desired preset name:
+      .example.code-block.
+        kit = new anikit("breath");
+      p To animate an element, use animateJs method with a given time #[code t] between #[code 0] and #[code 1]; this will update the element's style automatically:
+      .example.code-block.
+        kit.animteJs(node, t);
+      p Here is an example that you can control the animation progress with a slider:
+      .row
+        .col-md: .vertical-center: .w-100
+          .ldrs
+        .col-md: .vertical-center: .w-100.bg-light
+          #ldrs-demo.square
+      p This design makes it possible to animate things beyond HTML and CSS with the same code, for example, WebGL shapes. Anikit provides a handy function #[code animateThree] to animate THREE.js powered meshes:
+      .code-block.example kit.animateThree(node, t);
+      h3 Reference
+      p Here we list all APIs available in the anikit object:
+      ul
+        li #[code animate(node, opt)] - animate #[code node] with CSS animation, with optional additional config in #[code opt].
+        li #[code statify(node)]- remove animation from #[code node].
+        li #[code getdom()]- get related style dom element for the injected CSS animation.
+        li #[code destroy()]- remove the related DOM element.
+        li #[code setConfig(configObj)]- set values for edits.
+        li #[code getConfig]- get current values for edits.
+        li
+          div #[code origin(node,host,opt)]- setup transform origin for #[code node].
+          ul
+            li #[code node] - node we want to update.
+            li #[code host] - host element. can be an element, or a bounding box for reference.
+            li
+              div #[code opt] - options with following possible members:
+              ul
+                li #[code x] - origin in x coordinate. between 0 to 1; 0.5 means center of node.
+                li #[code y] - origin in y coordinate. between 0 to 1; 0.5 means center of node.
+                li #[code ox, oy, s] - possibly deprecated. control offset in x,y and scale when host is an element.
+
+
+
+
+
+
+
+    +script("assets/lib/bootstrap.native.v4.min.js")
+    +script("assets/lib/ldui.min.js")
+    +script("assets/anikit/anikit.bundle.min.js")
+    +script("js/index.js")

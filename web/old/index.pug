@@ -1,0 +1,24 @@
+doctype html
+include assets/anikit/anikit.pug
+html
+  head
+    link(rel="stylesheet",type="text/css",href="assets/ldui/ldui.min.css")
+    link(rel="stylesheet",type="text/css",href="index.css")
+    link(rel="stylesheet",type="text/css",href="assets/anikit/anikit.bundle.min.css")
+    link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css")
+
+  body
+    div(style="margin:50px")
+      .btn.btn-primary.mt-2(onclick="popupit()") Popup
+      .tgt.ld
+  //.alert.alert-primary.small Go Pro to Unlock All
+  //-.dropdown
+    .dropdown-menu
+      .in
+        +anikit-dropdown-menu
+  +anikit-dropdown
+  +anikit-modal
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap.native/2.0.25/bootstrap-native-v4.min.js")
+  script(src="assets/ldui/ldui.min.js")
+  script(src="assets/anikit/anikit.bundle.min.js")
+  script(src="index.js")
