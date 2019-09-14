@@ -10,6 +10,7 @@
   ldrs-nodes = ld$.find document, '.ldrs'
   window.ldcv1 = new ldCover root: ldcv-nodes.0
   window.ldcv2 = new ldCover root: ldcv-nodes.1
+  window.ldcv3 = new ldCover root: ldcv-nodes.2
   ldrs1 = new ldSlider root: ldrs-nodes.0, min: 0, max: 1, step: 0.01
   ldrs2 = new ldSlider root: ldrs-nodes.1, min: 0, max: 1, step: 0.01
   ldrs1-demo = ld$.find document, '#ldrs-demo', 0

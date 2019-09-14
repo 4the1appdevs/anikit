@@ -21,6 +21,9 @@
   window.ldcv2 = new ldCover({
     root: ldcvNodes[1]
   });
+  window.ldcv3 = new ldCover({
+    root: ldcvNodes[2]
+  });
   ldrs1 = new ldSlider({
     root: ldrsNodes[0],
     min: 0,

@@ -10,6 +10,7 @@ html(lang="en")
     +css("assets/anikit/anikit.bundle.min.css")
     +css("css/index.css")
   body
+
     .w-100.h-gr.vertical-center.bg-light
       .w-100.text-center
         h1 Anikit
@@ -104,6 +105,11 @@ html(lang="en")
         .col-md: .vertical-center
           .w-100.text-center: .d-inline-block
             +anikit-dropdown
+
+      p This can also be used in a modal:
+      .btn.btn-primary(onclick="ldcv3.toggle()") Toggle Modal
+      .ldcv: .base(style="top:10px;bottom:10px;left:50%;transform:translate(-50%,0);overflow:scroll"): .inner
+        +anikit-dropdown-menu
 
       h2 APIs
       p While Anikit can be used to generate CSS animation based on JavaScript functions, you can also use it to animate thing directly via JS.
