@@ -15,7 +15,7 @@
     "npm": ">=1.2.2"
   },
   "scripts": {
-    "start": "node_modules/.bin/lsc web/server.ls"
+    "start": "cd web; ../node_modules/.bin/lsc ../node_modules/template/server.ls"
   },
   "devDependencies": {
     "LiveScript": ">=1.2.0",
@@ -25,7 +25,8 @@
     "pug": "^2.0.3",
     "stylus": "^0.54.5",
     "uglify-js": "^3.2.0",
-    "uglifycss": "0.0.29"
+    "uglifycss": "0.0.29",
+    "template": "github:zbryikt/template#v2"
   },
   "dependencies": {
     "cubic": "github:loadingio/cubic",

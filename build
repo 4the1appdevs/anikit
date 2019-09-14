@@ -30,9 +30,9 @@ echo "Generate pug file..."
 lsc tool/build-pug.ls > dist/anikit.pug
 
 echo "Copy files to web..."
-mkdir -p web/assets/anikit/
-cp dist/anikit.bundle.min.js web/assets/anikit/
-cp dist/anikit.bundle.min.css web/assets/anikit/
-cp dist/anikit.pug web/assets/anikit/
+mkdir -p web/static/assets/anikit/
+cp dist/anikit.bundle.min.js web/static/assets/anikit/
+cp dist/anikit.bundle.min.css web/static/assets/anikit/
+cp dist/anikit.pug web/static/assets/anikit/
 
 echo "Done."
