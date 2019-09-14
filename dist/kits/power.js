@@ -27,7 +27,10 @@ ret = {
     },
     dir: {
       'default': 1,
-      hidden: true
+      hidden: true,
+      min: -1,
+      max: 1,
+      step: 2
     }
   },
   local: {

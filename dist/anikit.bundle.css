@@ -3090,7 +3090,7 @@ skew(-30deg);
     transform: rotate(0deg);
   }
   100% {
-    transform: rotate(129600deg);
+    transform: rotate(360deg);
   }
 }
 .ld.ld-cycle {

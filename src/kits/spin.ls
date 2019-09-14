@@ -12,7 +12,7 @@ ret = do
       prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI * 2)}
     "cycle":
-      steep: 0.0, cycle: 360
+      steep: 0.0, cycle: 1
       prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
       value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI * 2)}
     "flip-h":

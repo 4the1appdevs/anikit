@@ -8,7 +8,7 @@ ret = do
 
   edit: 
     steep: default: 0.5, type: \number, min: 0, max: 1, step: 0.01
-    dir: default: 1, hidden: true
+    dir: default: 1, hidden: true, min: -1, max: 1, step: 2
   local: 
     value: (t, c) -> 
       if c.dir > 0 =>

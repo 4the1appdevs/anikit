@@ -1271,7 +1271,10 @@ ret = {
     dir: {
       type: 'number',
       'default': 1,
-      hidden: true
+      hidden: true,
+      min: -1,
+      max: 1,
+      step: 2
     },
     count: {
       name: "Bounce Count",
@@ -2604,7 +2607,10 @@ ret = {
     dir: {
       type: 'number',
       'default': 1,
-      hidden: true
+      hidden: true,
+      min: -1,
+      max: 1,
+      step: 2
     },
     count: {
       name: "Bounce Count",
@@ -3137,7 +3143,10 @@ ret = {
     },
     dir: {
       'default': 1,
-      hidden: true
+      hidden: true,
+      min: -1,
+      max: 1,
+      step: 2
     }
   },
   local: {
@@ -3997,7 +4006,7 @@ ret = {
     },
     "cycle": {
       steep: 0.0,
-      cycle: 360,
+      cycle: 1,
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.cycle * 360 + "deg)"

@@ -270,7 +270,7 @@ ret = do
 
   edit: 
   
-    dir: type: \number, default: 1, hidden: true
+    dir: type: \number, default: 1, hidden: true, min: -1, max: 1, step: 2
     count: name: "Bounce Count", type: \number, default: 5, min: 1, max: 30, step: 2
     dtime: name: "Time Decay", type: \number, default: 0.7, min: 0, max: 1, step: 0.01
     decay: name: "Amount Decay", type: \number, default: 0.4, min: 0, max: 1, step: 0.01

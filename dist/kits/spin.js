@@ -37,7 +37,7 @@ ret = {
     },
     "cycle": {
       steep: 0.0,
-      cycle: 360,
+      cycle: 1,
       prop: function(f, c){
         return {
           transform: "rotate(" + f.value * c.cycle * 360 + "deg)"

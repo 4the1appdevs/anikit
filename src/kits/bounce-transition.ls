@@ -58,7 +58,7 @@ ret = do
       prop: ((f, c) -> spring.prop f, c, 4), value: ((t, c) -> spring.value t, c, 4)
 
   edit: 
-    dir: type: \number, default: 1, hidden: true
+    dir: type: \number, default: 1, hidden: true, min: -1, max: 1, step: 2
     count: name: "Bounce Count", type: \number, default: 30, min: 0, max: 50, step: 1
     mag: name: "Amount", type: \number, default: 0.3, min: 0.01, max: 1, step: 0.01
     extrude: type: \number, default: 0, min: 0, max: 1, step: 0.01, hidden: true
