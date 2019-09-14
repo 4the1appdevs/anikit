@@ -121,6 +121,12 @@ html(lang="en")
           #ldrs-demo.square
       p This design makes it possible to animate things beyond HTML and CSS with the same code, for example, WebGL shapes. Anikit provides a handy function #[code animateThree] to animate THREE.js powered meshes:
       .code-block.example kit.animateThree(node, t);
+      p Following is an example of WebGL rendering with Anikit, controlled with a slider:
+      .row
+        .col-md: .vertical-center: .w-100
+          .ldrs
+        .col-md: .vertical-center: .w-100.bg-light
+          #three-root(style="width:320px;height:240px")
       h3 Reference
       p Here we list all APIs available in the anikit object:
       ul
@@ -142,12 +148,8 @@ html(lang="en")
                 li #[code y] - origin in y coordinate. between 0 to 1; 0.5 means center of node.
                 li #[code ox, oy, s] - possibly deprecated. control offset in x,y and scale when host is an element.
 
-
-
-
-
-
-
+    +script("assets/lib/three.min.js")
+    +script("assets/lib/three-bundle.min.js")
     +script("assets/lib/bootstrap.native.v4.min.js")
     +script("assets/lib/ldui.min.js")
     +script("assets/anikit/anikit.bundle.min.js")
