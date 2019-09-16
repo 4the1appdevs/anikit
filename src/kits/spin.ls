@@ -57,22 +57,6 @@
     js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
     affine: (t, opt) -> opt.value @timing(t, opt), opt
 
-    /* equivalent keyframes */
-    /*
-      spin(name, dur, rate, offset, func)
-        .{name}
-          animation: unquote(name) dur linear infinite
-        @keyframes {name}
-          0%
-            timing-speed-up(rate)
-            func(0)
-          50%
-            timing-speed-down(rate)
-            func(offset * 0.5)
-          100%
-            func(offset)
-    */
-
   if module? => module.exports = ret
   return ret
 )!

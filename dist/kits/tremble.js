@@ -141,26 +141,6 @@
         transform: [s * Math.cos(r), Math.sin(r), 0, x, -Math.sin(r), s * Math.cos(r), 0, y, 0, 0, s, 0, 0, 0, 0, 1]
       };
     }
-    /* equivalent keyframes */
-    /*
-    tremble(name, dur, iterations, offset, degree, zoom)
-      x0 = 0
-      y0 = 0
-      .{name}
-        animation: unquote(name) dur linear infinite
-      @keyframes {name}
-        0%
-          transform: translate(x0,y0) rotate(0deg) scale(1)
-        for num in (1..(iterations - 1))
-          {1% * num * 100/iterations}
-            x = random() * offset - offset * 0.5
-            y = random() * offset - offset * 0.5
-            r = random() * degree - degree * 0.5
-            s = 1 + random() * zoom - zoom * 0.5
-            transform: translate(x,y) rotate(r) scale(s)
-        100%
-          transform: translate(x0,y0) rotate(0deg) scale(1)
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;

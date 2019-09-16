@@ -180,18 +180,6 @@
     affine: function(t, opt){
       return opt.value(this.timing(t, opt), opt);
     }
-    /* equivalent keyframes */
-    /*
-    @keyframes {name}
-      0%,50%,100%
-        timing-step(rate)
-      0%
-        func(-1 * max)
-      50%
-        func(1 * max)
-      100%
-        func(-1 * max)
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;

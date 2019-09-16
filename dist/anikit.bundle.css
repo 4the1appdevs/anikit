@@ -638,6 +638,17 @@
 .ld.ld-fade {
   animation: ld-fade 1s infinite; ; 
 }
+@keyframes ld-flip {
+  0%, 25%, 50%, 75%, 100% { animation-timing-function: cubic-bezier(0, 0.4,0.6, 1) }
+    0% { transform: scale(1,1) }
+   25% { transform: scale(-1,1) }
+   50% { transform: scale(-1,-1) }
+   75% { transform: scale(1,-1) }
+  100% { transform: scale(1,1) }
+}
+.ld.ld-flip {
+  animation: ld-flip 1s infinite; ; 
+}
 @keyframes ld-float {
   0% {
     animation-timing-function: cubic-bezier(0,0.4,0.6,1);

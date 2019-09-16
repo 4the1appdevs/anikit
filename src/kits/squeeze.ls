@@ -31,20 +31,6 @@
     js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
     affine: (t, opt) -> opt.value @timing(t, opt), opt
 
-    /* equivalent keyframes */
-    /*
-     @keyframes ld-squeeze
-        0%
-          transform: scale(1,config.zoom_y)
-        50%
-          transform: scale(config.zoom_x,1)
-        100%
-          transform: scale(1,config.zoom_y)
-      .ld-squeeze
-        animation: ld-squeeze config.dur infinite
-        timing-speed-down(config.accelerate)
-    */
-
   if module? => module.exports = ret
   return ret
 )!

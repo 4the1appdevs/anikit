@@ -20,17 +20,6 @@
     js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
     affine: (t, opt) -> return opt.value @timing(t, opt), opt
 
-    /* equivalent keyframes */
-    /*
-      @keyframes ld-fade
-        0%
-          opacity: 1
-        100%
-          opacity: 0
-      .ld-fade
-        animation: ld-fade config.dur linear infinite
-    */
-
   if module? => module.exports = ret
   return ret
 )!

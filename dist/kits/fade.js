@@ -54,16 +54,6 @@
     affine: function(t, opt){
       return opt.value(this.timing(t, opt), opt);
     }
-    /* equivalent keyframes */
-    /*
-      @keyframes ld-fade
-        0%
-          opacity: 1
-        100%
-          opacity: 0
-      .ld-fade
-        animation: ld-fade config.dur linear infinite
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;

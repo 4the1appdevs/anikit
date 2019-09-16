@@ -56,16 +56,7 @@
             transform: anikit.util.ty(c.offset * t)
           };
         }
-      }
-      /*
-      pulse:
-        dur: 0.5
-        count: 0, decay: 0.5, unit: ''
-        offset: name: "Scale Amount", default: 0.2, min: -1, max: 1, step: 0.01, unit: ''
-        local: error-threshold: 0.001, seg-sample-count: 20, sample-count: 1000
-        prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
-        value: (t, c) -> transform: anikit.util.s 1 - c.offset * t
-      */,
+      },
       "tick-alt": {
         count: 5,
         unit: '',
@@ -180,11 +171,7 @@
         return t * d;
       }
       return 0;
-    }
-    /*
-    css: (opt) -> anikit.step-to-keyframes (~> @timing it, opt), opt
-    js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
-    */,
+    },
     css: function(opt){
       var ref$, ref1$, this$ = this;
       return easingFit.fitToKeyframes(function(it){
@@ -199,27 +186,6 @@
     affine: function(t, opt){
       return opt.value(this.timing(t, opt), opt);
     }
-    /* equivalent keyframes */
-    /*
-    bounce(name, dur, iterations, accelerate, decay, power, offset, func)
-      R = 100 * (decay - 1) / (decay ** (iterations + 1) - 1)
-      .{name}
-        animation: unquote(name) dur linear infinite
-      @keyframes {name}
-        0%
-          func(0,0)
-          timing-speed-down(accelerate)
-        for num in (0..iterations)
-          p = (decay ** ( num + 1 ) - 1) / (decay - 1)
-          p2 = p - (decay ** num) * 0.5
-          d = offset * ((decay ** power) ** num)
-          {R * 1% * p2 }
-            func(d,num * 2 + 1)
-            timing-speed-up(accelerate)
-          {R * 1% * p}
-            func(0,num * 2 + 2)
-            timing-speed-down(accelerate)
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;

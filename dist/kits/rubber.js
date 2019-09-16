@@ -312,20 +312,6 @@
     affine: function(t, opt){
       return opt.value(this.timing(t, opt), opt);
     }
-    /* equivalent keyframes */
-    /*
-    @keyframes {name}
-      0%
-        func(0)
-      {delay * 1%}
-        func(offset)
-      for num in (1..(iterations - 1))
-        value = (offset) * (ratio ** (num - 1)) * (-1 ** (num))
-        {(delay + num * (100 - delay) / iterations) * 1%}
-          func(value)
-      100%
-        func(0)
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;

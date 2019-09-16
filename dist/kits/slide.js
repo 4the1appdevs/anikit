@@ -106,25 +106,6 @@
     affine: function(t, opt){
       return opt.value(this.timing(t, opt), opt);
     }
-    /* equivalent keyframes */
-    /*
-    slide(name, dur, rate, offset, func)
-      .{name}
-        animation: unquote(name) dur linear infinite
-      @keyframes {name}
-        0%, 100%
-          timing-speed-up(rate)
-        50%
-          timing-speed-down(rate)
-        0%
-          func(0)
-        49.9%
-          func(offset)
-        50%
-          func(-1 * offset)
-        100%
-          func(0)
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;
