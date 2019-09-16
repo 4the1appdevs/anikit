@@ -56,36 +56,16 @@
             transform: anikit.util.ty(c.offset * t)
           };
         }
-      },
-      pulse: {
-        dur: 0.5,
-        count: 0,
-        decay: 0.5,
-        unit: '',
-        offset: {
-          name: "Scale Amount",
-          'default': 0.2,
-          min: -1,
-          max: 1,
-          step: 0.01,
-          unit: ''
-        },
-        local: {
-          errorThreshold: 0.001,
-          segSampleCount: 20,
-          sampleCount: 1000
-        },
-        prop: function(f, c){
-          return {
-            transform: "scale(" + (1 - c.offset * f.value) + ")"
-          };
-        },
-        value: function(t, c){
-          return {
-            transform: anikit.util.s(1 - c.offset * t)
-          };
-        }
-      },
+      }
+      /*
+      pulse:
+        dur: 0.5
+        count: 0, decay: 0.5, unit: ''
+        offset: name: "Scale Amount", default: 0.2, min: -1, max: 1, step: 0.01, unit: ''
+        local: error-threshold: 0.001, seg-sample-count: 20, sample-count: 1000
+        prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
+        value: (t, c) -> transform: anikit.util.s 1 - c.offset * t
+      */,
       "tick-alt": {
         count: 5,
         unit: '',

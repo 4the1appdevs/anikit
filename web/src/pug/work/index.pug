@@ -19,7 +19,10 @@ html(lang="en")
             select#select.form-control.mb-4
             .ldrs
           .vertical-center
-            .block(style="width:128px;height:128px;border-radius:3px;background:#222")
+            div
+              .block(style="width:32px;height:32px;border-radius:3px;background:#222")
+              br
+              .block(style="width:32px;height:32px;border-radius:3px;background:#222")
 
     +script("../assets/lib/livescript-min.js")
     +script("../assets/lib/three.min.js")
@@ -28,5 +31,4 @@ html(lang="en")
     +script("../assets/lib/ldui.min.js")
     +script("../assets/anikit/anikit.util.min.js")
     +script("../assets/anikit/anikit.bundle.min.js")
-    +script("../js/work/blink-alt.js")
     +script("../js/work/index.js")

@@ -17,6 +17,7 @@
         prop: (f, c) -> {transform: "translate(0, #{c.offset * f.value}#{c.unit})"}
         value: (t, c) -> transform: anikit.util.ty c.offset * t
 
+      /*
       pulse:
         dur: 0.5
         count: 0, decay: 0.5, unit: ''
@@ -24,6 +25,7 @@
         local: error-threshold: 0.001, seg-sample-count: 20, sample-count: 1000
         prop: (f, c) -> {transform: "scale(#{1 - c.offset * f.value})"}
         value: (t, c) -> transform: anikit.util.s 1 - c.offset * t
+      */
 
       "tick-alt":
         count: 5, unit: ''

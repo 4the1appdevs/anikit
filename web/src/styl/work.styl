@@ -1,0 +1,41 @@
+
+d = 22.5
+@keyframes blah
+  0%
+    animation-timing-function: cubic-bezier(0,0.5,0.5,1)
+    transform: translate(-100px - 32px * tan(45 * 3.1415926 / 180) ,0) skew(d * 1deg)
+  33%
+    transform: translate(-32px * tan(-(d/2) * 3.1415926 / 180),0) skew(-(d/2) * 1deg)
+  44%
+    transform: translate(-32px * tan((d/4) * 3.1415926 / 180),0) skew((d/4) * 1deg)
+  55%
+    transform: translate(-32px * tan(-(d/8) * 3.1415926 / 180),0) skew(-(d/8) * 1deg)
+  66%
+    transform: translate(0px,0)
+  80%
+    transform: translate(0px,0) skew(0)
+  100%
+    transform: translate(100px,0) skew(d * 1deg)
+
+@keyframes blah2
+  0%
+    transform: translate(-32px * tan(45 * 3.1415926 / 180),0) skew(45deg)
+  100%
+    transform: translate(-32px * tan(-45 * 3.1415926 / 180),0) skew(-45deg)
+.square
+  position: absolute
+  top: 200px
+  left: 200px
+  width: 64px
+  height: 64px
+  margin: auto
+  background: #444
+  animation: blah 1s linear infinite
+.square2
+  position: absolute
+  top: 200px
+  left: 200px
+  width: 64px
+  height: 64px
+  background: #f00
+  opacity: 0.3
