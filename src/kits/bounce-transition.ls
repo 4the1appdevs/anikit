@@ -4,17 +4,17 @@
   spring = do
     prop: (f, c, d) ->
       value = @value f.value, c, d
-      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
+      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
     value: (t, c, d) ->
       t = if c.dir > 0 => t else 1 - t
       if c.dir < 0 and t > 1 => t = 1
       t >?= 0.01
       if d < 3 =>
         sgn = if d == 1 => 1 else -1
-        return transform: [1,0,0,c.offset * (1 - t) * sgn,0,1,0,0,0,0,1,0,0,0,0,1], opacity: t
+        return transform: [1,0,0,c.offset * (1 - t) * sgn,0,1,0,0,0,0,1,0,0,0,0,1]
       else
         sgn = if d == 3 => 1 else -1
-        return transform: [1,0,0,0,0,1,0,c.offset * (1 - t) * sgn,0,0,1,0,0,0,0,1], opacity: t
+        return transform: [1,0,0,0,0,1,0,c.offset * (1 - t) * sgn,0,0,1,0,0,0,0,1]
 
   ret = do
     name: \bounce-transition
@@ -81,7 +81,6 @@
       value = @affine t, opt
       ret = {}
       if value.transform => ret.transform = "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-      if value.opacity => ret.opacity = value.opacity
       return ret
     affine: (t, opt) ->
       t = @timing(t, opt)

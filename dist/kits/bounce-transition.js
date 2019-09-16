@@ -12,8 +12,7 @@
       var value;
       value = this.value(f.value, c, d);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
-        opacity: value.opacity
+        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
       };
     },
     value: function(t, c, d){
@@ -30,16 +29,14 @@
           ? 1
           : -1;
         return {
-          transform: [1, 0, 0, c.offset * (1 - t) * sgn, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-          opacity: t
+          transform: [1, 0, 0, c.offset * (1 - t) * sgn, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
         };
       } else {
         sgn = d === 3
           ? 1
           : -1;
         return {
-          transform: [1, 0, 0, 0, 0, 1, 0, c.offset * (1 - t) * sgn, 0, 0, 1, 0, 0, 0, 0, 1],
-          opacity: t
+          transform: [1, 0, 0, 0, 0, 1, 0, c.offset * (1 - t) * sgn, 0, 0, 1, 0, 0, 0, 0, 1]
         };
       }
     }
@@ -143,20 +140,6 @@
           return spring.value(t, c, 4);
         }
       }
-      /*
-      "throw-ltr-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 2), value: ((t, c) -> spring.value t, c, 2)
-      "throw-rtl-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 1), value: ((t, c) -> spring.value t, c, 1)
-      "throw-ttb-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 3), value: ((t, c) -> spring.value t, c, 3)
-      "throw-btt-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 4), value: ((t, c) -> spring.value t, c, 4)
-      */
     },
     edit: {
       dir: {
@@ -263,9 +246,6 @@
       ret = {};
       if (value.transform) {
         ret.transform = "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")";
-      }
-      if (value.opacity) {
-        ret.opacity = value.opacity;
       }
       return ret;
     },

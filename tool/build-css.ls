@@ -14,10 +14,12 @@ for k,v of anikit.types =>
     init-values = (["animation-fill-mode: forwards"] ++ ["#name: #value" for name,value of js]).join(\;)
   else init-values = "";
 
+  origin = if !(config.origin?) => ""
+  else "transform-origin: #{config.origin[0 to 1].map(-> (it * 100) + \%).join(' ')}"
   output.push css
   output.push """
     .ld.#{config.name} {
-      animation: #{config.name} #{config.dur or 1}s #{config.repeat or \infinite}; #init-values
+      animation: #{config.name} #{config.dur or 1}s #{config.repeat or \infinite}; #init-values; #origin
     }
   """
 
