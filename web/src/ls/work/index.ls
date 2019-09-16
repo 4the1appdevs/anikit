@@ -17,7 +17,7 @@ st = 0
 render = debounce ->
   kit := new anikit select.value
   kit.animate block, {dur: 1/(ldrs.get!)}
-  retstart := true
+  restart := true
 
 ldrs = new ldSlider root: '.ldrs', min: 0, max: 2, step: 0.01, from: 1
 ldrs.on \change, render
