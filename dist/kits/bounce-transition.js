@@ -142,63 +142,21 @@
         value: function(t, c){
           return spring.value(t, c, 4);
         }
-      },
-      "throw-ltr-in": {
-        dir: 1,
-        count: 2,
-        mag: 0.08,
-        extrude: 0.5,
-        offset: 500,
-        'throw': true,
-        prop: function(f, c){
-          return spring.prop(f, c, 2);
-        },
-        value: function(t, c){
-          return spring.value(t, c, 2);
-        }
-      },
-      "throw-rtl-in": {
-        dir: 1,
-        count: 2,
-        mag: 0.08,
-        extrude: 0.5,
-        offset: 500,
-        'throw': true,
-        prop: function(f, c){
-          return spring.prop(f, c, 1);
-        },
-        value: function(t, c){
-          return spring.value(t, c, 1);
-        }
-      },
-      "throw-ttb-in": {
-        dir: 1,
-        count: 2,
-        mag: 0.08,
-        extrude: 0.5,
-        offset: 500,
-        'throw': true,
-        prop: function(f, c){
-          return spring.prop(f, c, 3);
-        },
-        value: function(t, c){
-          return spring.value(t, c, 3);
-        }
-      },
-      "throw-btt-in": {
-        dir: 1,
-        count: 2,
-        mag: 0.08,
-        extrude: 0.5,
-        offset: 500,
-        'throw': true,
-        prop: function(f, c){
-          return spring.prop(f, c, 4);
-        },
-        value: function(t, c){
-          return spring.value(t, c, 4);
-        }
       }
+      /*
+      "throw-ltr-in":
+        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+        prop: ((f, c) -> spring.prop f, c, 2), value: ((t, c) -> spring.value t, c, 2)
+      "throw-rtl-in":
+        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+        prop: ((f, c) -> spring.prop f, c, 1), value: ((t, c) -> spring.value t, c, 1)
+      "throw-ttb-in":
+        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+        prop: ((f, c) -> spring.prop f, c, 3), value: ((t, c) -> spring.value t, c, 3)
+      "throw-btt-in":
+        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
+        prop: ((f, c) -> spring.prop f, c, 4), value: ((t, c) -> spring.value t, c, 4)
+      */
     },
     edit: {
       dir: {

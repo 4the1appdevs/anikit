@@ -45,19 +45,6 @@
         prop: (f, c) -> spring.prop f, c, 4
         value: (t, c) -> spring.value t, c, 4
 
-      "throw-ltr-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 2), value: ((t, c) -> spring.value t, c, 2)
-      "throw-rtl-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 1), value: ((t, c) -> spring.value t, c, 1)
-      "throw-ttb-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 3), value: ((t, c) -> spring.value t, c, 3)
-      "throw-btt-in":
-        dir: 1, count: 2, mag: 0.08, extrude: 0.5, offset: 500, throw: true
-        prop: ((f, c) -> spring.prop f, c, 4), value: ((t, c) -> spring.value t, c, 4)
-
     edit: 
       dir: type: \number, default: 1, hidden: true, min: -1, max: 1, step: 2
       count: name: "Bounce Count", type: \number, default: 30, min: 0, max: 50, step: 1
