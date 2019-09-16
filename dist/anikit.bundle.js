@@ -672,7 +672,7 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","pulse":"pulse","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-btt-in":"rush","rush-ttb-in":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-btt":"rush","rush-ttb":"rush","rush-rtl":"rush","rush-ltr":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","throw-ttb-in":"throw","throw-ltr-in":"throw","throw-rtl-in":"throw","throw-btt-in":"throw","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","pulse":"pulse","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-ltr":"rush","rush-rtl":"rush","rush-ttb":"rush","rush-btt":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-ttb-in":"rush","rush-btt-in":"rush","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","throw-ttb-in":"throw","throw-ltr-in":"throw","throw-rtl-in":"throw","throw-btt-in":"throw","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex-out":"vortex","vortex-in":"vortex","vortex-alt-out":"vortex","vortex-alt-in":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
 },{"./kits/blink":7,"./kits/blur":9,"./kits/blur-transition":8,"./kits/bounce":12,"./kits/bounce-rigid":10,"./kits/bounce-transition":11,"./kits/clock":13,"./kits/fade":14,"./kits/float":15,"./kits/heartbeat":16,"./kits/hit":17,"./kits/jump-transition":18,"./kits/move":19,"./kits/orbit":20,"./kits/patrol":21,"./kits/power":22,"./kits/pulse":23,"./kits/rubber":24,"./kits/rush":25,"./kits/slide":26,"./kits/spin":27,"./kits/squeeze":28,"./kits/static":29,"./kits/surprise":30,"./kits/throw":31,"./kits/tremble":32,"./kits/vortex":33,"./kits/wrench":34}],7:[function(require,module,exports){
@@ -3656,226 +3656,68 @@ function import$(obj, src){
 }
 },{"../anikit":4,"../easing":5,"cubic":35,"easing-fit":36}],25:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
+var slice$ = [].slice;
 (function(){
-  var easingFit, cubic, anikit, rushH, rushV, ret;
-  if (typeof require != 'undefined' && require !== null) {
-    easingFit = require('easing-fit');
-    cubic = require('cubic');
-    anikit = require('../anikit');
-  }
-  rushH = {
-    prop: function(f, c){
-      return {
-        transform: "translate(" + f.value * c.offset_far * c.direction + c.unit + ",0)\nskew(" + f.value * c.skew * -c.direction + "deg)",
-        opacity: Math.cos(f.value * Math.PI * 0.5)
-      };
-    },
-    value: function(t, c){
-      return {
-        transform: [1, -Math.tan(t * c.skew * -c.direction * Math.PI / 180), 0, t * c.offset_far * c.direction, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
-        opacity: Math.cos(t * Math.PI * 0.5)
-      };
-    }
-  };
-  rushV = {
-    prop: function(f, c){
-      return {
-        transform: "translate(0," + f.value * c.offset_far * c.direction + c.unit + ")\nskewY(" + f.value * c.skew * c.direction + "deg)",
-        opacity: Math.cos(f.value * Math.PI * 0.5)
-      };
-    },
-    value: function(t, c){
-      return {
-        transform: [1, -Math.tan(t * c.skew * c.direction * Math.PI / 180), 0, 0, 0, 1, 0, -t * c.offset_far * c.direction, 0, 0, 1, 0, 0, 0, 0, 1],
-        opacity: Math.cos(t * Math.PI * 0.5)
-      };
-    }
-  };
+  var ret;
   ret = {
     name: 'rush',
     type: 'animation',
     preset: {
-      "rush-btt-in": {
-        repeat: 1,
-        direction: -1,
-        percent_in: 0.9,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        percent_out: {
-          'default': 1,
-          hidden: true
-        },
-        prop: function(f, c){
-          return rushV.prop(f, c);
-        },
-        value: function(t, c){
-          return rushV.value(t, c);
-        }
-      },
-      "rush-ttb-in": {
-        repeat: 1,
-        direction: 1,
-        percent_in: 0.9,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        percent_out: {
-          'default': 1,
-          hidden: true
-        },
-        prop: function(f, c){
-          return rushV.prop(f, c);
-        },
-        value: function(t, c){
-          return rushV.value(t, c);
-        }
-      },
-      "rush-ltr-in": {
-        repeat: 1,
-        direction: 1,
-        percent_in: 0.9,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        percent_out: {
-          'default': 1,
-          hidden: true
-        },
-        prop: function(f, c){
-          return rushH.prop(f, c);
-        },
-        value: function(t, c){
-          return rushH.value(t, c);
-        }
-      },
-      "rush-rtl-in": {
-        repeat: 1,
-        direction: -1,
-        percent_in: 0.9,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        percent_out: {
-          'default': 1,
-          hidden: true
-        },
-        prop: function(f, c){
-          return rushH.prop(f, c);
-        },
-        value: function(t, c){
-          return rushH.value(t, c);
-        }
-      },
-      "rush-btt": {
-        direction: -1,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        prop: function(f, c){
-          return rushV.prop(f, c);
-        },
-        value: function(t, c){
-          return rushV.value(t, c);
-        }
-      },
-      "rush-ttb": {
-        direction: 1,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        prop: function(f, c){
-          return rushV.prop(f, c);
-        },
-        value: function(t, c){
-          return rushV.value(t, c);
-        }
+      "rush-ltr": {
+        dir: 1,
+        repeat: 0
       },
       "rush-rtl": {
-        direction: -1,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        prop: function(f, c){
-          return rushH.prop(f, c);
-        },
-        value: function(t, c){
-          return rushH.value(t, c);
-        }
+        dir: 2,
+        repeat: 0
       },
-      "rush-ltr": {
-        direction: 1,
-        local: {
-          sampleCount: 40,
-          errorThreshold: 0.001
-        },
-        prop: function(f, c){
-          return rushH.prop(f, c);
-        },
-        value: function(t, c){
-          return rushH.value(t, c);
-        }
+      "rush-ttb": {
+        dir: 3,
+        repeat: 0
+      },
+      "rush-btt": {
+        dir: 4,
+        repeat: 0
+      },
+      "rush-ltr-in": {
+        dir: 1,
+        repeat: 1
+      },
+      "rush-rtl-in": {
+        dir: 2,
+        repeat: 1
+      },
+      "rush-ttb-in": {
+        dir: 3,
+        repeat: 1
+      },
+      "rush-btt-in": {
+        dir: 4,
+        repeat: 1
       }
     },
     edit: {
-      dur: {
+      dir: {
+        name: "Direction",
+        type: 'Choice',
+        values: [1, 2, 3, 4],
         'default': 1
       },
-      steep: {
-        'default': 0.4,
+      offset: {
+        name: "Offset",
+        'default': 60,
         type: 'number',
-        min: 0,
-        max: 1,
-        step: 0.01
-      },
-      offset_near: {
-        name: "Offset(Break)",
-        'default': 20,
-        type: 'number',
-        unit: 'px',
         min: 0,
         max: 1000
       },
-      offset_far: {
-        name: "Offset(Transition)",
-        'default': 200,
+      size: {
+        name: "Item Size",
+        'default': 32,
         type: 'number',
-        unit: 'px',
         min: 0,
         max: 1000
       },
-      direction: {
-        'default': -1,
-        type: 'number',
-        min: -1,
-        max: 1,
-        step: 2,
-        hidden: true
-      },
-      percent_in: {
-        name: "Duration(Enter)",
-        'default': 0.6,
-        type: 'number',
-        min: 0,
-        max: 1,
-        step: 0.01
-      },
-      percent_out: {
-        name: "Duration(Exit)",
-        'default': 0.8,
-        type: 'number',
-        min: 0,
-        max: 1,
-        step: 0.01
-      },
-      skew: {
+      deg: {
         name: "Skew",
         'default': 30,
         type: 'number',
@@ -3883,85 +3725,81 @@ function import$(obj, src){
         min: 0,
         max: 90
       },
-      unit: {
-        'default': 'px',
-        type: 'choice',
-        values: ["px", "%", ""]
+      flip: {
+        name: "Flip",
+        'default': false,
+        type: 'boolean'
       }
     },
-    timing: function(t, opt){
-      var p1, pi, po, near;
-      p1 = [0, opt.steep, 1 - opt.steep, 1];
-      pi = opt.percent_in;
-      po = opt.percent_out;
-      if (po < pi) {
-        po = pi;
+    local: {
+      data: function(opt){
+        var RD, deg, offset, size, ds, xs, ts, dc, sgn, flip;
+        RD = Math.PI / 180;
+        deg = opt.deg, offset = opt.offset, size = opt.size;
+        ds = [deg, -deg / 2, -deg / 2, deg / 4, -deg / 8, 0, 0, deg];
+        xs = [-offset - size * Math.tan(deg * RD), -offset / 10 - size * Math.tan(RD * -deg / 2), -size * Math.tan(RD * -deg / 2), -size * Math.tan(RD * deg / 4), -size * Math.tan(RD * -deg / 8), 0, 0, offset];
+        if (opt.repeat) {
+          ts = [0, 0.3, 0.4, 0.55, 0.7, 0.8, 1];
+        } else {
+          ts = [0, 0.25, 0.33, 0.44, 0.55, 0.66, 0.8, 1];
+        }
+        dc = opt.dir <= 2 ? 'X' : 'Y';
+        sgn = opt.dir % 2
+          ? 1
+          : -1;
+        flip = opt.flip ? -1 : 1;
+        return {
+          RD: RD,
+          deg: deg,
+          offset: offset,
+          size: size,
+          ds: ds,
+          xs: xs,
+          ts: ts,
+          dc: dc,
+          sgn: sgn,
+          flip: flip
+        };
       }
-      near = opt.offset_near / opt.offset_far;
-      if (t === 0) {
-        return -1;
-      }
-      if (t < pi / 3) {
-        t = cubic.Bezier.y(cubic.Bezier.t(t * 3 / pi, p1), p1) * pi / 3;
-        return (near + 1) * t / (pi / 3) - 1;
-      }
-      if (t < pi) {
-        t = (t - pi / 3) * 3.75 / pi;
-        return near * Math.cos(t * Math.PI) * Math.pow(0.5, t);
-      }
-      if (t < po || po === 1) {
-        return 0;
-      }
-      return (t - po) / (1 - po);
     },
     css: function(opt){
-      var ref$, ref1$, this$ = this;
-      return easingFit.fitToKeyframes(function(it){
-        return this$.timing(it, opt);
-      }, (ref$ = (ref1$ = import$({}, opt.local) || {}, ref1$.config = opt, ref1$), ref$.name = opt.name, ref$.prop = opt.prop, ref$));
+      var ref$, RD, deg, offset, size, ds, xs, ts, dc, sgn, flip, fs, i$, to$, i;
+      ref$ = this.local.data(opt), RD = ref$.RD, deg = ref$.deg, offset = ref$.offset, size = ref$.size, ds = ref$.ds, xs = ref$.xs, ts = ref$.ts, dc = ref$.dc, sgn = ref$.sgn, flip = ref$.flip;
+      fs = "";
+      for (i$ = 0, to$ = ts.length; i$ < to$; ++i$) {
+        i = i$;
+        fs += ts[i] * 100 + "% { transform: translate" + dc + "(" + sgn * xs[i] + "px) skew" + dc + "(" + flip * sgn * ds[i] + "deg); }\n";
+      }
+      return "@keyframes " + opt.name + " {\n  0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); }\n  " + fs + "\n}";
     },
     js: function(t, opt){
-      return opt.prop({
-        value: this.timing(t, opt)
-      }, opt);
-    },
-    affine: function(t, opt){
-      return opt.value(this.timing(t, opt), opt);
+      var ref$, RD, deg, offset, size, ds, xs, ts, dc, sgn, flip, i$, to$, i, d1, d2, x1, x2, t1, t2, x, d;
+      ref$ = this.local.data(opt), RD = ref$.RD, deg = ref$.deg, offset = ref$.offset, size = ref$.size, ds = ref$.ds, xs = ref$.xs, ts = ref$.ts, dc = ref$.dc, sgn = ref$.sgn, flip = ref$.flip;
+      for (i$ = 0, to$ = ts.length; i$ < to$; ++i$) {
+        i = i$;
+        if (t < ts[i]) {
+          break;
+        }
+      }
+      ref$ = slice$.call(ds, i - 1, i + 1 || 9e9), d1 = ref$[0], d2 = ref$[1];
+      ref$ = slice$.call(xs, i - 1, i + 1 || 9e9), x1 = ref$[0], x2 = ref$[1];
+      ref$ = slice$.call(ts, i - 1, i + 1 || 9e9), t1 = ref$[0], t2 = ref$[1];
+      if (i === 1) {
+        t = Math.pow(t / ts[1], 0.5) * ts[1];
+      }
+      x = x1 + (x2 - x1) * (t - t1) / (t2 - t1);
+      d = d1 + (d2 - d1) * (t - t1) / (t2 - t1);
+      return {
+        transform: "translate" + dc + "(" + sgn * x + "px) skew" + dc + "(" + flip * sgn * d + "deg)"
+      };
     }
-    /* equivalent keyframes */
-    /*
-    rush(name, dur, rate, offset_near, offset_far, direction, percent_in, percent_out, skew)
-      .{name}
-        animation: unquote(name) 1s linear infinite
-      @keyframes {name}
-        0%
-          transform: translate(-1 * direction * offset_far, 0 ) skewX( direction * skew )
-          timing-speed-down(rate)
-        {percent_in * .37}
-          transform: translate( 1 * direction * offset_near, 0)  skewX( -0.78 * direction * skew )
-        {percent_in * .56}
-          transform: translate( -0.5 * direction * offset_near, 0)  skewX( 0.34 * direction * skew )
-        {percent_in * .75}
-          transform: translate( 0.25 * direction * offset_near, 0) skew( -0.17 * direction * skew )
-        {percent_in * 1}
-          transform: translate( 0, 0 ) skew(0deg)
-        {percent_out * 1}
-          transform: translate( 0, 0 ) skew(0deg)
-        100%
-          transform: translate(direction * offset_far, 0) skewX( direction * skew )
-    */
   };
   if (typeof module != 'undefined' && module !== null) {
     module.exports = ret;
   }
   return ret;
 })();
-function import$(obj, src){
-  var own = {}.hasOwnProperty;
-  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
-  return obj;
-}
-},{"../anikit":4,"cubic":35,"easing-fit":36}],26:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // Generated by LiveScript 1.3.1
 (function(){
   var easingFit, cubic, anikit, slide, ret;

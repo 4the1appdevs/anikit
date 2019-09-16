@@ -24,12 +24,11 @@ ldrs.on \change, render
 select.addEventListener \change, -> render!now!
 
 render-js = (t) ->
-  if restart => st = t
+  if restart => st := t; restart := false
   t = t - st
   t = (t / 1000) / ldrs.get!
   t = t - Math.floor(t)
-  if kit? =>
-    kit.animate-js block-js, t
+  if kit? => kit.animate-js block-js, t
   requestAnimationFrame render-js
 requestAnimationFrame render-js
 

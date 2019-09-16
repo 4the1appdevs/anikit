@@ -1,131 +1,65 @@
 (->
-  if require? => require! <[easing-fit cubic ../anikit]>
-
-  rush-h = do
-    prop: (f, c) -> {
-      transform: """
-        translate(#{f.value * c.offset_far * c.direction}#{c.unit},0)
-        skew(#{f.value * c.skew * -c.direction}deg)
-      """
-      opacity: Math.cos(f.value * Math.PI * 0.5)
-    }
-    value: (t, c) -> do
-      transform: [
-        1, -Math.tan(t * c.skew * -c.direction * Math.PI / 180), 0, t * c.offset_far * c.direction,
-        0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1
-      ]
-      opacity: Math.cos(t * Math.PI * 0.5)
-
-  rush-v = do
-    prop: (f, c) -> {
-      transform: """
-        translate(0,#{f.value * c.offset_far * c.direction}#{c.unit})
-        skewY(#{f.value * c.skew * c.direction}deg)
-      """
-      opacity: Math.cos(f.value * Math.PI * 0.5)
-    }
-    value: (t, c) -> do
-      transform: [
-        1, -Math.tan(t * c.skew * c.direction * Math.PI / 180), 0, 0,
-        0, 1, 0, -t * c.offset_far * c.direction, 0, 0, 1, 0, 0, 0, 0, 1
-      ]
-      opacity: Math.cos(t * Math.PI * 0.5)
-
   ret = do
     name: \rush
     type: \animation
     preset:
+      "rush-ltr": dir: 1, repeat: 0
+      "rush-rtl": dir: 2, repeat: 0
+      "rush-ttb": dir: 3, repeat: 0
+      "rush-btt": dir: 4, repeat: 0
+      "rush-ltr-in": dir: 1, repeat: 1
+      "rush-rtl-in": dir: 2, repeat: 1
+      "rush-ttb-in": dir: 3, repeat: 1
+      "rush-btt-in": dir: 4, repeat: 1
 
-      "rush-btt-in":
-        repeat: 1, direction: -1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
-        percent_out: default: 1, hidden: true
-        prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
+    edit: do
+      dir: name: "Direction", type: \Choice, values: [1,2,3,4], default: 1
+      offset: name: "Offset", default: 60, type: \number, min: 0, max: 1000
+      size: name: "Item Size", default: 32, type: \number, min: 0, max: 1000
+      deg: name: "Skew", default: 30, type: \number, unit: \deg, min: 0, max: 90
+      flip: name: "Flip", default: false, type: \boolean
+    local: data: (opt) ->
+      RD = Math.PI / 180
+      {deg, offset, size} = opt
+      ds = [ deg, -deg/2, -deg/2, deg/4, -deg/8, 0, 0, deg ]
+      xs = [
+        -offset - size * Math.tan(deg * RD),
+        -offset / 10 - size * Math.tan(RD * -deg / 2 ), 
+        -size * Math.tan(RD * -deg / 2),
+        -size * Math.tan(RD *  deg / 4),
+        -size * Math.tan(RD * -deg / 8),
+        0, 0, offset
+      ]
+      if opt.repeat => ts = [0, 0.3, 0.4, 0.55, 0.7, 0.8, 1]
+      else ts = [0, 0.25, 0.33, 0.44, 0.55, 0.66, 0.8, 1]
+      dc = if opt.dir <= 2 => \X else \Y
+      sgn = if opt.dir % 2 => 1 else -1
+      flip = if opt.flip => -1 else 1
 
-      "rush-ttb-in":
-        repeat: 1, direction: 1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
-        percent_out: default: 1, hidden: true
-        prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
-
-      "rush-ltr-in":
-        repeat: 1, direction: 1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
-        percent_out: default: 1, hidden: true
-        prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
-
-      "rush-rtl-in":
-        repeat: 1, direction: -1, percent_in: 0.9, local: sample-count: 40, error-threshold: 0.001
-        percent_out: default: 1, hidden: true
-        prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
-
-      "rush-btt":
-        direction: -1, local: sample-count: 40, error-threshold: 0.001
-        prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
-
-      "rush-ttb":
-        direction: 1, local: sample-count: 40, error-threshold: 0.001
-        prop: ((f, c) -> rush-v.prop f, c), value: ((t, c) -> rush-v.value t, c)
-
-      "rush-rtl":
-        direction: -1, local: sample-count: 40, error-threshold: 0.001
-        prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
-
-      "rush-ltr":
-        direction: 1, local: sample-count: 40, error-threshold: 0.001
-        prop: ((f, c) -> rush-h.prop f, c), value: ((t, c) -> rush-h.value t, c)
-
-    edit: 
-      dur: default: 1
-      steep: default: 0.4, type: \number, min: 0, max: 1, step: 0.01
-      offset_near: name: "Offset(Break)", default: 20, type: \number, unit: \px, min: 0, max: 1000
-      offset_far: name: "Offset(Transition)", default: 200, type: \number, unit: \px, min: 0, max: 1000
-      direction: default: -1, type: \number, min: -1, max: 1, step: 2, hidden: true
-      percent_in: name: "Duration(Enter)", default: 0.6, type: \number, min: 0, max: 1, step: 0.01
-      percent_out: name: "Duration(Exit)", default: 0.8, type: \number, min: 0, max: 1, step: 0.01
-      skew: name: "Skew", default: 30, type: \number, unit: \deg, min: 0, max: 90
-      unit: default: \px, type: \choice, values: ["px", "%", ""]
-
-    timing: (t, opt) ->
-      p1 = [0, opt.steep, 1 - opt.steep, 1] # speed down
-      pi = opt.percent_in
-      po = opt.percent_out
-      if po < pi => po = pi
-      near = opt.offset_near / opt.offset_far
-      if t == 0 => return -1
-      if t < (pi / 3) =>
-        t = cubic.Bezier.y(cubic.Bezier.t(t * 3/pi, p1), p1) * pi/3
-        return ((near + 1) * t / (pi/3)) - 1
-      if t < pi =>
-        t = ((t - (pi/3)) * 3.75 / pi)
-        return near * Math.cos(t * Math.PI) * (0.5 ** t)
-      if t < po or po == 1 => return 0
-      return (t - po) / (1 - po)
+      return {RD, deg, offset, size, ds, xs, ts, dc, sgn, flip}
 
     css: (opt) -> 
-      easing-fit.fit-to-keyframes (~> @timing it, opt), ({} <<< opt.local or {}) <<< {config: opt} <<< opt{name, prop}
-    js: (t, opt) -> opt.prop {value: @timing t, opt}, opt
-    affine: (t, opt) -> opt.value @timing(t, opt), opt
+      {RD,deg,offset,size,ds,xs,ts,dc,sgn,flip} = @local.data opt
+      fs = ""
+      for i from 0 til ts.length =>
+        fs += "#{ts[i] * 100}% { transform: translate#dc(#{sgn * xs[i]}px) skew#dc(#{flip * sgn * ds[i]}deg); }\n"
+      return """
+      @keyframes #{opt.name} {
+        0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); }
+        #fs
+      }
+      """
 
-    /* equivalent keyframes */
-    /*
-    rush(name, dur, rate, offset_near, offset_far, direction, percent_in, percent_out, skew)
-      .{name}
-        animation: unquote(name) 1s linear infinite
-      @keyframes {name}
-        0%
-          transform: translate(-1 * direction * offset_far, 0 ) skewX( direction * skew )
-          timing-speed-down(rate)
-        {percent_in * .37}
-          transform: translate( 1 * direction * offset_near, 0)  skewX( -0.78 * direction * skew )
-        {percent_in * .56}
-          transform: translate( -0.5 * direction * offset_near, 0)  skewX( 0.34 * direction * skew )
-        {percent_in * .75}
-          transform: translate( 0.25 * direction * offset_near, 0) skew( -0.17 * direction * skew )
-        {percent_in * 1}
-          transform: translate( 0, 0 ) skew(0deg)
-        {percent_out * 1}
-          transform: translate( 0, 0 ) skew(0deg)
-        100%
-          transform: translate(direction * offset_far, 0) skewX( direction * skew )
-    */
+    js: (t, opt) ->
+      {RD,deg,offset,size,ds,xs,ts,dc,sgn,flip} = @local.data opt
+      for i from 0 til ts.length => if t < ts[i] => break
+      [d1, d2] = ds[i - 1 to i]
+      [x1, x2] = xs[i - 1 to i]
+      [t1, t2] = ts[i - 1 to i]
+      if i == 1 => t = Math.pow(t / ts.1, 0.5) * ts.1
+      x = x1 + (x2 - x1) * (t - t1) / (t2 - t1)
+      d = d1 + (d2 - d1) * (t - t1) / (t2 - t1)
+      return transform: "translate#{dc}(#{sgn * x}px) skew#{dc}(#{flip * sgn * d}deg)"
 
   if module? => module.exports = ret
   return ret

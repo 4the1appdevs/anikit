@@ -40,9 +40,9 @@ select.addEventListener('change', function(){
   return render().now();
 });
 renderJs = function(t){
-  var st;
   if (restart) {
     st = t;
+    restart = false;
   }
   t = t - st;
   t = (t / 1000) / ldrs.get();
