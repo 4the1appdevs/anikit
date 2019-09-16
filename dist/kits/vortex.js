@@ -121,7 +121,7 @@
       var p1;
       p1 = [opt.steep, 0, 1, 1 - opt.steep];
       if (opt.reverse) {
-        t = t;
+        t = cubic.Bezier.y(cubic.Bezier.t(t, p1), p1);
       } else {
         if (t === 0) {
           return 0;

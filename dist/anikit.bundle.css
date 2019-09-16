@@ -2421,6 +2421,30 @@ transform: translate(-1.469576158976824e-14px,-60px) rotate(360deg) }  }
 .ld.ld-rush-btt-in {
   animation: ld-rush-btt-in 1s 1; animation-fill-mode: forwards;transform: translateY(78.47520861406802px) skewY(-30deg); 
 }
+@keyframes ld-skew {
+  0%, 50%, 100% { animation-timing-function: cubic-bezier(0.4,0,1,0.6) }
+  25%, 75% {      animation-timing-function: cubic-bezier(0,0.4,0.6,1) }
+    0% { transform: skewX(20deg) scale(1) }
+   25% { transform: skewX(0deg) scale(0.9) }
+   50% { transform: skewX(-20deg) scale(1) }
+   75% { transform: skewX(0deg) scale(0.9) }
+  100% { transform: skewX(20deg) scale(1) }
+}
+.ld.ld-skew {
+  animation: ld-skew 1s infinite; ; 
+}
+@keyframes ld-skew-alt {
+  0%, 50%, 100% { animation-timing-function: cubic-bezier(0.4,0,1,0.6) }
+  25%, 75% {      animation-timing-function: cubic-bezier(0,0.4,0.6,1) }
+    0% { transform: skewY(20deg) scale(1) }
+   25% { transform: skewY(0deg) scale(0.9) }
+   50% { transform: skewY(-20deg) scale(1) }
+   75% { transform: skewY(0deg) scale(0.9) }
+  100% { transform: skewY(20deg) scale(1) }
+}
+.ld.ld-skew-alt {
+  animation: ld-skew-alt 1s infinite; ; 
+}
 @keyframes ld-slide-ltr
 {
   0% {
