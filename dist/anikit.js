@@ -323,7 +323,15 @@ import$(anikit, {
     }
   },
   set: function(name, mod){
-    return this.mods[name] = mod;
+    var k, ref$, v, results$ = [];
+    this.mods[name] = mod;
+    if (mod.preset) {
+      for (k in ref$ = mod.preset) {
+        v = ref$[k];
+        results$.push(this.types[k] = name);
+      }
+      return results$;
+    }
   },
   get: function(name, opt){
     var config, ret, mod, k, v, ref$, o;
