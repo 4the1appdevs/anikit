@@ -12,10 +12,14 @@ html(lang="en")
   body
     .p-4.h-100
       .row.h-100
-        .col-md.h-100
+        .col-md-8.h-100
           textarea.form-control.bg-dark.text-white.code-block.text-sm.h-100
-        .col-md.text-center: .vertical-center
-          .block(style="width:128px;height:128px;border-radius:3px;background:#222")
+        .col-md-4.text-center
+          .card.position-absolute(style="width:calc(100% - 30px)"): .card-body
+            select#select.form-control.mb-4
+            .ldrs
+          .vertical-center
+            .block(style="width:128px;height:128px;border-radius:3px;background:#222")
 
     +script("../assets/lib/livescript-min.js")
     +script("../assets/lib/three.min.js")
