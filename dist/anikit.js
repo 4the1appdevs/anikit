@@ -322,6 +322,9 @@ import$(anikit, {
       return [1, 0, 0, 0, tan(t), 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
     }
   },
+  set: function(name, mod){
+    return this.mods[name] = mod;
+  },
   get: function(name, opt){
     var config, ret, mod, k, v, ref$, o;
     opt == null && (opt = {});

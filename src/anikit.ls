@@ -173,6 +173,7 @@ anikit <<< do
     s:  (t) -> [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1]
     kx: (t) -> [1, -tan(t), 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
     ky: (t) -> [1, 0, 0, 0, tan(t), 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+  set: (name, mod) -> @mods[name] = mod
   get: (name, opt={}) ->
     config = {name: name, dur: 1, repeat: 0}
     ret = if @types[name] => @mods[@types[name]] else @mods[name]
