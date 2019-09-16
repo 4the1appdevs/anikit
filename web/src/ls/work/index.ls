@@ -9,4 +9,3 @@ handler = debounce ->
   kit.animate block
 
 textarea.addEventListener \keyup, handler
-
