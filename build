@@ -40,4 +40,7 @@ cp dist/anikit.util.min.js web/static/assets/anikit/
 cp dist/anikit.bundle.min.css web/static/assets/anikit/
 cp dist/anikit.pug web/static/assets/anikit/
 
+echo "Touch doc file for triggering rebuilding..."
+touch web/src/pug/index.pug
+
 echo "Done."
