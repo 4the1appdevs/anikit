@@ -8,6 +8,7 @@ html(lang="en")
     +css("assets/lib/bootstrap.min.css")
     +css("assets/lib/ldui.min.css")
     +css("assets/anikit/anikit.bundle.min.css")
+    +css("css/ldsel.css")
     +css("css/index.css")
   body
 
@@ -29,15 +30,17 @@ html(lang="en")
       h2 Available Presets
       p.text-muted If animation stopped ( transitional animation plays only once ), click to re-animate it.
 
-      each g,$index in anikit.groupName
-        h4.font-weight-lighter
-          span #{g} 
-          span.text-sm.text-primary: small ( #{anikit.members[$index].length} )
-        .d-flex.flex-wrap.justify-content-between.bg-light.p-4
-          each m in anikit.members[$index]
-            .item(data-name=`ld-${m}`)
-              .square(class=`ld ld-${m}`)
-              div= m
+      #presets
+        each g,$index in anikit.groupName
+          h4.font-weight-lighter
+            span #{g} 
+            span.text-sm.text-primary: small ( #{anikit.members[$index].length} )
+          .d-flex.flex-wrap.justify-content-between.bg-light.p-4
+            each m in anikit.members[$index]
+              .item(data-name=`ld-${m}`)
+                .square(class=`ld ld-${m}`)
+                div= m
+
       h2 Library
       p Anikit presets are separated into two groups by their purpose and released under MIT License.
       h3: a(href="https://loading.io/animation/") loading.css
@@ -111,6 +114,37 @@ html(lang="en")
       .ldcv: .base(style="top:10px;bottom:10px;left:50%;transform:translate(-50%,0);overflow:scroll"): .inner
         +anikit-dropdown-menu
 
+      h3 Kit
+      p Anikit also provides a complete UI kit for a better user experience when choosing animation. It's a floating dropdown menu with search box and animation preview. Toggle it by clicking this button:
+      .btn.btn-outline-primary(onclick="ldsel.get({host: this}).then(function(it) {console.log(it);})") Show Me
+
+      .ldcv.ldsel: .base: .inner.has-tips.mx-auto: div
+        .head: input
+        .protip Go Pro to Unlock All
+        .menu
+          each g,$index in anikit.groupName
+            .item-head #{g}
+            .item-group
+              each m in anikit.members[$index]
+                .item(data-value=`ld-${m}`)
+                  div
+                    | #{m}
+                    if $index > 1
+                      i.i-lock
+                  .ani(class=`ld ld-${m}`)
+
+
+
+      h3 Build Your Own Kit
+      p If none of above fits your need, you can build your own kit with Pug variables provided in #[code anikit.pug] from scratch. Following is an example:
+      .example.code-block.
+        div
+          each g,$index in anikit.groupName
+          div= g
+          each m in anikit.members[$index]
+            div= m
+      p Above example loops over every animation in each group, and render their name in a #[code div] tag.
+
       h2 APIs
       p While Anikit can be used to generate CSS animation based on JavaScript functions, you can also use it to animate thing directly via JS.
       p First, you will have to create an anikit object. It's quite straight forward to do some based on presets - just create an object with the desired preset name:
@@ -159,4 +193,5 @@ html(lang="en")
     +script("assets/lib/bootstrap.native.v4.min.js")
     +script("assets/lib/ldui.min.js")
     +script("assets/anikit/anikit.bundle.min.js")
+    +script("js/ldsel.js")
     +script("js/index.js")

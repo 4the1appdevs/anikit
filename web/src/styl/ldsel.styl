@@ -1,0 +1,94 @@
+.ldsel.ldcv:before
+  display: none
+.ldsel.ldcv > .base
+  width: 240px
+  border: 1px solid #ddd
+  border-radius: 5px
+  box-shadow: 0 1px 3px rgba(0,0,0,.2)
+  background: #fff
+  overflow: hidden
+  position: fixed
+  top: 10px
+  bottom: 10px
+  max-height: 100%
+  & > div > div
+    position: relative
+    width: 100%
+    height: 100%
+  .head
+    position: absolute
+    z-index: 2
+    width: 100%
+    background: #fff
+    padding: 10px
+    border-bottom: 1px solid #ddd
+    box-shadow: 0 0 2px rgba(0,0,0,0.1)
+    input
+      width: 100%
+  .menu
+    position: absolute
+    z-index: 1
+    overflow-y: scroll
+    top: 53px
+    bottom: 0
+    width: 100%
+  .item-head
+    opacity: 0.75
+    padding: 5px
+    border-bottom: 1px solid #eee
+    border-top: 1px solid #eee
+    font-size: .875em
+    background: #f1f2f3
+  .item-group
+    padding-bottom: 10px
+  .item
+    i
+      font-size: 12px
+      opacity: .35
+      vertical-align: .2em
+      margin-left: .25em
+    cursor: pointer
+    padding: 5px
+    position: relative
+    &:after
+      content: " "
+      display: block
+    &:after, .ani
+      position: absolute
+      width: 0
+      height: 0
+      border-radius: 50%
+      border: 5px solid #ddd
+      margin: auto
+      top: 0
+      bottom: 0
+      right: 10px
+    .ani
+      display: none
+      animation-play-state: paused
+  .item:hover
+    background: #0ff
+    &:after
+      display: none
+    .ani
+      border-width: 7px
+      border-color: #0bf
+      border-left-color: transparent
+      animation-play-state: running
+      display: block
+  .protip
+    position: absolute
+    bottom: 0
+    left: 0
+    width: 100%
+    padding: 5px
+    background: #fff
+    text-align: center
+    z-index: 2
+    border-top: 1px solid #ddd
+    box-shadow: 0 0 2px rgba(0,0,0,.1)
+    font-size: .875em
+
+.ldsel.has-tips .menu
+  padding-bottom: 30px
+

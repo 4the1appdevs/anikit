@@ -1,5 +1,5 @@
 (->
-  ld$.find document, '.item' .map (n) -> 
+  ld$.find document, '#presets .item' .map (n) ->
     n.addEventListener \click, ->
       a = n.getAttribute \data-name
       s = ld$.find(n, '.square', 0)
@@ -16,6 +16,7 @@
   ldrs1-demo = ld$.find document, '#ldrs-demo', 0
   kit = new anikit \bounce
   ldrs1.on \change, -> kit.animate-js ldrs1-demo, it
+  window.ldsel = ldsel = new ldSelect root: '.ldsel'
 
   three-init = (root) ->
     box = root.getBoundingClientRect!
@@ -93,5 +94,4 @@
     requestAnimationFrame f
   requestAnimationFrame f
   */
-
 )!

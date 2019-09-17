@@ -1,0 +1,65 @@
+doctype html
+include ../../../static/assets/lib/pug/ldui.pug
+include ../../../static/assets/anikit/anikit.pug
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    link(href="https://fonts.googleapis.com/css?family=Oxygen:300,700|Roboto:300,500,700|BenchNine|Varela+Round&display=swap", rel="stylesheet")
+    +css("../assets/lib/bootstrap.min.css")
+    +css("../assets/lib/ldui.min.css")
+    +css("../assets/anikit/anikit.bundle.min.css")
+    +css("../css/index.css")
+    style: :stylus
+      @font-face
+        font-family: 'ldi'
+        font-weight: normal
+        font-style: normal
+        src: url('../assets/lib/fonts/ldi.ttf') format('truetype')
+      html,body { width: 100%; height: 100% }
+
+
+
+  body
+    .row.h-100
+      .col-md: .vertical-center
+        .w-100
+          .ldsel.has-tips.mx-auto(style="position:fixed;top:10px;bottom:10px;left:100px"): div
+            .head: input
+            .protip Go Pro to Unlock All
+            .menu
+              each g,$index in anikit.groupName
+                .item-head #{g}
+                .item-group
+                  each m in anikit.members[$index]
+                    .item(data-name=`ld-${m}`)
+                      div
+                        | #{m}
+                        if $index > 1
+                          i.i-lock
+                      .ani(class=`ld ld-${m}`)
+
+      .col-md
+        .w-100.h-100.p-4.text-center: .vertical-center
+          .w-50.mx-auto
+            .mb-2
+              .input-group
+                .dropdown
+                  .btn.btn-outline-dark.dropdown-toggle(data-toggle="dropdown") Item 1
+                  .dropdown-menu
+                    .mx-2.mb-2: input.form-control
+                    each i in [1,2,3,4,5,6,7,8,9]
+                      .dropdown-item item #{i}
+                .input-group-append: .btn.btn-outline-dark More
+            select.form-control
+              each i in [1,2,3,4,5,6,7,8,9]
+                each j in [1,2,3,4,5,6,7,8,9]
+                  option(name=`item ${i}`) item #{i}
+
+    +script("../assets/lib/livescript-min.js")
+    +script("../assets/lib/three.min.js")
+    +script("../assets/lib/three-bundle.min.js")
+    +script("../assets/lib/bootstrap.native.v4.min.js")
+    +script("../assets/lib/ldui.min.js")
+    +script("../assets/anikit/anikit.util.min.js")
+    +script("../assets/anikit/anikit.bundle.min.js")
+    +script("../js/work/select.js")
