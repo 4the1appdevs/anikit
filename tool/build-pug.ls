@@ -7,6 +7,7 @@ for k,v of anikit.types =>
   idx = if k == \static => 0 else if /\-(on|off|in|out)$/.exec(k) => 3 else 2
   gs[idx].push k
   if k in pop => gs.1.push k
+gs.map -> it.sort (a,b) -> if a > b => 1 else if b > a => -1 else 0
 
 animation = group-name: gn, members: gs
 
