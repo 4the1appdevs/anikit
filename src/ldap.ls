@@ -28,8 +28,6 @@
         @base.style.left = "#{box.x}px"
     # re-apply disable-filter and default-filter. default-filter is destructive. ( TODO: better way? )
     apply-filters: (o) ->
-      console.log "here"
-      console.log o
       if o? => <[disableFilter defaultFilter]>.map ~> if o[it] => @opt[it] = o[it]
       ld$.find @root, '.item' .map (d,i) ~>
         if @opt.disable-filter =>

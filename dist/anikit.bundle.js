@@ -552,8 +552,6 @@ function import$(obj, src){
     },
     applyFilters: function(o){
       var this$ = this;
-      console.log("here");
-      console.log(o);
       if (o != null) {
         ['disableFilter', 'defaultFilter'].map(function(it){
           if (o[it]) {
