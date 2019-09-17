@@ -31,7 +31,7 @@ echo "Uglify CSS bundles..."
 ./node_modules/.bin/uglifycss dist/anikit.bundle.css > dist/anikit.bundle.min.css
 
 echo "Generate pug file..."
-lsc tool/build-pug.ls > dist/anikit.pug
+cd tool; lsc build-pug.ls > ../dist/anikit.pug; cd ..
 
 echo "Copy files to web..."
 mkdir -p web/static/assets/anikit/
