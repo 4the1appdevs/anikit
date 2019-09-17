@@ -430,7 +430,12 @@ function import$(obj, src){
         return;
       }
       ret = n.getAttribute('data-value');
-      return this$.ldcv.set(ret);
+      return this$.ldcv.set({
+        name: ret,
+        info: {
+          limited: n.classList.contains('limited')
+        }
+      });
     });
     handler = function(){
       return this$.item.map(function(it){

@@ -13,7 +13,7 @@
         n = n.parentNode
       if !(n and n.classList.contains(\item)) => return
       ret = n.getAttribute(\data-value)
-      @ldcv.set ret
+      @ldcv.set {name: ret, info: limited: n.classList.contains(\limited) }
     handler = ~>
       @item.map ~> it.style.display = if !(~it.textContent.indexOf(@input.value)) => \none else \block
     @input.addEventListener \input, handler
