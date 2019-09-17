@@ -10,10 +10,7 @@ mixin ldap(clsname)
         .item-group
           each m in anikit.members[$index]
             .item(data-value=m)
-              div
-                | #{m}
-                if $index > 1
-                  i.i-lock
+              div #{m}
               .ani(class=`ld ld-${m}`)
 
 mixin anikit-select-options

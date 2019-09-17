@@ -407,6 +407,7 @@ function import$(obj, src){
   var ldAnikitPicker;
   ldAnikitPicker = function(opt){
     var handler, this$ = this;
+    this.opt = opt;
     this.root = typeof opt.root === 'string'
       ? document.querySelector(opt.root)
       : opt.root;
@@ -452,6 +453,34 @@ function import$(obj, src){
         box = opt.host.getBoundingClientRect();
         return this.base.style.left = box.x + "px";
       }
+    },
+    applyFilters: function(o){
+      var this$ = this;
+      console.log("here");
+      console.log(o);
+      if (o != null) {
+        ['disableFilter', 'defaultFilter'].map(function(it){
+          if (o[it]) {
+            return this$.opt[it] = o[it];
+          }
+        });
+      }
+      return ld$.find(this.root, '.item').map(function(d, i){
+        var ret;
+        if (this$.opt.disableFilter) {
+          ret = this$.opt.disableFilter(d.getAttribute('data-anikit'), i);
+          ld$.cls(d, this$.opt.limitHard
+            ? {
+              disabled: ret
+            }
+            : {
+              limited: ret
+            });
+        }
+        if (this$.opt.defaultFilter && !this$.opt.defaultFilter(d.getAttribute('data-anikit'), i)) {
+          return ld$.remove(d);
+        }
+      });
     }
   });
   return window.ldAnikitPicker = ldAnikitPicker;

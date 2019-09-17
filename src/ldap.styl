@@ -1,13 +1,13 @@
-.ldap.ldcv:before
+.ldap:before
   display: none
-.ldap.ldcv > .base
+.ldap > .base
   position: absolute
   width: 15em
   max-width: calc(100% - 2em)
   top: 1em
   bottom: 1em
   max-height: calc(100% - 2em)
-.ldap.ldcv > .base > .inner
+.ldap > .base > .inner
   border: 1px solid #ddd
   border-radius: 5px
   box-shadow: 0 1px 3px rgba(0,0,0,.2)
@@ -78,6 +78,19 @@
       border-left-color: transparent
       animation-play-state: running
       display: block
+
+  .item.limited
+    text-decoration: line-through
+    & > div:first-child:after
+      content: "×"
+      display: inline
+      opacity: .5
+      font-size: .75em
+      margin-left: .125em
+
+  .item.disabled
+    opacity: .25
+    cursor: not-allowed
   .protip
     position: absolute
     bottom: 0

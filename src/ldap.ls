@@ -1,5 +1,6 @@
 (->
   ldAnikitPicker = (opt) ->
+    @opt = opt
     @root = if typeof(opt.root) == \string => document.querySelector(opt.root) else opt.root
     @ldcv = new ldCover root: @root
     @input = @root.querySelector \input
@@ -25,6 +26,16 @@
       if opt.host =>
         box = opt.host.getBoundingClientRect!
         @base.style.left = "#{box.x}px"
+    # re-apply disable-filter and default-filter. default-filter is destructive. ( TODO: better way? )
+    apply-filters: (o) ->
+      console.log "here"
+      console.log o
+      if o? => <[disableFilter defaultFilter]>.map ~> if o[it] => @opt[it] = o[it]
+      ld$.find @root, '.item' .map (d,i) ~>
+        if @opt.disable-filter =>
+          ret = @opt.disable-filter(d.getAttribute(\data-anikit),i)
+          ld$.cls d, (if @opt.limit-hard => {disabled: ret} else {limited: ret})
+        if @opt.default-filter and !@opt.default-filter(d.getAttribute(\data-anikit),i) => ld$.remove d
 
   window.ldAnikitPicker = ldAnikitPicker
 )!
