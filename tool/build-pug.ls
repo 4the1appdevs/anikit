@@ -14,6 +14,6 @@ animation = group-name: gn, members: gs
 output = """
 //- module
 - var anikit = #{JSON.stringify(animation)};
-#{fs.read-file-sync '../src/anikit.pug' .toString!}
+#{fs.read-file-sync '../src/ldap.pug' .toString!}
 """
 console.log output

@@ -2675,6 +2675,19 @@ transform: translate(-1.469576158976824e-14px,-60px) rotate(360deg) }  }
 .ld.ld-cycle {
   animation: ld-cycle 1s infinite; ; 
 }
+@keyframes ld-cycle-alt
+{
+  0% {
+    animation-timing-function: cubic-bezier(0.3333,0.3333,0.6667,0.6667);
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+.ld.ld-cycle-alt {
+  animation: ld-cycle-alt 1s infinite; ; 
+}
 @keyframes ld-flip-h
 {
   0% {
@@ -3842,107 +3855,117 @@ transform: translate(-1.469576158976824e-14px,-60px) rotate(360deg) }  }
 }
 .ld.ld-wrench {
   animation: ld-wrench 1s infinite; ; 
-}.anikits {
-  display: flex;
-  flex-wrap: wrap;
-}
-.anikit .demo {
-  width: 48px;
-  height: 48px;
-  display: inline-block;
-}
-.anikit .ld {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  border: 24px solid transparent;
-  border-radius: 50%;
-  background: #09f;
-  border-top-color: #fff;
-  animation-iteration-count: infinite !important;
+}.ldap.ldcv:before {
   display: none;
 }
-.anikit.active .ld,
-.anikit:hover .ld {
-  animation-play-state: running;
-  display: block;
+.ldap.ldcv > .base {
+  position: absolute;
+  width: 15em;
+  max-width: calc(100% - 2em);
+  top: 1em;
+  bottom: 1em;
+  max-height: calc(100% - 2em);
 }
-.anikit.disabled {
-  background: #f9fafb;
-  color: #ccc;
-}
-.anikit.disabled .ld {
-  border-top-color: #f9fafb;
-  background: #ccc;
-}
-.anikits .anikit {
-  flex: 0 0 88px;
-  text-align: center;
-  font-size: 12px;
-  margin: 20px;
-  width: 88px;
-  height: 84px;
-  padding: 3px;
-  overflow: hidden;
-  cursor: pointer;
-}
-.anikits .anikit .demo {
-  display: block;
-  margin: auto;
-}
-.anikits .anikit .inner {
-  transform: scale(0.5);
-}
-.anikits .anikit .ld {
-  animation-play-state: running;
-  display: block;
-}
-.anikits .anikit.active,
-.anikits .anikit:hover {
-  background: #09f;
-  color: #fff;
-}
-.anikits .anikit.active .ld,
-.anikits .anikit:hover .ld {
+.ldap.ldcv > .base > .inner {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   background: #fff;
-  border-top-color: #09f;
+  overflow: hidden;
 }
-.anikits .anikit span {
-  width: 120px;
+.ldap.ldcv > .base > .inner > div {
   position: relative;
-  left: -19px;
+  width: 100%;
+  height: 100%;
+}
+.ldap.ldcv > .base > .inner .head {
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+}
+.ldap.ldcv > .base > .inner .head input {
+  width: 100%;
+}
+.ldap.ldcv > .base > .inner .menu {
+  position: absolute;
+  z-index: 1;
+  overflow-y: scroll;
+  top: 53px;
+  bottom: 0;
+  width: 100%;
+}
+.ldap.ldcv > .base > .inner .item-head {
+  opacity: 0.75;
+  padding: 5px;
+  border-bottom: 1px solid #eee;
+  border-top: 1px solid #eee;
+  font-size: 0.875em;
+  background: #f1f2f3;
+}
+.ldap.ldcv > .base > .inner .item-group {
+  padding-bottom: 10px;
+}
+.ldap.ldcv > .base > .inner .item {
+  cursor: pointer;
+  padding: 5px;
+  position: relative;
+}
+.ldap.ldcv > .base > .inner .item i {
+  font-size: 12px;
+  opacity: 0.35;
+  vertical-align: 0.2em;
+  margin-left: 0.25em;
+}
+.ldap.ldcv > .base > .inner .item:after {
+  content: " ";
   display: block;
 }
-.anikit.dropdown-item.disabled {
-  background: #f9fafb;
-  color: #ccc;
+.ldap.ldcv > .base > .inner .item:after,
+.ldap.ldcv > .base > .inner .item .ani {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  border: 5px solid #ddd;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 10px;
 }
-.anikit.dropdown-item.limited {
-  color: #444;
-  background: #f9fafb;
+.ldap.ldcv > .base > .inner .item .ani {
+  display: none;
+  animation-play-state: paused;
 }
-.anikit.dropdown-item.limited:hover span:after {
-  opacity: 0.5;
-  display: inline;
-  margin-left: 3px;
-  content: "\f011";
-  vertical-align: -15%;
-  line-height: 1;
-  font-family: ldi;
+.ldap.ldcv > .base > .inner .item:hover {
+  background: #0ff;
 }
-.anikit.dropdown-item .demo .inner {
-  transform: scale(0.3);
+.ldap.ldcv > .base > .inner .item:hover:after {
+  display: none;
+}
+.ldap.ldcv > .base > .inner .item:hover .ani {
+  border-width: 7px;
+  border-color: #0bf;
+  border-left-color: transparent;
+  animation-play-state: running;
+  display: block;
+}
+.ldap.ldcv > .base > .inner .protip {
   position: absolute;
   bottom: 0;
-  top: 0;
   left: 0;
-  right: 0;
-  margin: -5px auto 0;
+  width: 100%;
+  padding: 5px;
+  background: #fff;
+  text-align: center;
+  z-index: 2;
+  border-top: 1px solid #ddd;
+  box-shadow: 0 0 2px rgba(0,0,0,0.1);
+  font-size: 0.875em;
 }
-.anikit.dropdown-item .demo {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  position: relative;
-  float: right;
+.ldap.has-tips .menu {
+  padding-bottom: 30px;
 }

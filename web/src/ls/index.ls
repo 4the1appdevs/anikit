@@ -6,24 +6,23 @@
       s.classList.remove a
       s.offsetHeight
       setTimeout (-> s.classList.add a), 0
-  ldcv-nodes = ld$.find document, '.ldcv'
   ldrs-nodes = ld$.find document, '.ldrs'
-  window.ldcv1 = new ldCover root: ldcv-nodes.0
-  window.ldcv2 = new ldCover root: ldcv-nodes.1
-  window.ldcv3 = new ldCover root: ldcv-nodes.2
+  window.ldcv1 = new ldCover root: ld$.find(document, '#kit-modal-1 .ldcv', 0)
+  window.ldcv2 = new ldCover root: ld$.find(document, '#kit-modal-2 .ldcv', 0)
+  window.ldcv3 = new ldCover root: ld$.find(document, '#kit-modal-3 .ldcv', 0)
   ldrs1 = new ldSlider root: ldrs-nodes.0, min: 0, max: 1, step: 0.01
   ldrs2 = new ldSlider root: ldrs-nodes.1, min: 0, max: 1, step: 0.01
   ldrs1-demo = ld$.find document, '#ldrs-demo', 0
   kit = new anikit \bounce
   ldrs1.on \change, -> kit.animate-js ldrs1-demo, it
-  window.ldsel = ldsel = new ldSelect root: '.ldsel'
-  ldsel-nodes = ld$.find document, '#ldsel-animate i'
-  window.ldsel-animate = (node) ->
-    ldsel.get {host: node} .then (n) ->
+  window.ldap = ldap = new ldAnikitPicker root: '.ldap'
+  ldap-nodes = ld$.find document, '#ldap-animate i'
+  window.ldap-animate = (node) ->
+    ldap.get {host: node} .then (n) ->
       if !n => return
       k = new anikit(n.replace /^ld-/, '')
-      ldsel-nodes.map (d,i) ->
-        delay = i/ldsel-nodes.length
+      ldap-nodes.map (d,i) ->
+        delay = i/ldap-nodes.length
         if !k.config.repeat => delay = -1 + delay
         k.animate-js d, 0
         k.animate d

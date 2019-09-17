@@ -7,6 +7,7 @@ echo "Generate kits-list..."
 echo "Transpiling LiveScript..." 
 ./node_modules/.bin/lsc -cbp src/anikit.ls > dist/anikit.js
 ./node_modules/.bin/lsc -cbp src/ldap.ls >> dist/anikit.js
+./node_modules/.bin/lsc -cbp src/ldap-ext.ls >> dist/ldap-ext.js
 ./node_modules/.bin/lsc -cbp src/easing.ls > dist/easing.js
 ./node_modules/.bin/lsc -cbp src/util.ls > dist/anikit.util.js
 ./node_modules/.bin/lsc -o dist/kits/ -cb src/kits/*
@@ -20,25 +21,30 @@ echo "Bundle Anikit utils into anikit.util.js ..."
 echo "Uglify anikit.bundle.js ..."
 ./node_modules/.bin/uglifyjs dist/anikit.bundle.js > dist/anikit.bundle.min.js
 ./node_modules/.bin/uglifyjs dist/anikit.util.js > dist/anikit.util.min.js
+./node_modules/.bin/uglifyjs dist/ldap-ext.js > dist/ldap-ext.min.js
 
 echo "Building CSS Bundle..."
 ./node_modules/.bin/lsc tool/build-css
 
 echo "Transpiling Stylus..."
 ./node_modules/.bin/stylus -p src/ldap.styl >> dist/anikit.bundle.css
+./node_modules/.bin/stylus -p src/ldap-ext.styl > dist/ldap-ext.css
 
 echo "Uglify CSS bundles..."
 ./node_modules/.bin/uglifycss dist/anikit.bundle.css > dist/anikit.bundle.min.css
+./node_modules/.bin/uglifycss dist/ldap-ext.css > dist/anikit-ext.min.css
 
 echo "Generate pug file..."
-cd tool; lsc build-pug.ls > ../dist/anikit.pug; cd ..
+cd tool; lsc build-pug.ls > ../dist/ldap.pug; cd ..
+cp src/ldap-ext.pug dist/ldap-ext.pug
 
 echo "Copy files to web..."
 mkdir -p web/static/assets/anikit/
 cp dist/anikit.bundle.min.js web/static/assets/anikit/
 cp dist/anikit.util.min.js web/static/assets/anikit/
 cp dist/anikit.bundle.min.css web/static/assets/anikit/
-cp dist/anikit.pug web/static/assets/anikit/
+cp dist/ldap.pug web/static/assets/anikit/
+cp dist/ldap-ext.pug web/static/assets/anikit/
 
 echo "Touch doc file for triggering rebuilding..."
 touch web/src/pug/index.pug

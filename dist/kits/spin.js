@@ -52,6 +52,20 @@
           };
         }
       },
+      "cycle-alt": {
+        steep: 0.0,
+        cycle: -1,
+        prop: function(f, c){
+          return {
+            transform: "rotate(" + f.value * c.cycle * 360 + "deg)"
+          };
+        },
+        value: function(t, c){
+          return {
+            transform: anikit.util.rz(t * c.cycle * Math.PI * 2)
+          };
+        }
+      },
       "flip-h": {
         cycle: 1,
         flip: true,
@@ -118,8 +132,8 @@
       cycle: {
         'default': 1,
         type: 'number',
-        min: 0,
-        max: 100,
+        min: -20,
+        max: 20,
         step: 1
       },
       flip: {

@@ -1,6 +1,7 @@
 doctype html
 include ../../static/assets/lib/pug/ldui.pug
-include ../../static/assets/anikit/anikit.pug
+include ../../static/assets/anikit/ldap.pug
+include ../../static/assets/anikit/ldap-ext.pug
 html(lang="en")
   head
     meta(charset="utf-8")
@@ -62,74 +63,18 @@ html(lang="en")
         .col-md: .vertical-center
           select.form-control
             +anikit-select-options
-      h3 Modal
-      p For using in a popup modal. Here we use ldCover for an example. Useful when you want to show a preview for each animation.
 
-      .row.mb-1
-        .col-md
-          .example.code-block.
-            .ldcv: .base: .inner
-              +anikit-modal-content
-        .col-md: .vertical-center
-          .w-100.text-center
-            .btn.btn-primary(onclick="ldcv2.toggle()") Toggle Modal
-
-      .row
-        .col-md
-          .example.code-block.
-            //- or for shorthand:
-            +anikit-modal
-        .col-md: .vertical-center
-          .w-100.text-center
-            .btn.btn-primary(onclick="ldcv1.toggle()") Toggle Modal
-
-      +anikit-modal
-      .ldcv: .base(style="width:700px;height:500px"): .inner.card: .card-body
-        +anikit-modal-content
-      h3 Bootstrap Dropdown
-      p Generate a list of items compatible with bootstrap dropdown component. Useful when working with an editor, since unlike modal this won't block the whole UI.
-
-      .row.mb-1
-        .col-md
-          .example.code-block.
-            .dropdown
-              .btn.btn-primary.dropdown-toggle(
-              data-toggle="dropdown") Choose ..
-              .dropdown-menu
-                +anikit-dropdown-menu
-        .col-md: .vertical-center
-          .w-100.text-center: .d-inline-block
-            .dropdown
-              .btn.btn-primary.dropdown-toggle(data-toggle="dropdown") Animations ...
-              .dropdown-menu
-                +anikit-dropdown-menu
-
-      .row
-        .col-md
-          .example.code-block.
-            //- or for shorthand:
-            +anikit-dropdown
-        .col-md: .vertical-center
-          .w-100.text-center: .d-inline-block
-            +anikit-dropdown
-
-      p This can also be used in a modal:
-      .btn.btn-primary(onclick="ldcv3.toggle()") Toggle Modal
-      .ldcv: .base(style="top:10px;bottom:10px;left:50%;transform:translate(-50%,0);overflow:scroll"): .inner
-        +anikit-dropdown-menu
-
-      h3 Kit
-      p Anikit also provides a complete UI kit for a better user experience when choosing animation. It's a floating dropdown menu with search box and animation preview. Toggle it by clicking this button:
-      .btn.btn-outline-primary(onclick="ldselAnimate(this)") Show Me
-      .btn.btn-text
-        #ldsel-animate
-          each i in [1,2,3,4,5,6]
-            i.i-heart.text-danger.d-inline-block.text-lg.mr-2
-
-      +anikit-selector
+      h3 ldAnikitPicker
+      p Anikit provides a complete UI kit for a better user experience when choosing animation. It's a floating dropdown menu with search box and animation preview. Toggle it by clicking this button:
+      .m-4.p-4
+        .btn.btn-outline-primary(onclick="ldapAnimate(this)") Show Me
+        .btn.btn-text.float-right
+          #ldap-animate
+            each i in [1,2,3,4,5,6]
+              i.i-heart.text-danger.d-inline-block.text-lg.mr-2
+      #ldap: +ldap
         .protip Go Pro to Unlock All
-
-
+      br
 
       h3 Build Your Own Kit
       p If none of above fits your need, you can build your own kit with Pug variables provided in #[code anikit.pug] from scratch. Following is an example:
@@ -140,6 +85,68 @@ html(lang="en")
           each m in anikit.members[$index]
             div= m
       p Above example loops over every animation in each group, and render their name in a #[code div] tag.
+      h2 Other Kits #[span.text-sm.text-muted / TBD ]
+      p Following kits are work-in-progress and for demonstration purpose only. You can find and use them by including #[code ldap-ext.pug], #[code ldap-ext.js] and #[code ldap-ext.css].
+
+      .px-4.py-2(style="border-left:4px solid #ddd")
+
+        h3 Modal
+        p For using in a popup modal. Here we use ldCover for an example. Useful when you want to show a preview for each animation.
+
+        .row.mb-1
+          .col-md
+            .example.code-block.
+              .ldcv: .base: .inner
+                +anikit-modal-content
+          .col-md: .vertical-center
+            .w-100.text-center
+              .btn.btn-primary(onclick="ldcv2.toggle()") Toggle Modal
+
+        .row
+          .col-md
+            .example.code-block.
+              //- or for shorthand:
+              +anikit-modal
+          .col-md: .vertical-center
+            .w-100.text-center
+              .btn.btn-primary(onclick="ldcv1.toggle()") Toggle Modal
+
+        #kit-modal-1: +anikit-modal
+        #kit-modal-2: .ldcv: .base(style="width:700px;height:500px"): .inner.card: .card-body
+          +anikit-modal-content
+        h3 Bootstrap Dropdown
+        p Generate a list of items compatible with bootstrap dropdown component. Useful when working with an editor, since unlike modal this won't block the whole UI.
+
+        .row.mb-1
+          .col-md
+            .example.code-block.
+              .dropdown
+                .btn.btn-primary.dropdown-toggle(
+                data-toggle="dropdown") Choose ..
+                .dropdown-menu
+                  +anikit-dropdown-menu
+          .col-md: .vertical-center
+            .w-100.text-center: .d-inline-block
+              .dropdown
+                .btn.btn-primary.dropdown-toggle(data-toggle="dropdown") Animations ...
+                .dropdown-menu
+                  +anikit-dropdown-menu
+
+        .row
+          .col-md
+            .example.code-block.
+              //- or for shorthand:
+              +anikit-dropdown
+          .col-md: .vertical-center
+            .w-100.text-center: .d-inline-block
+              +anikit-dropdown
+
+        p This can also be used in a modal:
+        .btn.btn-primary(onclick="ldcv3.toggle()") Toggle Modal
+        #kit-modal-3: .ldcv
+          .base(style="top:10px;bottom:10px;left:50%;transform:translate(-50%,0);overflow:scroll"): .inner
+            +anikit-dropdown-menu
+        +nbr(2)
 
       h2 APIs
       p While Anikit can be used to generate CSS animation based on JavaScript functions, you can also use it to animate thing directly via JS.

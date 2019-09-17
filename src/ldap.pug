@@ -1,0 +1,21 @@
+mixin ldap(clsname)
+  .ldcv.ldap(class=clsname): .base: .inner.has-tips.mx-auto: div
+    .head: input
+    block
+    .menu
+      each g,$index in anikit.groupName
+        .item-head #{g}
+        .item-group
+          each m in anikit.members[$index]
+            .item(data-value=m)
+              div
+                | #{m}
+                if $index > 1
+                  i.i-lock
+              .ani(class=`ld ld-${m}`)
+
+mixin anikit-select-options
+  each n,i in anikit.groupName
+    optgroup(label=n)
+      each k in anikit.members[i]
+        option(value=k)= k
