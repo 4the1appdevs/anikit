@@ -406,13 +406,15 @@ function import$(obj, src){
 (function(){
   var ldAnikitPicker;
   ldAnikitPicker = function(opt){
-    var this$ = this;
+    var handler, this$ = this;
     this.root = typeof opt.root === 'string'
       ? document.querySelector(opt.root)
       : opt.root;
     this.ldcv = new ldCover({
       root: this.root
     });
+    this.input = this.root.querySelector('input');
+    this.item = Array.from(this.root.querySelectorAll('.item'));
     this.base = this.root.querySelector('.base');
     this.root.addEventListener('click', function(e){
       var n, ret;
@@ -429,6 +431,12 @@ function import$(obj, src){
       ret = n.getAttribute('data-value');
       return this$.ldcv.set(ret);
     });
+    handler = function(){
+      return this$.item.map(function(it){
+        return it.style.display = !~it.textContent.indexOf(this$.input.value) ? 'none' : 'block';
+      });
+    };
+    this.input.addEventListener('input', handler);
     return this;
   };
   ldAnikitPicker.prototype = import$(Object.create(Object.prototype), {
