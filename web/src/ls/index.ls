@@ -18,8 +18,9 @@
   window.ldap = ldap = new ldAnikitPicker root: '.ldap'
   ldap-nodes = ld$.find document, '#ldap-animate i'
   window.ldap-animate = (node) ->
-    ldap.get {host: node} .then (n) ->
-      if !n => return
+    ldap.get {host: node} .then (o) ->
+      if !o => return
+      n = o.name
       k = new anikit(n.replace /^ld-/, '')
       ldap-nodes.map (d,i) ->
         delay = i/ldap-nodes.length

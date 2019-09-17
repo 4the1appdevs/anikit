@@ -47,11 +47,12 @@
   window.ldapAnimate = function(node){
     return ldap.get({
       host: node
-    }).then(function(n){
-      var k;
-      if (!n) {
+    }).then(function(o){
+      var n, k;
+      if (!o) {
         return;
       }
+      n = o.name;
       k = new anikit(n.replace(/^ld-/, ''));
       return ldapNodes.map(function(d, i){
         var delay;
