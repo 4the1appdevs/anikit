@@ -21,7 +21,11 @@ html(lang="en")
       p Anikit ( stands for #[b Ani]mation tool#[b kit] ) is an utility for generating CSS Animation from JavaScript functions, with a set of prebuilt CSS animations. Following is an example powered by anikit:
       img.d-block.mx-auto(src="assets/img/thunder.svg")
       h2 Concept
-      p Anikit works with animations written as #[b ldEditor modules]. Every module contains a set of configurations calls "#[b edits]". Given a set of values for each edit, anikit generates a CSS keyframes for it.
+      p Anikit works with animations written as #[b ldEditor modules]. Every module contains a set of configurations calls "#[b edits]". Given a set of values for each edit, anikit can:
+      ul
+        li generates a CSS keyframes for it. ( if #[code css] function is implemented. )
+        li animate specific element in JS ( if #[code js] function is implemented. )
+        li animate Three.js mesh ( if #[code affine] function is implemented. )
       p Some modules ship along with set of edit values called "#[b preset]". Every preset ships with a name, and Anikit build named CSS animation and corresponding CSS classe for each preset, bundling it into #[b anikit.bundle.css].
       ul
         li #[b module] - define the rules, configs about how to generate an animation.
