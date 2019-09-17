@@ -4,6 +4,12 @@ body {
   height: 100%;
   font-size: 18px;
 }
+@font-face {
+  font-family: 'ldi';
+  font-weight: normal;
+  font-style: normal;
+  src: url("../assets/lib/fonts/ldi.ttf") format('truetype');
+}
 .square {
   width: 32px;
   height: 32px;

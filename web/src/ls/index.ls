@@ -17,6 +17,18 @@
   kit = new anikit \bounce
   ldrs1.on \change, -> kit.animate-js ldrs1-demo, it
   window.ldsel = ldsel = new ldSelect root: '.ldsel'
+  ldsel-nodes = ld$.find document, '#ldsel-animate i'
+  window.ldsel-animate = (node) ->
+    ldsel.get {host: node} .then (n) ->
+      if !n => return
+      k = new anikit(n.replace /^ld-/, '')
+      ldsel-nodes.map (d,i) ->
+        delay = i/ldsel-nodes.length
+        if !k.config.repeat => delay = -1 + delay
+        k.animate-js d, 0
+        k.animate d
+        d.style.animationDelay = "#{delay}s"
+
 
   three-init = (root) ->
     box = root.getBoundingClientRect!
