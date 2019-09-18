@@ -1737,10 +1737,16 @@
 @keyframes ld-move-ltr
 {
   0% {
-    transform: matrix(1,0,0,1,0,0);
+    transform: matrix(1,0,0,1,-50,0);
+  }
+  10% {
+    transform: matrix(1,0,0,1,-40,0);
+  }
+  90% {
+    transform: matrix(1,0,0,1,40,0);
   }
   100% {
-    transform: matrix(1,0,0,1,100,0);
+    transform: matrix(1,0,0,1,50,0);
   }
 }
 .ld.ld-move-ltr {
@@ -1749,10 +1755,16 @@
 @keyframes ld-move-rtl
 {
   0% {
-    transform: matrix(1,0,0,1,0,0);
+    transform: matrix(1,0,0,1,50,0);
+  }
+  10% {
+    transform: matrix(1,0,0,1,40,0);
+  }
+  90% {
+    transform: matrix(1,0,0,1,-40,0);
   }
   100% {
-    transform: matrix(1,0,0,1,-100,0);
+    transform: matrix(1,0,0,1,-50,0);
   }
 }
 .ld.ld-move-rtl {
@@ -1761,10 +1773,16 @@
 @keyframes ld-move-ttb
 {
   0% {
-    transform: matrix(1,0,0,1,0,0);
+    transform: matrix(1,0,0,1,0,-50);
+  }
+  10% {
+    transform: matrix(1,0,0,1,0,-40);
+  }
+  90% {
+    transform: matrix(1,0,0,1,0,40);
   }
   100% {
-    transform: matrix(1,0,0,1,0,100);
+    transform: matrix(1,0,0,1,0,50);
   }
 }
 .ld.ld-move-ttb {
@@ -1773,14 +1791,108 @@
 @keyframes ld-move-btt
 {
   0% {
-    transform: matrix(1,0,0,1,0,0);
+    transform: matrix(1,0,0,1,0,50);
+  }
+  10% {
+    transform: matrix(1,0,0,1,0,40);
+  }
+  90% {
+    transform: matrix(1,0,0,1,0,-40);
   }
   100% {
-    transform: matrix(1,0,0,1,0,-100);
+    transform: matrix(1,0,0,1,0,-50);
   }
 }
 .ld.ld-move-btt {
   animation: ld-move-btt 1s infinite; ; 
+}
+@keyframes ld-move-alt-ltr
+{
+  0% {
+    transform: matrix(1,0,0,1,-50,0);
+    opacity: 0;
+  }
+  10% {
+    transform: matrix(1,0,0,1,-40,0);
+    opacity: 0.9999999999999998;
+  }
+  90% {
+    transform: matrix(1,0,0,1,40,0);
+    opacity: 0.9999999999999998;
+  }
+  100% {
+    transform: matrix(1,0,0,1,50,0);
+    opacity: 0;
+  }
+}
+.ld.ld-move-alt-ltr {
+  animation: ld-move-alt-ltr 1s infinite; ; 
+}
+@keyframes ld-move-alt-rtl
+{
+  0% {
+    transform: matrix(1,0,0,1,50,0);
+    opacity: 0;
+  }
+  10% {
+    transform: matrix(1,0,0,1,40,0);
+    opacity: 0.9999999999999998;
+  }
+  90% {
+    transform: matrix(1,0,0,1,-40,0);
+    opacity: 0.9999999999999998;
+  }
+  100% {
+    transform: matrix(1,0,0,1,-50,0);
+    opacity: 0;
+  }
+}
+.ld.ld-move-alt-rtl {
+  animation: ld-move-alt-rtl 1s infinite; ; 
+}
+@keyframes ld-move-alt-ttb
+{
+  0% {
+    transform: matrix(1,0,0,1,0,-50);
+    opacity: 0;
+  }
+  10% {
+    transform: matrix(1,0,0,1,0,-40);
+    opacity: 0.9999999999999998;
+  }
+  90% {
+    transform: matrix(1,0,0,1,0,40);
+    opacity: 0.9999999999999998;
+  }
+  100% {
+    transform: matrix(1,0,0,1,0,50);
+    opacity: 0;
+  }
+}
+.ld.ld-move-alt-ttb {
+  animation: ld-move-alt-ttb 1s infinite; ; 
+}
+@keyframes ld-move-alt-btt
+{
+  0% {
+    transform: matrix(1,0,0,1,0,50);
+    opacity: 0;
+  }
+  10% {
+    transform: matrix(1,0,0,1,0,40);
+    opacity: 0.9999999999999998;
+  }
+  90% {
+    transform: matrix(1,0,0,1,0,-40);
+    opacity: 0.9999999999999998;
+  }
+  100% {
+    transform: matrix(1,0,0,1,0,-50);
+    opacity: 0;
+  }
+}
+.ld.ld-move-alt-btt {
+  animation: ld-move-alt-btt 1s infinite; ; 
 }
  @keyframes ld-orbit {  0% {
 animation-timing-function: linear;

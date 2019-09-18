@@ -8,11 +8,15 @@
   }
   move = {
     prop: function(f, c){
-      var value;
+      var value, ret, ref$;
       value = this.value(f.value, c);
-      return {
+      ret = {
         transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
       };
+      if (c.fade) {
+        ret.opacity = (ref$ = (0.5 - Math.abs(0.5 - f.value)) * 10) < 1 ? ref$ : 1;
+      }
+      return ret;
     },
     value: function(t, c){
       return {
@@ -39,6 +43,26 @@
       "move-btt": import$({
         offset: 100,
         dir: 4
+      }, move),
+      "move-alt-ltr": import$({
+        offset: 100,
+        dir: 1,
+        fade: true
+      }, move),
+      "move-alt-rtl": import$({
+        offset: 100,
+        dir: 3,
+        fade: true
+      }, move),
+      "move-alt-ttb": import$({
+        offset: 100,
+        dir: 2,
+        fade: true
+      }, move),
+      "move-alt-btt": import$({
+        offset: 100,
+        dir: 4,
+        fade: true
       }, move)
     },
     edit: {
@@ -81,20 +105,30 @@
           percent: 0,
           value: 0
         }, {
+          percent: 10,
+          value: 0.1
+        }, {
+          percent: 90,
+          value: 0.9
+        }, {
           percent: 100,
           value: 1
         }
       ], {
         name: opt.name,
         prop: function(f, c){
-          var ref$, a, b;
-          ref$ = [0, f.value * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
+          var ref$, a, b, ret;
+          ref$ = [0, (f.value - 0.5) * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
           if (c.dir % 2) {
             ref$ = [b, a], a = ref$[0], b = ref$[1];
           }
-          return {
+          ret = {
             transform: "matrix(1,0,0,1," + a + "," + b + ")"
           };
+          if (c.fade) {
+            ret.opacity = (ref$ = (0.5 - Math.abs(0.5 - f.value)) * 10) < 1 ? ref$ : 1;
+          }
+          return ret;
         },
         config: opt
       });

@@ -654,7 +654,7 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","flip":"flip","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","pulse":"pulse","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-ltr":"rush","rush-rtl":"rush","rush-ttb":"rush","rush-btt":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-ttb-in":"rush","rush-btt-in":"rush","skew":"skew","skew-alt":"skew","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","cycle-alt":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","throw-ttb-in":"throw","throw-ltr-in":"throw","throw-rtl-in":"throw","throw-btt-in":"throw","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex":"vortex","vortex-alt":"vortex","vortex-in":"vortex","vortex-out":"vortex","vortex-alt-in":"vortex","vortex-alt-out":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-out-alt":"bounce-transition","bounce-in-alt":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","flip":"flip","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","move-alt-ltr":"move","move-alt-rtl":"move","move-alt-ttb":"move","move-alt-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","pulse":"pulse","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-ltr":"rush","rush-rtl":"rush","rush-ttb":"rush","rush-btt":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-ttb-in":"rush","rush-btt-in":"rush","skew":"skew","skew-alt":"skew","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","cycle-alt":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","throw-ttb-in":"throw","throw-ltr-in":"throw","throw-rtl-in":"throw","throw-btt-in":"throw","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex":"vortex","vortex-alt":"vortex","vortex-in":"vortex","vortex-out":"vortex","vortex-alt-in":"vortex","vortex-alt-out":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
 },{"./kits/blink":7,"./kits/blur":9,"./kits/blur-transition":8,"./kits/bounce":12,"./kits/bounce-rigid":10,"./kits/bounce-transition":11,"./kits/clock":13,"./kits/fade":14,"./kits/flip":15,"./kits/float":16,"./kits/heartbeat":17,"./kits/hit":18,"./kits/jump-transition":19,"./kits/move":20,"./kits/orbit":21,"./kits/patrol":22,"./kits/power":23,"./kits/pulse":24,"./kits/rubber":25,"./kits/rush":26,"./kits/skew":27,"./kits/slide":28,"./kits/spin":29,"./kits/squeeze":30,"./kits/static":31,"./kits/surprise":32,"./kits/throw":33,"./kits/tremble":34,"./kits/vortex":35,"./kits/wrench":36}],7:[function(require,module,exports){
@@ -2760,11 +2760,15 @@ function import$(obj, src){
   }
   move = {
     prop: function(f, c){
-      var value;
+      var value, ret, ref$;
       value = this.value(f.value, c);
-      return {
+      ret = {
         transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
       };
+      if (c.fade) {
+        ret.opacity = (ref$ = (0.5 - Math.abs(0.5 - f.value)) * 10) < 1 ? ref$ : 1;
+      }
+      return ret;
     },
     value: function(t, c){
       return {
@@ -2791,6 +2795,26 @@ function import$(obj, src){
       "move-btt": import$({
         offset: 100,
         dir: 4
+      }, move),
+      "move-alt-ltr": import$({
+        offset: 100,
+        dir: 1,
+        fade: true
+      }, move),
+      "move-alt-rtl": import$({
+        offset: 100,
+        dir: 3,
+        fade: true
+      }, move),
+      "move-alt-ttb": import$({
+        offset: 100,
+        dir: 2,
+        fade: true
+      }, move),
+      "move-alt-btt": import$({
+        offset: 100,
+        dir: 4,
+        fade: true
       }, move)
     },
     edit: {
@@ -2833,20 +2857,30 @@ function import$(obj, src){
           percent: 0,
           value: 0
         }, {
+          percent: 10,
+          value: 0.1
+        }, {
+          percent: 90,
+          value: 0.9
+        }, {
           percent: 100,
           value: 1
         }
       ], {
         name: opt.name,
         prop: function(f, c){
-          var ref$, a, b;
-          ref$ = [0, f.value * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
+          var ref$, a, b, ret;
+          ref$ = [0, (f.value - 0.5) * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
           if (c.dir % 2) {
             ref$ = [b, a], a = ref$[0], b = ref$[1];
           }
-          return {
+          ret = {
             transform: "matrix(1,0,0,1," + a + "," + b + ")"
           };
+          if (c.fade) {
+            ret.opacity = (ref$ = (0.5 - Math.abs(0.5 - f.value)) * 10) < 1 ? ref$ : 1;
+          }
+          return ret;
         },
         config: opt
       });
