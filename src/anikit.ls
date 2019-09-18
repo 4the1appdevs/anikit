@@ -107,7 +107,9 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if !(x?) or !(y?) => [x,y,z] = [0.5, 0.5, 0.5]
     if n.style => anikit.util.origin n, h, x, y, ox, oy, if s? => s else 1
 
-  statify: (node) -> node.style.animation = node.style.animationDelay = ""
+  statify: (node) ->
+    for k,v of node.ld-style => node.style[k] = null
+    node.style.animation = node.style.animationDelay = ""
   destroy: -> if @dom and @dom.parentNode => @dom.parentNode.removeChild @dom
 
 anikit <<< do

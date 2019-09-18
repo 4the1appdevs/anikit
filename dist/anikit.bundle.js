@@ -279,6 +279,11 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     }
   },
   statify: function(node){
+    var k, ref$, v;
+    for (k in ref$ = node.ldStyle) {
+      v = ref$[k];
+      node.style[k] = null;
+    }
     return node.style.animation = node.style.animationDelay = "";
   },
   destroy: function(){
