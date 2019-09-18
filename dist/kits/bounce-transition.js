@@ -10,13 +10,14 @@
   spring = {
     prop: function(f, c, d){
       var value;
-      value = this.value(f.value, c, d);
+      value = this.value(f.value, c, d, f.percent);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        opacity: value.opacity
       };
     },
-    value: function(t, c, d){
-      var sgn;
+    value: function(t, c, d, p){
+      var sgn, ref$;
       t = c.dir > 0
         ? t
         : 1 - t;
@@ -29,14 +30,16 @@
           ? 1
           : -1;
         return {
-          transform: [1, 0, 0, c.offset * (1 - t) * sgn, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+          transform: [1, 0, 0, c.offset * (1 - t) * sgn, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: (ref$ = p * 10) < 1 ? ref$ : 1
         };
       } else {
         sgn = d === 3
           ? 1
           : -1;
         return {
-          transform: [1, 0, 0, 0, 0, 1, 0, c.offset * (1 - t) * sgn, 0, 0, 1, 0, 0, 0, 0, 1]
+          transform: [1, 0, 0, 0, 0, 1, 0, c.offset * (1 - t) * sgn, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: (ref$ = p * 10) < 1 ? ref$ : 1
         };
       }
     }
@@ -97,8 +100,8 @@
         prop: function(f, c){
           return spring.prop(f, c, 2);
         },
-        value: function(t, c){
-          return spring.value(t, c, 2);
+        value: function(t, c, p){
+          return spring.value(t, c, 2, p);
         }
       },
       "spring-rtl-in": {
@@ -110,8 +113,8 @@
         prop: function(f, c){
           return spring.prop(f, c, 1);
         },
-        value: function(t, c){
-          return spring.value(t, c, 1);
+        value: function(t, c, p){
+          return spring.value(t, c, 1, p);
         }
       },
       "spring-ttb-in": {
@@ -123,8 +126,8 @@
         prop: function(f, c){
           return spring.prop(f, c, 3);
         },
-        value: function(t, c){
-          return spring.value(t, c, 3);
+        value: function(t, c, p){
+          return spring.value(t, c, 3, p);
         }
       },
       "spring-btt-in": {
@@ -136,8 +139,8 @@
         prop: function(f, c){
           return spring.prop(f, c, 4);
         },
-        value: function(t, c){
-          return spring.value(t, c, 4);
+        value: function(t, c, p){
+          return spring.value(t, c, 4, p);
         }
       }
     },
@@ -196,10 +199,12 @@
         var value;
         value = this.value(f.value, c);
         return {
-          transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+          transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+          opacity: value.opacity
         };
       },
-      value: function(t, c){
+      value: function(t, c, p){
+        var ref$;
         t = c.dir > 0
           ? t
           : 1 - t;
@@ -208,7 +213,8 @@
         }
         t >= 0.01 || (t = 0.01);
         return {
-          transform: [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1]
+          transform: [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1],
+          opacity: (ref$ = p * 10) < 1 ? ref$ : 1
         };
       }
     },
@@ -250,10 +256,12 @@
       return ret;
     },
     affine: function(t, opt){
+      var ot;
+      ot = t;
       t = this.timing(t, opt);
       return opt.value
         ? opt.value(t, opt)
-        : this.local.value(t, opt);
+        : this.local.value(t, opt, ot);
     }
   };
   if (typeof module != 'undefined' && module !== null) {

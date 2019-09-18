@@ -3,18 +3,18 @@
 
   spring = do
     prop: (f, c, d) ->
-      value = @value f.value, c, d
-      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-    value: (t, c, d) ->
+      value = @value f.value, c, d, f.percent
+      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
+    value: (t, c, d, p) ->
       t = if c.dir > 0 => t else 1 - t
       if c.dir < 0 and t > 1 => t = 1
       t >?= 0.01
       if d < 3 =>
         sgn = if d == 1 => 1 else -1
-        return transform: [1,0,0,c.offset * (1 - t) * sgn,0,1,0,0,0,0,1,0,0,0,0,1]
+        return transform: [1,0,0,c.offset * (1 - t) * sgn,0,1,0,0,0,0,1,0,0,0,0,1], opacity: p * 10 <? 1
       else
         sgn = if d == 3 => 1 else -1
-        return transform: [1,0,0,0,0,1,0,c.offset * (1 - t) * sgn,0,0,1,0,0,0,0,1]
+        return transform: [1,0,0,0,0,1,0,c.offset * (1 - t) * sgn,0,0,1,0,0,0,0,1], opacity: p * 10 <? 1
 
   ret = do
     name: \bounce-transition
@@ -31,19 +31,19 @@
       "spring-ltr-in":
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 2
-        value: (t, c) -> spring.value t, c, 2
+        value: (t, c, p) -> spring.value t, c, 2, p
       "spring-rtl-in":
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 1
-        value: (t, c) -> spring.value t, c, 1
+        value: (t, c, p) -> spring.value t, c, 1, p
       "spring-ttb-in":
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 3
-        value: (t, c) -> spring.value t, c, 3
+        value: (t, c, p) -> spring.value t, c, 3, p
       "spring-btt-in":
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 4
-        value: (t, c) -> spring.value t, c, 4
+        value: (t, c, p) -> spring.value t, c, 4, p
 
     edit: 
       dir: type: \number, default: 1, hidden: true, min: -1, max: 1, step: 2
@@ -56,12 +56,12 @@
     local: 
       prop: (f, c) ->
         value = @value f.value, c
-        return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-      value: (t, c) ->
+        return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
+      value: (t, c, p) ->
         t = if c.dir > 0 => t else 1 - t
         if c.dir < 0 and t > 1 => t = 1
         t >?= 0.01
-        return transform: [t,0,0,0,0,t,0,0,0,0,t,0,0,0,0,1]
+        return transform: [t,0,0,0,0,t,0,0,0,0,t,0,0,0,0,1], opacity: (p * 10 <? 1)
 
     timing: (t, opt) ->
       wave = Math.cos(t * 6.28 * opt.count) * ( 1 - t ** opt.mag )
@@ -83,8 +83,9 @@
       if value.transform => ret.transform = "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
       return ret
     affine: (t, opt) ->
+      ot = t
       t = @timing(t, opt)
-      return if opt.value => opt.value(t,opt) else @local.value(t,opt)
+      return if opt.value => opt.value(t,opt) else @local.value(t,opt,ot)
 
 
   if module? => module.exports = ret

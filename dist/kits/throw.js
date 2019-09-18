@@ -102,7 +102,8 @@
           x = -f.value;
         }
         return {
-          transform: "translate(" + x * c.height + "px," + y * c.height + "px)"
+          transform: "translate(" + x * c.height + "px," + y * c.height + "px)",
+          opacity: (ref$ = f.percent * 10) < 1 ? ref$ : 1
         };
       }
     },
@@ -122,7 +123,8 @@
     },
     js: function(t, opt){
       return this.local.prop({
-        value: this.track(t, opt)
+        value: this.track(t, opt),
+        percent: t
       }, opt);
     }
   };

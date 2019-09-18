@@ -45,8 +45,10 @@
         fs += "#{ts[i] * 100}% { transform: translate#dc(#{sgn * xs[i]}px) skew#dc(#{flip * sgn * ds[i]}deg); }\n"
       return """
       @keyframes #{opt.name} {
-        0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); }
+        0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
+        5% { opacity: 1}
         #fs
+        100% { opacity: 1}
       }
       """
 
@@ -59,7 +61,7 @@
       if i == 1 => t = Math.pow(t / ts.1, 0.5) * ts.1
       x = x1 + (x2 - x1) * (t - t1) / (t2 - t1)
       d = d1 + (d2 - d1) * (t - t1) / (t2 - t1)
-      return transform: "translate#{dc}(#{sgn * x}px) skew#{dc}(#{flip * sgn * d}deg)"
+      return transform: "translate#{dc}(#{sgn * x}px) skew#{dc}(#{flip * sgn * d}deg)", opacity: (t * 20 <? 1)
 
   if module? => module.exports = ret
   return ret

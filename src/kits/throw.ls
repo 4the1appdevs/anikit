@@ -41,7 +41,7 @@
         if c.dir == 2 => y = -f.value 
         if c.dir == 3 => x = f.value 
         if c.dir == 4 => x = -f.value 
-        return transform: "translate(#{x * c.height}px,#{y * c.height}px)"
+        return transform: "translate(#{x * c.height}px,#{y * c.height}px)", opacity: (f.percent * 10) <? 1
 
     css: (opt) ->
       ret = easing-fit.fit-to-keyframes(
@@ -53,7 +53,7 @@
         }
       )
       ret
-    js: (t, opt) -> @local.prop {value: @track t, opt}, opt
+    js: (t, opt) -> @local.prop {value: @track(t, opt), percent: t}, opt
 
   if module? => module.exports = ret
   return ret

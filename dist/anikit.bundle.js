@@ -1044,13 +1044,14 @@ function import$(obj, src){
   spring = {
     prop: function(f, c, d){
       var value;
-      value = this.value(f.value, c, d);
+      value = this.value(f.value, c, d, f.percent);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        opacity: value.opacity
       };
     },
-    value: function(t, c, d){
-      var sgn;
+    value: function(t, c, d, p){
+      var sgn, ref$;
       t = c.dir > 0
         ? t
         : 1 - t;
@@ -1063,14 +1064,16 @@ function import$(obj, src){
           ? 1
           : -1;
         return {
-          transform: [1, 0, 0, c.offset * (1 - t) * sgn, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+          transform: [1, 0, 0, c.offset * (1 - t) * sgn, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: (ref$ = p * 10) < 1 ? ref$ : 1
         };
       } else {
         sgn = d === 3
           ? 1
           : -1;
         return {
-          transform: [1, 0, 0, 0, 0, 1, 0, c.offset * (1 - t) * sgn, 0, 0, 1, 0, 0, 0, 0, 1]
+          transform: [1, 0, 0, 0, 0, 1, 0, c.offset * (1 - t) * sgn, 0, 0, 1, 0, 0, 0, 0, 1],
+          opacity: (ref$ = p * 10) < 1 ? ref$ : 1
         };
       }
     }
@@ -1131,8 +1134,8 @@ function import$(obj, src){
         prop: function(f, c){
           return spring.prop(f, c, 2);
         },
-        value: function(t, c){
-          return spring.value(t, c, 2);
+        value: function(t, c, p){
+          return spring.value(t, c, 2, p);
         }
       },
       "spring-rtl-in": {
@@ -1144,8 +1147,8 @@ function import$(obj, src){
         prop: function(f, c){
           return spring.prop(f, c, 1);
         },
-        value: function(t, c){
-          return spring.value(t, c, 1);
+        value: function(t, c, p){
+          return spring.value(t, c, 1, p);
         }
       },
       "spring-ttb-in": {
@@ -1157,8 +1160,8 @@ function import$(obj, src){
         prop: function(f, c){
           return spring.prop(f, c, 3);
         },
-        value: function(t, c){
-          return spring.value(t, c, 3);
+        value: function(t, c, p){
+          return spring.value(t, c, 3, p);
         }
       },
       "spring-btt-in": {
@@ -1170,8 +1173,8 @@ function import$(obj, src){
         prop: function(f, c){
           return spring.prop(f, c, 4);
         },
-        value: function(t, c){
-          return spring.value(t, c, 4);
+        value: function(t, c, p){
+          return spring.value(t, c, 4, p);
         }
       }
     },
@@ -1230,10 +1233,12 @@ function import$(obj, src){
         var value;
         value = this.value(f.value, c);
         return {
-          transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+          transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+          opacity: value.opacity
         };
       },
-      value: function(t, c){
+      value: function(t, c, p){
+        var ref$;
         t = c.dir > 0
           ? t
           : 1 - t;
@@ -1242,7 +1247,8 @@ function import$(obj, src){
         }
         t >= 0.01 || (t = 0.01);
         return {
-          transform: [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1]
+          transform: [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1],
+          opacity: (ref$ = p * 10) < 1 ? ref$ : 1
         };
       }
     },
@@ -1284,10 +1290,12 @@ function import$(obj, src){
       return ret;
     },
     affine: function(t, opt){
+      var ot;
+      ot = t;
       t = this.timing(t, opt);
       return opt.value
         ? opt.value(t, opt)
-        : this.local.value(t, opt);
+        : this.local.value(t, opt, ot);
     }
   };
   if (typeof module != 'undefined' && module !== null) {
@@ -3735,7 +3743,7 @@ var slice$ = [].slice;
         i = i$;
         fs += ts[i] * 100 + "% { transform: translate" + dc + "(" + sgn * xs[i] + "px) skew" + dc + "(" + flip * sgn * ds[i] + "deg); }\n";
       }
-      return "@keyframes " + opt.name + " {\n  0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); }\n  " + fs + "\n}";
+      return "@keyframes " + opt.name + " {\n  0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }\n  5% { opacity: 1}\n  " + fs + "\n  100% { opacity: 1}\n}";
     },
     js: function(t, opt){
       var ref$, RD, deg, offset, size, ds, xs, ts, dc, sgn, flip, i$, to$, i, d1, d2, x1, x2, t1, t2, x, d;
@@ -3755,7 +3763,8 @@ var slice$ = [].slice;
       x = x1 + (x2 - x1) * (t - t1) / (t2 - t1);
       d = d1 + (d2 - d1) * (t - t1) / (t2 - t1);
       return {
-        transform: "translate" + dc + "(" + sgn * x + "px) skew" + dc + "(" + flip * sgn * d + "deg)"
+        transform: "translate" + dc + "(" + sgn * x + "px) skew" + dc + "(" + flip * sgn * d + "deg)",
+        opacity: (ref$ = t * 20) < 1 ? ref$ : 1
       };
     }
   };
@@ -4496,7 +4505,8 @@ function import$(obj, src){
           x = -f.value;
         }
         return {
-          transform: "translate(" + x * c.height + "px," + y * c.height + "px)"
+          transform: "translate(" + x * c.height + "px," + y * c.height + "px)",
+          opacity: (ref$ = f.percent * 10) < 1 ? ref$ : 1
         };
       }
     },
@@ -4516,7 +4526,8 @@ function import$(obj, src){
     },
     js: function(t, opt){
       return this.local.prop({
-        value: this.track(t, opt)
+        value: this.track(t, opt),
+        percent: t
       }, opt);
     }
   };
