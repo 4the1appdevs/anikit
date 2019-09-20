@@ -1806,7 +1806,7 @@
 .ld.ld-move-btt {
   animation: ld-move-btt 1s infinite; ; 
 }
-@keyframes ld-move-alt-ltr
+@keyframes ld-move-fade-ltr
 {
   0% {
     transform: matrix(1,0,0,1,-50,0);
@@ -1825,10 +1825,10 @@
     opacity: 0;
   }
 }
-.ld.ld-move-alt-ltr {
-  animation: ld-move-alt-ltr 1s infinite; ; 
+.ld.ld-move-fade-ltr {
+  animation: ld-move-fade-ltr 1s infinite; ; 
 }
-@keyframes ld-move-alt-rtl
+@keyframes ld-move-fade-rtl
 {
   0% {
     transform: matrix(1,0,0,1,50,0);
@@ -1847,10 +1847,10 @@
     opacity: 0;
   }
 }
-.ld.ld-move-alt-rtl {
-  animation: ld-move-alt-rtl 1s infinite; ; 
+.ld.ld-move-fade-rtl {
+  animation: ld-move-fade-rtl 1s infinite; ; 
 }
-@keyframes ld-move-alt-ttb
+@keyframes ld-move-fade-ttb
 {
   0% {
     transform: matrix(1,0,0,1,0,-50);
@@ -1869,10 +1869,10 @@
     opacity: 0;
   }
 }
-.ld.ld-move-alt-ttb {
-  animation: ld-move-alt-ttb 1s infinite; ; 
+.ld.ld-move-fade-ttb {
+  animation: ld-move-fade-ttb 1s infinite; ; 
 }
-@keyframes ld-move-alt-btt
+@keyframes ld-move-fade-btt
 {
   0% {
     transform: matrix(1,0,0,1,0,50);
@@ -1891,8 +1891,8 @@
     opacity: 0;
   }
 }
-.ld.ld-move-alt-btt {
-  animation: ld-move-alt-btt 1s infinite; ; 
+.ld.ld-move-fade-btt {
+  animation: ld-move-fade-btt 1s infinite; ; 
 }
  @keyframes ld-orbit {  0% {
 animation-timing-function: linear;

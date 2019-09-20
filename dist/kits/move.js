@@ -44,22 +44,22 @@
         offset: 100,
         dir: 4
       }, move),
-      "move-alt-ltr": import$({
+      "move-fade-ltr": import$({
         offset: 100,
         dir: 1,
         fade: true
       }, move),
-      "move-alt-rtl": import$({
+      "move-fade-rtl": import$({
         offset: 100,
         dir: 3,
         fade: true
       }, move),
-      "move-alt-ttb": import$({
+      "move-fade-ttb": import$({
         offset: 100,
         dir: 2,
         fade: true
       }, move),
-      "move-alt-btt": import$({
+      "move-fade-btt": import$({
         offset: 100,
         dir: 4,
         fade: true
