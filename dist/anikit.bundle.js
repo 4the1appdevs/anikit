@@ -1401,13 +1401,13 @@ function import$(obj, src){
           var s, y;
           if (idx < ret1.length) {
             return {
-              transform: "translate(0," + f.value * c.height + "px) scaleY(1)"
+              transform: "translate(0," + f.value * c.height + c.unit + ") scaleY(1)"
             };
           } else {
             s = f.value;
             y = (c.offset || 50) * (1 - s);
             return {
-              transform: "translate(0," + y + "px) scaleY(" + f.value + ")"
+              transform: "translate(0," + y + c.unit + ") scaleY(" + f.value + ")"
             };
           }
         },
@@ -2945,7 +2945,7 @@ function import$(obj, src){
       }
     },
     css: function(opt){
-      var list, i$, to$, i, r, a, x, y, p;
+      var list, i$, to$, i, r, a, x, y, p, ref$;
       list = [];
       for (i$ = 0, to$ = opt.count; i$ <= to$; ++i$) {
         i = i$;
@@ -2954,9 +2954,13 @@ function import$(obj, src){
         x = Math.sin(a) * opt.radius;
         y = -Math.cos(a) * opt.radius;
         p = 100 * i / opt.count;
+        ref$ = [x, y, p].map(fn$), x = ref$[0], y = ref$[1], p = ref$[2];
         list.push(" " + p + "% {\nanimation-timing-function: linear;\ntransform: translate(" + x + opt.unit + "," + y + opt.unit + ") rotate(" + r + "deg) } ");
       }
       return " @keyframes " + opt.name + " { " + list.join('\n') + " } ";
+      function fn$(it){
+        return anikit.util.round(it);
+      }
     },
     js: function(t, opt){
       var m;
@@ -3741,6 +3745,11 @@ var slice$ = [].slice;
         name: "Flip",
         'default': false,
         type: 'boolean'
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       }
     },
     local: {
@@ -3780,7 +3789,7 @@ var slice$ = [].slice;
       fs = "";
       for (i$ = 0, to$ = ts.length; i$ < to$; ++i$) {
         i = i$;
-        fs += ts[i] * 100 + "% { transform: translate" + dc + "(" + sgn * xs[i] + "px) skew" + dc + "(" + flip * sgn * ds[i] + "deg); }\n";
+        fs += ts[i] * 100 + "% { transform: translate" + dc + "(" + sgn * xs[i] + opt.unit + ") skew" + dc + "(" + flip * sgn * ds[i] + "deg); }\n";
       }
       return "@keyframes " + opt.name + " {\n  0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }\n  5% { opacity: 1}\n  " + fs + "\n  100% { opacity: 1}\n}";
     },
@@ -3802,7 +3811,7 @@ var slice$ = [].slice;
       x = x1 + (x2 - x1) * (t - t1) / (t2 - t1);
       d = d1 + (d2 - d1) * (t - t1) / (t2 - t1);
       return {
-        transform: "translate" + dc + "(" + sgn * x + "px) skew" + dc + "(" + flip * sgn * d + "deg)",
+        transform: "translate" + dc + "(" + sgn * x + opt.unit + ") skew" + dc + "(" + flip * sgn * d + "deg)",
         opacity: (ref$ = t * 20) < 1 ? ref$ : 1
       };
     }
@@ -4503,6 +4512,11 @@ function import$(obj, src){
         min: 0.01,
         max: 0.99,
         step: 0.01
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       }
     },
     track: function(t, opt){
@@ -4544,7 +4558,7 @@ function import$(obj, src){
           x = -f.value;
         }
         return {
-          transform: "translate(" + x * c.height + "px," + y * c.height + "px)",
+          transform: "translate(" + x * c.height + c.unit + "," + y * c.height + c.unit + ")",
           opacity: (ref$ = f.percent * 10) < 1 ? ref$ : 1
         };
       }

@@ -18,6 +18,7 @@
       size: name: "Item Size", default: 32, type: \number, min: 0, max: 1000
       deg: name: "Skew", default: 30, type: \number, unit: \deg, min: 0, max: 90
       flip: name: "Flip", default: false, type: \boolean
+      unit: default: \px, type: \choice, values: ["px", "%", ""]
     local: data: (opt) ->
       RD = Math.PI / 180
       {deg, offset, size} = opt
@@ -42,7 +43,7 @@
       {RD,deg,offset,size,ds,xs,ts,dc,sgn,flip} = @local.data opt
       fs = ""
       for i from 0 til ts.length =>
-        fs += "#{ts[i] * 100}% { transform: translate#dc(#{sgn * xs[i]}px) skew#dc(#{flip * sgn * ds[i]}deg); }\n"
+        fs += "#{ts[i] * 100}% { transform: translate#dc(#{sgn * xs[i]}#{opt.unit}) skew#dc(#{flip * sgn * ds[i]}deg); }\n"
       return """
       @keyframes #{opt.name} {
         0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
@@ -61,7 +62,7 @@
       if i == 1 => t = Math.pow(t / ts.1, 0.5) * ts.1
       x = x1 + (x2 - x1) * (t - t1) / (t2 - t1)
       d = d1 + (d2 - d1) * (t - t1) / (t2 - t1)
-      return transform: "translate#{dc}(#{sgn * x}px) skew#{dc}(#{flip * sgn * d}deg)", opacity: (t * 20 <? 1)
+      return transform: "translate#{dc}(#{sgn * x}#{opt.unit}) skew#{dc}(#{flip * sgn * d}deg)", opacity: (t * 20 <? 1)
 
   if module? => module.exports = ret
   return ret

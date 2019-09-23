@@ -1897,42 +1897,42 @@
  @keyframes ld-orbit {  0% {
 animation-timing-function: linear;
 transform: translate(0px,-60px) rotate(0deg) } 
- 8.333333333333334% {
+ 8.33333% {
 animation-timing-function: linear;
-transform: translate(29.999999999999996px,-51.96152422706632px) rotate(30deg) } 
- 16.666666666666668% {
+transform: translate(30px,-51.96152px) rotate(30deg) } 
+ 16.66667% {
 animation-timing-function: linear;
-transform: translate(51.96152422706631px,-30.000000000000007px) rotate(60deg) } 
+transform: translate(51.96152px,-30px) rotate(60deg) } 
  25% {
 animation-timing-function: linear;
-transform: translate(60px,-3.67394039744206e-15px) rotate(90deg) } 
- 33.333333333333336% {
+transform: translate(60px,0px) rotate(90deg) } 
+ 33.33333% {
 animation-timing-function: linear;
-transform: translate(51.96152422706632px,29.999999999999986px) rotate(120deg) } 
- 41.666666666666664% {
+transform: translate(51.96152px,30px) rotate(120deg) } 
+ 41.66667% {
 animation-timing-function: linear;
-transform: translate(29.999999999999996px,51.96152422706632px) rotate(150deg) } 
+transform: translate(30px,51.96152px) rotate(150deg) } 
  50% {
 animation-timing-function: linear;
-transform: translate(7.34788079488412e-15px,60px) rotate(180deg) } 
- 58.333333333333336% {
+transform: translate(0px,60px) rotate(180deg) } 
+ 58.33333% {
 animation-timing-function: linear;
-transform: translate(-29.999999999999982px,51.96152422706633px) rotate(210deg) } 
- 66.66666666666667% {
+transform: translate(-30px,51.96152px) rotate(210deg) } 
+ 66.66667% {
 animation-timing-function: linear;
-transform: translate(-51.961524227066306px,30.00000000000003px) rotate(240deg) } 
+transform: translate(-51.96152px,30px) rotate(240deg) } 
  75% {
 animation-timing-function: linear;
-transform: translate(-60px,1.1021821192326178e-14px) rotate(270deg) } 
- 83.33333333333333% {
+transform: translate(-60px,0px) rotate(270deg) } 
+ 83.33333% {
 animation-timing-function: linear;
-transform: translate(-51.96152422706631px,-30.000000000000007px) rotate(300deg) } 
- 91.66666666666667% {
+transform: translate(-51.96152px,-30px) rotate(300deg) } 
+ 91.66667% {
 animation-timing-function: linear;
-transform: translate(-30.00000000000003px,-51.961524227066306px) rotate(330deg) } 
+transform: translate(-30px,-51.96152px) rotate(330deg) } 
  100% {
 animation-timing-function: linear;
-transform: translate(-1.469576158976824e-14px,-60px) rotate(360deg) }  } 
+transform: translate(0px,-60px) rotate(360deg) }  } 
 .ld.ld-orbit {
   animation: ld-orbit 1s infinite; ; 
 }

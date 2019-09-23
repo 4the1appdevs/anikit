@@ -3,11 +3,11 @@
   ret = do
     name: \orbit
     type: \animation
-    preset: orbit: {count: 12, radius: 60, unit: \px}
+    preset: orbit: { count: 12, radius: 60, unit: \px }
     edit: 
       count: name: "Sample Count", default: 8, type: \number, min: 4, max: 36
       radius: default: 60, type: \number, unit: \%, min: 0, max: 1000
-      unit: default: \px, type: \choice, values: ["px", "%", ""]
+      unit: default: \px type: \choice, values: ["px", "%", ""]
 
     css: (opt) ->
       list = []
@@ -17,6 +17,7 @@
         x = Math.sin(a) * opt.radius
         y = -Math.cos(a) * opt.radius
         p = 100 * i / opt.count
+        [x,y,p] = [x,y,p].map -> anikit.util.round it
         list.push """ #{p}% {
           animation-timing-function: linear;
           transform: translate(#{x}#{opt.unit},#{y}#{opt.unit}) rotate(#{r}deg) } 

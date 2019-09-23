@@ -72,6 +72,11 @@ var slice$ = [].slice;
         name: "Flip",
         'default': false,
         type: 'boolean'
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       }
     },
     local: {
@@ -111,7 +116,7 @@ var slice$ = [].slice;
       fs = "";
       for (i$ = 0, to$ = ts.length; i$ < to$; ++i$) {
         i = i$;
-        fs += ts[i] * 100 + "% { transform: translate" + dc + "(" + sgn * xs[i] + "px) skew" + dc + "(" + flip * sgn * ds[i] + "deg); }\n";
+        fs += ts[i] * 100 + "% { transform: translate" + dc + "(" + sgn * xs[i] + opt.unit + ") skew" + dc + "(" + flip * sgn * ds[i] + "deg); }\n";
       }
       return "@keyframes " + opt.name + " {\n  0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }\n  5% { opacity: 1}\n  " + fs + "\n  100% { opacity: 1}\n}";
     },
@@ -133,7 +138,7 @@ var slice$ = [].slice;
       x = x1 + (x2 - x1) * (t - t1) / (t2 - t1);
       d = d1 + (d2 - d1) * (t - t1) / (t2 - t1);
       return {
-        transform: "translate" + dc + "(" + sgn * x + "px) skew" + dc + "(" + flip * sgn * d + "deg)",
+        transform: "translate" + dc + "(" + sgn * x + opt.unit + ") skew" + dc + "(" + flip * sgn * d + "deg)",
         opacity: (ref$ = t * 20) < 1 ? ref$ : 1
       };
     }

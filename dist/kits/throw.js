@@ -61,6 +61,11 @@
         min: 0.01,
         max: 0.99,
         step: 0.01
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       }
     },
     track: function(t, opt){
@@ -102,7 +107,7 @@
           x = -f.value;
         }
         return {
-          transform: "translate(" + x * c.height + "px," + y * c.height + "px)",
+          transform: "translate(" + x * c.height + c.unit + "," + y * c.height + c.unit + ")",
           opacity: (ref$ = f.percent * 10) < 1 ? ref$ : 1
         };
       }

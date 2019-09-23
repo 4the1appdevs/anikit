@@ -38,7 +38,7 @@
       }
     },
     css: function(opt){
-      var list, i$, to$, i, r, a, x, y, p;
+      var list, i$, to$, i, r, a, x, y, p, ref$;
       list = [];
       for (i$ = 0, to$ = opt.count; i$ <= to$; ++i$) {
         i = i$;
@@ -47,9 +47,13 @@
         x = Math.sin(a) * opt.radius;
         y = -Math.cos(a) * opt.radius;
         p = 100 * i / opt.count;
+        ref$ = [x, y, p].map(fn$), x = ref$[0], y = ref$[1], p = ref$[2];
         list.push(" " + p + "% {\nanimation-timing-function: linear;\ntransform: translate(" + x + opt.unit + "," + y + opt.unit + ") rotate(" + r + "deg) } ");
       }
       return " @keyframes " + opt.name + " { " + list.join('\n') + " } ";
+      function fn$(it){
+        return anikit.util.round(it);
+      }
     },
     js: function(t, opt){
       var m;

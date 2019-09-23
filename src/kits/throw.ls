@@ -18,6 +18,7 @@
       count: name: "Bounce Count", type: \number, default: 3, min: 1, max: 10, step: 1
       height: name: "Height", type: \number, default: 20, min: 0, max: 1000, step: 1
       decay: name: "Decay", type: \number, default: 0.3, min: 0.01, max: 0.99, step: 0.01
+      unit: default: \px, type: \choice, values: ["px", "%", ""]
 
     track: (t, opt)->
       r = opt.decay
@@ -41,7 +42,9 @@
         if c.dir == 2 => y = -f.value 
         if c.dir == 3 => x = f.value 
         if c.dir == 4 => x = -f.value 
-        return transform: "translate(#{x * c.height}px,#{y * c.height}px)", opacity: (f.percent * 10) <? 1
+        return do
+          transform: "translate(#{x * c.height}#{c.unit},#{y * c.height}#{c.unit})"
+          opacity: (f.percent * 10) <? 1
 
     css: (opt) ->
       ret = easing-fit.fit-to-keyframes(

@@ -35,11 +35,11 @@
         format: \css
         prop: (f, c, idx) -> 
           if idx < ret1.length =>
-            {transform: "translate(0,#{f.value * c.height}px) scaleY(1)"}
+            {transform: "translate(0,#{f.value * c.height}#{c.unit}) scaleY(1)"}
           else
             s = f.value
             y = (c.offset or 50) * (1 - s)
-            {transform: "translate(0,#{y}px) scaleY(#{f.value})"}
+            {transform: "translate(0,#{y}#{c.unit}) scaleY(#{f.value})"}
         name: opt.name
         config: opt
       return ret

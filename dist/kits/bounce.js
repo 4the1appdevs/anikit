@@ -85,13 +85,13 @@
           var s, y;
           if (idx < ret1.length) {
             return {
-              transform: "translate(0," + f.value * c.height + "px) scaleY(1)"
+              transform: "translate(0," + f.value * c.height + c.unit + ") scaleY(1)"
             };
           } else {
             s = f.value;
             y = (c.offset || 50) * (1 - s);
             return {
-              transform: "translate(0," + y + "px) scaleY(" + f.value + ")"
+              transform: "translate(0," + y + c.unit + ") scaleY(" + f.value + ")"
             };
           }
         },
