@@ -20,8 +20,8 @@
     name: \bounce-transition
     type: \animation
     preset: 
-      "bounce-out-alt": dir: -1, count: 3, mag: 0.1, offset: default: 0, hidden: true
-      "bounce-in-alt":  dir:  1, count: 3, mag: 0.1, extrude: 0.5, offset: default: 0, hidden: true
+      "bounce-alt-out": dir: -1, count: 3, mag: 0.1, offset: default: 0, hidden: true
+      "bounce-alt-in":  dir:  1, count: 3, mag: 0.1, extrude: 0.5, offset: default: 0, hidden: true
 
       "bounce-out": dir: -1, count: 4, mag: 0.2, offset: default: 0, hidden: true
       "bounce-in":  

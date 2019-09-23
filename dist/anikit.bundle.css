@@ -179,7 +179,7 @@
 .ld.ld-jump {
   animation: ld-jump 1s infinite; ; 
 }
-@keyframes ld-bounce-out-alt
+@keyframes ld-bounce-alt-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.094,0.3361,-1.0597,0.6688);
@@ -226,10 +226,10 @@
     opacity: 1;
   }
 }
-.ld.ld-bounce-out-alt {
-  animation: ld-bounce-out-alt 1s 1; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0); 
+.ld.ld-bounce-alt-out {
+  animation: ld-bounce-alt-out 1s 1; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0); 
 }
-@keyframes ld-bounce-in-alt
+@keyframes ld-bounce-alt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.0955,0.3456,-1.5085,0.6684);
@@ -276,8 +276,8 @@
     opacity: 1;
   }
 }
-.ld.ld-bounce-in-alt {
-  animation: ld-bounce-in-alt 1s 1; animation-fill-mode: forwards;transform: matrix(0.01,0,0,0.01,0,0); 
+.ld.ld-bounce-alt-in {
+  animation: ld-bounce-alt-in 1s 1; animation-fill-mode: forwards;transform: matrix(0.01,0,0,0.01,0,0); 
 }
 @keyframes ld-bounce-out
 {

@@ -48,7 +48,7 @@
     name: 'bounce-transition',
     type: 'animation',
     preset: {
-      "bounce-out-alt": {
+      "bounce-alt-out": {
         dir: -1,
         count: 3,
         mag: 0.1,
@@ -57,7 +57,7 @@
           hidden: true
         }
       },
-      "bounce-in-alt": {
+      "bounce-alt-in": {
         dir: 1,
         count: 3,
         mag: 0.1,
