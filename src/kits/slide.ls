@@ -4,7 +4,7 @@
     prop: (f, c) -> 
       value = @value f.value, c
       return do 
-        transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
         opacity: if c.fade => value.opacity else 1
     value: (t, c) -> do
       transform: anikit.util[if c.dir == 1 => \tx else \ty] t * c.offset

@@ -309,6 +309,33 @@ import$(anikit, {
       if v.transform? => v.transform = v.transform.map -> easing-fit.round it, d
       return v
     */,
+    decompose: function(mat, opt){
+      var a, b, c, d, e, f, D, t, ref$, kx, ky, r, s, R, S, u;
+      opt == null && (opt = {});
+      a = mat[0], b = mat[1], c = mat[2], d = mat[3], e = mat[4], f = mat[5];
+      D = a * d - b * c;
+      t = [e, f];
+      ref$ = [0, 0, 0, [0, 0]], kx = ref$[0], ky = ref$[1], r = ref$[2], s = ref$[3];
+      if (a || b) {
+        R = Math.sqrt(a * a + b * b);
+        r = (b > 0
+          ? 1
+          : -1) * Math.acos(a / R);
+        s = [R, D / R];
+        kx = Math.atan((a * c + b * d) / (R * R));
+      } else if (c || d) {
+        S = Math.sqrt(c * c + d * d);
+        r = Math.PI / 2 - (d > 0
+          ? Math.acos(-c / s)
+          : -Math.acos(c / s));
+        s = [D / s, s];
+        ky = Math.atan(a * c + b * d) / (s * s);
+      } else {
+        s = [0, 0];
+      }
+      u = opt.unit || 'px';
+      return ["translate(" + t[0] + u + "," + t[1] + u + ")", "rotate(" + r * 180 / Math.PI + "deg)", "scale(" + s[0] + "," + s[1] + ")", "skewX(" + kx * 180 / Math.PI + "deg)", "skewY(" + ky * 180 / Math.PI + "deg)"].join(' ');
+    },
     kth: function(n, m, k){
       if (k > n) {
         k = n;
@@ -2760,20 +2787,25 @@ function import$(obj, src){
   }
   move = {
     prop: function(f, c){
-      var value, ret, ref$;
+      var value, ret, that;
       value = this.value(f.value, c);
       ret = {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
       };
-      if (c.fade) {
-        ret.opacity = (ref$ = (0.5 - Math.abs(0.5 - f.value)) * 10) < 1 ? ref$ : 1;
+      if ((that = value.opacity) != null) {
+        ret.opacity = that;
       }
       return ret;
     },
     value: function(t, c){
-      return {
-        transform: anikit.util[c.dir % 2 ? 'tx' : 'ty']((c.dir > 2 ? -1 : 1) * 2 * (t - 0.5) * c.offset)
+      var ret, ref$;
+      ret = {
+        transform: anikit.util[c.dir % 2 ? 'tx' : 'ty']((c.dir > 2 ? -1 : 1) * (2 * t - ((ref$ = Math.floor(2 * t) * 2) < 2 ? ref$ : 2)) * c.offset)
       };
+      if (c.fade) {
+        ret.opacity = anikit.util.round((ref$ = Math.abs(t - 0.5) * 10) < 1 ? ref$ : 1);
+      }
+      return ret;
     }
   };
   ret = {
@@ -2781,7 +2813,7 @@ function import$(obj, src){
     type: 'animation',
     preset: {
       "move-ltr": import$({
-        offset: 100,
+        offset: 30,
         dir: 1
       }, move),
       "move-rtl": import$({
@@ -2797,7 +2829,7 @@ function import$(obj, src){
         dir: 4
       }, move),
       "move-fade-ltr": import$({
-        offset: 100,
+        offset: 30,
         dir: 1,
         fade: true
       }, move),
@@ -2852,38 +2884,36 @@ function import$(obj, src){
       return ((2 * t + 1) % 2 - 1) * 0.5 + 0.5;
     },
     css: function(opt){
+      var ref$;
       return easingFit.toKeyframes([
         {
           percent: 0,
           value: 0
         }, {
-          percent: 10,
-          value: 0.1
+          percent: 40,
+          value: 0.4
         }, {
-          percent: 90,
-          value: 0.9
+          percent: 49.99999,
+          value: 0.4999999
+        }, {
+          percent: 50,
+          value: 0.5
+        }, {
+          percent: 50.00001,
+          value: 0.5000001
+        }, {
+          percent: 60,
+          value: 0.6
         }, {
           percent: 100,
           value: 1
         }
-      ], {
-        name: opt.name,
+      ], (ref$ = {
         prop: function(f, c){
-          var ref$, a, b, ret;
-          ref$ = [0, (f.value - 0.5) * c.offset * (opt.dir > 2 ? -1 : 1)], a = ref$[0], b = ref$[1];
-          if (c.dir % 2) {
-            ref$ = [b, a], a = ref$[0], b = ref$[1];
-          }
-          ret = {
-            transform: "matrix(1,0,0,1," + a + "," + b + ")"
-          };
-          if (c.fade) {
-            ret.opacity = (ref$ = (0.5 - Math.abs(0.5 - f.value)) * 10) < 1 ? ref$ : 1;
-          }
-          return ret;
+          return move.prop(f, c);
         },
         config: opt
-      });
+      }, ref$.name = opt.name, ref$));
     },
     js: function(t, opt){
       return opt.prop({
@@ -3933,7 +3963,7 @@ var slice$ = [].slice;
       var value;
       value = this.value(f.value, c);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: c.fade ? value.opacity : 1
       };
     },

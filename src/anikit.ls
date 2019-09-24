@@ -123,6 +123,37 @@ anikit <<< do
       if v.transform? => v.transform = v.transform.map -> easing-fit.round it, d
       return v
     */
+
+    # 2D transform matrix decomposition algorithm via QR matrix decomposition
+    # algorithm adopted from http://frederic-wang.fr/decomposition-of-2d-transform-matrices.html
+    # credit: Frederic Wang, 2013
+    decompose: (mat, opt = {}) ->
+      [a,b,c,d,e,f] = mat
+      D = a * d - b * c
+      t = [e,f]
+      [kx,ky,r,s] = [0,0,0,[0,0]]
+      if a or b =>
+        R = Math.sqrt(a * a + b * b)
+        r = (if b > 0 => 1 else -1 ) * Math.acos( a / R )
+        s = [R, D / R]
+        kx = Math.atan((a * c + b * d) / (R * R))
+      else if c or d =>
+        S = Math.sqrt(c * c + d * d)
+        r = Math.PI/2 - (if d > 0 => Math.acos(-c / s) else -Math.acos(c / s))
+        s = [D/s, s]
+        ky = Math.atan(a * c + b * d) / (s * s)
+      else s = [0,0]
+      u = opt.unit or \px
+      return [
+        "translate(#{t.0}#{u},#{t.1}#{u})",
+        "rotate(#{r * 180 / Math.PI}deg)",
+        "scale(#{s.0},#{s.1})",
+        "skewX(#{kx * 180 / Math.PI}deg)",
+        "skewY(#{ky * 180 / Math.PI}deg)"
+      ].join(' ')
+
+
+
     kth: (n,m,k) ->
       if k > n => k = n
       if m == 1 => return k

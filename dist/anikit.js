@@ -218,6 +218,33 @@ import$(anikit, {
       if v.transform? => v.transform = v.transform.map -> easing-fit.round it, d
       return v
     */,
+    decompose: function(mat, opt){
+      var a, b, c, d, e, f, D, t, ref$, kx, ky, r, s, R, S, u;
+      opt == null && (opt = {});
+      a = mat[0], b = mat[1], c = mat[2], d = mat[3], e = mat[4], f = mat[5];
+      D = a * d - b * c;
+      t = [e, f];
+      ref$ = [0, 0, 0, [0, 0]], kx = ref$[0], ky = ref$[1], r = ref$[2], s = ref$[3];
+      if (a || b) {
+        R = Math.sqrt(a * a + b * b);
+        r = (b > 0
+          ? 1
+          : -1) * Math.acos(a / R);
+        s = [R, D / R];
+        kx = Math.atan((a * c + b * d) / (R * R));
+      } else if (c || d) {
+        S = Math.sqrt(c * c + d * d);
+        r = Math.PI / 2 - (d > 0
+          ? Math.acos(-c / s)
+          : -Math.acos(c / s));
+        s = [D / s, s];
+        ky = Math.atan(a * c + b * d) / (s * s);
+      } else {
+        s = [0, 0];
+      }
+      u = opt.unit || 'px';
+      return ["translate(" + t[0] + u + "," + t[1] + u + ")", "rotate(" + r * 180 / Math.PI + "deg)", "scale(" + s[0] + "," + s[1] + ")", "skewX(" + kx * 180 / Math.PI + "deg)", "skewY(" + ky * 180 / Math.PI + "deg)"].join(' ');
+    },
     kth: function(n, m, k){
       if (k > n) {
         k = n;

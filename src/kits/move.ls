@@ -3,14 +3,15 @@
   move = do
     prop: (f, c) -> 
       value = @value f.value, c
-      ret = transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
-      if c.fade => ret.opacity = (0.5 - Math.abs(0.5 - f.value)) * 10 <? 1
+      value.transform = anikit.util.decompose(anikit.util.m4to3(value.transform), c)
+      return value
+    value: (t, c) ->
+      ret = do
+        transform: anikit.util[if (c.dir % 2) => \tx else \ty](
+          (if c.dir > 2 => -1 else 1) * ((2 * t) - (Math.floor(2 * t) * 2 <? 2)) * c.offset
+        )
+      if c.fade => ret.opacity = anikit.util.round(Math.abs(t - 0.5) * 10 <? 1)
       return ret
-    value: (t, c) -> do
-      transform: anikit.util[if (c.dir % 2) => \tx else \ty](
-        (if c.dir > 2 => -1 else 1) * 2 * (t - 0.5) * c.offset
-      )
-
 
   ret = do
     name: \move
@@ -36,21 +37,17 @@
     timing: (t, opt) -> (((2 * t + 1) % 2) - 1) * 0.5 + 0.5
 
     css: (opt) -> 
-      easing-fit.to-keyframes([
-        {percent: 0, value: 0}
-        {percent: 10, value: 0.1}
-        {percent: 90, value: 0.9}
-        {percent: 100, value: 1}
-      ], {
-        name: opt.name
-        prop: (f, c) ->
-          [a,b] = [0, (f.value - 0.5) * c.offset * (if opt.dir > 2 => -1 else 1)]
-          if ( c.dir % 2 ) => [a,b] = [b,a]
-          ret = transform: "matrix(1,0,0,1,#a,#b)"
-          if c.fade => ret.opacity = (0.5 - Math.abs(0.5 - f.value)) * 10 <? 1
-          return ret
-        config: opt
-      }
+      easing-fit.to-keyframes(
+        [
+          {percent: 0, value: 0}
+          {percent: 40, value: 0.4}
+          {percent: 49.99999, value: 0.4999999}
+          {percent: 50, value: 0.5}
+          {percent: 50.00001, value: 0.5000001}
+          {percent: 60, value: 0.6}
+          {percent: 100, value: 1}
+        ],
+        {} <<< {prop: ((f,c)-> move.prop(f,c)), config: opt} <<< opt{name}
       )
     js: (t, opt) -> opt.prop {value: t}, opt
     affine: (t, opt) -> opt.value t, opt

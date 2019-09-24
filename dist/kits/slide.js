@@ -11,7 +11,7 @@
       var value;
       value = this.value(f.value, c);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: c.fade ? value.opacity : 1
       };
     },

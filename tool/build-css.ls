@@ -19,7 +19,7 @@ for k,v of anikit.types =>
   output.push css
   output.push """
     .ld.#{config.name} {
-      animation: #{config.name} #{config.dur or 1}s #{config.repeat or \infinite}; #init-values; #origin
+      animation: #{config.name} #{config.dur or 1}s #{config.repeat or \infinite} linear; #init-values; #origin
     }
   """
 
