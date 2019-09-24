@@ -52,13 +52,14 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return this.config;
   },
   cls: function(cfg, opt){
-    var name, css, ref$, re, has, k, js, initValues, n, v, origin, that;
+    var prefix, name, css, ref$, re, has, k, js, initValues, n, v, origin, selector, that;
     cfg == null && (cfg = {});
     opt == null && (opt = {});
     if (!this.mod.css) {
       return null;
     }
-    name = opt.name || this.config.name || this.mod.name || 'unnamed';
+    prefix = opt.prefix || '';
+    name = (prefix ? prefix + "-" : "") + (opt.name || this.config.name || this.mod.name || 'unnamed');
     css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = name, ref$));
     re = {
       skewX: /skewX\(0deg\)/g,
@@ -98,7 +99,12 @@ anikit.prototype = import$(Object.create(Object.prototype), {
       : "transform-origin: " + [(ref$ = cfg.origin)[0], ref$[1]].map(function(it){
         return it * 100 + '%';
       }).join(' ');
-    return "" + css + "\n" + ((that = opt.prefix) ? that : '') + "." + name + " {\n  animation: " + name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
+    selector = ((that = opt.alias)
+      ? that
+      : [name]).map(function(it){
+      return "." + prefix + "." + it;
+    }).join(',');
+    return "" + css + "\n" + selector + " {\n  animation: " + name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
   },
   css: function(opt){
     opt == null && (opt = {});

@@ -113,7 +113,7 @@
           };
         }
       },
-      wander: {
+      "wander-h": {
         offset: {
           'default': 10,
           max: 500,

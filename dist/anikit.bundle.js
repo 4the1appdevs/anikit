@@ -143,13 +143,14 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return this.config;
   },
   cls: function(cfg, opt){
-    var name, css, ref$, re, has, k, js, initValues, n, v, origin, that;
+    var prefix, name, css, ref$, re, has, k, js, initValues, n, v, origin, selector, that;
     cfg == null && (cfg = {});
     opt == null && (opt = {});
     if (!this.mod.css) {
       return null;
     }
-    name = opt.name || this.config.name || this.mod.name || 'unnamed';
+    prefix = opt.prefix || '';
+    name = (prefix ? prefix + "-" : "") + (opt.name || this.config.name || this.mod.name || 'unnamed');
     css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = name, ref$));
     re = {
       skewX: /skewX\(0deg\)/g,
@@ -189,7 +190,12 @@ anikit.prototype = import$(Object.create(Object.prototype), {
       : "transform-origin: " + [(ref$ = cfg.origin)[0], ref$[1]].map(function(it){
         return it * 100 + '%';
       }).join(' ');
-    return "" + css + "\n" + ((that = opt.prefix) ? that : '') + "." + name + " {\n  animation: " + name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
+    selector = ((that = opt.alias)
+      ? that
+      : [name]).map(function(it){
+      return "." + prefix + "." + it;
+    }).join(',');
+    return "" + css + "\n" + selector + " {\n  animation: " + name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
   },
   css: function(opt){
     opt == null && (opt = {});
@@ -731,7 +737,7 @@ var mods = {
   "wrench": require("./kits/wrench")
 };
 
-var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-alt-out":"bounce-transition","bounce-alt-in":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","flip":"flip","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","move-fade-ltr":"move","move-fade-rtl":"move","move-fade-ttb":"move","move-fade-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander":"patrol","power-off":"power","power-on":"power","pulse":"pulse","jingle":"rubber","rubber-v":"rubber","rubber":"rubber","shake-v":"rubber","shake":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-ltr":"rush","rush-rtl":"rush","rush-ttb":"rush","rush-btt":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-ttb-in":"rush","rush-btt-in":"rush","skew":"skew","skew-alt":"skew","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","cycle-alt":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","throw-ttb-in":"throw","throw-ltr-in":"throw","throw-rtl-in":"throw","throw-btt-in":"throw","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex":"vortex","vortex-alt":"vortex","vortex-in":"vortex","vortex-out":"vortex","vortex-alt-in":"vortex","vortex-alt-out":"vortex","wrench":"wrench"};
+var types = {"blink":"blink","blur-in":"blur-transition","blur-out":"blur-transition","blur":"blur","beat":"bounce-rigid","bounceAlt":"bounce-rigid","tick-alt":"bounce-rigid","jump":"bounce-rigid","bounce-alt-out":"bounce-transition","bounce-alt-in":"bounce-transition","bounce-out":"bounce-transition","bounce-in":"bounce-transition","spring-ltr-in":"bounce-transition","spring-rtl-in":"bounce-transition","spring-ttb-in":"bounce-transition","spring-btt-in":"bounce-transition","bounce":"bounce","clock":"clock","fade":"fade","flip":"flip","float":"float","heartbeat":"heartbeat","hit":"hit","jump-alt-in":"jump-transition","jump-alt-out":"jump-transition","jump-in":"jump-transition","jump-out":"jump-transition","zoom-in":"jump-transition","zoom-out":"jump-transition","fade-in":"jump-transition","fade-out":"jump-transition","grow-rtl-in":"jump-transition","grow-rtl-out":"jump-transition","grow-ltr-in":"jump-transition","grow-ltr-out":"jump-transition","grow-ttb-in":"jump-transition","grow-ttb-out":"jump-transition","grow-btt-in":"jump-transition","grow-btt-out":"jump-transition","flip-v-in":"jump-transition","flip-v-out":"jump-transition","flip-h-in":"jump-transition","flip-h-out":"jump-transition","slide-rtl-in":"jump-transition","slide-rtl-out":"jump-transition","slide-ltr-in":"jump-transition","slide-ltr-out":"jump-transition","slide-ttb-in":"jump-transition","slide-ttb-out":"jump-transition","slide-btt-in":"jump-transition","slide-btt-out":"jump-transition","float-rtl-in":"jump-transition","float-rtl-out":"jump-transition","float-ltr-in":"jump-transition","float-ltr-out":"jump-transition","float-ttb-in":"jump-transition","float-ttb-out":"jump-transition","float-btt-in":"jump-transition","float-btt-out":"jump-transition","fall-rtl-in":"jump-transition","fall-ltr-in":"jump-transition","fall-ttb-in":"jump-transition","fall-btt-in":"jump-transition","move-ltr":"move","move-rtl":"move","move-ttb":"move","move-btt":"move","move-fade-ltr":"move","move-fade-rtl":"move","move-fade-ttb":"move","move-fade-btt":"move","orbit":"orbit","breath":"patrol","dim":"patrol","metronome":"patrol","swing":"patrol","wander-v":"patrol","wander-h":"patrol","power-off":"power","power-on":"power","pulse":"pulse","jingle":"rubber","rubber-v":"rubber","rubber-h":"rubber","shake-v":"rubber","shake-h":"rubber","tick":"rubber","smash":"rubber","jelly-alt":"rubber","jelly":"rubber","damage":"rubber","rush-ltr":"rush","rush-rtl":"rush","rush-ttb":"rush","rush-btt":"rush","rush-ltr-in":"rush","rush-rtl-in":"rush","rush-ttb-in":"rush","rush-btt-in":"rush","skew":"skew","skew-alt":"skew","slide-ltr":"slide","slide-rtl":"slide","slide-btt":"slide","slide-ttb":"slide","coin-h":"spin","coin-v":"spin","cycle":"spin","cycle-alt":"spin","flip-h":"spin","flip-v":"spin","spin-fast":"spin","spin":"spin","squeeze":"squeeze","static":"static","surprise":"surprise","throw-ttb-in":"throw","throw-ltr-in":"throw","throw-rtl-in":"throw","throw-btt-in":"throw","measure":"tremble","shiver":"tremble","swim":"tremble","tremble":"tremble","vortex":"vortex","vortex-alt":"vortex","vortex-in":"vortex","vortex-out":"vortex","vortex-alt-in":"vortex","vortex-alt-out":"vortex","wrench":"wrench"};
 
 module.exports = {mods: mods, types: types};
 },{"./kits/blink":7,"./kits/blur":9,"./kits/blur-transition":8,"./kits/bounce":12,"./kits/bounce-rigid":10,"./kits/bounce-transition":11,"./kits/clock":13,"./kits/fade":14,"./kits/flip":15,"./kits/float":16,"./kits/heartbeat":17,"./kits/hit":18,"./kits/jump-transition":19,"./kits/move":20,"./kits/orbit":21,"./kits/patrol":22,"./kits/power":23,"./kits/pulse":24,"./kits/rubber":25,"./kits/rush":26,"./kits/skew":27,"./kits/slide":28,"./kits/spin":29,"./kits/squeeze":30,"./kits/static":31,"./kits/surprise":32,"./kits/throw":33,"./kits/tremble":34,"./kits/vortex":35,"./kits/wrench":36}],7:[function(require,module,exports){
@@ -3186,7 +3192,7 @@ function import$(obj, src){
           };
         }
       },
-      wander: {
+      "wander-h": {
         offset: {
           'default': 10,
           max: 500,
@@ -3490,7 +3496,7 @@ function import$(obj, src){
           };
         }
       },
-      rubber: {
+      "rubber-h": {
         count: 7,
         ratio: 0.7,
         delay: 0.3,
@@ -3536,7 +3542,7 @@ function import$(obj, src){
           };
         }
       },
-      shake: {
+      "shake-h": {
         count: 5,
         ratio: 0.7,
         delay: 0.3,

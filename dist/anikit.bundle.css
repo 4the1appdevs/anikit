@@ -2121,7 +2121,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-wander-v {
   animation: ld-wander-v 1s infinite linear; ; 
 }
-@keyframes ld-wander
+@keyframes ld-wander-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.9647,0.2413,-0.0705,0.7911);
@@ -2135,8 +2135,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: translate(-10px,0);
   }
 }
-.ld.ld-wander {
-  animation: ld-wander 1s infinite linear; ; 
+.ld.ld-wander-h {
+  animation: ld-wander-h 1s infinite linear; ; 
 }
 @keyframes ld-power-off {
   0%, 20%, 100% {
@@ -2289,7 +2289,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-rubber-v {
   animation: ld-rubber-v 1s infinite linear; ; 
 }
-@keyframes ld-rubber
+@keyframes ld-rubber-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.1858,0.2841,0.5834,1.4615);
@@ -2327,8 +2327,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: scaleX(0.9836);
   }
 }
-.ld.ld-rubber {
-  animation: ld-rubber 1s infinite linear; ; 
+.ld.ld-rubber-h {
+  animation: ld-rubber-h 1s infinite linear; ; 
 }
 @keyframes ld-shake-v
 {
@@ -2363,7 +2363,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-shake-v {
   animation: ld-shake-v 1s infinite linear; ; 
 }
-@keyframes ld-shake
+@keyframes ld-shake-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.1515,0.2047,0.6562,1.1369);
@@ -2393,8 +2393,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: translate(-1.6800000000000002px,0);
   }
 }
-.ld.ld-shake {
-  animation: ld-shake 1s infinite linear; ; 
+.ld.ld-shake-h {
+  animation: ld-shake-h 1s infinite linear; ; 
 }
 @keyframes ld-tick
 {

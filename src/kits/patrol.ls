@@ -34,7 +34,7 @@
         unit: \px
         prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
         value: (t, c) -> transform: anikit.util.ty t * c.offset
-      wander:
+      "wander-h":
         offset: default: 10, max: 500, step: 1, name: "Move Amount"
         unit: \px
         prop: (f, c) -> {transform: "translate(#{f.value * c.offset}#{c.unit},0)"}

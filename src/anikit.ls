@@ -29,7 +29,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   get-config: -> @config
   cls: (cfg = {}, opt = {}) ->
     if !@mod.css => return null
-    name = opt.name or @config.name or @mod.name or 'unnamed'
+    prefix = opt.prefix or ''
+    name = (if prefix => "#{prefix}-" else "") + (opt.name or @config.name or @mod.name or 'unnamed')
     css = @mod.css (cfg = {} <<< @config <<< cfg <<< {name})
 
 
@@ -52,9 +53,10 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
     origin = if !(cfg.origin?) => ""
     else "transform-origin: #{cfg.origin[0 to 1].map(-> (it * 100) + \%).join(' ')}"
+    selector = (if opt.alias => that else [name]).map(-> ".#prefix.#it").join(',')
     return """
     #css
-    #{if opt.prefix => that else ''}.#{name} {
+    #selector {
       animation: #{name} #{cfg.dur or 1}s #{cfg.repeat or \infinite} linear; #init-values; #origin
     }
     """

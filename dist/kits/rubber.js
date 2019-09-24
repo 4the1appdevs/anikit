@@ -58,7 +58,7 @@
           };
         }
       },
-      rubber: {
+      "rubber-h": {
         count: 7,
         ratio: 0.7,
         delay: 0.3,
@@ -104,7 +104,7 @@
           };
         }
       },
-      shake: {
+      "shake-h": {
         count: 5,
         ratio: 0.7,
         delay: 0.3,
