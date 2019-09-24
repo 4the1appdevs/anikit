@@ -9,6 +9,19 @@ for k,v of anikit.types =>
   mod = require "../src/kits/#{mod.name}"
   if !mod.css => continue
   css = mod.css config
+
+  # there might be redundant transform generated. check and clear them.
+  re = do
+    skewX: /skewX\(0deg\)/g
+    skewY: /skewY\(0deg\)/g
+    rotate: /rotate\(0deg\)/g
+    scale: /scale\(1,1\)/g
+  has = {}
+  [k for k of re].map (k)->
+    if (new RegExp(k)).exec(css.replace(re[k], '')) => return
+    css := css.replace(re[k], '')
+  css = css.replace /\s+;/g, ';'
+
   if mod.js and config.repeat =>
     js = mod.js 0, config
     init-values = (["animation-fill-mode: forwards"] ++ ["#name: #value" for name,value of js]).join(\;)
