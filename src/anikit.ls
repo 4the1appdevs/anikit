@@ -29,7 +29,9 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   get-config: -> @config
   cls: (cfg = {}, opt = {}) ->
     if !@mod.css => return null
-    css = @mod.css (cfg = {} <<< @config <<< cfg <<< {name: opt.name or cfg.name})
+    name = opt.name or @config.name or @mod.name or 'unnamed'
+    css = @mod.css (cfg = {} <<< @config <<< cfg <<< {name})
+
 
     # there might be redundant transform generated. check and clear them.
     re = do
@@ -52,8 +54,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     else "transform-origin: #{cfg.origin[0 to 1].map(-> (it * 100) + \%).join(' ')}"
     return """
     #css
-    #{if opt.prefix => that else ''}.#{opt.name} {
-      animation: #{opt.name} #{cfg.dur or 1}s #{cfg.repeat or \infinite} linear; #init-values; #origin
+    #{if opt.prefix => that else ''}.#{name} {
+      animation: #{name} #{cfg.dur or 1}s #{cfg.repeat or \infinite} linear; #init-values; #origin
     }
     """
 

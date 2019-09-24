@@ -34,7 +34,7 @@
     css: function(opt){
       var delta;
       delta = opt.transtime * opt.showtime * 0.5;
-      return "@keyframes " + opt.name + " {\n  0% { opacity: 1; }\n  " + 100 * (opt.showtime - delta) + "% { opacity: 1; }\n  " + 100 * (opt.showtime + delta) + "% { opacity: 0; }\n  " + 100 * (1 - 2 * delta) + "% { opacity: 0; }\n  100% { opacity: 1; }\n}";
+      return "@keyframes " + opt.name + " {\n  0% { opacity: 1; }\n  " + anikit.util.round(100 * (opt.showtime - delta)) + "% { opacity: 1; }\n  " + anikit.util.round(100 * (opt.showtime + delta)) + "% { opacity: 0; }\n  " + anikit.util.round(100 * (1 - 2 * delta)) + "% { opacity: 0; }\n  100% { opacity: 1; }\n}";
     },
     js: function(t, opt){
       var delta;

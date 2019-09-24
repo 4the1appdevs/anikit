@@ -143,13 +143,14 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return this.config;
   },
   cls: function(cfg, opt){
-    var css, ref$, re, has, k, js, initValues, n, v, origin, that;
+    var name, css, ref$, re, has, k, js, initValues, n, v, origin, that;
     cfg == null && (cfg = {});
     opt == null && (opt = {});
     if (!this.mod.css) {
       return null;
     }
-    css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = opt.name || cfg.name, ref$));
+    name = opt.name || this.config.name || this.mod.name || 'unnamed';
+    css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = name, ref$));
     re = {
       skewX: /skewX\(0deg\)/g,
       skewY: /skewY\(0deg\)/g,
@@ -188,7 +189,7 @@ anikit.prototype = import$(Object.create(Object.prototype), {
       : "transform-origin: " + [(ref$ = cfg.origin)[0], ref$[1]].map(function(it){
         return it * 100 + '%';
       }).join(' ');
-    return "" + css + "\n" + ((that = opt.prefix) ? that : '') + "." + opt.name + " {\n  animation: " + opt.name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
+    return "" + css + "\n" + ((that = opt.prefix) ? that : '') + "." + name + " {\n  animation: " + name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
   },
   css: function(opt){
     opt == null && (opt = {});
@@ -770,7 +771,7 @@ module.exports = {mods: mods, types: types};
     css: function(opt){
       var delta;
       delta = opt.transtime * opt.showtime * 0.5;
-      return "@keyframes " + opt.name + " {\n  0% { opacity: 1; }\n  " + 100 * (opt.showtime - delta) + "% { opacity: 1; }\n  " + 100 * (opt.showtime + delta) + "% { opacity: 0; }\n  " + 100 * (1 - 2 * delta) + "% { opacity: 0; }\n  100% { opacity: 1; }\n}";
+      return "@keyframes " + opt.name + " {\n  0% { opacity: 1; }\n  " + anikit.util.round(100 * (opt.showtime - delta)) + "% { opacity: 1; }\n  " + anikit.util.round(100 * (opt.showtime + delta)) + "% { opacity: 0; }\n  " + anikit.util.round(100 * (1 - 2 * delta)) + "% { opacity: 0; }\n  100% { opacity: 1; }\n}";
     },
     js: function(t, opt){
       var delta;

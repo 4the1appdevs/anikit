@@ -14,9 +14,9 @@
       """
         @keyframes #{opt.name} {
           0% { opacity: 1; }
-          #{100 * (opt.showtime - delta)}% { opacity: 1; }
-          #{100 * (opt.showtime + delta)}% { opacity: 0; }
-          #{100 * (1 - 2 * delta)}% { opacity: 0; }
+          #{anikit.util.round(100 * (opt.showtime - delta))}% { opacity: 1; }
+          #{anikit.util.round(100 * (opt.showtime + delta))}% { opacity: 0; }
+          #{anikit.util.round(100 * (1 - 2 * delta))}% { opacity: 0; }
           100% { opacity: 1; }
         }
       """
