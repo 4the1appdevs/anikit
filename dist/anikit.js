@@ -62,10 +62,10 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     name = (prefix ? prefix + "-" : "") + (opt.name || this.config.name || this.mod.name || 'unnamed');
     css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = name, ref$));
     re = {
-      skewX: /skewX\(0deg\)/g,
-      skewY: /skewY\(0deg\)/g,
-      rotate: /rotate\(0deg\)/g,
-      scale: /scale\(1,1\)/g
+      skewX: /skewX\(0(deg)?\)/g,
+      skewY: /skewY\(0(deg)?\)/g,
+      rotate: /rotate\(0(deg)?\)/g,
+      scale: /scale\(1(,1)?\)/g
     };
     has = {};
     (function(){
@@ -100,7 +100,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
         return it * 100 + '%';
       }).join(' ');
     selector = ((that = opt.alias)
-      ? that
+      ? that.map(function(it){
+        return prefix + "-" + it;
+      })
       : [name]).map(function(it){
       return "." + prefix + "." + it;
     }).join(',');

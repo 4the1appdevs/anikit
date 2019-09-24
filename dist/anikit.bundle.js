@@ -153,10 +153,10 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     name = (prefix ? prefix + "-" : "") + (opt.name || this.config.name || this.mod.name || 'unnamed');
     css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = name, ref$));
     re = {
-      skewX: /skewX\(0deg\)/g,
-      skewY: /skewY\(0deg\)/g,
-      rotate: /rotate\(0deg\)/g,
-      scale: /scale\(1,1\)/g
+      skewX: /skewX\(0(deg)?\)/g,
+      skewY: /skewY\(0(deg)?\)/g,
+      rotate: /rotate\(0(deg)?\)/g,
+      scale: /scale\(1(,1)?\)/g
     };
     has = {};
     (function(){
@@ -191,7 +191,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
         return it * 100 + '%';
       }).join(' ');
     selector = ((that = opt.alias)
-      ? that
+      ? that.map(function(it){
+        return prefix + "-" + it;
+      })
       : [name]).map(function(it){
       return "." + prefix + "." + it;
     }).join(',');
@@ -902,7 +904,7 @@ module.exports = {mods: mods, types: types};
       unit: {
         'default': 'px',
         type: 'choice',
-        values: ["px", "%", ""]
+        values: ["px", ""]
       }
     },
     css: function(opt){
@@ -4718,7 +4720,7 @@ function import$(obj, src){
       tremble: {
         dur: 0.5,
         count: 30,
-        offset: 2,
+        offset: 3,
         degree: 0,
         zoom: 0,
         unit: 'px'
@@ -4764,7 +4766,9 @@ function import$(obj, src){
     },
     prop: function(f, opt){
       var ref$, x, y, r, s;
-      ref$ = this.calc(f.value, opt), x = ref$[0], y = ref$[1], r = ref$[2], s = ref$[3];
+      ref$ = this.calc(f.value, opt).map(function(it){
+        return anikit.util.round(it);
+      }), x = ref$[0], y = ref$[1], r = ref$[2], s = ref$[3];
       return {
         transform: "translate(" + x + opt.unit + "," + y + opt.unit + ") rotate(" + r + "deg) scale(" + s + ")"
       };
@@ -4781,7 +4785,7 @@ function import$(obj, src){
         p = easingFit.round(100 * i / opt.count);
         ret.push("  " + p + "% { transform: " + this.prop({
           value: p / 100
-        }, opt).transform + "; animation-timing-function: linear }");
+        }, opt).transform + " }");
       }
       ret.push("  100% { transform: translate(0,0) rotate(0) scale(1) }");
       ret.push("}");

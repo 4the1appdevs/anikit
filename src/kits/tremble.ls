@@ -7,7 +7,7 @@
       measure: dur: 5, count: 30, offset: 0, degree: 30, zoom: 0
       shiver: dur: 0.5, count: 30, offset: 0, degree: 0, zoom: 0.1
       swim: dur: 10, count: 12, offset: 12, degree: 30, zoom: 0, unit: \px
-      tremble: dur: 0.5, count: 30, offset: 2, degree: 0, zoom: 0, unit: \px
+      tremble: dur: 0.5, count: 30, offset: 3, degree: 0, zoom: 0, unit: \px
 
     edit: 
       count: name: "Sample Count", default: 30, type: \number, min: 1, max: 99
@@ -17,7 +17,7 @@
       unit: default: \px, type: \choice, values: ["px", "%", ""]
 
     prop: (f, opt) ->
-      [x,y,r,s] = @calc f.value, opt
+      [x,y,r,s] = @calc(f.value, opt).map -> anikit.util.round(it)
       { transform: "translate(#x#{opt.unit},#y#{opt.unit}) rotate(#{r}deg) scale(#s)" }
     css: (opt) -> 
       ret = [
@@ -26,7 +26,7 @@
       ]
       for i from 1 til opt.count =>
         p = easing-fit.round(100 * i / opt.count)
-        ret.push "  #{p}% { transform: #{@prop({value:p/100}, opt).transform}; animation-timing-function: linear }"
+        ret.push "  #{p}% { transform: #{@prop({value:p/100}, opt).transform} }"
       ret.push "  100% { transform: translate(0,0) rotate(0) scale(1) }"
       ret.push "}"
       return ret.join('\n')

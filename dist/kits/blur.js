@@ -26,7 +26,7 @@
       unit: {
         'default': 'px',
         type: 'choice',
-        values: ["px", "%", ""]
+        values: ["px", ""]
       }
     },
     css: function(opt){

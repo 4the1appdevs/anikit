@@ -35,7 +35,7 @@
       tremble: {
         dur: 0.5,
         count: 30,
-        offset: 2,
+        offset: 3,
         degree: 0,
         zoom: 0,
         unit: 'px'
@@ -81,7 +81,9 @@
     },
     prop: function(f, opt){
       var ref$, x, y, r, s;
-      ref$ = this.calc(f.value, opt), x = ref$[0], y = ref$[1], r = ref$[2], s = ref$[3];
+      ref$ = this.calc(f.value, opt).map(function(it){
+        return anikit.util.round(it);
+      }), x = ref$[0], y = ref$[1], r = ref$[2], s = ref$[3];
       return {
         transform: "translate(" + x + opt.unit + "," + y + opt.unit + ") rotate(" + r + "deg) scale(" + s + ")"
       };
@@ -98,7 +100,7 @@
         p = easingFit.round(100 * i / opt.count);
         ret.push("  " + p + "% { transform: " + this.prop({
           value: p / 100
-        }, opt).transform + "; animation-timing-function: linear }");
+        }, opt).transform + " }");
       }
       ret.push("  100% { transform: translate(0,0) rotate(0) scale(1) }");
       ret.push("}");

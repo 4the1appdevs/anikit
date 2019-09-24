@@ -36,10 +36,10 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
     # there might be redundant transform generated. check and clear them.
     re = do
-      skewX: /skewX\(0deg\)/g
-      skewY: /skewY\(0deg\)/g
-      rotate: /rotate\(0deg\)/g
-      scale: /scale\(1,1\)/g
+      skewX: /skewX\(0(deg)?\)/g
+      skewY: /skewY\(0(deg)?\)/g
+      rotate: /rotate\(0(deg)?\)/g
+      scale: /scale\(1(,1)?\)/g
     has = {}
     [k for k of re].map (k)->
       if (new RegExp(k)).exec(css.replace(re[k], '')) => return
