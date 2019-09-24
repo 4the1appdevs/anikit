@@ -27,6 +27,36 @@ anikit.prototype = Object.create(Object.prototype) <<< do
     if @dom => @dom.textContent = @mod.css({} <<< @config <<< name: "#{@config.name}-#{@id}")
     @mod.config = @config
   get-config: -> @config
+  cls: (cfg = {}, opt = {}) ->
+    if !@mod.css => return null
+    css = @mod.css (cfg = {} <<< @config <<< cfg <<< {name: opt.name or cfg.name})
+
+    # there might be redundant transform generated. check and clear them.
+    re = do
+      skewX: /skewX\(0deg\)/g
+      skewY: /skewY\(0deg\)/g
+      rotate: /rotate\(0deg\)/g
+      scale: /scale\(1,1\)/g
+    has = {}
+    [k for k of re].map (k)->
+      if (new RegExp(k)).exec(css.replace(re[k], '')) => return
+      css := css.replace(re[k], '')
+    css = css.replace /\s+;/g, ';'
+
+    if @mod.js and cfg.repeat =>
+      js = @mod.js 0, cfg
+      init-values = (["animation-fill-mode: forwards"] ++ ["#n: #v" for n,v of js]).join(\;)
+    else init-values = ""
+
+    origin = if !(cfg.origin?) => ""
+    else "transform-origin: #{cfg.origin[0 to 1].map(-> (it * 100) + \%).join(' ')}"
+    return """
+    #css
+    #{if opt.prefix => that else ''}.#{opt.name} {
+      animation: #{opt.name} #{cfg.dur or 1}s #{cfg.repeat or \infinite} linear; #init-values; #origin
+    }
+    """
+
   css: (opt={}) -> if @mod.css => @mod.css {} <<< @config <<< opt else {}
   js: (t, opt={}) -> if @mod.js => @mod.js t, opt = {} <<< @config <<< opt
   affine: (t, opt={}) -> if @mod.affine => @mod.affine t, opt = {} <<< @config <<< opt
@@ -245,4 +275,5 @@ anikit <<< do
 
 
 if window? => window <<< {easing, anikit, easing-fit, cubic}
-if module? => module.exports <<< anikit
+# required module can't be used as a constructor so we put anikit in exports.anikit
+if module? => module.exports <<< anikit; module.exports.anikit = anikit

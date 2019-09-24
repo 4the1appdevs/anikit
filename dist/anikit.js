@@ -51,6 +51,54 @@ anikit.prototype = import$(Object.create(Object.prototype), {
   getConfig: function(){
     return this.config;
   },
+  cls: function(cfg, opt){
+    var css, ref$, re, has, k, js, initValues, n, v, origin, that;
+    cfg == null && (cfg = {});
+    opt == null && (opt = {});
+    if (!this.mod.css) {
+      return null;
+    }
+    css = this.mod.css(cfg = (ref$ = import$(import$({}, this.config), cfg), ref$.name = opt.name || cfg.name, ref$));
+    re = {
+      skewX: /skewX\(0deg\)/g,
+      skewY: /skewY\(0deg\)/g,
+      rotate: /rotate\(0deg\)/g,
+      scale: /scale\(1,1\)/g
+    };
+    has = {};
+    (function(){
+      var results$ = [];
+      for (k in re) {
+        results$.push(k);
+      }
+      return results$;
+    }()).map(function(k){
+      if (new RegExp(k).exec(css.replace(re[k], ''))) {
+        return;
+      }
+      return css = css.replace(re[k], '');
+    });
+    css = css.replace(/\s+;/g, ';');
+    if (this.mod.js && cfg.repeat) {
+      js = this.mod.js(0, cfg);
+      initValues = (["animation-fill-mode: forwards"].concat((function(){
+        var ref$, results$ = [];
+        for (n in ref$ = js) {
+          v = ref$[n];
+          results$.push(n + ": " + v);
+        }
+        return results$;
+      }()))).join(';');
+    } else {
+      initValues = "";
+    }
+    origin = !(cfg.origin != null)
+      ? ""
+      : "transform-origin: " + [(ref$ = cfg.origin)[0], ref$[1]].map(function(it){
+        return it * 100 + '%';
+      }).join(' ');
+    return "" + css + "\n" + ((that = opt.prefix) ? that : '') + "." + opt.name + " {\n  animation: " + opt.name + " " + (cfg.dur || 1) + "s " + (cfg.repeat || 'infinite') + " linear; " + initValues + "; " + origin + "\n}";
+  },
   css: function(opt){
     opt == null && (opt = {});
     if (this.mod.css) {
@@ -428,6 +476,7 @@ if (typeof window != 'undefined' && window !== null) {
 }
 if (typeof module != 'undefined' && module !== null) {
   import$(module.exports, anikit);
+  module.exports.anikit = anikit;
 }
 function import$(obj, src){
   var own = {}.hasOwnProperty;
