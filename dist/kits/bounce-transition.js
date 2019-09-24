@@ -12,7 +12,7 @@
       var value;
       value = this.value(f.value, c, d, f.percent);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: value.opacity
       };
     },
@@ -189,6 +189,11 @@
         type: 'boolean',
         'default': false,
         hidden: true
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       },
       repeat: {
         'default': 1

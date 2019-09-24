@@ -4,7 +4,7 @@
   spring = do
     prop: (f, c, d) ->
       value = @value f.value, c, d, f.percent
-      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
+      return transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c), opacity: value.opacity
     value: (t, c, d, p) ->
       t = if c.dir > 0 => t else 1 - t
       if c.dir < 0 and t > 1 => t = 1
@@ -52,6 +52,7 @@
       extrude: type: \number, default: 0, min: 0, max: 1, step: 0.01, hidden: true
       offset: type: \number, default: 0, min: -500, max: 500, step: 1
       throw: name: "Throw in?", type: \boolean, default: false, hidden: true
+      unit: default: \px, type: \choice, values: ["px", "%", ""]
       repeat: default: 1
     local: 
       prop: (f, c) ->

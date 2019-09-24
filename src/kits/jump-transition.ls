@@ -10,7 +10,7 @@
   slide = do
     prop: (f, c, d, o) ->
       value = @value f.value, c, d, o
-      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
+      return transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c), opacity: value.opacity
     value: (t, c, d, o) ->
       if c.dir > 0 => t = 1 - t
       if t <= 0.005 => t = 0.005
@@ -27,7 +27,7 @@
   flip = do
     prop: (f, c, d) ->
       value = @value f.value, c, d
-      return transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})", opacity: value.opacity
+      return transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c), opacity: value.opacity
     value: (t, c, d) ->
       if c.dir > 0 => t = 1 - t
       if t <= 0.005 => t = 0.005
@@ -39,7 +39,7 @@
   grow = do
     prop: (f, c, d) ->
       value = @value f.value, c, d
-      ret = transform: "matrix(#{anikit.util.m4to3(value.transform).join(',')})"
+      ret = transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
       if value.opacity? => ret.opacity = value.opacity
       ret
     value: (t, c, d) ->
@@ -277,6 +277,7 @@
       decay: name: "Amount Decay", type: \number, default: 0.4, min: 0, max: 1, step: 0.01
       power: type: \number, default: 2, min: 0, max: 10, step: 0.01, hidden: true
       offset: type: \number, default: 50, min: 0, max: 500, step: 1, hidden: true
+      unit: default: \px, type: \choice, values: ["px", "%", ""]
       repeat: default: 1
     local: 
       prop: (f, c) ->

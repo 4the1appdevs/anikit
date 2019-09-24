@@ -27,7 +27,7 @@
       var value;
       value = this.value(f.value, c, d, o);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: value.opacity
       };
     },
@@ -67,7 +67,7 @@
       var value;
       value = this.value(f.value, c, d);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: value.opacity
       };
     },
@@ -95,7 +95,7 @@
       var value, ret;
       value = this.value(f.value, c, d);
       ret = {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
       };
       if (value.opacity != null) {
         ret.opacity = value.opacity;
@@ -691,6 +691,11 @@
         max: 500,
         step: 1,
         hidden: true
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       },
       repeat: {
         'default': 1

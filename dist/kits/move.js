@@ -8,15 +8,10 @@
   }
   move = {
     prop: function(f, c){
-      var value, ret, that;
+      var value;
       value = this.value(f.value, c);
-      ret = {
-        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
-      };
-      if ((that = value.opacity) != null) {
-        ret.opacity = that;
-      }
-      return ret;
+      value.transform = anikit.util.decompose(anikit.util.m4to3(value.transform), c);
+      return value;
     },
     value: function(t, c){
       var ret, ref$;
@@ -34,7 +29,7 @@
     type: 'animation',
     preset: {
       "move-ltr": import$({
-        offset: 30,
+        offset: 100,
         dir: 1
       }, move),
       "move-rtl": import$({
@@ -50,7 +45,7 @@
         dir: 4
       }, move),
       "move-fade-ltr": import$({
-        offset: 30,
+        offset: 100,
         dir: 1,
         fade: true
       }, move),

@@ -1078,7 +1078,7 @@ function import$(obj, src){
       var value;
       value = this.value(f.value, c, d, f.percent);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: value.opacity
       };
     },
@@ -1255,6 +1255,11 @@ function import$(obj, src){
         type: 'boolean',
         'default': false,
         hidden: true
+      },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
       },
       repeat: {
         'default': 1
@@ -2029,7 +2034,7 @@ function import$(obj, src){
       var value;
       value = this.value(f.value, c, d, o);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: value.opacity
       };
     },
@@ -2069,7 +2074,7 @@ function import$(obj, src){
       var value;
       value = this.value(f.value, c, d);
       return {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")",
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c),
         opacity: value.opacity
       };
     },
@@ -2097,7 +2102,7 @@ function import$(obj, src){
       var value, ret;
       value = this.value(f.value, c, d);
       ret = {
-        transform: "matrix(" + anikit.util.m4to3(value.transform).join(',') + ")"
+        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
       };
       if (value.opacity != null) {
         ret.opacity = value.opacity;
@@ -2694,6 +2699,11 @@ function import$(obj, src){
         step: 1,
         hidden: true
       },
+      unit: {
+        'default': 'px',
+        type: 'choice',
+        values: ["px", "%", ""]
+      },
       repeat: {
         'default': 1
       }
@@ -2787,15 +2797,10 @@ function import$(obj, src){
   }
   move = {
     prop: function(f, c){
-      var value, ret, that;
+      var value;
       value = this.value(f.value, c);
-      ret = {
-        transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c)
-      };
-      if ((that = value.opacity) != null) {
-        ret.opacity = that;
-      }
-      return ret;
+      value.transform = anikit.util.decompose(anikit.util.m4to3(value.transform), c);
+      return value;
     },
     value: function(t, c){
       var ret, ref$;
@@ -2813,7 +2818,7 @@ function import$(obj, src){
     type: 'animation',
     preset: {
       "move-ltr": import$({
-        offset: 30,
+        offset: 100,
         dir: 1
       }, move),
       "move-rtl": import$({
@@ -2829,7 +2834,7 @@ function import$(obj, src){
         dir: 4
       }, move),
       "move-fade-ltr": import$({
-        offset: 30,
+        offset: 100,
         dir: 1,
         fade: true
       }, move),
