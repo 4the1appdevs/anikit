@@ -7,7 +7,7 @@
       blur: {}
     edit: 
       blur: name: "Blur Amount", default: 10, type: \number, unit: \px, units: <[px %]>, min: 0, max: 100, step: 1
-      unit: default: \px, type: \choice, values: ["px", "%", ""]
+      unit: default: \px, type: \choice, values: ["px", ""]
 
     css: (opt) ->
       """

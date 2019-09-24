@@ -53,7 +53,7 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
     origin = if !(cfg.origin?) => ""
     else "transform-origin: #{cfg.origin[0 to 1].map(-> (it * 100) + \%).join(' ')}"
-    selector = (if opt.alias => that else [name]).map(-> ".#prefix.#it").join(',')
+    selector = (if opt.alias => that.map(->"#{prefix}-#it") else [name]).map(-> ".#prefix.#it").join(',')
     return """
     #css
     #selector {
