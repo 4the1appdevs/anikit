@@ -64,7 +64,26 @@ html(lang="en")
             +anikit-select-options
 
       h3 ldAnikitPicker
-      p Anikit provides a complete UI kit for a better user experience when choosing animation. It's a floating dropdown menu with search box and animation preview. Toggle it by clicking this button:
+      p Anikit provides a complete UI kit for a better user experience when choosing animation. It's a floating dropdown menu with search box and animation preview.
+      .row
+        .col-md
+          .example.code-block.h-100.
+            //- PUG code
+            #some-id: +ldap
+        .col-md
+          .example.code-block.
+            /* JS Code */
+            var ldap = new ldAnikitPicker({
+              root: '#some-id .ldap'
+            });
+            ldap.get({host: <some-reference-node>})
+            .then(function(obj) {
+              /* obj.name is name
+              of the animation picked */
+            });
+
+
+      p Following is an example of how it would be like. Toggle it by clicking this button:
       .m-4.p-4
         .btn.btn-outline-primary(onclick="ldapAnimate(this)") Show Me
         .btn.btn-text.float-right
