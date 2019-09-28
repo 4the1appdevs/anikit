@@ -3,7 +3,7 @@ require! <[../src/kits/orbit]>
 
 name = process.argv.2
 if !name =>
-  console.log "usage: gifmin [filename]"
+  console.log "usage: lsc getkit.ls [kitname]"
   process.exit!
 
 kit = anikit.get name
