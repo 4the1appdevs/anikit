@@ -624,6 +624,9 @@ function import$(obj, src){
       });
     };
     this.input.addEventListener('input', handler);
+    this.ldcv.on('toggle.on', debounce(250, function(){
+      return this$.input.focus();
+    }));
     return this;
   };
   ldAnikitPicker.prototype = import$(Object.create(Object.prototype), {

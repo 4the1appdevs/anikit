@@ -17,6 +17,10 @@
     handler = ~>
       @item.map ~> it.style.display = if !(~it.textContent.indexOf(@input.value)) => \none else \block
     @input.addEventListener \input, handler
+    # when ldap is on, focus the input.
+    # it's believed that focus take effect only when the panel is visible, but there is an animation
+    # so we take a break before doing it. #TODO should find a better way to detect animation ends.
+    @ldcv.on \toggle.on, debounce 250, ~> @input.focus!
     @
   ldAnikitPicker.prototype = Object.create(Object.prototype) <<< do
     get: (opt = {}) ->
