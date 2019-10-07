@@ -2866,7 +2866,7 @@ function import$(obj, src){
     value: function(t, c){
       var ret, ref$;
       ret = {
-        transform: anikit.util[c.dir % 2 ? 'tx' : 'ty']((c.dir > 2 ? -1 : 1) * (2 * t - ((ref$ = Math.floor(2 * t) * 2) < 2 ? ref$ : 2)) * c.offset)
+        transform: anikit.util[c.dir % 2 ? 'tx' : 'ty']((c.dir > 2 ? -1 : 1) * (2 * t - ((ref$ = Math.floor(2 * t) * 2) < 2 ? ref$ : 2)) * c.offset / 2)
       };
       if (c.fade) {
         ret.opacity = anikit.util.round((ref$ = Math.abs(t - 0.5) * 10) < 1 ? ref$ : 1);

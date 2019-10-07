@@ -1740,19 +1740,19 @@
     transform: translate(0px,0px);
   }
   40% {
-    transform: translate(80px,0px);
+    transform: translate(40px,0px);
   }
   49.99999% {
-    transform: translate(99.99998px,0px);
+    transform: translate(49.99999px,0px);
   }
   50% {
-    transform: translate(-100px,0px);
+    transform: translate(-50px,0px);
   }
   50.00001% {
-    transform: translate(-99.99998px,0px);
+    transform: translate(-49.99999px,0px);
   }
   60% {
-    transform: translate(-80px,0px);
+    transform: translate(-40px,0px);
   }
   100% {
     transform: translate(0px,0px);
@@ -1767,19 +1767,19 @@
     transform: translate(0px,0px);
   }
   40% {
-    transform: translate(-80px,0px);
+    transform: translate(-40px,0px);
   }
   49.99999% {
-    transform: translate(-99.99998px,0px);
+    transform: translate(-49.99999px,0px);
   }
   50% {
-    transform: translate(100px,0px);
+    transform: translate(50px,0px);
   }
   50.00001% {
-    transform: translate(99.99998px,0px);
+    transform: translate(49.99999px,0px);
   }
   60% {
-    transform: translate(80px,0px);
+    transform: translate(40px,0px);
   }
   100% {
     transform: translate(0px,0px);
@@ -1794,19 +1794,19 @@
     transform: translate(0px,0px);
   }
   40% {
-    transform: translate(0px,80px);
+    transform: translate(0px,40px);
   }
   49.99999% {
-    transform: translate(0px,99.99998px);
+    transform: translate(0px,49.99999px);
   }
   50% {
-    transform: translate(0px,-100px);
+    transform: translate(0px,-50px);
   }
   50.00001% {
-    transform: translate(0px,-99.99998px);
+    transform: translate(0px,-49.99999px);
   }
   60% {
-    transform: translate(0px,-80px);
+    transform: translate(0px,-40px);
   }
   100% {
     transform: translate(0px,0px);
@@ -1821,19 +1821,19 @@
     transform: translate(0px,0px);
   }
   40% {
-    transform: translate(0px,-80px);
+    transform: translate(0px,-40px);
   }
   49.99999% {
-    transform: translate(0px,-99.99998px);
+    transform: translate(0px,-49.99999px);
   }
   50% {
-    transform: translate(0px,100px);
+    transform: translate(0px,50px);
   }
   50.00001% {
-    transform: translate(0px,99.99998px);
+    transform: translate(0px,49.99999px);
   }
   60% {
-    transform: translate(0px,80px);
+    transform: translate(0px,40px);
   }
   100% {
     transform: translate(0px,0px);
@@ -1849,23 +1849,23 @@
     opacity: 1;
   }
   40% {
-    transform: translate(80px,0px);
+    transform: translate(40px,0px);
     opacity: 1;
   }
   49.99999% {
-    transform: translate(99.99998px,0px);
+    transform: translate(49.99999px,0px);
     opacity: 0;
   }
   50% {
-    transform: translate(-100px,0px);
+    transform: translate(-50px,0px);
     opacity: 0;
   }
   50.00001% {
-    transform: translate(-99.99998px,0px);
+    transform: translate(-49.99999px,0px);
     opacity: 0;
   }
   60% {
-    transform: translate(-80px,0px);
+    transform: translate(-40px,0px);
     opacity: 1;
   }
   100% {
@@ -1883,23 +1883,23 @@
     opacity: 1;
   }
   40% {
-    transform: translate(-80px,0px);
+    transform: translate(-40px,0px);
     opacity: 1;
   }
   49.99999% {
-    transform: translate(-99.99998px,0px);
+    transform: translate(-49.99999px,0px);
     opacity: 0;
   }
   50% {
-    transform: translate(100px,0px);
+    transform: translate(50px,0px);
     opacity: 0;
   }
   50.00001% {
-    transform: translate(99.99998px,0px);
+    transform: translate(49.99999px,0px);
     opacity: 0;
   }
   60% {
-    transform: translate(80px,0px);
+    transform: translate(40px,0px);
     opacity: 1;
   }
   100% {
@@ -1917,23 +1917,23 @@
     opacity: 1;
   }
   40% {
-    transform: translate(0px,80px);
+    transform: translate(0px,40px);
     opacity: 1;
   }
   49.99999% {
-    transform: translate(0px,99.99998px);
+    transform: translate(0px,49.99999px);
     opacity: 0;
   }
   50% {
-    transform: translate(0px,-100px);
+    transform: translate(0px,-50px);
     opacity: 0;
   }
   50.00001% {
-    transform: translate(0px,-99.99998px);
+    transform: translate(0px,-49.99999px);
     opacity: 0;
   }
   60% {
-    transform: translate(0px,-80px);
+    transform: translate(0px,-40px);
     opacity: 1;
   }
   100% {
@@ -1951,23 +1951,23 @@
     opacity: 1;
   }
   40% {
-    transform: translate(0px,-80px);
+    transform: translate(0px,-40px);
     opacity: 1;
   }
   49.99999% {
-    transform: translate(0px,-99.99998px);
+    transform: translate(0px,-49.99999px);
     opacity: 0;
   }
   50% {
-    transform: translate(0px,100px);
+    transform: translate(0px,50px);
     opacity: 0;
   }
   50.00001% {
-    transform: translate(0px,99.99998px);
+    transform: translate(0px,49.99999px);
     opacity: 0;
   }
   60% {
-    transform: translate(0px,80px);
+    transform: translate(0px,40px);
     opacity: 1;
   }
   100% {

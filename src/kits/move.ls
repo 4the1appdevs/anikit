@@ -8,7 +8,7 @@
     value: (t, c) ->
       ret = do
         transform: anikit.util[if (c.dir % 2) => \tx else \ty](
-          (if c.dir > 2 => -1 else 1) * ((2 * t) - (Math.floor(2 * t) * 2 <? 2)) * c.offset
+          (if c.dir > 2 => -1 else 1) * ((2 * t) - (Math.floor(2 * t) * 2 <? 2)) * c.offset / 2
         )
       if c.fade => ret.opacity = anikit.util.round(Math.abs(t - 0.5) * 10 <? 1)
       return ret
