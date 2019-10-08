@@ -92,7 +92,7 @@
         }
       }
       return {
-        transform: [s, -Math.tan(k * Math.PI / 180), 0, 0, 0, 1, 0, -p, 0, 0, 1, 0, 0, 0, 0, 1],
+        transform: [s, -Math.tan(k * Math.PI / 180), 0, 0, 0, s, 0, -p, 0, 0, 1, 0, 0, 0, 0, 1],
         opacity: o
       };
     }
