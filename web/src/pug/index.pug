@@ -188,6 +188,19 @@ html(lang="en")
           .ldrs
         .col-md: .vertical-center: .w-100.bg-light
           #three-root(style="width:320px;height:240px")
+
+      h3 JS vs CSS Rendering
+      p You can compare JS versus CSS rendering result here.
+      .row
+        .col-md.d-flex.justify-content-center.align-items-center
+          .btn.btn-outline-primary(ld="compare-btn") Choose ...
+        .col-md.d-flex.justify-content-center.align-items-center
+          .orange.ld(ld="compare js")
+        .col-md.d-flex.justify-content-center.align-items-center
+          .orange.ld(ld="compare css")
+        .col-md: .vertical-center: .w-100.text-center
+          div(ld="compare webgl",style="height:240px")
+
       h3 Reference
       p Here we list all APIs available in the anikit object:
       ul
