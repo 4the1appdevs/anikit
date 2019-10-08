@@ -82,8 +82,10 @@ anikit.prototype = Object.create(Object.prototype) <<< do
   animate-js: (node, t, opt={}) ->
     opt = {} <<< @config <<< opt
     if node.ld-style => for k,v of that => node.style[k] = ""
+    origin = if @config.origin => that else [0.5, 0.5, 0.5]
     t = @timing t, opt
     node.ld-style = @js t, opt
+    node.ld-style <<< [origin.0, origin.1].map(-> "#{it * 100}%").join(' ')
     node.style <<< node.ld-style
 
   animate-three: (node, t, opt={}) ->
@@ -126,8 +128,8 @@ anikit.prototype = Object.create(Object.prototype) <<< do
 
     [dur,rpt, dir] = [opt.dur or 1, if opt.repeat => that else \infinite, opt.animation-dir or \normal]
     origin = if @config.origin => that else [0.5, 0.5, 0.5]
+    node.style.transformOrigin = [origin.0, origin.1].map(-> "#{it * 100}%").join(' ')
     # this works perfectly only when transform is in animation. see README for more detail
-    #node.style.transformOrigin = [origin.0 or 0.5, origin.1 or 0.5].map(-> "#{it * 100}%").join(' ')
     #node.style.transformBox = "fill-box"
     node.style.animation = "#{@config.name}-#{@id} #{dur}s #{rpt} linear forwards #{dir}"
     node.style.animationDelay = "#{opt.delay or 0}s"

@@ -243,7 +243,7 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     return t;
   },
   animateJs: function(node, t, opt){
-    var that, k, v;
+    var that, k, v, origin;
     opt == null && (opt = {});
     opt = import$(import$({}, this.config), opt);
     if (that = node.ldStyle) {
@@ -252,8 +252,14 @@ anikit.prototype = import$(Object.create(Object.prototype), {
         node.style[k] = "";
       }
     }
+    origin = (that = this.config.origin)
+      ? that
+      : [0.5, 0.5, 0.5];
     t = this.timing(t, opt);
     node.ldStyle = this.js(t, opt);
+    import$(node.ldStyle, [origin[0], origin[1]].map(function(it){
+      return it * 100 + "%";
+    }).join(' '));
     return import$(node.style, node.ldStyle);
   },
   animateThree: function(node, t, opt){
@@ -310,6 +316,9 @@ anikit.prototype = import$(Object.create(Object.prototype), {
     origin = (that = this.config.origin)
       ? that
       : [0.5, 0.5, 0.5];
+    node.style.transformOrigin = [origin[0], origin[1]].map(function(it){
+      return it * 100 + "%";
+    }).join(' ');
     node.style.animation = this.config.name + "-" + this.id + " " + dur + "s " + rpt + " linear forwards " + dir;
     return node.style.animationDelay = (opt.delay || 0) + "s";
   },

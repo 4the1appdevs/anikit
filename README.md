@@ -163,8 +163,6 @@ Config could be overwritten by options when calling animate function, e.g.,
      - pulse ( not work in webgl )
      - rush-xxx, rush-xxx-in, throw-xxx-in ( not work in webgl )
    - incorrect
-     - hit ( y scale not work )
-     - jingle ( transform-origin incorrect )
      - orbit ( js wrong rotate diretion )
      - skew, skew-alt ( webgl in wrong direction )
      - slide-xxx, fall-xxx-in, vortex-in ( opacity not work in js / webgl )
