@@ -163,7 +163,6 @@ Config could be overwritten by options when calling animate function, e.g.,
      - rush-xxx, rush-xxx-in ( not work in webgl )
    - incorrect
      - slide-xxx, fall-xxx-in ( opacity not work in js / webgl )
-     - vortex-in / vortex-out ( opacity not work, direction not the same )
      - wander-h / wander-v ( speed not the same )
 
 

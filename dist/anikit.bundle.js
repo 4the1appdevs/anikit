@@ -4884,7 +4884,7 @@ function import$(obj, src){
     var fade, r, s, o, ret;
     fade = c.fade;
     if (c.reverse) {
-      r = t * c.rotate * Math.PI * 2;
+      r = -t * c.rotate * Math.PI * 2;
       s = (c.zoom - 1) * t + 1;
       o = 1 - t;
       fade = true;
