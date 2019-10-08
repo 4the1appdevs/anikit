@@ -25,11 +25,11 @@
       }
       """
     js: (t, opt) ->
-      v = @affine t, opt
+      v = @affine t, opt, true
       m = anikit.util.m4to3 v.transform
       return transform: "matrix(#{m.join(',')})"
 
-    affine: (t, opt) ->
+    affine: (t, opt, inverse) ->
       ds = 1 - opt.scale
       s = opt.steep
       p1 = [s, 0, 1, 1 - s]
@@ -41,7 +41,8 @@
       s = if phase % 2 => (1 - ds) * t + ds else ( ds - 1 ) * t + 1
       a = (if phase % 2=> opt.deg * t else opt.deg * (1 - t)) * Math.PI / 180
       if phase >= 1 && phase < 3 => a = -a
-      sx = sy = Math.tan(a)
+      sx = sy = -Math.tan(a)
+      if inverse => sx = sy = -sx
       if opt.dir == 0 => sy = 0 else sx = 0
       return transform: [
         s, sy, 0, 0, 

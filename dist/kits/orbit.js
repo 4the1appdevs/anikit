@@ -57,20 +57,19 @@
     },
     js: function(t, opt){
       var m;
-      m = this.affine(t, import$({
-        js: true
-      }, opt)).transform;
+      m = this.affine(t, opt, true).transform;
       m = [m[0], -m[1], m[4], -m[5], m[3], -m[7]];
       return {
         transform: "matrix(" + m.join(',') + ")"
       };
     },
-    affine: function(t, opt){
+    affine: function(t, opt, inverse){
       var a, x, y;
+      inverse == null && (inverse = false);
       a = Math.PI * 2 * t;
       x = Math.sin(a) * opt.radius;
       y = -Math.cos(a) * opt.radius;
-      a = opt.js ? -a - Math.PI : a;
+      a = inverse ? -a - Math.PI : a;
       return {
         transform: [Math.cos(a), Math.sin(a), 0, x, -Math.sin(a), Math.cos(a), 0, -y, 0, 0, 1, 0, 0, 0, 0, 1]
       };
@@ -81,8 +80,3 @@
   }
   return ret;
 })();
-function import$(obj, src){
-  var own = {}.hasOwnProperty;
-  for (var key in src) if (own.call(src, key)) obj[key] = src[key];
-  return obj;
-}

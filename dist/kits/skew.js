@@ -54,13 +54,13 @@
     },
     js: function(t, opt){
       var v, m;
-      v = this.affine(t, opt);
+      v = this.affine(t, opt, true);
       m = anikit.util.m4to3(v.transform);
       return {
         transform: "matrix(" + m.join(',') + ")"
       };
     },
-    affine: function(t, opt){
+    affine: function(t, opt, inverse){
       var ds, s, p1, p2, phase, dt, p, a, sx, sy;
       ds = 1 - opt.scale;
       s = opt.steep;
@@ -79,7 +79,10 @@
       if (phase >= 1 && phase < 3) {
         a = -a;
       }
-      sx = sy = Math.tan(a);
+      sx = sy = -Math.tan(a);
+      if (inverse) {
+        sx = sy = -sx;
+      }
       if (opt.dir === 0) {
         sy = 0;
       } else {
