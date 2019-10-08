@@ -23,9 +23,9 @@
         r = c.rotate * Math.PI * 2;
         s = 1;
         o = 1 - (t - 0.6) / (1 - 0.6);
-        if (t < 0.6) {
-          fade = true;
-        }
+      }
+      if (t < 0.6) {
+        fade = true;
       }
     }
     ret = {
@@ -53,7 +53,6 @@
       },
       "vortex-out": {
         zoom: 0.3,
-        fade: false,
         repeat: 1,
         reverse: true
       },
@@ -64,7 +63,6 @@
       },
       "vortex-alt-out": {
         zoom: 3,
-        fade: false,
         repeat: 1,
         reverse: true
       }

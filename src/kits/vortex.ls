@@ -16,7 +16,7 @@
         r = c.rotate * Math.PI * 2
         s = 1
         o = 1 - (t - 0.6)  / (1 - 0.6)
-        if t < 0.6 => fade = true
+      if t < 0.6 => fade = true
     ret = { transform: [
       s * Math.cos(r), s * Math.sin(r), 0, 0, -s * Math.sin(r), s * Math.cos(r), 0, 0, 0, 0, s, 0, 0, 0, 0, 1
     ]}
@@ -30,9 +30,9 @@
       "vortex": zoom: 0.3
       "vortex-alt": zoom: 3
       "vortex-in": zoom: 0.3, fade: false, repeat: 1
-      "vortex-out": zoom: 0.3, fade: false, repeat: 1, reverse: true
+      "vortex-out": zoom: 0.3, repeat: 1, reverse: true
       "vortex-alt-in": zoom: 3, fade: false, repeat: 1
-      "vortex-alt-out": zoom: 3, fade: false, repeat: 1, reverse: true
+      "vortex-alt-out": zoom: 3, repeat: 1, reverse: true
 
     edit:
       dur: default: 1

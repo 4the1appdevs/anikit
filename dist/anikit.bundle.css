@@ -4313,7 +4313,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
   100% { opacity: 1; transform: rotate(0deg) scale(1); }
 }
 .ld.ld-vortex-in {
-  animation: ld-vortex-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.3,0,0,0.3,0,0); 
+  animation: ld-vortex-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.3,0,0,0.3,0,0);opacity: 0; 
 }
 @keyframes ld-vortex-out {
   0% {
@@ -4333,7 +4333,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
   100% { opacity: 1; transform: rotate(0deg) scale(1); }
 }
 .ld.ld-vortex-alt-in {
-  animation: ld-vortex-alt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(3,0,0,3,0,0); 
+  animation: ld-vortex-alt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(3,0,0,3,0,0);opacity: 0; 
 }
 @keyframes ld-vortex-alt-out {
   0% {

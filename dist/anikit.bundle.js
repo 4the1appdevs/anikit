@@ -4877,9 +4877,9 @@ function import$(obj, src){
         r = c.rotate * Math.PI * 2;
         s = 1;
         o = 1 - (t - 0.6) / (1 - 0.6);
-        if (t < 0.6) {
-          fade = true;
-        }
+      }
+      if (t < 0.6) {
+        fade = true;
       }
     }
     ret = {
@@ -4907,7 +4907,6 @@ function import$(obj, src){
       },
       "vortex-out": {
         zoom: 0.3,
-        fade: false,
         repeat: 1,
         reverse: true
       },
@@ -4918,7 +4917,6 @@ function import$(obj, src){
       },
       "vortex-alt-out": {
         zoom: 3,
-        fade: false,
         repeat: 1,
         reverse: true
       }
