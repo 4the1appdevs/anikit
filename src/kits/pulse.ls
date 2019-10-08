@@ -13,7 +13,9 @@
       t = t - Math.floor(t)
       return Math.pow(t, opt.decay) * opt.scale + ( 1 - opt.scale / 2)
 
-    local: prop: (f, c) -> return transform: "scale(#{f.value})"
+    local:
+      prop: (f, c) -> return transform: "scale(#{f.value})"
+      value: (t, c) -> return transform: [t,0,0,0,0,t,0,0,0,0,t,0,0,0,0,1]
 
     css: (opt) ->
       ret = easing-fit.fit-to-keyframes(
@@ -26,6 +28,7 @@
       )
       ret
     js: (t, opt) -> @local.prop {value: @track t, opt}, opt
+    affine: (t, opt) -> @local.value @track(t,opt), opt
 
   if module? => module.exports = ret
   return ret

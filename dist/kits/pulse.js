@@ -40,6 +40,11 @@
         return {
           transform: "scale(" + f.value + ")"
         };
+      },
+      value: function(t, c){
+        return {
+          transform: [t, 0, 0, 0, 0, t, 0, 0, 0, 0, t, 0, 0, 0, 0, 1]
+        };
       }
     },
     css: function(opt){
@@ -60,6 +65,9 @@
       return this.local.prop({
         value: this.track(t, opt)
       }, opt);
+    },
+    affine: function(t, opt){
+      return this.local.value(this.track(t, opt), opt);
     }
   };
   if (typeof module != 'undefined' && module !== null) {
