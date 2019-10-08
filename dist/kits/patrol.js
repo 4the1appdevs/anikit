@@ -101,6 +101,11 @@
           step: 1,
           name: "Move Amount"
         },
+        local: {
+          errorThreshold: 0.0001,
+          sampleCount: 20,
+          segSampleCount: 1000
+        },
         unit: 'px',
         prop: function(f, c){
           return {
@@ -119,6 +124,11 @@
           max: 500,
           step: 1,
           name: "Move Amount"
+        },
+        local: {
+          errorThreshold: 0.0001,
+          sampleCount: 20,
+          segSampleCount: 1000
         },
         unit: 'px',
         prop: function(f, c){

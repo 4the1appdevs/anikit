@@ -161,8 +161,6 @@ Config could be overwritten by options when calling animate function, e.g.,
      - blur-in / blur-out ( in webgl )
      - float
      - rush-xxx, rush-xxx-in ( not work in webgl )
-   - incorrect
-     - wander-h / wander-v ( speed not the same )
 
 
 ## LICENSE
