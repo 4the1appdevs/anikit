@@ -25,7 +25,7 @@
       """ @keyframes #{opt.name} { #{list.join('\n')} } """
 
     js: (t, opt) ->
-      m = @affine(t, opt).transform
+      m = @affine(t, {js: true} <<< opt).transform
       m = [m.0, -m.1, m.4, -m.5, m.3, -m.7]
       return transform: "matrix(#{m.join(',')})"
 
@@ -33,13 +33,12 @@
       a = Math.PI * 2 * t
       x = Math.sin(a) * opt.radius
       y = -Math.cos(a) * opt.radius
+      a = if opt.js => -a - Math.PI else a
 
       return transform: [
         Math.cos(a), Math.sin(a), 0, x, 
         -Math.sin(a), Math.cos(a), 0, -y, 0, 0, 1, 0, 0, 0, 0, 1
       ]
-
-
 
   if module? => module.exports = ret
   return ret
