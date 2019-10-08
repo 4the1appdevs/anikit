@@ -1,5 +1,22 @@
 (->
   if require? => require! <[easing-fit cubic ../anikit]>
+
+
+  value = (f, c)->
+    [x,y] = [0, 0]
+    if c.dir == 1 => y = f.value
+    if c.dir == 2 => y = -f.value
+    if c.dir == 3 => x = f.value
+    if c.dir == 4 => x = -f.value
+    return do
+      transform: [
+        1,0,0,(x * c.height),
+        0,1,0,(y * c.height),
+        0,0,1,0
+        0,0,0,1
+      ]
+      opacity: (f.percent * 10) <? 1
+
   # while the use of [h,w,a] could be replaced by [1,1,1] in the following code,
   # we keep here for readability of the process of calculating the parabola.
   [h,w] = [1,1]
@@ -26,7 +43,7 @@
       dx = 0.2
       rin = 2
       total = 2 * w * (Math.pow(rr, opt.count) - 1) / (rr - 1)
-      if t < dx => return rin * 2 * h * total * dx / w
+      if t < dx => return (rin * 2 * h * total * dx / w) * Math.pow((dx - t), 0.5)
       x = (t - dx) * total / (1 - dx) 
       for i from 1 to opt.count =>
         cw = 2 * w * (Math.pow(rr, i) - 1) / (rr - 1)
@@ -37,14 +54,9 @@
 
     local: 
       prop: (f, c) ->
-        [x,y] = [0, 0]
-        if c.dir == 1 => y = f.value 
-        if c.dir == 2 => y = -f.value 
-        if c.dir == 3 => x = f.value 
-        if c.dir == 4 => x = -f.value 
-        return do
-          transform: "translate(#{x * c.height}#{c.unit},#{y * c.height}#{c.unit})"
-          opacity: (f.percent * 10) <? 1
+        v = value f, c
+        m = anikit.util.m4to3 v.transform
+        return v <<< transform: "translate(#{m.4}#{c.unit},#{m.5}#{c.unit})"
 
     css: (opt) ->
       ret = easing-fit.fit-to-keyframes(
@@ -57,6 +69,7 @@
       )
       ret
     js: (t, opt) -> @local.prop {value: @track(t, opt), percent: t}, opt
+    affine: (t, opt) -> value {value: @track(t, opt), percent: t}, opt
 
   if module? => module.exports = ret
   return ret
