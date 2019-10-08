@@ -4,8 +4,8 @@
 
   value = (f, c)->
     [x,y] = [0, 0]
-    if c.dir == 1 => y = f.value
-    if c.dir == 2 => y = -f.value
+    if c.dir == 1 => y = -f.value
+    if c.dir == 2 => y = f.value
     if c.dir == 3 => x = f.value
     if c.dir == 4 => x = -f.value
     return do

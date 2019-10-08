@@ -10,10 +10,10 @@
     var ref$, x, y;
     ref$ = [0, 0], x = ref$[0], y = ref$[1];
     if (c.dir === 1) {
-      y = f.value;
+      y = -f.value;
     }
     if (c.dir === 2) {
-      y = -f.value;
+      y = f.value;
     }
     if (c.dir === 3) {
       x = f.value;
