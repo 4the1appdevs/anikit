@@ -162,7 +162,6 @@ Config could be overwritten by options when calling animate function, e.g.,
      - float
      - rush-xxx, rush-xxx-in ( not work in webgl )
    - incorrect
-     - slide-xxx, fall-xxx-in ( opacity not work in js / webgl )
      - wander-h / wander-v ( speed not the same )
 
 

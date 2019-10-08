@@ -1319,7 +1319,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
     transform: translate(199px,0px);
-    opacity: 0;
+    opacity: 0.05;
   }
   2% {
     animation-timing-function: cubic-bezier(0.2668,0.6542,0.5372,0.8035);
@@ -1332,7 +1332,7 @@
   }
 }
 .ld.ld-slide-rtl-in {
-  animation: ld-slide-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,199,0);opacity: 0; 
+  animation: ld-slide-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,199,0);opacity: 0.05; 
 }
 @keyframes ld-slide-rtl-out
 {
@@ -1344,11 +1344,11 @@
   97% {
     animation-timing-function: cubic-bezier(0.3286,0.4108,0.6714,0.5892);
     transform: translate(198.4px,0px);
-    opacity: 1;
+    opacity: 0.08;
   }
   100% {
     transform: translate(199px,0px);
-    opacity: 0;
+    opacity: 0.05;
   }
 }
 .ld.ld-slide-rtl-out {
@@ -1359,7 +1359,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
     transform: translate(-199px,0px);
-    opacity: 0;
+    opacity: 0.05;
   }
   2% {
     animation-timing-function: cubic-bezier(0.2668,0.6542,0.5372,0.8035);
@@ -1372,7 +1372,7 @@
   }
 }
 .ld.ld-slide-ltr-in {
-  animation: ld-slide-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-199,0);opacity: 0; 
+  animation: ld-slide-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-199,0);opacity: 0.05; 
 }
 @keyframes ld-slide-ltr-out
 {
@@ -1384,11 +1384,11 @@
   97% {
     animation-timing-function: cubic-bezier(0.3286,0.4108,0.6714,0.5892);
     transform: translate(-198.4px,0px);
-    opacity: 1;
+    opacity: 0.08;
   }
   100% {
     transform: translate(-199px,0px);
-    opacity: 0;
+    opacity: 0.05;
   }
 }
 .ld.ld-slide-ltr-out {
@@ -1399,7 +1399,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
     transform: translate(0px,-199px);
-    opacity: 0;
+    opacity: 0.05;
   }
   2% {
     animation-timing-function: cubic-bezier(0.2668,0.6542,0.5372,0.8035);
@@ -1412,7 +1412,7 @@
   }
 }
 .ld.ld-slide-ttb-in {
-  animation: ld-slide-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-199);opacity: 0; 
+  animation: ld-slide-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-199);opacity: 0.05; 
 }
 @keyframes ld-slide-ttb-out
 {
@@ -1424,11 +1424,11 @@
   97% {
     animation-timing-function: cubic-bezier(0.3286,0.4108,0.6714,0.5892);
     transform: translate(0px,-198.4px);
-    opacity: 1;
+    opacity: 0.08;
   }
   100% {
     transform: translate(0px,-199px);
-    opacity: 0;
+    opacity: 0.05;
   }
 }
 .ld.ld-slide-ttb-out {
@@ -1439,7 +1439,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
     transform: translate(0px,199px);
-    opacity: 0;
+    opacity: 0.05;
   }
   2% {
     animation-timing-function: cubic-bezier(0.2668,0.6542,0.5372,0.8035);
@@ -1452,7 +1452,7 @@
   }
 }
 .ld.ld-slide-btt-in {
-  animation: ld-slide-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,199);opacity: 0; 
+  animation: ld-slide-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,199);opacity: 0.05; 
 }
 @keyframes ld-slide-btt-out
 {
@@ -1464,11 +1464,11 @@
   97% {
     animation-timing-function: cubic-bezier(0.3286,0.4108,0.6714,0.5892);
     transform: translate(0px,198.4px);
-    opacity: 1;
+    opacity: 0.08;
   }
   100% {
     transform: translate(0px,199px);
-    opacity: 0;
+    opacity: 0.05;
   }
 }
 .ld.ld-slide-btt-out {
@@ -1479,7 +1479,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
     transform: translate(14.925px,0px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
   100% {
     transform: translate(0px,0px);
@@ -1487,7 +1487,7 @@
   }
 }
 .ld.ld-float-rtl-in {
-  animation: ld-float-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,14.925,0);opacity: 0.005; 
+  animation: ld-float-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,14.925,0);opacity: 0.05; 
 }
 @keyframes ld-float-rtl-out
 {
@@ -1498,7 +1498,7 @@
   }
   100% {
     transform: translate(14.925px,0px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
 }
 .ld.ld-float-rtl-out {
@@ -1509,7 +1509,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
     transform: translate(-14.925px,0px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
   100% {
     transform: translate(0px,0px);
@@ -1517,7 +1517,7 @@
   }
 }
 .ld.ld-float-ltr-in {
-  animation: ld-float-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-14.925,0);opacity: 0.005; 
+  animation: ld-float-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-14.925,0);opacity: 0.05; 
 }
 @keyframes ld-float-ltr-out
 {
@@ -1528,7 +1528,7 @@
   }
   100% {
     transform: translate(-14.925px,0px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
 }
 .ld.ld-float-ltr-out {
@@ -1539,7 +1539,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
     transform: translate(0px,-14.925px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
   100% {
     transform: translate(0px,0px);
@@ -1547,7 +1547,7 @@
   }
 }
 .ld.ld-float-ttb-in {
-  animation: ld-float-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-14.925);opacity: 0.005; 
+  animation: ld-float-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-14.925);opacity: 0.05; 
 }
 @keyframes ld-float-ttb-out
 {
@@ -1558,7 +1558,7 @@
   }
   100% {
     transform: translate(0px,-14.925px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
 }
 .ld.ld-float-ttb-out {
@@ -1569,7 +1569,7 @@
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
     transform: translate(0px,14.925px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
   100% {
     transform: translate(0px,0px);
@@ -1577,7 +1577,7 @@
   }
 }
 .ld.ld-float-btt-in {
-  animation: ld-float-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,14.925);opacity: 0.005; 
+  animation: ld-float-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,14.925);opacity: 0.05; 
 }
 @keyframes ld-float-btt-out
 {
@@ -1588,7 +1588,7 @@
   }
   100% {
     transform: translate(0px,14.925px);
-    opacity: 0.005;
+    opacity: 0.05;
   }
 }
 .ld.ld-float-btt-out {

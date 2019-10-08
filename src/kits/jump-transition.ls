@@ -11,7 +11,7 @@
     prop: (f, c, d, o) ->
       value = @value f.value, c, d, o
       return transform: anikit.util.decompose(anikit.util.m4to3(value.transform), c), opacity: value.opacity
-    value: (t, c, d, o) ->
+    value: (t, c, d, o, p) ->
       if c.dir > 0 => t = 1 - t
       if t <= 0.005 => t = 0.005
       if d < 3 => 
@@ -20,7 +20,7 @@
       else 
         sgn = if d == 3 => 1 else -1
         ret = transform: [1, 0, 0, 0, 0, 1, 0, sgn * (1 - t) * c.offset, 0, 0, 1, 0, 0, 0, 0, 1]
-      if o? => ret.opacity = t
+      if o? => ret.opacity = ((if p? => p else t) * 10 <? 1)
       else ret.opacity = if t <= 0.005 => 0 else 1
       ret
 
@@ -164,50 +164,50 @@
       "slide-rtl-in": {
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
-        prop: (f, c) -> slide.prop f, c, 1
-        value: (t, c) -> slide.value t, c, 1
+        prop: (f, c) -> slide.prop f, c, 1, 1
+        value: (t, c) -> slide.value t, c, 1, 1
       } <<< no-bounce
       "slide-rtl-out": {
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
-        prop: (f, c) -> slide.prop f, c, 1
-        value: (t, c) -> slide.value t, c, 1
+        prop: (f, c) -> slide.prop f, c, 1, 1
+        value: (t, c) -> slide.value t, c, 1, 1
       } <<< no-bounce
       "slide-ltr-in": {
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
-        prop: (f, c) -> slide.prop f, c, 2
-        value: (t, c) -> slide.value t, c, 2
+        prop: (f, c) -> slide.prop f, c, 2, 1
+        value: (t, c) -> slide.value t, c, 2, 1
       } <<< no-bounce
       "slide-ltr-out": {
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
-        prop: (f, c) -> slide.prop f, c, 2
-        value: (t, c) -> slide.value t, c, 2
+        prop: (f, c) -> slide.prop f, c, 2, 1
+        value: (t, c) -> slide.value t, c, 2, 1
       } <<< no-bounce
       "slide-ttb-in": {
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
-        prop: (f, c) -> slide.prop f, c, 3
-        value: (t, c) -> slide.value t, c, 3
+        prop: (f, c) -> slide.prop f, c, 3, 1
+        value: (t, c) -> slide.value t, c, 3, 1
       } <<< no-bounce
       "slide-ttb-out": {
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
-        prop: (f, c) -> slide.prop f, c, 3
-        value: (t, c) -> slide.value t, c, 3
+        prop: (f, c) -> slide.prop f, c, 3, 1
+        value: (t, c) -> slide.value t, c, 3, 1
       } <<< no-bounce
       "slide-btt-in": {
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
-        prop: (f, c) -> slide.prop f, c, 4
-        value: (t, c) -> slide.value t, c, 4
+        prop: (f, c) -> slide.prop f, c, 4, 1
+        value: (t, c) -> slide.value t, c, 4, 1
       } <<< no-bounce
       "slide-btt-out": {
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
-        prop: (f, c) -> slide.prop f, c, 4
-        value: (t, c) -> slide.value t, c, 4
+        prop: (f, c) -> slide.prop f, c, 4, 1
+        value: (t, c) -> slide.value t, c, 4, 1
       } <<< no-bounce
 
       "float-rtl-in": {
@@ -254,19 +254,19 @@
       "fall-rtl-in":
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 1
-        value: (t, c) -> slide.value t, c, 1
+        value: (t, c, p) -> slide.value t, c, 1, 1, p
       "fall-ltr-in":
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 2
-        value: (t, c) -> slide.value t, c, 2
+        value: (t, c, p) -> slide.value t, c, 2, 1, p
       "fall-ttb-in":
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 3
-        value: (t, c) -> slide.value t, c, 3
+        value: (t, c, p) -> slide.value t, c, 3, 1, p
       "fall-btt-in":
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 4
-        value: (t, c) -> slide.value t, c, 4
+        value: (t, c, p) -> slide.value t, c, 4, 1, p
 
 
     edit: 
@@ -316,8 +316,8 @@
       if value.opacity? => ret.opacity = value.opacity
       return ret
     affine: (t, opt) -> 
-      t = @timing(t, opt)
-      return if opt.value => opt.value(t,opt) else @local.value(t,opt)
+      t2 = @timing(t, opt)
+      return if opt.value => opt.value(t2,opt,t) else @local.value(t2,opt,t)
 
   if module? => module.exports = ret
   return ret

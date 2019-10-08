@@ -2108,8 +2108,8 @@ function import$(obj, src){
         opacity: value.opacity
       };
     },
-    value: function(t, c, d, o){
-      var sgn, ret;
+    value: function(t, c, d, o, p){
+      var sgn, ret, ref$;
       if (c.dir > 0) {
         t = 1 - t;
       }
@@ -2132,7 +2132,7 @@ function import$(obj, src){
         };
       }
       if (o != null) {
-        ret.opacity = t;
+        ret.opacity = (ref$ = (p != null ? p : t) * 10) < 1 ? ref$ : 1;
       } else {
         ret.opacity = t <= 0.005 ? 0 : 1;
       }
@@ -2457,10 +2457,10 @@ function import$(obj, src){
           segPtrs: [0.02]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 1);
+          return slide.prop(f, c, 1, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 1);
+          return slide.value(t, c, 1, 1);
         }
       }, noBounce),
       "slide-rtl-out": import$({
@@ -2473,10 +2473,10 @@ function import$(obj, src){
           segPtrs: [0.97]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 1);
+          return slide.prop(f, c, 1, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 1);
+          return slide.value(t, c, 1, 1);
         }
       }, noBounce),
       "slide-ltr-in": import$({
@@ -2489,10 +2489,10 @@ function import$(obj, src){
           segPtrs: [0.02]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 2);
+          return slide.prop(f, c, 2, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 2);
+          return slide.value(t, c, 2, 1);
         }
       }, noBounce),
       "slide-ltr-out": import$({
@@ -2505,10 +2505,10 @@ function import$(obj, src){
           segPtrs: [0.97]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 2);
+          return slide.prop(f, c, 2, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 2);
+          return slide.value(t, c, 2, 1);
         }
       }, noBounce),
       "slide-ttb-in": import$({
@@ -2521,10 +2521,10 @@ function import$(obj, src){
           segPtrs: [0.02]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 3);
+          return slide.prop(f, c, 3, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 3);
+          return slide.value(t, c, 3, 1);
         }
       }, noBounce),
       "slide-ttb-out": import$({
@@ -2537,10 +2537,10 @@ function import$(obj, src){
           segPtrs: [0.97]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 3);
+          return slide.prop(f, c, 3, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 3);
+          return slide.value(t, c, 3, 1);
         }
       }, noBounce),
       "slide-btt-in": import$({
@@ -2553,10 +2553,10 @@ function import$(obj, src){
           segPtrs: [0.02]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 4);
+          return slide.prop(f, c, 4, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 4);
+          return slide.value(t, c, 4, 1);
         }
       }, noBounce),
       "slide-btt-out": import$({
@@ -2569,10 +2569,10 @@ function import$(obj, src){
           segPtrs: [0.97]
         },
         prop: function(f, c){
-          return slide.prop(f, c, 4);
+          return slide.prop(f, c, 4, 1);
         },
         value: function(t, c){
-          return slide.value(t, c, 4);
+          return slide.value(t, c, 4, 1);
         }
       }, noBounce),
       "float-rtl-in": import$({
@@ -2685,8 +2685,8 @@ function import$(obj, src){
         prop: function(f, c){
           return slide.prop(f, c, 1);
         },
-        value: function(t, c){
-          return slide.value(t, c, 1);
+        value: function(t, c, p){
+          return slide.value(t, c, 1, 1, p);
         }
       },
       "fall-ltr-in": {
@@ -2695,8 +2695,8 @@ function import$(obj, src){
         prop: function(f, c){
           return slide.prop(f, c, 2);
         },
-        value: function(t, c){
-          return slide.value(t, c, 2);
+        value: function(t, c, p){
+          return slide.value(t, c, 2, 1, p);
         }
       },
       "fall-ttb-in": {
@@ -2705,8 +2705,8 @@ function import$(obj, src){
         prop: function(f, c){
           return slide.prop(f, c, 3);
         },
-        value: function(t, c){
-          return slide.value(t, c, 3);
+        value: function(t, c, p){
+          return slide.value(t, c, 3, 1, p);
         }
       },
       "fall-btt-in": {
@@ -2715,8 +2715,8 @@ function import$(obj, src){
         prop: function(f, c){
           return slide.prop(f, c, 4);
         },
-        value: function(t, c){
-          return slide.value(t, c, 4);
+        value: function(t, c, p){
+          return slide.value(t, c, 4, 1, p);
         }
       }
     },
@@ -2840,10 +2840,11 @@ function import$(obj, src){
       return ret;
     },
     affine: function(t, opt){
-      t = this.timing(t, opt);
+      var t2;
+      t2 = this.timing(t, opt);
       return opt.value
-        ? opt.value(t, opt)
-        : this.local.value(t, opt);
+        ? opt.value(t2, opt, t)
+        : this.local.value(t2, opt, t);
     }
   };
   if (typeof module != 'undefined' && module !== null) {
