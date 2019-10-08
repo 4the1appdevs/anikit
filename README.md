@@ -156,11 +156,10 @@ Config could be overwritten by options when calling animate function, e.g.,
 ## TODO
 
  * some kits doesn't work in js or webgl context, including:
-   - not working
+   - not working - these animations use css shadow and filter which are not supported by WebGL.
      - blur
      - blur-in / blur-out ( in webgl )
      - float
-     - rush-xxx, rush-xxx-in ( not work in webgl )
 
 
 ## LICENSE

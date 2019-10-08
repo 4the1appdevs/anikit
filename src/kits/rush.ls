@@ -54,6 +54,7 @@
       """
 
     js: (t, opt) ->
+      #TODO align with affin
       {RD,deg,offset,size,ds,xs,ts,dc,sgn,flip} = @local.data opt
       for i from 0 til ts.length => if t < ts[i] => break
       [d1, d2] = ds[i - 1 to i]
@@ -63,6 +64,29 @@
       x = x1 + (x2 - x1) * (t - t1) / (t2 - t1)
       d = d1 + (d2 - d1) * (t - t1) / (t2 - t1)
       return transform: "translate#{dc}(#{sgn * x}#{opt.unit}) skew#{dc}(#{flip * sgn * d}deg)", opacity: (t * 20 <? 1)
+
+    affine: (t, opt) ->
+      {RD,deg,offset,size,ds,xs,ts,dc,sgn,flip} = @local.data opt
+      for i from 0 til ts.length => if t < ts[i] => break
+      [d1, d2] = ds[i - 1 to i]
+      [x1, x2] = xs[i - 1 to i]
+      [t1, t2] = ts[i - 1 to i]
+      if i == 1 => t = Math.pow(t / ts.1, 0.5) * ts.1
+      x = x1 + (x2 - x1) * (t - t1) / (t2 - t1)
+      d = d1 + (d2 - d1) * (t - t1) / (t2 - t1)
+      kx = if dc == \X => -Math.tan(flip * sgn * d * Math.PI / 180) else 0
+      ky = if dc == \Y => -Math.tan(flip * sgn * d * Math.PI / 180) else 0
+      tx = if dc == \X => sgn * x else 0
+      ty = if dc == \Y => -sgn * x else 0
+
+      return do
+        transform: [
+          1, kx, 0, tx,
+          ky, 1, 0, ty,
+          0,  0, 1,  0,
+          0,  0, 0,  1
+        ],
+        opacity: t * 20 <? 1
 
   if module? => module.exports = ret
   return ret

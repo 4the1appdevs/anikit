@@ -141,6 +141,32 @@ var slice$ = [].slice;
         transform: "translate" + dc + "(" + sgn * x + opt.unit + ") skew" + dc + "(" + flip * sgn * d + "deg)",
         opacity: (ref$ = t * 20) < 1 ? ref$ : 1
       };
+    },
+    affine: function(t, opt){
+      var ref$, RD, deg, offset, size, ds, xs, ts, dc, sgn, flip, i$, to$, i, d1, d2, x1, x2, t1, t2, x, d, kx, ky, tx, ty;
+      ref$ = this.local.data(opt), RD = ref$.RD, deg = ref$.deg, offset = ref$.offset, size = ref$.size, ds = ref$.ds, xs = ref$.xs, ts = ref$.ts, dc = ref$.dc, sgn = ref$.sgn, flip = ref$.flip;
+      for (i$ = 0, to$ = ts.length; i$ < to$; ++i$) {
+        i = i$;
+        if (t < ts[i]) {
+          break;
+        }
+      }
+      ref$ = slice$.call(ds, i - 1, i + 1 || 9e9), d1 = ref$[0], d2 = ref$[1];
+      ref$ = slice$.call(xs, i - 1, i + 1 || 9e9), x1 = ref$[0], x2 = ref$[1];
+      ref$ = slice$.call(ts, i - 1, i + 1 || 9e9), t1 = ref$[0], t2 = ref$[1];
+      if (i === 1) {
+        t = Math.pow(t / ts[1], 0.5) * ts[1];
+      }
+      x = x1 + (x2 - x1) * (t - t1) / (t2 - t1);
+      d = d1 + (d2 - d1) * (t - t1) / (t2 - t1);
+      kx = dc === 'X' ? -Math.tan(flip * sgn * d * Math.PI / 180) : 0;
+      ky = dc === 'Y' ? -Math.tan(flip * sgn * d * Math.PI / 180) : 0;
+      tx = dc === 'X' ? sgn * x : 0;
+      ty = dc === 'Y' ? -sgn * x : 0;
+      return {
+        transform: [1, kx, 0, tx, ky, 1, 0, ty, 0, 0, 1, 0, 0, 0, 0, 1],
+        opacity: (ref$ = t * 20) < 1 ? ref$ : 1
+      };
     }
   };
   if (typeof module != 'undefined' && module !== null) {
