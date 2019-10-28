@@ -11,6 +11,7 @@
     type: 'animation',
     preset: {
       "coin-h": {
+        name: "coin (horizontally)",
         cycle: 10,
         dur: 2,
         prop: function(f, c){
@@ -25,6 +26,7 @@
         }
       },
       "coin-v": {
+        name: "coin (vertically)",
         cycle: 10,
         dur: 2,
         prop: function(f, c){
@@ -67,6 +69,7 @@
         }
       },
       "flip-h": {
+        name: "flip (horizontally)",
         cycle: 1,
         flip: true,
         prop: function(f, c){
@@ -81,6 +84,7 @@
         }
       },
       "flip-v": {
+        name: "flip (vertically)",
         cycle: 1,
         flip: true,
         prop: function(f, c){

@@ -30,12 +30,14 @@
         prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
         value: (t, c) -> transform: anikit.util.rz t * c.offset * Math.PI / 180
       "wander-v": 
+        name: "wander (vertically)"
         offset: default: 10, max: 500, step: 1, name: "Move Amount"
         local: error-threshold: 0.0001, sample-count: 20, seg-sample-count: 1000
         unit: \px
         prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
         value: (t, c) -> transform: anikit.util.ty t * c.offset
       "wander-h":
+        name: "wander (horizontally)"
         offset: default: 10, max: 500, step: 1, name: "Move Amount"
         local: error-threshold: 0.0001, sample-count: 20, seg-sample-count: 1000
         unit: \px

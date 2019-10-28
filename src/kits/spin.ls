@@ -5,10 +5,12 @@
     type: \animation
     preset:
       "coin-h":
+        name: "coin (horizontally)"
         cycle: 10, dur: 2
         prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle * 360}deg)"}
         value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI * 2)}
       "coin-v":
+        name: "coin (vertically)"
         cycle: 10, dur: 2
         prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
         value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI * 2)}
@@ -21,10 +23,12 @@
         prop: (f, c) -> {transform: "rotate(#{f.value * c.cycle * 360}deg)"}
         value: (t, c) -> {transform: anikit.util.rz(t * c.cycle * Math.PI * 2)}
       "flip-h":
+        name: "flip (horizontally)"
         cycle: 1, flip: true
         prop: (f, c) -> {transform: "rotateY(#{f.value * c.cycle * 360}deg)"}
         value: (t, c) -> {transform: anikit.util.ry(t * c.cycle * Math.PI * 2)}
       "flip-v":
+        name: "flip (vertically)"
         cycle: 1, flip: true
         prop: (f, c) -> {transform: "rotateX(#{f.value * c.cycle * 360}deg)"}
         value: (t, c) -> {transform: anikit.util.rx(t * c.cycle * Math.PI * 2)}

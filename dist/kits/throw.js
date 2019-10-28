@@ -33,18 +33,22 @@
     type: 'animation',
     preset: {
       "throw-ttb-in": {
+        name: "throw-in (top to bottom)",
         dir: 2,
         repeat: 1
       },
       "throw-ltr-in": {
+        name: "throw-in (left to right)",
         dir: 4,
         repeat: 1
       },
       "throw-rtl-in": {
+        name: "throw-in (right to left)",
         dir: 3,
         repeat: 1
       },
       "throw-btt-in": {
+        name: "throw-in (bottom to top)",
         dir: 1,
         repeat: 1
       }

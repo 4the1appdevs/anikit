@@ -29,37 +29,45 @@
     type: 'animation',
     preset: {
       "move-ltr": import$({
+        name: "move (left to right)",
         offset: 100,
         dir: 1
       }, move),
       "move-rtl": import$({
+        name: "move (right to left)",
         offset: 100,
         dir: 3
       }, move),
       "move-ttb": import$({
+        name: "move (top to bottom)",
         offset: 100,
         dir: 2
       }, move),
       "move-btt": import$({
+        name: "move (bottom to top)",
         offset: 100,
         dir: 4
       }, move),
       "move-fade-ltr": import$({
+        name: "move faded (left to right)",
         offset: 100,
         dir: 1,
         fade: true
       }, move),
       "move-fade-rtl": import$({
+        name: "move faded (right to left)",
         offset: 100,
         dir: 3,
         fade: true
       }, move),
       "move-fade-ttb": import$({
+        name: "move faded (top to bottom)",
         offset: 100,
         dir: 2,
         fade: true
       }, move),
       "move-fade-btt": import$({
+        name: "move faded (bottom to top)",
         offset: 100,
         dir: 4,
         fade: true

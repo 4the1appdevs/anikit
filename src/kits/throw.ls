@@ -25,10 +25,10 @@
     name: \throw
     type: \animation
     preset: do
-      "throw-ttb-in": dir: 2, repeat: 1
-      "throw-ltr-in": dir: 4, repeat: 1
-      "throw-rtl-in": dir: 3, repeat: 1
-      "throw-btt-in": dir: 1, repeat: 1
+      "throw-ttb-in": name: "throw-in (top to bottom)", dir: 2, repeat: 1
+      "throw-ltr-in": name: "throw-in (left to right)", dir: 4, repeat: 1
+      "throw-rtl-in": name: "throw-in (right to left)", dir: 3, repeat: 1
+      "throw-btt-in": name: "throw-in (bottom to top)", dir: 1, repeat: 1
 
     edit: do
       dir: type: \number, default: 1, hidden: true, min: 1, max: 4, step: 1

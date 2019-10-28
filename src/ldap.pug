@@ -15,4 +15,4 @@ mixin anikit-select-options
   each n,i in anikit.groupName
     optgroup(label=n)
       each k in anikit.members[i]
-        option(value=k)= k
+        option(value=k[0])= k[1]

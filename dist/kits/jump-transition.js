@@ -227,6 +227,7 @@
         }
       },
       "grow-rtl-in": import$({
+        name: "grow-in (right to left)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -239,6 +240,7 @@
         }
       }, noBounce),
       "grow-rtl-out": import$({
+        name: "grow-out (right to left)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -251,6 +253,7 @@
         }
       }, noBounce),
       "grow-ltr-in": import$({
+        name: "grow-in (left to right)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -263,6 +266,7 @@
         }
       }, noBounce),
       "grow-ltr-out": import$({
+        name: "grow-out (left to right)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -275,6 +279,7 @@
         }
       }, noBounce),
       "grow-ttb-in": import$({
+        name: "grow-in (top to bottom)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -287,6 +292,7 @@
         }
       }, noBounce),
       "grow-ttb-out": import$({
+        name: "grow-out (top to bottom)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -299,6 +305,7 @@
         }
       }, noBounce),
       "grow-btt-in": import$({
+        name: "grow-in (bottom to top)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -311,6 +318,7 @@
         }
       }, noBounce),
       "grow-btt-out": import$({
+        name: "grow-out (bottom to top)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -323,6 +331,7 @@
         }
       }, noBounce),
       "flip-v-in": import$({
+        name: "flip-in (vertically)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -335,6 +344,7 @@
         }
       }, noBounce),
       "flip-v-out": import$({
+        name: "flip-out (vertically)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -347,6 +357,7 @@
         }
       }, noBounce),
       "flip-h-in": import$({
+        name: "flip-in (horizontally)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -359,6 +370,7 @@
         }
       }, noBounce),
       "flip-h-out": import$({
+        name: "flip-out (horizontally)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -371,6 +383,7 @@
         }
       }, noBounce),
       "slide-rtl-in": import$({
+        name: "slide-in (right to left)",
         dir: 1,
         offset: {
           'default': 200,
@@ -387,6 +400,7 @@
         }
       }, noBounce),
       "slide-rtl-out": import$({
+        name: "slide-out (right to left)",
         dir: -1,
         offset: {
           'default': 200,
@@ -403,6 +417,7 @@
         }
       }, noBounce),
       "slide-ltr-in": import$({
+        name: "slide-in (left to right)",
         dir: 1,
         offset: {
           'default': 200,
@@ -419,6 +434,7 @@
         }
       }, noBounce),
       "slide-ltr-out": import$({
+        name: "slide-out (left to right)",
         dir: -1,
         offset: {
           'default': 200,
@@ -435,6 +451,7 @@
         }
       }, noBounce),
       "slide-ttb-in": import$({
+        name: "slide-in (top to bottom)",
         dir: 1,
         offset: {
           'default': 200,
@@ -451,6 +468,7 @@
         }
       }, noBounce),
       "slide-ttb-out": import$({
+        name: "slide-out (top to bottom)",
         dir: -1,
         offset: {
           'default': 200,
@@ -467,6 +485,7 @@
         }
       }, noBounce),
       "slide-btt-in": import$({
+        name: "slide-in (bottom to top)",
         dir: 1,
         offset: {
           'default': 200,
@@ -483,6 +502,7 @@
         }
       }, noBounce),
       "slide-btt-out": import$({
+        name: "slide-out (bottom to top)",
         dir: -1,
         offset: {
           'default': 200,
@@ -499,6 +519,7 @@
         }
       }, noBounce),
       "float-rtl-in": import$({
+        name: "float-in (right to left)",
         dir: 1,
         offset: {
           'default': 15,
@@ -512,6 +533,7 @@
         }
       }, noBounce),
       "float-rtl-out": import$({
+        name: "float-out (right to left)",
         dir: -1,
         offset: {
           'default': 15,
@@ -525,6 +547,7 @@
         }
       }, noBounce),
       "float-ltr-in": import$({
+        name: "float-in (left to right)",
         dir: 1,
         offset: {
           'default': 15,
@@ -538,6 +561,7 @@
         }
       }, noBounce),
       "float-ltr-out": import$({
+        name: "float-out (left to right)",
         dir: -1,
         offset: {
           'default': 15,
@@ -551,6 +575,7 @@
         }
       }, noBounce),
       "float-ttb-in": import$({
+        name: "float-in (top to bottom)",
         dir: 1,
         offset: {
           'default': 15,
@@ -564,6 +589,7 @@
         }
       }, noBounce),
       "float-ttb-out": import$({
+        name: "float-out (top to bottom)",
         dir: -1,
         offset: {
           'default': 15,
@@ -577,6 +603,7 @@
         }
       }, noBounce),
       "float-btt-in": import$({
+        name: "float-in (bottom to top)",
         dir: 1,
         offset: {
           'default': 15,
@@ -590,6 +617,7 @@
         }
       }, noBounce),
       "float-btt-out": import$({
+        name: "float-out (bottom to top)",
         dir: -1,
         offset: {
           'default': 15,
@@ -603,6 +631,7 @@
         }
       }, noBounce),
       "fall-rtl-in": {
+        name: "fall-in (right to left)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -613,6 +642,7 @@
         }
       },
       "fall-ltr-in": {
+        name: "fall-in (left to right)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -623,6 +653,7 @@
         }
       },
       "fall-ttb-in": {
+        name: "fall-in (top to bottom)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -633,6 +664,7 @@
         }
       },
       "fall-btt-in": {
+        name: "fall-in (bottom to top)",
         dir: 1,
         count: 3,
         prop: function(f, c){

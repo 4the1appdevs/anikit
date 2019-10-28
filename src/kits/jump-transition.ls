@@ -88,48 +88,56 @@
         value: (t, c) -> {opacity: t}
 
       "grow-rtl-in": {
+        name: "grow-in (right to left)"
         dir: 1
         local: seg-ptrs: [0.02]
         prop: (f, c) -> grow.prop f, c, 1
         value: (t, c) -> grow.value t, c, 1
       } <<< no-bounce
       "grow-rtl-out": {
+        name: "grow-out (right to left)"
         dir: -1
         local: seg-ptrs: [0.97]
         prop: (f, c) -> grow.prop f, c, 1
         value: (t, c) -> grow.value t, c, 1
       } <<< no-bounce
       "grow-ltr-in": {
+        name: "grow-in (left to right)"
         dir: 1
         local: seg-ptrs: [0.02]
         prop: (f, c) -> grow.prop f, c, 2
         value: (t, c) -> grow.value t, c, 2
       } <<< no-bounce
       "grow-ltr-out": {
+        name: "grow-out (left to right)"
         dir: -1
         local: seg-ptrs: [0.97]
         prop: (f, c) -> grow.prop f, c, 2
         value: (t, c) -> grow.value t, c, 2
       } <<< no-bounce
       "grow-ttb-in": {
+        name: "grow-in (top to bottom)"
         dir: 1
         local: seg-ptrs: [0.02]
         prop: (f, c) -> grow.prop f, c, 3
         value: (t, c) -> grow.value t, c, 3
       } <<< no-bounce
       "grow-ttb-out": {
+        name: "grow-out (top to bottom)"
         dir: -1
         local: seg-ptrs: [0.97]
         prop: (f, c) -> grow.prop f, c, 3
         value: (t, c) -> grow.value t, c, 3
       } <<< no-bounce
       "grow-btt-in": {
+        name: "grow-in (bottom to top)"
         dir: 1
         local: seg-ptrs: [0.02]
         prop: (f, c) -> grow.prop f, c, 4
         value: (t, c) -> grow.value t, c, 4
       } <<< no-bounce
       "grow-btt-out": {
+        name: "grow-out (bottom to top)"
         dir: -1
         local: seg-ptrs: [0.97]
         prop: (f, c) -> grow.prop f, c, 4
@@ -137,24 +145,28 @@
       } <<< no-bounce
 
       "flip-v-in": {
+        name: "flip-in (vertically)"
         dir: 1
         local: seg-ptrs: [0.02]
         prop: (f, c) -> flip.prop f, c, 1
         value: (t, c) -> flip.value t, c, 1
       } <<< no-bounce
       "flip-v-out": {
+        name: "flip-out (vertically)"
         dir: -1
         local: seg-ptrs: [0.97]
         prop: (f, c) -> flip.prop f, c, 1
         value: (t, c) -> flip.value t, c, 1
       } <<< no-bounce
       "flip-h-in": {
+        name: "flip-in (horizontally)"
         dir: 1
         local: seg-ptrs: [0.02]
         prop: (f, c) -> flip.prop f, c, 2
         value: (t, c) -> flip.value t, c, 2
       } <<< no-bounce
       "flip-h-out": {
+        name: "flip-out (horizontally)"
         dir: -1
         local: seg-ptrs: [0.97]
         prop: (f, c) -> flip.prop f, c, 2
@@ -162,48 +174,56 @@
       } <<< no-bounce
 
       "slide-rtl-in": {
+        name: "slide-in (right to left)"
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
         prop: (f, c) -> slide.prop f, c, 1, 1
         value: (t, c) -> slide.value t, c, 1, 1
       } <<< no-bounce
       "slide-rtl-out": {
+        name: "slide-out (right to left)"
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
         prop: (f, c) -> slide.prop f, c, 1, 1
         value: (t, c) -> slide.value t, c, 1, 1
       } <<< no-bounce
       "slide-ltr-in": {
+        name: "slide-in (left to right)"
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
         prop: (f, c) -> slide.prop f, c, 2, 1
         value: (t, c) -> slide.value t, c, 2, 1
       } <<< no-bounce
       "slide-ltr-out": {
+        name: "slide-out (left to right)"
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
         prop: (f, c) -> slide.prop f, c, 2, 1
         value: (t, c) -> slide.value t, c, 2, 1
       } <<< no-bounce
       "slide-ttb-in": {
+        name: "slide-in (top to bottom)"
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
         prop: (f, c) -> slide.prop f, c, 3, 1
         value: (t, c) -> slide.value t, c, 3, 1
       } <<< no-bounce
       "slide-ttb-out": {
+        name: "slide-out (top to bottom)"
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
         prop: (f, c) -> slide.prop f, c, 3, 1
         value: (t, c) -> slide.value t, c, 3, 1
       } <<< no-bounce
       "slide-btt-in": {
+        name: "slide-in (bottom to top)"
         dir: 1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.02]
         prop: (f, c) -> slide.prop f, c, 4, 1
         value: (t, c) -> slide.value t, c, 4, 1
       } <<< no-bounce
       "slide-btt-out": {
+        name: "slide-out (bottom to top)"
         dir: -1, offset: default: 200, hidden: false
         local: seg-ptrs: [0.97]
         prop: (f, c) -> slide.prop f, c, 4, 1
@@ -211,59 +231,71 @@
       } <<< no-bounce
 
       "float-rtl-in": {
+        name: "float-in (right to left)"
         dir: 1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 1, 1
         value: (t, c) -> slide.value t, c, 1, 1
       } <<< no-bounce
       "float-rtl-out": {
+        name: "float-out (right to left)"
         dir: -1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 1, 1
         value: (t, c) -> slide.value t, c, 1, 1
       } <<< no-bounce
       "float-ltr-in": {
+        name: "float-in (left to right)"
         dir: 1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 2, 1
         value: (t, c) -> slide.value t, c, 2, 1
       } <<< no-bounce
       "float-ltr-out": {
+        name: "float-out (left to right)"
         dir: -1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 2, 1
         value: (t, c) -> slide.value t, c, 2, 1
       } <<< no-bounce
       "float-ttb-in": {
+        name: "float-in (top to bottom)"
         dir: 1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 3, 1
         value: (t, c) -> slide.value t, c, 3, 1
       } <<< no-bounce
       "float-ttb-out": {
+        name: "float-out (top to bottom)"
         dir: -1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 3, 1
         value: (t, c) -> slide.value t, c, 3, 1
       } <<< no-bounce
       "float-btt-in": {
+        name: "float-in (bottom to top)"
         dir: 1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 4, 1
         value: (t, c) -> slide.value t, c, 4, 1
       } <<< no-bounce
       "float-btt-out": {
+        name: "float-out (bottom to top)"
         dir: -1, offset: default: 15, hidden: false
         prop: (f, c) -> slide.prop f, c, 4, 1
         value: (t, c) -> slide.value t, c, 4, 1
       } <<< no-bounce
 
       "fall-rtl-in":
+        name: "fall-in (right to left)"
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 1
         value: (t, c, p) -> slide.value t, c, 1, 1, p
       "fall-ltr-in":
+        name: "fall-in (left to right)"
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 2
         value: (t, c, p) -> slide.value t, c, 2, 1, p
       "fall-ttb-in":
+        name: "fall-in (top to bottom)"
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 3
         value: (t, c, p) -> slide.value t, c, 3, 1, p
       "fall-btt-in":
+        name: "fall-in (bottom to top)"
         dir: 1, count: 3
         prop: (f, c) -> slide.prop f, c, 4
         value: (t, c, p) -> slide.value t, c, 4, 1, p

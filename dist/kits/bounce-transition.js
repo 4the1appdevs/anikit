@@ -92,6 +92,7 @@
         }
       },
       "spring-ltr-in": {
+        name: "spring-in (left to right)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -105,6 +106,7 @@
         }
       },
       "spring-rtl-in": {
+        name: "spring-in (right to left)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -118,6 +120,7 @@
         }
       },
       "spring-ttb-in": {
+        name: "spring-in (top to bottom)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -131,6 +134,7 @@
         }
       },
       "spring-btt-in": {
+        name: "spring-in (bottom to top)",
         dir: 1,
         count: 3,
         mag: 0.2,

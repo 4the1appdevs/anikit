@@ -18,14 +18,14 @@
     type: \animation
     preset:
       # no-fade animation is useful for seamless repeatable patterns when animating
-      "move-ltr": {offset: 100, dir: 1} <<< move
-      "move-rtl": {offset: 100, dir: 3} <<< move
-      "move-ttb": {offset: 100, dir: 2} <<< move
-      "move-btt": {offset: 100, dir: 4} <<< move
-      "move-fade-ltr": {offset: 100, dir: 1, fade: true} <<< move
-      "move-fade-rtl": {offset: 100, dir: 3, fade: true} <<< move
-      "move-fade-ttb": {offset: 100, dir: 2, fade: true} <<< move
-      "move-fade-btt": {offset: 100, dir: 4, fade: true} <<< move
+      "move-ltr": {name: "move (left to right)", offset: 100, dir: 1} <<< move
+      "move-rtl": {name: "move (right to left)", offset: 100, dir: 3} <<< move
+      "move-ttb": {name: "move (top to bottom)", offset: 100, dir: 2} <<< move
+      "move-btt": {name: "move (bottom to top)", offset: 100, dir: 4} <<< move
+      "move-fade-ltr": {name: "move faded (left to right)", offset: 100, dir: 1, fade: true} <<< move
+      "move-fade-rtl": {name: "move faded (right to left)", offset: 100, dir: 3, fade: true} <<< move
+      "move-fade-ttb": {name: "move faded (top to bottom)", offset: 100, dir: 2, fade: true} <<< move
+      "move-fade-btt": {name: "move faded (bottom to top)", offset: 100, dir: 4, fade: true} <<< move
 
     edit: 
       steep: default: 0.3, type: \number, min: 0.3, max: 1, step: 0.01

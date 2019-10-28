@@ -3,14 +3,14 @@
     name: \rush
     type: \animation
     preset:
-      "rush-ltr": dir: 1, repeat: 0
-      "rush-rtl": dir: 2, repeat: 0
-      "rush-ttb": dir: 3, repeat: 0
-      "rush-btt": dir: 4, repeat: 0
-      "rush-ltr-in": dir: 1, repeat: 1
-      "rush-rtl-in": dir: 2, repeat: 1
-      "rush-ttb-in": dir: 3, repeat: 1
-      "rush-btt-in": dir: 4, repeat: 1
+      "rush-ltr": name: "rush (left to right)", dir: 1, repeat: 0
+      "rush-rtl": name: "rush (right to left)", dir: 2, repeat: 0
+      "rush-ttb": name: "rush (top to bottom)", dir: 3, repeat: 0
+      "rush-btt": name: "rush (bottom to top)", dir: 4, repeat: 0
+      "rush-ltr-in": name: "rush-in (left to right)", dir: 1, repeat: 1
+      "rush-rtl-in": name: "rush-in (right to left)", dir: 2, repeat: 1
+      "rush-ttb-in": name: "rush-in (top to bottom)", dir: 3, repeat: 1
+      "rush-btt-in": name: "rush-in (bottom to top)", dir: 4, repeat: 1
 
     edit: do
       dir: name: "Direction", type: \Choice, values: [1,2,3,4], default: 1

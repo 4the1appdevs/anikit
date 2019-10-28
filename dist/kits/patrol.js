@@ -95,6 +95,7 @@
         }
       },
       "wander-v": {
+        name: "wander (vertically)",
         offset: {
           'default': 10,
           max: 500,
@@ -119,6 +120,7 @@
         }
       },
       "wander-h": {
+        name: "wander (horizontally)",
         offset: {
           'default': 10,
           max: 500,
