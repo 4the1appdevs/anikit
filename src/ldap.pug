@@ -7,8 +7,8 @@ mixin ldap(clsname)
         .item-head #{g}
         .item-group
           each m in anikit.members[$index]
-            .item(data-value=m)
-              div #{m}
+            .item(data-value=m[0])
+              div #{m[1]}
               .ani(class=`ld ld-${m}`)
 
 mixin anikit-select-options
