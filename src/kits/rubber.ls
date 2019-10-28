@@ -11,25 +11,25 @@
         prop: (f, c) -> {transform: "rotate(#{f.value * c.offset}deg)"}
         value: (t, c) -> {transform: anikit.util.rz(t * c.offset * Math.PI / 180)}
       "rubber-v":
-        name: "rubber (vertically)"
+        label: "rubber (vertically)"
         count: 7, ratio: 0.7, delay: 0.3, unit: ''
         offset: default: 0.2, min: 0.01, max: 1, step: 0.01, name: "Scale Amount"
         prop: (f, c) -> {transform: "scaleY(#{1 + f.value * c.offset})"}
         value: (t, c) -> {transform: anikit.util.sy(1 + t * c.offset)}
       "rubber-h":
-        name: "rubber (horizontally)"
+        label: "rubber (horizontally)"
         count: 7, ratio: 0.7, delay: 0.3, unit: ''
         offset: default: 0.2, min: 0.01, max: 1, step: 0.01, name: "Scale Amount"
         prop: (f, c) -> {transform: "scaleX(#{1 + f.value * c.offset})"}
         value: (t, c) -> {transform: anikit.util.sx(1 + t * c.offset)}
       "shake-v":
-        name: "shake (vertically)"
+        label: "shake (vertically)"
         count: 5, ratio: 0.6, delay: 0.3, unit: \px
         offset: default: 10, min: 0, max: 500, step: 1, name: "Move Amount"
         prop: (f, c) -> {transform: "translate(0,#{f.value * c.offset}#{c.unit})"}
         value: (t, c) -> {transform: anikit.util.ty(t * c.offset)}
       "shake-h":
-        name: "shake (horizontally)"
+        label: "shake (horizontally)"
         count: 5, ratio: 0.7, delay: 0.3, unit: \px
         offset: default: 10, min: 0, max: 500, step: 1, name: "Move Amount"
         prop: (f, c) -> {transform: "translate(#{f.value * c.offset}#{c.unit},0)"}

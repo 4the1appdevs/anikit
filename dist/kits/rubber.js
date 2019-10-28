@@ -36,7 +36,7 @@
         }
       },
       "rubber-v": {
-        name: "rubber (vertically)",
+        label: "rubber (vertically)",
         count: 7,
         ratio: 0.7,
         delay: 0.3,
@@ -60,7 +60,7 @@
         }
       },
       "rubber-h": {
-        name: "rubber (horizontally)",
+        label: "rubber (horizontally)",
         count: 7,
         ratio: 0.7,
         delay: 0.3,
@@ -84,7 +84,7 @@
         }
       },
       "shake-v": {
-        name: "shake (vertically)",
+        label: "shake (vertically)",
         count: 5,
         ratio: 0.6,
         delay: 0.3,
@@ -108,7 +108,7 @@
         }
       },
       "shake-h": {
-        name: "shake (horizontally)",
+        label: "shake (horizontally)",
         count: 5,
         ratio: 0.7,
         delay: 0.3,

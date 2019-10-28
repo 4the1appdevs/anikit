@@ -15,10 +15,10 @@
     name: \slide
     type: \animation
     preset:
-      "slide-ltr": {name: "slide (left to right)", offset:  200} <<< slide
-      "slide-rtl": {name: "slide (right to left)", offset: -200} <<< slide
-      "slide-btt": {name: "slide (bottom to top)", offset: -200, dir: 2} <<< slide
-      "slide-ttb": {name: "slide (top to bottom)", offset:  200, dir: 2} <<< slide
+      "slide-ltr": {label: "slide (left to right)", offset:  200} <<< slide
+      "slide-rtl": {label: "slide (right to left)", offset: -200} <<< slide
+      "slide-btt": {label: "slide (bottom to top)", offset: -200, dir: 2} <<< slide
+      "slide-ttb": {label: "slide (top to bottom)", offset:  200, dir: 2} <<< slide
 
     edit: 
       fade: default: true, type: \boolean, hidden: true

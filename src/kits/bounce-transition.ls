@@ -29,22 +29,22 @@
         local: sample-count: 40, error-threshold: 0.0001, seg-sample-count: 1000
 
       "spring-ltr-in":
-        name: "spring-in (left to right)"
+        label: "spring-in (left to right)"
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 2
         value: (t, c, p) -> spring.value t, c, 2, p
       "spring-rtl-in":
-        name: "spring-in (right to left)"
+        label: "spring-in (right to left)"
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 1
         value: (t, c, p) -> spring.value t, c, 1, p
       "spring-ttb-in":
-        name: "spring-in (top to bottom)"
+        label: "spring-in (top to bottom)"
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 3
         value: (t, c, p) -> spring.value t, c, 3, p
       "spring-btt-in":
-        name: "spring-in (bottom to top)"
+        label: "spring-in (bottom to top)"
         dir: 1, count: 3, mag: 0.2, extrude: 0.5, offset: 50
         prop: (f, c) -> spring.prop f, c, 4
         value: (t, c, p) -> spring.value t, c, 4, p

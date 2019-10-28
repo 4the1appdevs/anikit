@@ -27,20 +27,20 @@
     type: 'animation',
     preset: {
       "slide-ltr": import$({
-        name: "slide (left to right)",
+        label: "slide (left to right)",
         offset: 200
       }, slide),
       "slide-rtl": import$({
-        name: "slide (right to left)",
+        label: "slide (right to left)",
         offset: -200
       }, slide),
       "slide-btt": import$({
-        name: "slide (bottom to top)",
+        label: "slide (bottom to top)",
         offset: -200,
         dir: 2
       }, slide),
       "slide-ttb": import$({
-        name: "slide (top to bottom)",
+        label: "slide (top to bottom)",
         offset: 200,
         dir: 2
       }, slide)

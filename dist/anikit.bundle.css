@@ -424,7 +424,7 @@
 .ld.ld-bounce-in {
   animation: ld-bounce-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.01,0,0,0.01,0,0); 
 }
-@keyframes ld-spring-in (left to right)
+@keyframes ld-spring-ltr-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.0741,0.3499,0.0735,0.662);
@@ -471,10 +471,10 @@
     opacity: 1;
   }
 }
-.ld.ld-spring-in (left to right) {
-  animation: ld-spring-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-49.5,0); 
+.ld.ld-spring-ltr-in {
+  animation: ld-spring-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-49.5,0); 
 }
-@keyframes ld-spring-in (right to left)
+@keyframes ld-spring-rtl-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.0741,0.3499,0.0735,0.662);
@@ -521,10 +521,10 @@
     opacity: 1;
   }
 }
-.ld.ld-spring-in (right to left) {
-  animation: ld-spring-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,49.5,0); 
+.ld.ld-spring-rtl-in {
+  animation: ld-spring-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,49.5,0); 
 }
-@keyframes ld-spring-in (top to bottom)
+@keyframes ld-spring-ttb-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.0741,0.3499,0.0735,0.662);
@@ -571,10 +571,10 @@
     opacity: 1;
   }
 }
-.ld.ld-spring-in (top to bottom) {
-  animation: ld-spring-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-49.5); 
+.ld.ld-spring-ttb-in {
+  animation: ld-spring-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-49.5); 
 }
-@keyframes ld-spring-in (bottom to top)
+@keyframes ld-spring-btt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.0741,0.3499,0.0735,0.662);
@@ -621,8 +621,8 @@
     opacity: 1;
   }
 }
-.ld.ld-spring-in (bottom to top) {
-  animation: ld-spring-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,49.5); 
+.ld.ld-spring-btt-in {
+  animation: ld-spring-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,49.5); 
 }
 @keyframes ld-bounce
 {
@@ -1074,7 +1074,7 @@
 .ld.ld-fade-out {
   animation: ld-fade-out 1s 1 linear; animation-fill-mode: forwards;opacity: 1; 
 }
-@keyframes ld-grow-in (right to left)
+@keyframes ld-grow-rtl-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1091,10 +1091,10 @@
     opacity: 1;
   }
 }
-.ld.ld-grow-in (right to left) {
-  animation: ld-grow-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.005,0,0,1,49.75,0);opacity: 0; 
+.ld.ld-grow-rtl-in {
+  animation: ld-grow-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.005,0,0,1,49.75,0);opacity: 0; 
 }
-@keyframes ld-grow-out (right to left)
+@keyframes ld-grow-rtl-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1111,10 +1111,10 @@
     opacity: 0;
   }
 }
-.ld.ld-grow-out (right to left) {
-  animation: ld-grow-out (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-grow-rtl-out {
+  animation: ld-grow-rtl-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-grow-in (left to right)
+@keyframes ld-grow-ltr-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1131,10 +1131,10 @@
     opacity: 1;
   }
 }
-.ld.ld-grow-in (left to right) {
-  animation: ld-grow-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.005,0,0,1,-49.75,0);opacity: 0; 
+.ld.ld-grow-ltr-in {
+  animation: ld-grow-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.005,0,0,1,-49.75,0);opacity: 0; 
 }
-@keyframes ld-grow-out (left to right)
+@keyframes ld-grow-ltr-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1151,10 +1151,10 @@
     opacity: 0;
   }
 }
-.ld.ld-grow-out (left to right) {
-  animation: ld-grow-out (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-grow-ltr-out {
+  animation: ld-grow-ltr-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-grow-in (top to bottom)
+@keyframes ld-grow-ttb-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1171,10 +1171,10 @@
     opacity: 1;
   }
 }
-.ld.ld-grow-in (top to bottom) {
-  animation: ld-grow-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,0.005,0,-49.75);opacity: 0; 
+.ld.ld-grow-ttb-in {
+  animation: ld-grow-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,0.005,0,-49.75);opacity: 0; 
 }
-@keyframes ld-grow-out (top to bottom)
+@keyframes ld-grow-ttb-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1191,10 +1191,10 @@
     opacity: 0;
   }
 }
-.ld.ld-grow-out (top to bottom) {
-  animation: ld-grow-out (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-grow-ttb-out {
+  animation: ld-grow-ttb-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-grow-in (bottom to top)
+@keyframes ld-grow-btt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1211,10 +1211,10 @@
     opacity: 1;
   }
 }
-.ld.ld-grow-in (bottom to top) {
-  animation: ld-grow-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,0.005,0,49.75);opacity: 0; 
+.ld.ld-grow-btt-in {
+  animation: ld-grow-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,0.005,0,49.75);opacity: 0; 
 }
-@keyframes ld-grow-out (bottom to top)
+@keyframes ld-grow-btt-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1231,10 +1231,10 @@
     opacity: 0;
   }
 }
-.ld.ld-grow-out (bottom to top) {
-  animation: ld-grow-out (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-grow-btt-out {
+  animation: ld-grow-btt-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-flip-in (vertically)
+@keyframes ld-flip-v-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1251,10 +1251,10 @@
     opacity: 1;
   }
 }
-.ld.ld-flip-in (vertically) {
-  animation: ld-flip-in (vertically) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,0.005,0,0);opacity: 0; 
+.ld.ld-flip-v-in {
+  animation: ld-flip-v-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,0.005,0,0);opacity: 0; 
 }
-@keyframes ld-flip-out (vertically)
+@keyframes ld-flip-v-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1271,10 +1271,10 @@
     opacity: 0;
   }
 }
-.ld.ld-flip-out (vertically) {
-  animation: ld-flip-out (vertically) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-flip-v-out {
+  animation: ld-flip-v-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-flip-in (horizontally)
+@keyframes ld-flip-h-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1291,10 +1291,10 @@
     opacity: 1;
   }
 }
-.ld.ld-flip-in (horizontally) {
-  animation: ld-flip-in (horizontally) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.005,0,0,1,0,0);opacity: 0; 
+.ld.ld-flip-h-in {
+  animation: ld-flip-h-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(0.005,0,0,1,0,0);opacity: 0; 
 }
-@keyframes ld-flip-out (horizontally)
+@keyframes ld-flip-h-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1311,10 +1311,10 @@
     opacity: 0;
   }
 }
-.ld.ld-flip-out (horizontally) {
-  animation: ld-flip-out (horizontally) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-flip-h-out {
+  animation: ld-flip-h-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-slide-in (right to left)
+@keyframes ld-slide-rtl-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1331,10 +1331,10 @@
     opacity: 1;
   }
 }
-.ld.ld-slide-in (right to left) {
-  animation: ld-slide-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,199,0);opacity: 0.05; 
+.ld.ld-slide-rtl-in {
+  animation: ld-slide-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,199,0);opacity: 0.05; 
 }
-@keyframes ld-slide-out (right to left)
+@keyframes ld-slide-rtl-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1351,10 +1351,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-slide-out (right to left) {
-  animation: ld-slide-out (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-slide-rtl-out {
+  animation: ld-slide-rtl-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-slide-in (left to right)
+@keyframes ld-slide-ltr-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1371,10 +1371,10 @@
     opacity: 1;
   }
 }
-.ld.ld-slide-in (left to right) {
-  animation: ld-slide-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-199,0);opacity: 0.05; 
+.ld.ld-slide-ltr-in {
+  animation: ld-slide-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-199,0);opacity: 0.05; 
 }
-@keyframes ld-slide-out (left to right)
+@keyframes ld-slide-ltr-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1391,10 +1391,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-slide-out (left to right) {
-  animation: ld-slide-out (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-slide-ltr-out {
+  animation: ld-slide-ltr-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-slide-in (top to bottom)
+@keyframes ld-slide-ttb-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1411,10 +1411,10 @@
     opacity: 1;
   }
 }
-.ld.ld-slide-in (top to bottom) {
-  animation: ld-slide-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-199);opacity: 0.05; 
+.ld.ld-slide-ttb-in {
+  animation: ld-slide-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-199);opacity: 0.05; 
 }
-@keyframes ld-slide-out (top to bottom)
+@keyframes ld-slide-ttb-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1431,10 +1431,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-slide-out (top to bottom) {
-  animation: ld-slide-out (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-slide-ttb-out {
+  animation: ld-slide-ttb-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-slide-in (bottom to top)
+@keyframes ld-slide-btt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.1006,0.3357,-0.2396,0.6703);
@@ -1451,10 +1451,10 @@
     opacity: 1;
   }
 }
-.ld.ld-slide-in (bottom to top) {
-  animation: ld-slide-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,199);opacity: 0.05; 
+.ld.ld-slide-btt-in {
+  animation: ld-slide-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,199);opacity: 0.05; 
 }
-@keyframes ld-slide-out (bottom to top)
+@keyframes ld-slide-btt-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2221,0.7433,0.3066,0.8148);
@@ -1471,10 +1471,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-slide-out (bottom to top) {
-  animation: ld-slide-out (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-slide-btt-out {
+  animation: ld-slide-btt-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-float-in (right to left)
+@keyframes ld-float-rtl-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1486,10 +1486,10 @@
     opacity: 1;
   }
 }
-.ld.ld-float-in (right to left) {
-  animation: ld-float-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,14.925,0);opacity: 0.05; 
+.ld.ld-float-rtl-in {
+  animation: ld-float-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,14.925,0);opacity: 0.05; 
 }
-@keyframes ld-float-out (right to left)
+@keyframes ld-float-rtl-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1501,10 +1501,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-float-out (right to left) {
-  animation: ld-float-out (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-float-rtl-out {
+  animation: ld-float-rtl-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-float-in (left to right)
+@keyframes ld-float-ltr-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1516,10 +1516,10 @@
     opacity: 1;
   }
 }
-.ld.ld-float-in (left to right) {
-  animation: ld-float-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-14.925,0);opacity: 0.05; 
+.ld.ld-float-ltr-in {
+  animation: ld-float-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-14.925,0);opacity: 0.05; 
 }
-@keyframes ld-float-out (left to right)
+@keyframes ld-float-ltr-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1531,10 +1531,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-float-out (left to right) {
-  animation: ld-float-out (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-float-ltr-out {
+  animation: ld-float-ltr-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-float-in (top to bottom)
+@keyframes ld-float-ttb-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1546,10 +1546,10 @@
     opacity: 1;
   }
 }
-.ld.ld-float-in (top to bottom) {
-  animation: ld-float-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-14.925);opacity: 0.05; 
+.ld.ld-float-ttb-in {
+  animation: ld-float-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-14.925);opacity: 0.05; 
 }
-@keyframes ld-float-out (top to bottom)
+@keyframes ld-float-ttb-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1561,10 +1561,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-float-out (top to bottom) {
-  animation: ld-float-out (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-float-ttb-out {
+  animation: ld-float-ttb-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-float-in (bottom to top)
+@keyframes ld-float-btt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1576,10 +1576,10 @@
     opacity: 1;
   }
 }
-.ld.ld-float-in (bottom to top) {
-  animation: ld-float-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,14.925);opacity: 0.05; 
+.ld.ld-float-btt-in {
+  animation: ld-float-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,14.925);opacity: 0.05; 
 }
-@keyframes ld-float-out (bottom to top)
+@keyframes ld-float-btt-out
 {
   0% {
     animation-timing-function: cubic-bezier(0.2242,0.7499,0.3142,0.8148);
@@ -1591,10 +1591,10 @@
     opacity: 0.05;
   }
 }
-.ld.ld-float-out (bottom to top) {
-  animation: ld-float-out (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
+.ld.ld-float-btt-out {
+  animation: ld-float-btt-out 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,0);opacity: 1; 
 }
-@keyframes ld-fall-in (right to left)
+@keyframes ld-fall-rtl-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.7815,0.1815,0.7831,0.7206);
@@ -1626,10 +1626,10 @@
     opacity: 1;
   }
 }
-.ld.ld-fall-in (right to left) {
-  animation: ld-fall-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,49.75,0);opacity: 0; 
+.ld.ld-fall-rtl-in {
+  animation: ld-fall-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,49.75,0);opacity: 0; 
 }
-@keyframes ld-fall-in (left to right)
+@keyframes ld-fall-ltr-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.7815,0.1815,0.7831,0.7206);
@@ -1661,10 +1661,10 @@
     opacity: 1;
   }
 }
-.ld.ld-fall-in (left to right) {
-  animation: ld-fall-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-49.75,0);opacity: 0; 
+.ld.ld-fall-ltr-in {
+  animation: ld-fall-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,-49.75,0);opacity: 0; 
 }
-@keyframes ld-fall-in (top to bottom)
+@keyframes ld-fall-ttb-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.7815,0.1815,0.7831,0.7206);
@@ -1696,10 +1696,10 @@
     opacity: 1;
   }
 }
-.ld.ld-fall-in (top to bottom) {
-  animation: ld-fall-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-49.75);opacity: 0; 
+.ld.ld-fall-ttb-in {
+  animation: ld-fall-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,-49.75);opacity: 0; 
 }
-@keyframes ld-fall-in (bottom to top)
+@keyframes ld-fall-btt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.7815,0.1815,0.7831,0.7206);
@@ -1731,10 +1731,10 @@
     opacity: 1;
   }
 }
-.ld.ld-fall-in (bottom to top) {
-  animation: ld-fall-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,49.75);opacity: 0; 
+.ld.ld-fall-btt-in {
+  animation: ld-fall-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: matrix(1,0,0,1,0,49.75);opacity: 0; 
 }
-@keyframes ld-move (left to right)
+@keyframes ld-move-ltr
 {
   0% {
     transform: translate(0px,0px);
@@ -1758,10 +1758,10 @@
     transform: translate(0px,0px);
   }
 }
-.ld.ld-move (left to right) {
-  animation: ld-move (left to right) 1s infinite linear; ; 
+.ld.ld-move-ltr {
+  animation: ld-move-ltr 1s infinite linear; ; 
 }
-@keyframes ld-move (right to left)
+@keyframes ld-move-rtl
 {
   0% {
     transform: translate(0px,0px);
@@ -1785,10 +1785,10 @@
     transform: translate(0px,0px);
   }
 }
-.ld.ld-move (right to left) {
-  animation: ld-move (right to left) 1s infinite linear; ; 
+.ld.ld-move-rtl {
+  animation: ld-move-rtl 1s infinite linear; ; 
 }
-@keyframes ld-move (top to bottom)
+@keyframes ld-move-ttb
 {
   0% {
     transform: translate(0px,0px);
@@ -1812,10 +1812,10 @@
     transform: translate(0px,0px);
   }
 }
-.ld.ld-move (top to bottom) {
-  animation: ld-move (top to bottom) 1s infinite linear; ; 
+.ld.ld-move-ttb {
+  animation: ld-move-ttb 1s infinite linear; ; 
 }
-@keyframes ld-move (bottom to top)
+@keyframes ld-move-btt
 {
   0% {
     transform: translate(0px,0px);
@@ -1839,10 +1839,10 @@
     transform: translate(0px,0px);
   }
 }
-.ld.ld-move (bottom to top) {
-  animation: ld-move (bottom to top) 1s infinite linear; ; 
+.ld.ld-move-btt {
+  animation: ld-move-btt 1s infinite linear; ; 
 }
-@keyframes ld-move faded (left to right)
+@keyframes ld-move-fade-ltr
 {
   0% {
     transform: translate(0px,0px);
@@ -1873,10 +1873,10 @@
     opacity: 1;
   }
 }
-.ld.ld-move faded (left to right) {
-  animation: ld-move faded (left to right) 1s infinite linear; ; 
+.ld.ld-move-fade-ltr {
+  animation: ld-move-fade-ltr 1s infinite linear; ; 
 }
-@keyframes ld-move faded (right to left)
+@keyframes ld-move-fade-rtl
 {
   0% {
     transform: translate(0px,0px);
@@ -1907,10 +1907,10 @@
     opacity: 1;
   }
 }
-.ld.ld-move faded (right to left) {
-  animation: ld-move faded (right to left) 1s infinite linear; ; 
+.ld.ld-move-fade-rtl {
+  animation: ld-move-fade-rtl 1s infinite linear; ; 
 }
-@keyframes ld-move faded (top to bottom)
+@keyframes ld-move-fade-ttb
 {
   0% {
     transform: translate(0px,0px);
@@ -1941,10 +1941,10 @@
     opacity: 1;
   }
 }
-.ld.ld-move faded (top to bottom) {
-  animation: ld-move faded (top to bottom) 1s infinite linear; ; 
+.ld.ld-move-fade-ttb {
+  animation: ld-move-fade-ttb 1s infinite linear; ; 
 }
-@keyframes ld-move faded (bottom to top)
+@keyframes ld-move-fade-btt
 {
   0% {
     transform: translate(0px,0px);
@@ -1975,8 +1975,8 @@
     opacity: 1;
   }
 }
-.ld.ld-move faded (bottom to top) {
-  animation: ld-move faded (bottom to top) 1s infinite linear; ; 
+.ld.ld-move-fade-btt {
+  animation: ld-move-fade-btt 1s infinite linear; ; 
 }
  @keyframes ld-orbit {  0% {
 animation-timing-function: linear;
@@ -2104,7 +2104,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-swing {
   animation: ld-swing 1s infinite linear; ; 
 }
-@keyframes ld-wander (vertically)
+@keyframes ld-wander-v
 {
   0% {
     animation-timing-function: cubic-bezier(0.7806,0.0715,0.8998,0.731);
@@ -2142,10 +2142,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: translate(0,-10px);
   }
 }
-.ld.ld-wander (vertically) {
-  animation: ld-wander (vertically) 1s infinite linear; ; 
+.ld.ld-wander-v {
+  animation: ld-wander-v 1s infinite linear; ; 
 }
-@keyframes ld-wander (horizontally)
+@keyframes ld-wander-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.7806,0.0715,0.8998,0.731);
@@ -2183,8 +2183,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: translate(-10px,0);
   }
 }
-.ld.ld-wander (horizontally) {
-  animation: ld-wander (horizontally) 1s infinite linear; ; 
+.ld.ld-wander-h {
+  animation: ld-wander-h 1s infinite linear; ; 
 }
 @keyframes ld-power-off {
   0%, 20%, 100% {
@@ -2296,7 +2296,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-jingle {
   animation: ld-jingle 1s infinite linear; ; transform-origin: 50% 0%
 }
-@keyframes ld-rubber (vertically)
+@keyframes ld-rubber-v
 {
   0% {
     animation-timing-function: cubic-bezier(0.1858,0.2841,0.5834,1.4615);
@@ -2334,10 +2334,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: scaleY(0.9836);
   }
 }
-.ld.ld-rubber (vertically) {
-  animation: ld-rubber (vertically) 1s infinite linear; ; 
+.ld.ld-rubber-v {
+  animation: ld-rubber-v 1s infinite linear; ; 
 }
-@keyframes ld-rubber (horizontally)
+@keyframes ld-rubber-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.1858,0.2841,0.5834,1.4615);
@@ -2375,10 +2375,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: scaleX(0.9836);
   }
 }
-.ld.ld-rubber (horizontally) {
-  animation: ld-rubber (horizontally) 1s infinite linear; ; 
+.ld.ld-rubber-h {
+  animation: ld-rubber-h 1s infinite linear; ; 
 }
-@keyframes ld-shake (vertically)
+@keyframes ld-shake-v
 {
   0% {
     animation-timing-function: cubic-bezier(0.1441,0.1912,0.6583,1.1029);
@@ -2408,10 +2408,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: translate(0,-0.78px);
   }
 }
-.ld.ld-shake (vertically) {
-  animation: ld-shake (vertically) 1s infinite linear; ; 
+.ld.ld-shake-v {
+  animation: ld-shake-v 1s infinite linear; ; 
 }
-@keyframes ld-shake (horizontally)
+@keyframes ld-shake-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.1515,0.2047,0.6562,1.1369);
@@ -2441,8 +2441,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: translate(-1.6800000000000002px,0);
   }
 }
-.ld.ld-shake (horizontally) {
-  animation: ld-shake (horizontally) 1s infinite linear; ; 
+.ld.ld-shake-h {
+  animation: ld-shake-h 1s infinite linear; ; 
 }
 @keyframes ld-tick
 {
@@ -2641,7 +2641,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-damage {
   animation: ld-damage 1s infinite linear; ; 
 }
-@keyframes ld-rush (left to right) {
+@keyframes ld-rush-ltr {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateX(-78.47520861406802px) skewX(30deg); }
@@ -2655,10 +2655,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush (left to right) {
-  animation: ld-rush (left to right) 1s infinite linear; ; 
+.ld.ld-rush-ltr {
+  animation: ld-rush-ltr 1s infinite linear; ; 
 }
-@keyframes ld-rush (right to left) {
+@keyframes ld-rush-rtl {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateX(78.47520861406802px) skewX(-30deg); }
@@ -2672,10 +2672,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush (right to left) {
-  animation: ld-rush (right to left) 1s infinite linear; ; 
+.ld.ld-rush-rtl {
+  animation: ld-rush-rtl 1s infinite linear; ; 
 }
-@keyframes ld-rush (top to bottom) {
+@keyframes ld-rush-ttb {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateY(-78.47520861406802px) skewY(30deg); }
@@ -2689,10 +2689,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush (top to bottom) {
-  animation: ld-rush (top to bottom) 1s infinite linear; ; 
+.ld.ld-rush-ttb {
+  animation: ld-rush-ttb 1s infinite linear; ; 
 }
-@keyframes ld-rush (bottom to top) {
+@keyframes ld-rush-btt {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateY(78.47520861406802px) skewY(-30deg); }
@@ -2706,10 +2706,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush (bottom to top) {
-  animation: ld-rush (bottom to top) 1s infinite linear; ; 
+.ld.ld-rush-btt {
+  animation: ld-rush-btt 1s infinite linear; ; 
 }
-@keyframes ld-rush-in (left to right) {
+@keyframes ld-rush-ltr-in {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateX(-78.47520861406802px) skewX(30deg); }
@@ -2722,10 +2722,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush-in (left to right) {
-  animation: ld-rush-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: translateX(-78.47520861406802px) skewX(30deg);opacity: 0; 
+.ld.ld-rush-ltr-in {
+  animation: ld-rush-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: translateX(-78.47520861406802px) skewX(30deg);opacity: 0; 
 }
-@keyframes ld-rush-in (right to left) {
+@keyframes ld-rush-rtl-in {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateX(78.47520861406802px) skewX(-30deg); }
@@ -2738,10 +2738,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush-in (right to left) {
-  animation: ld-rush-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: translateX(78.47520861406802px) skewX(-30deg);opacity: 0; 
+.ld.ld-rush-rtl-in {
+  animation: ld-rush-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: translateX(78.47520861406802px) skewX(-30deg);opacity: 0; 
 }
-@keyframes ld-rush-in (top to bottom) {
+@keyframes ld-rush-ttb-in {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateY(-78.47520861406802px) skewY(30deg); }
@@ -2754,10 +2754,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush-in (top to bottom) {
-  animation: ld-rush-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: translateY(-78.47520861406802px) skewY(30deg);opacity: 0; 
+.ld.ld-rush-ttb-in {
+  animation: ld-rush-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: translateY(-78.47520861406802px) skewY(30deg);opacity: 0; 
 }
-@keyframes ld-rush-in (bottom to top) {
+@keyframes ld-rush-btt-in {
   0% { animation-timing-function: cubic-bezier(0,0.5,0.5,1); opacity: 0 }
   5% { opacity: 1}
   0% { transform: translateY(78.47520861406802px) skewY(-30deg); }
@@ -2770,8 +2770,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 
   100% { opacity: 1}
 }
-.ld.ld-rush-in (bottom to top) {
-  animation: ld-rush-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: translateY(78.47520861406802px) skewY(-30deg);opacity: 0; 
+.ld.ld-rush-btt-in {
+  animation: ld-rush-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: translateY(78.47520861406802px) skewY(-30deg);opacity: 0; 
 }
 @keyframes ld-skew {
   0%, 50%, 100% { animation-timing-function: cubic-bezier(0.4,0,1,0.6) }
@@ -2797,7 +2797,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-skew-alt {
   animation: ld-skew-alt 1s infinite linear; ; 
 }
-@keyframes ld-slide (left to right)
+@keyframes ld-slide-ltr
 {
   0% {
     animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
@@ -2839,10 +2839,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-slide (left to right) {
-  animation: ld-slide (left to right) 1s infinite linear; ; 
+.ld.ld-slide-ltr {
+  animation: ld-slide-ltr 1s infinite linear; ; 
 }
-@keyframes ld-slide (right to left)
+@keyframes ld-slide-rtl
 {
   0% {
     animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
@@ -2884,10 +2884,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-slide (right to left) {
-  animation: ld-slide (right to left) 1s infinite linear; ; 
+.ld.ld-slide-rtl {
+  animation: ld-slide-rtl 1s infinite linear; ; 
 }
-@keyframes ld-slide (bottom to top)
+@keyframes ld-slide-btt
 {
   0% {
     animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
@@ -2929,10 +2929,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-slide (bottom to top) {
-  animation: ld-slide (bottom to top) 1s infinite linear; ; 
+.ld.ld-slide-btt {
+  animation: ld-slide-btt 1s infinite linear; ; 
 }
-@keyframes ld-slide (top to bottom)
+@keyframes ld-slide-ttb
 {
   0% {
     animation-timing-function: cubic-bezier(0.4652,0.1051,0.774,0.6426);
@@ -2974,10 +2974,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-slide (top to bottom) {
-  animation: ld-slide (top to bottom) 1s infinite linear; ; 
+.ld.ld-slide-ttb {
+  animation: ld-slide-ttb 1s infinite linear; ; 
 }
-@keyframes ld-coin (horizontally)
+@keyframes ld-coin-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.5856,0.0703,0.4143,0.9297);
@@ -2987,10 +2987,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: rotateY(3600deg);
   }
 }
-.ld.ld-coin (horizontally) {
-  animation: ld-coin (horizontally) 2s infinite linear; ; 
+.ld.ld-coin-h {
+  animation: ld-coin-h 2s infinite linear; ; 
 }
-@keyframes ld-coin (vertically)
+@keyframes ld-coin-v
 {
   0% {
     animation-timing-function: cubic-bezier(0.5856,0.0703,0.4143,0.9297);
@@ -3000,8 +3000,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: rotateX(3600deg);
   }
 }
-.ld.ld-coin (vertically) {
-  animation: ld-coin (vertically) 2s infinite linear; ; 
+.ld.ld-coin-v {
+  animation: ld-coin-v 2s infinite linear; ; 
 }
 @keyframes ld-cycle
 {
@@ -3029,7 +3029,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-cycle-alt {
   animation: ld-cycle-alt 1s infinite linear; ; 
 }
-@keyframes ld-flip (horizontally)
+@keyframes ld-flip-h
 {
   0% {
     animation-timing-function: cubic-bezier(0.1909,0.4373,0.4509,0.7454);
@@ -3051,10 +3051,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: rotateY(360deg);
   }
 }
-.ld.ld-flip (horizontally) {
-  animation: ld-flip (horizontally) 1s infinite linear; ; 
+.ld.ld-flip-h {
+  animation: ld-flip-h 1s infinite linear; ; 
 }
-@keyframes ld-flip (vertically)
+@keyframes ld-flip-v
 {
   0% {
     animation-timing-function: cubic-bezier(0.1909,0.4373,0.4509,0.7454);
@@ -3076,8 +3076,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     transform: rotateX(360deg);
   }
 }
-.ld.ld-flip (vertically) {
-  animation: ld-flip (vertically) 1s infinite linear; ; 
+.ld.ld-flip-v {
+  animation: ld-flip-v 1s infinite linear; ; 
 }
 @keyframes ld-spin-fast
 {
@@ -3150,7 +3150,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
 .ld.ld-surprise {
   animation: ld-surprise 1s infinite linear; ; 
 }
-@keyframes ld-throw-in (top to bottom)
+@keyframes ld-throw-ttb-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.3173,0.3347,0.6682,0.6667);
@@ -3447,10 +3447,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-throw-in (top to bottom) {
-  animation: ld-throw-in (top to bottom) 1s 1 linear; animation-fill-mode: forwards;transform: translate(0px,-26.44245px);opacity: 0; 
+.ld.ld-throw-ttb-in {
+  animation: ld-throw-ttb-in 1s 1 linear; animation-fill-mode: forwards;transform: translate(0px,-26.44245px);opacity: 0; 
 }
-@keyframes ld-throw-in (left to right)
+@keyframes ld-throw-ltr-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.3173,0.3347,0.6682,0.6667);
@@ -3747,10 +3747,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-throw-in (left to right) {
-  animation: ld-throw-in (left to right) 1s 1 linear; animation-fill-mode: forwards;transform: translate(-26.44245px,0px);opacity: 0; 
+.ld.ld-throw-ltr-in {
+  animation: ld-throw-ltr-in 1s 1 linear; animation-fill-mode: forwards;transform: translate(-26.44245px,0px);opacity: 0; 
 }
-@keyframes ld-throw-in (right to left)
+@keyframes ld-throw-rtl-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.3173,0.3347,0.6682,0.6667);
@@ -4047,10 +4047,10 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-throw-in (right to left) {
-  animation: ld-throw-in (right to left) 1s 1 linear; animation-fill-mode: forwards;transform: translate(26.44245px,0px);opacity: 0; 
+.ld.ld-throw-rtl-in {
+  animation: ld-throw-rtl-in 1s 1 linear; animation-fill-mode: forwards;transform: translate(26.44245px,0px);opacity: 0; 
 }
-@keyframes ld-throw-in (bottom to top)
+@keyframes ld-throw-btt-in
 {
   0% {
     animation-timing-function: cubic-bezier(0.3173,0.3347,0.6682,0.6667);
@@ -4347,8 +4347,8 @@ transform: translate(0px,-60px) rotate(360deg) }  }
     opacity: 1;
   }
 }
-.ld.ld-throw-in (bottom to top) {
-  animation: ld-throw-in (bottom to top) 1s 1 linear; animation-fill-mode: forwards;transform: translate(0px,26.44245px);opacity: 0; 
+.ld.ld-throw-btt-in {
+  animation: ld-throw-btt-in 1s 1 linear; animation-fill-mode: forwards;transform: translate(0px,26.44245px);opacity: 0; 
 }
 @keyframes ld-measure {
   0% { transform: translate(0px,0px) rotate(0deg)  }

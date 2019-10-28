@@ -7,42 +7,42 @@ var slice$ = [].slice;
     type: 'animation',
     preset: {
       "rush-ltr": {
-        name: "rush (left to right)",
+        label: "rush (left to right)",
         dir: 1,
         repeat: 0
       },
       "rush-rtl": {
-        name: "rush (right to left)",
+        label: "rush (right to left)",
         dir: 2,
         repeat: 0
       },
       "rush-ttb": {
-        name: "rush (top to bottom)",
+        label: "rush (top to bottom)",
         dir: 3,
         repeat: 0
       },
       "rush-btt": {
-        name: "rush (bottom to top)",
+        label: "rush (bottom to top)",
         dir: 4,
         repeat: 0
       },
       "rush-ltr-in": {
-        name: "rush-in (left to right)",
+        label: "rush-in (left to right)",
         dir: 1,
         repeat: 1
       },
       "rush-rtl-in": {
-        name: "rush-in (right to left)",
+        label: "rush-in (right to left)",
         dir: 2,
         repeat: 1
       },
       "rush-ttb-in": {
-        name: "rush-in (top to bottom)",
+        label: "rush-in (top to bottom)",
         dir: 3,
         repeat: 1
       },
       "rush-btt-in": {
-        name: "rush-in (bottom to top)",
+        label: "rush-in (bottom to top)",
         dir: 4,
         repeat: 1
       }

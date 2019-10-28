@@ -1228,7 +1228,7 @@ function import$(obj, src){
         }
       },
       "spring-ltr-in": {
-        name: "spring-in (left to right)",
+        label: "spring-in (left to right)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -1242,7 +1242,7 @@ function import$(obj, src){
         }
       },
       "spring-rtl-in": {
-        name: "spring-in (right to left)",
+        label: "spring-in (right to left)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -1256,7 +1256,7 @@ function import$(obj, src){
         }
       },
       "spring-ttb-in": {
-        name: "spring-in (top to bottom)",
+        label: "spring-in (top to bottom)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -1270,7 +1270,7 @@ function import$(obj, src){
         }
       },
       "spring-btt-in": {
-        name: "spring-in (bottom to top)",
+        label: "spring-in (bottom to top)",
         dir: 1,
         count: 3,
         mag: 0.2,
@@ -2308,7 +2308,7 @@ function import$(obj, src){
         }
       },
       "grow-rtl-in": import$({
-        name: "grow-in (right to left)",
+        label: "grow-in (right to left)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -2321,7 +2321,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-rtl-out": import$({
-        name: "grow-out (right to left)",
+        label: "grow-out (right to left)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -2334,7 +2334,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-ltr-in": import$({
-        name: "grow-in (left to right)",
+        label: "grow-in (left to right)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -2347,7 +2347,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-ltr-out": import$({
-        name: "grow-out (left to right)",
+        label: "grow-out (left to right)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -2360,7 +2360,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-ttb-in": import$({
-        name: "grow-in (top to bottom)",
+        label: "grow-in (top to bottom)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -2373,7 +2373,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-ttb-out": import$({
-        name: "grow-out (top to bottom)",
+        label: "grow-out (top to bottom)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -2386,7 +2386,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-btt-in": import$({
-        name: "grow-in (bottom to top)",
+        label: "grow-in (bottom to top)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -2399,7 +2399,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "grow-btt-out": import$({
-        name: "grow-out (bottom to top)",
+        label: "grow-out (bottom to top)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -2412,7 +2412,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "flip-v-in": import$({
-        name: "flip-in (vertically)",
+        label: "flip-in (vertically)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -2425,7 +2425,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "flip-v-out": import$({
-        name: "flip-out (vertically)",
+        label: "flip-out (vertically)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -2438,7 +2438,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "flip-h-in": import$({
-        name: "flip-in (horizontally)",
+        label: "flip-in (horizontally)",
         dir: 1,
         local: {
           segPtrs: [0.02]
@@ -2451,7 +2451,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "flip-h-out": import$({
-        name: "flip-out (horizontally)",
+        label: "flip-out (horizontally)",
         dir: -1,
         local: {
           segPtrs: [0.97]
@@ -2464,7 +2464,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-rtl-in": import$({
-        name: "slide-in (right to left)",
+        label: "slide-in (right to left)",
         dir: 1,
         offset: {
           'default': 200,
@@ -2481,7 +2481,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-rtl-out": import$({
-        name: "slide-out (right to left)",
+        label: "slide-out (right to left)",
         dir: -1,
         offset: {
           'default': 200,
@@ -2498,7 +2498,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-ltr-in": import$({
-        name: "slide-in (left to right)",
+        label: "slide-in (left to right)",
         dir: 1,
         offset: {
           'default': 200,
@@ -2515,7 +2515,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-ltr-out": import$({
-        name: "slide-out (left to right)",
+        label: "slide-out (left to right)",
         dir: -1,
         offset: {
           'default': 200,
@@ -2532,7 +2532,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-ttb-in": import$({
-        name: "slide-in (top to bottom)",
+        label: "slide-in (top to bottom)",
         dir: 1,
         offset: {
           'default': 200,
@@ -2549,7 +2549,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-ttb-out": import$({
-        name: "slide-out (top to bottom)",
+        label: "slide-out (top to bottom)",
         dir: -1,
         offset: {
           'default': 200,
@@ -2566,7 +2566,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-btt-in": import$({
-        name: "slide-in (bottom to top)",
+        label: "slide-in (bottom to top)",
         dir: 1,
         offset: {
           'default': 200,
@@ -2583,7 +2583,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "slide-btt-out": import$({
-        name: "slide-out (bottom to top)",
+        label: "slide-out (bottom to top)",
         dir: -1,
         offset: {
           'default': 200,
@@ -2600,7 +2600,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-rtl-in": import$({
-        name: "float-in (right to left)",
+        label: "float-in (right to left)",
         dir: 1,
         offset: {
           'default': 15,
@@ -2614,7 +2614,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-rtl-out": import$({
-        name: "float-out (right to left)",
+        label: "float-out (right to left)",
         dir: -1,
         offset: {
           'default': 15,
@@ -2628,7 +2628,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-ltr-in": import$({
-        name: "float-in (left to right)",
+        label: "float-in (left to right)",
         dir: 1,
         offset: {
           'default': 15,
@@ -2642,7 +2642,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-ltr-out": import$({
-        name: "float-out (left to right)",
+        label: "float-out (left to right)",
         dir: -1,
         offset: {
           'default': 15,
@@ -2656,7 +2656,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-ttb-in": import$({
-        name: "float-in (top to bottom)",
+        label: "float-in (top to bottom)",
         dir: 1,
         offset: {
           'default': 15,
@@ -2670,7 +2670,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-ttb-out": import$({
-        name: "float-out (top to bottom)",
+        label: "float-out (top to bottom)",
         dir: -1,
         offset: {
           'default': 15,
@@ -2684,7 +2684,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-btt-in": import$({
-        name: "float-in (bottom to top)",
+        label: "float-in (bottom to top)",
         dir: 1,
         offset: {
           'default': 15,
@@ -2698,7 +2698,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "float-btt-out": import$({
-        name: "float-out (bottom to top)",
+        label: "float-out (bottom to top)",
         dir: -1,
         offset: {
           'default': 15,
@@ -2712,7 +2712,7 @@ function import$(obj, src){
         }
       }, noBounce),
       "fall-rtl-in": {
-        name: "fall-in (right to left)",
+        label: "fall-in (right to left)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -2723,7 +2723,7 @@ function import$(obj, src){
         }
       },
       "fall-ltr-in": {
-        name: "fall-in (left to right)",
+        label: "fall-in (left to right)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -2734,7 +2734,7 @@ function import$(obj, src){
         }
       },
       "fall-ttb-in": {
-        name: "fall-in (top to bottom)",
+        label: "fall-in (top to bottom)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -2745,7 +2745,7 @@ function import$(obj, src){
         }
       },
       "fall-btt-in": {
-        name: "fall-in (bottom to top)",
+        label: "fall-in (bottom to top)",
         dir: 1,
         count: 3,
         prop: function(f, c){
@@ -2925,45 +2925,45 @@ function import$(obj, src){
     type: 'animation',
     preset: {
       "move-ltr": import$({
-        name: "move (left to right)",
+        label: "move (left to right)",
         offset: 100,
         dir: 1
       }, move),
       "move-rtl": import$({
-        name: "move (right to left)",
+        label: "move (right to left)",
         offset: 100,
         dir: 3
       }, move),
       "move-ttb": import$({
-        name: "move (top to bottom)",
+        label: "move (top to bottom)",
         offset: 100,
         dir: 2
       }, move),
       "move-btt": import$({
-        name: "move (bottom to top)",
+        label: "move (bottom to top)",
         offset: 100,
         dir: 4
       }, move),
       "move-fade-ltr": import$({
-        name: "move faded (left to right)",
+        label: "move faded (left to right)",
         offset: 100,
         dir: 1,
         fade: true
       }, move),
       "move-fade-rtl": import$({
-        name: "move faded (right to left)",
+        label: "move faded (right to left)",
         offset: 100,
         dir: 3,
         fade: true
       }, move),
       "move-fade-ttb": import$({
-        name: "move faded (top to bottom)",
+        label: "move faded (top to bottom)",
         offset: 100,
         dir: 2,
         fade: true
       }, move),
       "move-fade-btt": import$({
-        name: "move faded (bottom to top)",
+        label: "move faded (bottom to top)",
         offset: 100,
         dir: 4,
         fade: true
@@ -3235,7 +3235,7 @@ function import$(obj, src){
         }
       },
       "wander-v": {
-        name: "wander (vertically)",
+        label: "wander (vertically)",
         offset: {
           'default': 10,
           max: 500,
@@ -3260,7 +3260,7 @@ function import$(obj, src){
         }
       },
       "wander-h": {
-        name: "wander (horizontally)",
+        label: "wander (horizontally)",
         offset: {
           'default': 10,
           max: 500,
@@ -3555,7 +3555,7 @@ function import$(obj, src){
         }
       },
       "rubber-v": {
-        name: "rubber (vertically)",
+        label: "rubber (vertically)",
         count: 7,
         ratio: 0.7,
         delay: 0.3,
@@ -3579,7 +3579,7 @@ function import$(obj, src){
         }
       },
       "rubber-h": {
-        name: "rubber (horizontally)",
+        label: "rubber (horizontally)",
         count: 7,
         ratio: 0.7,
         delay: 0.3,
@@ -3603,7 +3603,7 @@ function import$(obj, src){
         }
       },
       "shake-v": {
-        name: "shake (vertically)",
+        label: "shake (vertically)",
         count: 5,
         ratio: 0.6,
         delay: 0.3,
@@ -3627,7 +3627,7 @@ function import$(obj, src){
         }
       },
       "shake-h": {
-        name: "shake (horizontally)",
+        label: "shake (horizontally)",
         count: 5,
         ratio: 0.7,
         delay: 0.3,
@@ -3856,42 +3856,42 @@ var slice$ = [].slice;
     type: 'animation',
     preset: {
       "rush-ltr": {
-        name: "rush (left to right)",
+        label: "rush (left to right)",
         dir: 1,
         repeat: 0
       },
       "rush-rtl": {
-        name: "rush (right to left)",
+        label: "rush (right to left)",
         dir: 2,
         repeat: 0
       },
       "rush-ttb": {
-        name: "rush (top to bottom)",
+        label: "rush (top to bottom)",
         dir: 3,
         repeat: 0
       },
       "rush-btt": {
-        name: "rush (bottom to top)",
+        label: "rush (bottom to top)",
         dir: 4,
         repeat: 0
       },
       "rush-ltr-in": {
-        name: "rush-in (left to right)",
+        label: "rush-in (left to right)",
         dir: 1,
         repeat: 1
       },
       "rush-rtl-in": {
-        name: "rush-in (right to left)",
+        label: "rush-in (right to left)",
         dir: 2,
         repeat: 1
       },
       "rush-ttb-in": {
-        name: "rush-in (top to bottom)",
+        label: "rush-in (top to bottom)",
         dir: 3,
         repeat: 1
       },
       "rush-btt-in": {
-        name: "rush-in (bottom to top)",
+        label: "rush-in (bottom to top)",
         dir: 4,
         repeat: 1
       }
@@ -4162,20 +4162,20 @@ var slice$ = [].slice;
     type: 'animation',
     preset: {
       "slide-ltr": import$({
-        name: "slide (left to right)",
+        label: "slide (left to right)",
         offset: 200
       }, slide),
       "slide-rtl": import$({
-        name: "slide (right to left)",
+        label: "slide (right to left)",
         offset: -200
       }, slide),
       "slide-btt": import$({
-        name: "slide (bottom to top)",
+        label: "slide (bottom to top)",
         offset: -200,
         dir: 2
       }, slide),
       "slide-ttb": import$({
-        name: "slide (top to bottom)",
+        label: "slide (top to bottom)",
         offset: 200,
         dir: 2
       }, slide)
@@ -4270,7 +4270,7 @@ function import$(obj, src){
     type: 'animation',
     preset: {
       "coin-h": {
-        name: "coin (horizontally)",
+        label: "coin (horizontally)",
         cycle: 10,
         dur: 2,
         prop: function(f, c){
@@ -4285,7 +4285,7 @@ function import$(obj, src){
         }
       },
       "coin-v": {
-        name: "coin (vertically)",
+        label: "coin (vertically)",
         cycle: 10,
         dur: 2,
         prop: function(f, c){
@@ -4328,7 +4328,7 @@ function import$(obj, src){
         }
       },
       "flip-h": {
-        name: "flip (horizontally)",
+        label: "flip (horizontally)",
         cycle: 1,
         flip: true,
         prop: function(f, c){
@@ -4343,7 +4343,7 @@ function import$(obj, src){
         }
       },
       "flip-v": {
-        name: "flip (vertically)",
+        label: "flip (vertically)",
         cycle: 1,
         flip: true,
         prop: function(f, c){
@@ -4705,22 +4705,22 @@ function import$(obj, src){
     type: 'animation',
     preset: {
       "throw-ttb-in": {
-        name: "throw-in (top to bottom)",
+        label: "throw-in (top to bottom)",
         dir: 2,
         repeat: 1
       },
       "throw-ltr-in": {
-        name: "throw-in (left to right)",
+        label: "throw-in (left to right)",
         dir: 4,
         repeat: 1
       },
       "throw-rtl-in": {
-        name: "throw-in (right to left)",
+        label: "throw-in (right to left)",
         dir: 3,
         repeat: 1
       },
       "throw-btt-in": {
-        name: "throw-in (bottom to top)",
+        label: "throw-in (bottom to top)",
         dir: 1,
         repeat: 1
       }
@@ -5256,7 +5256,7 @@ Func.prototype = import$(Object.create(Object.prototype), FuncMembers = {
   }
 });
 import$(Func, FuncMembers);
-Func.glsl = "float cubic(float x, vec4 p) {\n  return p.x * x * x * x + p.y * x * x + p.z * x + p.w;\n}\n/* 3 roots, 1 for root count */\nvec4 cubicRoot(float y, vec4 p) {\n  float a, b, c, d, A, B, C, D, y1, y2, k, theta, x1, x2, x3;\n  d = d - y;\n  A = b * b - 3. * a * c;\n  B = b * c - 9. * a * d;\n  C = c * c - 3. * b * d;\n  D = B * B - 4. * A * C;\n  if(A==B && B==0.) return vec4(-b / (3. * a), -c / b, -3. * d / c, 3.);\n  if(D > 0) {\n    y1 = A * b + 3. * a * (-B + sqrt(D)) * 0.5;\n    y2 = A * b + 3. * a * (-B - sqrt(D)) * 0.5;\n    return vec4(vec3(-b - (cbrt(y1) + cbrt(y2)) / ( 3. * a)), 1.);\n  } else if(D == 0) { \n    k = B/A;\n    return vec4((-b/a) + k, -k/2., -k/2., 2.);\n  } else if(D < 0) {\n    k = (2. * A * b - 3 * a * B) / (2. * A * sqrt(A));\n    theta = acos(k) / 3.;\n    x1 = (-b - 2. * sqrt(A) * cos(theta)) / (3. * a);\n    x2 = (-b + sqrt(A) * (cos(theta) + sqrt(3.) * sin(theta))) / (3. * a);\n    x3 = (-b + sqrt(A) * (cos(theta) - sqrt(3.) * sin(theta))) / (3. * a);\n    return vec4(x1, x2, x3, 3.);\n  }\n}";
+Func.glsl = "float cubic(float x, vec4 p) {\n  return p.x * x * x * x + p.y * x * x + p.z * x + p.w;\n}\n/* 3 roots, 1 for root count */\nvec4 cubicRoot(float y, vec4 p) {\n  float a, b, c, d, A, B, C, D, y1, y2, k, theta, x1, x2, x3;\n  d = d - y;\n  A = b * b - 3. * a * c;\n  B = b * c - 9. * a * d;\n  C = c * c - 3. * b * d;\n  D = B * B - 4. * A * C;\n  if(A==B && B==0.) return vec4(-b / (3. * a), -c / b, -3. * d / c, 3.);\n  if(D > 0) {\n    y1 = A * b + 3. * a * (-B + sqrt(D)) * 0.5;\n    y2 = A * b + 3. * a * (-B - sqrt(D)) * 0.5;\n    return vec4(vec3(-b - (cbrt(y1) + cbrt(y2)) / ( 3. * a)), 1.);\n  } else if(D == 0) {\n    k = B/A;\n    return vec4((-b/a) + k, -k/2., -k/2., 2.);\n  } else if(D < 0) {\n    k = (2. * A * b - 3 * a * B) / (2. * A * sqrt(A));\n    theta = acos(k) / 3.;\n    x1 = (-b - 2. * sqrt(A) * cos(theta)) / (3. * a);\n    x2 = (-b + sqrt(A) * (cos(theta) + sqrt(3.) * sin(theta))) / (3. * a);\n    x3 = (-b + sqrt(A) * (cos(theta) - sqrt(3.) * sin(theta))) / (3. * a);\n    return vec4(x1, x2, x3, 3.);\n  }\n}";
 Bezier = function(p){
   var coff;
   this.p = p;

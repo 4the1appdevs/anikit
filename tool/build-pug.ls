@@ -7,7 +7,7 @@ g = {}
 pop = <[spin bounce bounce-in bounce-out blink fade breath tremble slide-ltr float-btt-in flip-h]>
 for k,v of anikit.types => 
   idx = if k == \static => 0 else if /\-(on|off|in|out)$/.exec(k) => 3 else 2
-  name = [k,anikit.mods[v].preset[k].name or k]
+  name = [k,anikit.mods[v].preset[k].label or k]
   gs[idx].push name
   if k in pop => gs.1.push name
 gs.map -> it.sort (a,b) -> if a > b => 1 else if b > a => -1 else 0

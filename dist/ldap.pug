@@ -11,7 +11,7 @@ mixin ldap(clsname)
           each m in anikit.members[$index]
             .item(data-value=m[0])
               div #{m[1]}
-              .ani(class=`ld ld-${m}`)
+              .ani(class=`ld ld-${m[0]}`)
 
 mixin anikit-select-options
   each n,i in anikit.groupName
