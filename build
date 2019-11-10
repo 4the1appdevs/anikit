@@ -7,7 +7,7 @@ echo "Generate kits-list..."
 echo "Transpiling LiveScript..." 
 ./node_modules/.bin/lsc -cbp src/anikit.ls > dist/anikit.js
 ./node_modules/.bin/lsc -cbp src/ldap.ls >> dist/anikit.js
-./node_modules/.bin/lsc -cbp src/ldap-ext.ls >> dist/ldap-ext.js
+./node_modules/.bin/lsc -cbp src/ldap-ext.ls > dist/ldap-ext.js
 ./node_modules/.bin/lsc -cbp src/easing.ls > dist/easing.js
 ./node_modules/.bin/lsc -cbp src/util.ls > dist/anikit.util.js
 ./node_modules/.bin/lsc -o dist/kits/ -cb src/kits/*
