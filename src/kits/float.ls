@@ -32,6 +32,30 @@
         }
       } """
 
+
+    timing: (t, opt) ->
+      p1 = [0, opt.steep, 1 - opt.steep, 1]
+      p2 = [opt.steep, 0, 1, 1 - opt.steep]
+      if t == 0 or t == 1 => return t
+      if t < 0.5 =>
+        t = cubic.Bezier.y(cubic.Bezier.t(t * 2, p1), p1)
+        t = t * 0.5
+      else
+        t = cubic.Bezier.y(cubic.Bezier.t((t - 0.5) * 2, p2), p2)
+        t = t * 0.5 + 0.5
+      return 2 * (0.5 - Math.abs(t - 0.5))
+
+    js: (t, opt) ->
+      t = @timing t, opt
+      return do
+        transform: "translate(0,#{t * -opt.offset}#{opt.unit}) scale(#{t * ( 1 - opt.zoom ) + opt.zoom})"
+    affine: (t, opt) ->
+      t = @timing t, opt
+      s = t * ( 1 - opt.zoom ) + opt.zoom
+      ty = t * -opt.offset
+      return do
+        transform: [s, 0, 0, 0, 0, s, 0, -ty, 0, 0, s, 0, 0, 0, 0, 1]
+
   if module? => module.exports = ret
   return ret
 )!
