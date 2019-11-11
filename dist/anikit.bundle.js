@@ -632,6 +632,11 @@ function import$(obj, src){
         return it.style.display = !~it.textContent.indexOf(this$.input.value) ? 'none' : 'block';
       });
     };
+    this.input.addEventListener('keydown', function(e){
+      if (e.keyCode !== 27) {
+        return e.stopPropagation();
+      }
+    });
     this.input.addEventListener('input', handler);
     this.ldcv.on('toggle.on', debounce(250, function(){
       return this$.input.focus();

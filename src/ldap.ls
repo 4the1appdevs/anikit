@@ -16,6 +16,9 @@
       @ldcv.set {name: ret, info: limited: n.classList.contains(\limited) }
     handler = ~>
       @item.map ~> it.style.display = if !(~it.textContent.indexOf(@input.value)) => \none else \block
+    # only propagate escape so escape can close modal.
+    # otherwise block event so there wont be strange behavior if someone is listening to document.keydown.
+    @input.addEventListener \keydown, (e) -> if e.keyCode != 27 => e.stopPropagation!
     @input.addEventListener \input, handler
     # when ldap is on, focus the input.
     # it's believed that focus take effect only when the panel is visible, but there is an animation
