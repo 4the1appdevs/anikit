@@ -4553,6 +4553,7 @@ transform: translate(0px,-60px) rotate(360deg) }  }
   max-width: calc(100% - 2em);
   top: 1em;
   bottom: 1em;
+  left: 0;
   max-height: calc(100% - 2em);
 }
 .ldap > .base > .inner {
